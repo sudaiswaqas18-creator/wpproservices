@@ -1,5 +1,6 @@
 import { Check, Sparkles } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
+import ContactLink from './ContactLink';
 
 export default function Pricing() {
   const { data: plans } = useApiData('pricing');
@@ -56,9 +57,9 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <a href="#contact" className="btn-primary mt-8 w-full">
+              <ContactLink className="btn-primary mt-8 w-full block text-center">
                 Get a Free Consultation
-              </a>
+              </ContactLink>
             </div>
           ))}
         </div>

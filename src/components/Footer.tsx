@@ -60,8 +60,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} PixelForge Digital. All rights reserved.
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-8 text-sm text-gray-500 sm:flex-row">
+          <p>&copy; {new Date().getFullYear()} PixelForge Digital. All rights reserved.</p>
+          <Link to="/privacy-policy" className="hover:text-brand-400">Privacy Policy</Link>
         </div>
       </div>
     </footer>

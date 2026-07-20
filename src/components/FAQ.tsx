@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApiData } from '../hooks/useApiData';
+import ContactLink from './ContactLink';
 
 export default function FAQ() {
   const { data: faqs } = useApiData('faqs');
@@ -50,7 +51,7 @@ export default function FAQ() {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#contact" className="btn-primary">Start with a Free Consultation</a>
+          <ContactLink className="btn-primary">Start with a Free Consultation</ContactLink>
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { Building2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useApiData } from '../hooks/useApiData';
+import ContactLink from './ContactLink';
 
 export default function Industries() {
   const { data: industries } = useApiData('industries');
@@ -24,9 +26,9 @@ export default function Industries() {
               <h3 className="mt-4 font-bold text-gray-900">{ind.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">{ind.description}</p>
               {ind.has_case_study && (
-                <button type="button" className="mt-4 flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                <Link to="/case-studies" className="mt-4 flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
                   View Case Study <ArrowRight size={14} />
-                </button>
+                </Link>
               )}
             </div>
           ))}
@@ -36,7 +38,7 @@ export default function Industries() {
           No matter your industry, we craft WordPress websites that deliver results.
         </p>
         <div className="mt-6 text-center">
-          <a href="#contact" className="btn-primary">Let&apos;s Build Your Website</a>
+          <ContactLink className="btn-primary">Let&apos;s Build Your Website</ContactLink>
         </div>
       </div>
     </section>

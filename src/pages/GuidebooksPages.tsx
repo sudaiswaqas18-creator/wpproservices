@@ -37,7 +37,12 @@ export default function GuidebookDetailPage() {
       <h1 className="mt-4 text-4xl font-extrabold">{book.title}</h1>
       <p className="mt-4 text-lg text-gray-600">{book.description}</p>
       {book.content && <p className="mt-6 leading-relaxed text-gray-700">{book.content}</p>}
-      <button type="button" className="btn-primary mt-8 inline-flex gap-2"><Download size={16} /> Download Guide</button>
+      <Link
+        to={`/contact?product=${encodeURIComponent(book.title)}&type=guidebook`}
+        className="btn-primary mt-8 inline-flex gap-2"
+      >
+        <Download size={16} /> Download Guide
+      </Link>
     </div></section>
   );
 }

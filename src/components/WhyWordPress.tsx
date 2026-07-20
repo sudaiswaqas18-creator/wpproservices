@@ -1,4 +1,5 @@
 import { Layers, TrendingUp, Search, Wallet } from 'lucide-react';
+import ContactLink from './ContactLink';
 
 const benefits = [
   { icon: Layers, title: 'Easy Customization', desc: 'Thousands of themes and plugins adapt seamlessly to any business need.' },
@@ -19,9 +20,9 @@ export default function WhyWordPress() {
               scalability, and cost-efficiency — the go-to platform for startups, growing businesses,
               and enterprises alike.
             </p>
-            <a href="#contact" className="btn-primary mt-8 inline-flex">
+            <ContactLink className="btn-primary mt-8 inline-flex">
               Build My WordPress Website
-            </a>
+            </ContactLink>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

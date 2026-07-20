@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ContactForm from './ContactForm';
+import ContactLink from './ContactLink';
 
 const stats = [
   { value: '10+', label: 'Years of Experience' },
@@ -19,7 +20,7 @@ export default function Hero() {
             We design and develop exceptional WordPress websites that help ambitious businesses stand out and grow.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link to="/contact" className="btn-primary">Contact Us</Link>
+            <ContactLink className="btn-primary">Contact Us</ContactLink>
             <Link to="/services" className="btn-outline">View Services</Link>
           </div>
         </motion.div>

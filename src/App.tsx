@@ -10,6 +10,7 @@ import BlogDetailPage from './pages/BlogDetailPage';
 import PricingPage from './pages/PricingPage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ResourcesPage from './pages/ResourcesPage';
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="blog/:slug" element={<BlogDetailPage />} />
         <Route path="pricing" element={<PricingPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 

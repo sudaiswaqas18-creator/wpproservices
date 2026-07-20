@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
+import ContactLink from './ContactLink';
 
 export default function Portfolio() {
   const { data: items } = useApiData('portfolio');
@@ -62,9 +63,9 @@ export default function Portfolio() {
                 <ExternalLink size={18} className={active === i ? 'text-brand-600' : 'text-gray-400'} />
               </button>
             ))}
-            <a href="#contact" className="btn-primary mt-4 self-start">
+            <ContactLink className="btn-primary mt-4 inline-flex self-start">
               Let&apos;s Build Together
-            </a>
+            </ContactLink>
           </div>
         </div>
       </div>

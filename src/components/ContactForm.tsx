@@ -1,5 +1,5 @@
 import { useState, FormEvent, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Send, CheckCircle, AlertCircle, ShoppingBag } from 'lucide-react';
 import { api } from '../api/client';
 import { validateContactForm, fieldClass, FieldErrors, hasErrors } from '../utils/validation';
@@ -24,6 +24,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
   const [searchParams] = useSearchParams();
   const purchaseProduct = searchParams.get('product');
   const purchasePrice = searchParams.get('price');
+  const inquiryType = searchParams.get('type');
 
   const [form, setForm] = useState({
     name: '',
@@ -40,11 +41,13 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
 
   useEffect(() => {
     if (!purchaseProduct) return;
-    const details = purchasePrice
-      ? `I would like to purchase "${purchaseProduct}" (${purchasePrice}). Please share license and payment details.`
-      : `I would like to purchase "${purchaseProduct}". Please share license and payment details.`;
+    const details = inquiryType === 'guidebook'
+      ? `I would like to download the guidebook "${purchaseProduct}". Please send me the download link.`
+      : purchasePrice
+        ? `I would like to purchase "${purchaseProduct}" (${purchasePrice}). Please share license and payment details.`
+        : `I would like to purchase "${purchaseProduct}". Please share license and payment details.`;
     setForm((f) => (f.project_details ? f : { ...f, project_details: details }));
-  }, [purchaseProduct, purchasePrice]);
+  }, [purchaseProduct, purchasePrice, inquiryType]);
 
   const validate = (data = form) => validateContactForm(data);
 
@@ -202,9 +205,9 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
           />
           <span className="text-sm text-gray-600">
             I have read and understood the{' '}
-            <a href="#" className="font-medium text-brand-600 hover:underline">
+            <Link to="/privacy-policy" className="font-medium text-brand-600 hover:underline">
               Privacy Policy
-            </a>
+            </Link>
           </span>
         </label>
         {show('privacy_accepted') && <p className="mt-1 text-xs text-red-600">{errors.privacy_accepted}</p>}
