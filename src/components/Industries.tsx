@@ -1,0 +1,44 @@
+import { Building2, ArrowRight } from 'lucide-react';
+import { useApiData } from '../hooks/useApiData';
+
+export default function Industries() {
+  const { data: industries } = useApiData('industries');
+
+  if (!industries.length) return null;
+
+  return (
+    <section className="bg-surface-50 py-20">
+      <div className="section-container">
+        <h2 className="section-title">Industries We Serve</h2>
+        <p className="section-subtitle">
+          With over 10+ years of WordPress and WooCommerce expertise, we partner with businesses
+          across diverse industries to craft scalable, impactful solutions.
+        </p>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {industries.map((ind) => (
+            <div key={ind.id} className="card group">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 transition group-hover:bg-brand-500">
+                <Building2 size={20} className="text-brand-600 group-hover:text-white" />
+              </div>
+              <h3 className="mt-4 font-bold text-gray-900">{ind.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">{ind.description}</p>
+              {ind.has_case_study && (
+                <button type="button" className="mt-4 flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                  View Case Study <ArrowRight size={14} />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-10 text-center text-gray-600">
+          No matter your industry, we craft WordPress websites that deliver results.
+        </p>
+        <div className="mt-6 text-center">
+          <a href="#contact" className="btn-primary">Let&apos;s Build Your Website</a>
+        </div>
+      </div>
+    </section>
+  );
+}

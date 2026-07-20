@@ -1,0 +1,46 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, TrendingUp } from 'lucide-react';
+import { useApiData } from '../hooks/useApiData';
+import CTA from '../components/CTA';
+
+export default function CaseStudiesPage() {
+  const { data: studies } = useApiData('caseStudies');
+
+  return (
+    <>
+      <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
+        <div className="section-container text-center">
+          <h1 className="text-4xl font-extrabold text-gray-900">Case Studies</h1>
+          <p className="section-subtitle mx-auto mt-4">Real projects with measurable growth — improved speed, UX, and conversions.</p>
+        </div>
+      </section>
+      <section className="pb-20">
+        <div className="section-container space-y-6">
+          {studies.map((cs) => (
+            <article key={cs.id} className="card overflow-hidden p-0">
+              <div className="grid lg:grid-cols-3">
+                <div className="border-b border-gray-100 p-8 lg:col-span-2 lg:border-b-0 lg:border-r">
+                  <h2 className="text-xl font-bold text-gray-900">{cs.title}</h2>
+                  <p className="mt-2 text-sm font-medium text-brand-600">Client: {cs.client}</p>
+                  <p className="mt-4 text-sm text-gray-600">{cs.challenge}</p>
+                  <Link to={`/case-studies/${cs.slug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                    View Full Case Study <ArrowRight size={14} />
+                  </Link>
+                </div>
+                <div className="flex flex-col justify-center bg-brand-50/50 p-8">
+                  {[{ l: cs.metric1_label, v: cs.metric1_value }, { l: cs.metric2_label, v: cs.metric2_value }, { l: cs.metric3_label, v: cs.metric3_value }].map((m) => (
+                    <div key={m.l} className="flex items-center justify-between border-b border-brand-100 py-4 last:border-0">
+                      <span className="text-sm text-gray-600">{m.l}</span>
+                      <span className="flex items-center gap-1 font-bold text-brand-600"><TrendingUp size={14} />{m.v}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <CTA />
+    </>
+  );
+}
