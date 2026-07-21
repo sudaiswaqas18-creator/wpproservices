@@ -4,9 +4,16 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
 
 const AUTOPLAY_MS = 6000;
+const DOT_SIZE = 10;
+const DOT_GAP = 10;
+const PILL_WIDTH = 32;
 
 function initials(name: string) {
   return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+}
+
+function pillOffset(index: number) {
+  return index * (DOT_SIZE + DOT_GAP) - (PILL_WIDTH - DOT_SIZE) / 2;
 }
 
 export default function Testimonials() {
@@ -29,7 +36,7 @@ export default function Testimonials() {
     go(current === 0 ? items.length - 1 : current - 1);
   }, [current, go, items.length]);
 
-  const next = useCallback(() => {
+  const nextSlide = useCallback(() => {
     go(current === items.length - 1 ? 0 : current + 1);
   }, [current, go, items.length]);
 
@@ -37,10 +44,7 @@ export default function Testimonials() {
     if (items.length <= 1) return;
     const timer = window.setInterval(() => {
       setDirection(1);
-      setCurrent((c) => {
-        const n = c === items.length - 1 ? 0 : c + 1;
-        return n;
-      });
+      setCurrent((c) => (c === items.length - 1 ? 0 : c + 1));
       setProgressKey((k) => k + 1);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(timer);
@@ -57,12 +61,7 @@ export default function Testimonials() {
       rotateY: d > 0 ? 28 : -28,
       scale: 0.92,
     }),
-    center: {
-      x: 0,
-      opacity: 1,
-      rotateY: 0,
-      scale: 1,
-    },
+    center: { x: 0, opacity: 1, rotateY: 0, scale: 1 },
     exit: (d: number) => ({
       x: d > 0 ? -280 : 280,
       opacity: 0,
@@ -98,13 +97,10 @@ export default function Testimonials() {
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-500/30">
                   {initials(t.name)}
                 </div>
-
                 <Quote size={36} className="mt-6 text-brand-200" strokeWidth={1.5} />
-
                 <blockquote className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-700 sm:text-xl">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
-
                 <div className="mt-8 w-full max-w-md border-t border-slate-100 pt-6">
                   <p className="text-lg font-bold text-gray-900">{t.name}</p>
                   <p className="mt-1 text-sm text-gray-500">{t.company}</p>
@@ -128,40 +124,42 @@ export default function Testimonials() {
               <ChevronLeft size={20} />
             </button>
 
-            <div className="flex items-center gap-2.5">
+            <div
+              className="relative flex items-center"
+              style={{ gap: DOT_GAP, height: PILL_WIDTH / 2 }}
+            >
               {items.map((item, i) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => go(i)}
-                  className="relative flex h-2.5 w-2.5 items-center justify-center rounded-full"
+                  className="relative z-10 rounded-full bg-gray-300 transition-colors hover:bg-brand-200"
+                  style={{ width: DOT_SIZE, height: DOT_SIZE }}
                   aria-label={`Go to testimonial ${i + 1}`}
                   aria-current={i === current ? 'true' : undefined}
-                >
-                  <span className={`block h-2.5 w-2.5 rounded-full transition-colors duration-300 ${i === current ? 'bg-transparent' : 'bg-gray-300 hover:bg-brand-200'}`} />
-                  {i === current && (
-                    <motion.span
-                      layoutId="testimonial-active-pill"
-                      className="testimonial-active-pill absolute left-1/2 top-1/2 h-2.5 w-8 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-brand-500 shadow-sm shadow-brand-500/40"
-                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-                    >
-                      <motion.span
-                        key={progressKey}
-                        className="testimonial-progress-fill block h-full rounded-full bg-white/35"
-                        initial={{ width: '0%' }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: AUTOPLAY_MS / 1000, ease: 'linear' }}
-                      />
-                      <span className="testimonial-pill-shimmer" aria-hidden="true" />
-                    </motion.span>
-                  )}
-                </button>
+                />
               ))}
+
+              <motion.div
+                className="testimonial-active-pill pointer-events-none absolute top-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-brand-500 shadow-md shadow-brand-500/50"
+                style={{ width: PILL_WIDTH, height: DOT_SIZE }}
+                animate={{ x: pillOffset(current) }}
+                transition={{ type: 'spring', stiffness: 380, damping: 26, mass: 0.8 }}
+              >
+                <motion.div
+                  key={progressKey}
+                  className="absolute inset-y-0 left-0 bg-white/45"
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: AUTOPLAY_MS / 1000, ease: 'linear' }}
+                />
+                <span className="testimonial-pill-shimmer" aria-hidden="true" />
+              </motion.div>
             </div>
 
             <button
               type="button"
-              onClick={next}
+              onClick={nextSlide}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-gray-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
               aria-label="Next testimonial"
             >

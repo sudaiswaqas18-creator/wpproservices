@@ -90,9 +90,10 @@ function StatsBar() {
   const marqueeItems = [...stats, ...stats];
 
   return (
-    <section className="stats-marquee-section relative overflow-hidden border-y border-brand-100/80 bg-gradient-to-r from-brand-50 via-brand-100/40 to-brand-50 py-5">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-brand-50 to-transparent sm:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-brand-50 to-transparent sm:w-24" />
+    <section className="stats-marquee-section relative overflow-hidden border-y border-brand-200/60 bg-brand-50 py-7 sm:py-8">
+      <div className="stats-marquee-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-brand-50 to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-brand-50 to-transparent sm:w-20" />
 
       <div className="stats-marquee-viewport">
         <div className="stats-marquee-track">
@@ -100,7 +101,7 @@ function StatsBar() {
             <div key={`${s.stat_label}-${i}`} className="stats-marquee-item">
               <span className="stats-marquee-value">{s.stat_value}</span>
               <span className="stats-marquee-label">{s.stat_label}</span>
-              <span className="stats-marquee-dot" aria-hidden="true" />
+              <span className="stats-marquee-sep" aria-hidden="true">◆</span>
             </div>
           ))}
         </div>
