@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
+
+const AUTOPLAY_MS = 6000;
 
 function initials(name: string) {
   return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
@@ -11,18 +13,42 @@ export default function Testimonials() {
   const { data: items } = useApiData('testimonials');
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
+
+  const go = useCallback((next: number) => {
+    if (next === current) return;
+    let d = next - current;
+    if (d > items.length / 2) d -= items.length;
+    if (d < -items.length / 2) d += items.length;
+    setDirection(d > 0 ? 1 : -1);
+    setCurrent(next);
+    setProgressKey((k) => k + 1);
+  }, [current, items.length]);
+
+  const prev = useCallback(() => {
+    go(current === 0 ? items.length - 1 : current - 1);
+  }, [current, go, items.length]);
+
+  const next = useCallback(() => {
+    go(current === items.length - 1 ? 0 : current + 1);
+  }, [current, go, items.length]);
+
+  useEffect(() => {
+    if (items.length <= 1) return;
+    const timer = window.setInterval(() => {
+      setDirection(1);
+      setCurrent((c) => {
+        const n = c === items.length - 1 ? 0 : c + 1;
+        return n;
+      });
+      setProgressKey((k) => k + 1);
+    }, AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [items.length, current]);
 
   if (!items.length) return null;
 
   const t = items[current];
-
-  const go = (next: number) => {
-    setDirection(next > current ? 1 : -1);
-    setCurrent(next);
-  };
-
-  const prev = () => go(current === 0 ? items.length - 1 : current - 1);
-  const next = () => go(current === items.length - 1 ? 0 : current + 1);
 
   const slideVariants = {
     enter: (d: number) => ({
@@ -102,17 +128,34 @@ export default function Testimonials() {
               <ChevronLeft size={20} />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               {items.map((item, i) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => go(i)}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    i === current ? 'w-8 bg-brand-500' : 'w-2.5 bg-gray-300 hover:bg-brand-200'
-                  }`}
+                  className="relative flex h-2.5 w-2.5 items-center justify-center rounded-full"
                   aria-label={`Go to testimonial ${i + 1}`}
-                />
+                  aria-current={i === current ? 'true' : undefined}
+                >
+                  <span className={`block h-2.5 w-2.5 rounded-full transition-colors duration-300 ${i === current ? 'bg-transparent' : 'bg-gray-300 hover:bg-brand-200'}`} />
+                  {i === current && (
+                    <motion.span
+                      layoutId="testimonial-active-pill"
+                      className="testimonial-active-pill absolute left-1/2 top-1/2 h-2.5 w-8 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-brand-500 shadow-sm shadow-brand-500/40"
+                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                    >
+                      <motion.span
+                        key={progressKey}
+                        className="testimonial-progress-fill block h-full rounded-full bg-white/35"
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: AUTOPLAY_MS / 1000, ease: 'linear' }}
+                      />
+                      <span className="testimonial-pill-shimmer" aria-hidden="true" />
+                    </motion.span>
+                  )}
+                </button>
               ))}
             </div>
 
