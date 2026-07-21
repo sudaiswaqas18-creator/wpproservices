@@ -9,11 +9,11 @@ const offices = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200/80 bg-gradient-to-b from-white to-brand-50/40 text-slate-600">
+    <footer className="border-t border-surface-200 bg-gradient-to-b from-white to-brand-50/30 text-ink-muted">
       <div className="section-container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Logo />
+            <Logo variant="footer" />
             <p className="mt-4 text-sm leading-relaxed text-slate-500">
               WPServices builds scalable, secure, and conversion-focused WordPress websites for businesses worldwide.
             </p>

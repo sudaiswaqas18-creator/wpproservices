@@ -1,0 +1,23 @@
+{
+  "name": "WPServices — WordPress Agency",
+  "short_name": "WPServices",
+  "description": "Custom WordPress development, WooCommerce plugins, and ongoing maintenance.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-placeholder.svg",
+      "sizes": "200x60",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

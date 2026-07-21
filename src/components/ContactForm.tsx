@@ -1,6 +1,6 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Send, CheckCircle, AlertCircle, ShoppingBag } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ShoppingBag, Loader2 } from 'lucide-react';
 import { api } from '../api/client';
 import { validateContactForm, fieldClass, FieldErrors, hasErrors } from '../utils/validation';
 
@@ -93,7 +93,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-card ${compact ? '' : 'lg:p-8'}`}
+      className={`rounded-2xl border border-surface-200 bg-white p-6 shadow-card ring-1 ring-brand-500/5 ${compact ? '' : 'lg:p-8'}`}
       id="contact"
     >
       {!compact && (
@@ -231,8 +231,17 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
         disabled={status === 'loading'}
         className="btn-primary mt-5 w-full gap-2 disabled:opacity-60"
       >
-        {status === 'loading' ? 'Submitting...' : 'Get Free Consultation'}
-        {status !== 'loading' && <Send size={16} />}
+        {status === 'loading' ? (
+          <>
+            <Loader2 size={16} className="animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          <>
+            Get Free Consultation
+            <Send size={16} />
+          </>
+        )}
       </button>
     </form>
   );

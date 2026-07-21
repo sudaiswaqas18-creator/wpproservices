@@ -4,7 +4,7 @@ import { FileText, Briefcase, Mail, Wrench, Star, Image, HelpCircle } from 'luci
 import { adminApi } from '../../api/admin';
 
 const statConfig = [
-  { key: 'blog_posts', label: 'Blog Posts', icon: FileText, color: 'bg-blue-500', link: '/admin/blogs' },
+  { key: 'blog_posts', label: 'Blog Posts', icon: FileText, color: 'bg-brand-500', link: '/admin/blogs' },
   { key: 'case_studies', label: 'Case Studies', icon: Briefcase, color: 'bg-purple-500', link: '/admin/case-studies' },
   { key: 'services', label: 'Services', icon: Wrench, color: 'bg-brand-500', link: '/admin/services' },
   { key: 'testimonials', label: 'Testimonials', icon: Star, color: 'bg-yellow-500', link: '/admin/testimonials' },
