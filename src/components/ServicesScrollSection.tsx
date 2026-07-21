@@ -5,7 +5,6 @@ import {
   AnimatePresence,
   useMotionValueEvent,
   useScroll,
-  useSpring,
   useTransform,
 } from 'framer-motion';
 import {
@@ -84,25 +83,31 @@ const CATEGORIES: ServiceCategory[] = [
 ];
 
 const COUNT = CATEGORIES.length;
-/** Full viewport height per category — more room = no skip on scroll */
-const VH_PER_CATEGORY = 100;
+/** vh per category + 1 extra buffer step so category 5 fully shows before next section */
+const VH_PER_STEP = 115;
+const TOTAL_STEPS = COUNT + 1;
+const CARD_STEP_PX = 92;
 
 function progressToIndex(progress: number) {
-  const clamped = Math.min(1, Math.max(0, progress));
-  return Math.min(COUNT - 1, Math.max(0, Math.floor(clamped * COUNT)));
+  const p = Math.min(1, Math.max(0, progress));
+  const scaled = p * (TOTAL_STEPS / COUNT);
+  return Math.min(COUNT - 1, Math.max(0, Math.floor(scaled * COUNT)));
+}
+
+function getScrollMetrics(sectionEl: HTMLElement) {
+  const sectionTop = sectionEl.offsetTop;
+  const scrollRange = Math.max(1, sectionEl.offsetHeight - window.innerHeight);
+  return { sectionTop, scrollRange };
 }
 
 function scrollToCategory(sectionEl: HTMLElement, index: number) {
-  const sectionTop = sectionEl.offsetTop;
-  const scrollRange = sectionEl.offsetHeight - window.innerHeight;
-  if (scrollRange <= 0) return;
-  const segmentCenter = (index + 0.5) / COUNT;
-  window.scrollTo({ top: sectionTop + segmentCenter * scrollRange, behavior: 'smooth' });
+  const { sectionTop, scrollRange } = getScrollMetrics(sectionEl);
+  const progress = (index + 0.5) / COUNT;
+  window.scrollTo({ top: sectionTop + progress * scrollRange * (COUNT / TOTAL_STEPS), behavior: 'smooth' });
 }
 
 export default function ServicesScrollSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const targetIndexRef = useRef(0);
   const isDesktopRef = useRef(false);
   const [active, setActive] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -112,13 +117,7 @@ export default function ServicesScrollSection() {
     offset: ['start start', 'end end'],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    restDelta: 0.001,
-  });
-
-  const scrollBarWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+  const scrollBarWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
@@ -133,31 +132,13 @@ export default function ServicesScrollSection() {
 
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
     if (!isDesktopRef.current) return;
-    targetIndexRef.current = progressToIndex(progress);
+    setActive(progressToIndex(progress));
   });
 
-  useEffect(() => {
-    if (!isDesktop) return;
-
-    const stepTowardTarget = () => {
-      setActive((prev) => {
-        const target = targetIndexRef.current;
-        if (prev < target) return prev + 1;
-        if (prev > target) return prev - 1;
-        return prev;
-      });
-    };
-
-    const id = window.setInterval(stepTowardTarget, 90);
-    return () => window.clearInterval(id);
-  }, [isDesktop]);
-
   const handleCategoryClick = (index: number) => {
-    targetIndexRef.current = index;
+    setActive(index);
     if (isDesktop && sectionRef.current) {
       scrollToCategory(sectionRef.current, index);
-    } else {
-      setActive(index);
     }
   };
 
@@ -193,10 +174,7 @@ export default function ServicesScrollSection() {
 
         {isDesktop && (
           <div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
-            <motion.div
-              className="h-full rounded-full bg-brand-500"
-              style={{ width: scrollBarWidth }}
-            />
+            <motion.div className="h-full rounded-full bg-brand-500" style={{ width: scrollBarWidth }} />
           </div>
         )}
 
@@ -220,77 +198,83 @@ export default function ServicesScrollSection() {
         </Link>
       </div>
 
-      <div className="relative space-y-3 lg:space-y-4">
-        {CATEGORIES.map((cat, i) => {
-          const Icon = cat.icon;
-          const isActive = i === active;
-          const offset = i - active;
+      <div className="relative overflow-hidden lg:h-[min(420px,55vh)]">
+        <motion.div
+          className="space-y-3 lg:space-y-4"
+          animate={{ y: isDesktop ? -active * CARD_STEP_PX : 0 }}
+          transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+        >
+          {CATEGORIES.map((cat, i) => {
+            const Icon = cat.icon;
+            const isActive = i === active;
 
-          return (
-            <motion.button
-              key={cat.id}
-              type="button"
-              onClick={() => handleCategoryClick(i)}
-              animate={{
-                opacity: isActive ? 1 : 0.35,
-                scale: isActive ? 1 : 0.965,
-                y: isDesktop ? offset * 12 : 0,
-                filter: isActive ? 'blur(0px)' : 'blur(0.4px)',
-              }}
-              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-              className={`services-scroll-card group w-full rounded-2xl border bg-white text-left ${
-                isActive
-                  ? 'border-brand-200 shadow-cardHover ring-1 ring-brand-100'
-                  : 'border-slate-200/80 shadow-card'
-              }`}
-            >
-              <div className="flex items-start gap-4 p-5 sm:p-6">
-                <div
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
-                    isActive
-                      ? 'bg-brand-500 text-white shadow-md shadow-brand-500/25'
-                      : 'bg-brand-50 text-brand-600'
-                  }`}
-                >
-                  <Icon size={22} />
-                </div>
-                <div className="min-w-0 flex-1 text-left">
-                  <h3 className={`text-lg font-bold ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
-                    {cat.title}
-                  </h3>
+            return (
+              <motion.button
+                key={cat.id}
+                type="button"
+                onClick={() => handleCategoryClick(i)}
+                animate={{
+                  opacity: isActive ? 1 : 0.4,
+                  scale: isActive ? 1 : 0.97,
+                }}
+                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                className={`services-scroll-card group w-full rounded-2xl border bg-white text-left ${
+                  isActive
+                    ? 'border-brand-200 shadow-cardHover ring-1 ring-brand-100'
+                    : 'border-slate-200/80 shadow-card'
+                }`}
+              >
+                <div className="flex items-start gap-4 p-5 sm:p-6">
+                  <div
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
+                      isActive
+                        ? 'bg-brand-500 text-white shadow-md shadow-brand-500/25'
+                        : 'bg-brand-50 text-brand-600'
+                    }`}
+                  >
+                    <Icon size={22} />
+                  </div>
+                  <div className="min-w-0 flex-1 text-left">
+                    <h3 className={`text-lg font-bold ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
+                      {cat.title}
+                    </h3>
 
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="mt-2 text-sm leading-relaxed text-gray-600">{cat.desc}</p>
-                        <ul className="mt-4 space-y-2.5">
-                          {cat.links.map((link) => (
-                            <li key={link.slug}>
-                              <Link
-                                to={`/services/${link.slug}`}
-                                onClick={(e) => e.stopPropagation()}
-                                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline"
-                              >
-                                {link.label}
-                                <ArrowRight size={14} />
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <p className="mt-2 text-sm leading-relaxed text-gray-600">{cat.desc}</p>
+                          <ul className="mt-4 space-y-2.5">
+                            {cat.links.map((link) => (
+                              <li key={link.slug}>
+                                <Link
+                                  to={`/services/${link.slug}`}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline"
+                                >
+                                  {link.label}
+                                  <ArrowRight size={14} />
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
-              </div>
-            </motion.button>
-          );
-        })}
+              </motion.button>
+            );
+          })}
+        </motion.div>
+
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-surface-50 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-surface-50 to-transparent" />
       </div>
     </div>
   );
@@ -307,9 +291,9 @@ export default function ServicesScrollSection() {
     <section
       ref={sectionRef}
       className="services-scroll-section relative bg-surface-50"
-      style={{ height: `${COUNT * VH_PER_CATEGORY}vh` }}
+      style={{ height: `${TOTAL_STEPS * VH_PER_STEP}vh` }}
     >
-      <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center py-10">
+      <div className="sticky top-24 flex h-[calc(100vh-6rem)] items-center py-8">
         <div className="section-container w-full">{content}</div>
       </div>
     </section>
