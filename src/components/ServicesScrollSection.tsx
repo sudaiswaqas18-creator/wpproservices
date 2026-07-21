@@ -5,6 +5,8 @@ import {
   AnimatePresence,
   useMotionValueEvent,
   useScroll,
+  useSpring,
+  useTransform,
 } from 'framer-motion';
 import {
   ArrowRight,
@@ -82,18 +84,26 @@ const CATEGORIES: ServiceCategory[] = [
 ];
 
 const COUNT = CATEGORIES.length;
-const SCROLL_STEPS_VH = 85;
+/** Full viewport height per category — more room = no skip on scroll */
+const VH_PER_CATEGORY = 100;
+
+function progressToIndex(progress: number) {
+  const clamped = Math.min(1, Math.max(0, progress));
+  return Math.min(COUNT - 1, Math.max(0, Math.floor(clamped * COUNT)));
+}
 
 function scrollToCategory(sectionEl: HTMLElement, index: number) {
   const sectionTop = sectionEl.offsetTop;
   const scrollRange = sectionEl.offsetHeight - window.innerHeight;
-  if (scrollRange <= 0 || COUNT <= 1) return;
-  const target = sectionTop + (index / (COUNT - 1)) * scrollRange;
-  window.scrollTo({ top: target, behavior: 'smooth' });
+  if (scrollRange <= 0) return;
+  const segmentCenter = (index + 0.5) / COUNT;
+  window.scrollTo({ top: sectionTop + segmentCenter * scrollRange, behavior: 'smooth' });
 }
 
 export default function ServicesScrollSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const targetIndexRef = useRef(0);
+  const isDesktopRef = useRef(false);
   const [active, setActive] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -102,24 +112,52 @@ export default function ServicesScrollSection() {
     offset: ['start start', 'end end'],
   });
 
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  const scrollBarWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
-    const update = () => setIsDesktop(mq.matches);
+    const update = () => {
+      setIsDesktop(mq.matches);
+      isDesktopRef.current = mq.matches;
+    };
     update();
     mq.addEventListener('change', update);
     return () => mq.removeEventListener('change', update);
   }, []);
 
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
-    if (!isDesktop) return;
-    const idx = Math.min(COUNT - 1, Math.max(0, Math.floor(progress * COUNT)));
-    setActive(idx);
+    if (!isDesktopRef.current) return;
+    targetIndexRef.current = progressToIndex(progress);
   });
 
+  useEffect(() => {
+    if (!isDesktop) return;
+
+    const stepTowardTarget = () => {
+      setActive((prev) => {
+        const target = targetIndexRef.current;
+        if (prev < target) return prev + 1;
+        if (prev > target) return prev - 1;
+        return prev;
+      });
+    };
+
+    const id = window.setInterval(stepTowardTarget, 90);
+    return () => window.clearInterval(id);
+  }, [isDesktop]);
+
   const handleCategoryClick = (index: number) => {
-    setActive(index);
+    targetIndexRef.current = index;
     if (isDesktop && sectionRef.current) {
       scrollToCategory(sectionRef.current, index);
+    } else {
+      setActive(index);
     }
   };
 
@@ -135,26 +173,34 @@ export default function ServicesScrollSection() {
 
         <h2 className="section-title mt-5">Our Services</h2>
 
+        <p className="mt-2 text-sm font-semibold text-brand-600">
+          {String(active + 1).padStart(2, '0')} / {String(COUNT).padStart(2, '0')}
+          <span className="ml-2 font-normal text-gray-500">{activeCategory.title}</span>
+        </p>
+
         <AnimatePresence mode="wait">
           <motion.p
             key={activeCategory.id}
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
             className="mt-4 max-w-lg text-base leading-relaxed text-gray-600 sm:text-lg"
           >
             {activeCategory.desc}
           </motion.p>
         </AnimatePresence>
 
-        <p className="mt-3 max-w-lg text-sm leading-relaxed text-gray-500">
-          {isDesktop
-            ? 'Scroll slowly — each category activates step by step as you move through this section.'
-            : 'Tap a category to explore related services.'}
-        </p>
+        {isDesktop && (
+          <div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
+            <motion.div
+              className="h-full rounded-full bg-brand-500"
+              style={{ width: scrollBarWidth }}
+            />
+          </div>
+        )}
 
-        <div className="mt-6 flex gap-2">
+        <div className="mt-5 flex gap-2">
           {CATEGORIES.map((cat, i) => (
             <button
               key={cat.id}
@@ -186,11 +232,12 @@ export default function ServicesScrollSection() {
               type="button"
               onClick={() => handleCategoryClick(i)}
               animate={{
-                opacity: isActive ? 1 : 0.38,
-                scale: isActive ? 1 : 0.96,
-                y: isDesktop ? offset * 10 : 0,
+                opacity: isActive ? 1 : 0.35,
+                scale: isActive ? 1 : 0.965,
+                y: isDesktop ? offset * 12 : 0,
+                filter: isActive ? 'blur(0px)' : 'blur(0.4px)',
               }}
-              transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
               className={`services-scroll-card group w-full rounded-2xl border bg-white text-left ${
                 isActive
                   ? 'border-brand-200 shadow-cardHover ring-1 ring-brand-100'
@@ -218,7 +265,7 @@ export default function ServicesScrollSection() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
                         className="overflow-hidden"
                       >
                         <p className="mt-2 text-sm leading-relaxed text-gray-600">{cat.desc}</p>
@@ -260,7 +307,7 @@ export default function ServicesScrollSection() {
     <section
       ref={sectionRef}
       className="services-scroll-section relative bg-surface-50"
-      style={{ height: `${COUNT * SCROLL_STEPS_VH}vh` }}
+      style={{ height: `${COUNT * VH_PER_CATEGORY}vh` }}
     >
       <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center py-10">
         <div className="section-container w-full">{content}</div>
