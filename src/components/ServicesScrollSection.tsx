@@ -1,12 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  motion,
-  AnimatePresence,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight,
   Bot,
@@ -83,63 +77,70 @@ const CATEGORIES: ServiceCategory[] = [
 ];
 
 const COUNT = CATEGORIES.length;
-/** vh per category + 1 extra buffer step so category 5 fully shows before next section */
-const VH_PER_STEP = 115;
-const TOTAL_STEPS = COUNT + 1;
-const CARD_STEP_PX = 92;
+/** Tall section: each category + generous buffer so 05 never gets skipped */
+const SECTION_HEIGHT_VH = COUNT * 140 + 160;
+const CARD_STEP_PX = 96;
 
+/** Last category (05) owns the final 25% of scroll — cannot be skipped */
 function progressToIndex(progress: number) {
   const p = Math.min(1, Math.max(0, progress));
-  const scaled = p * (TOTAL_STEPS / COUNT);
-  return Math.min(COUNT - 1, Math.max(0, Math.floor(scaled * COUNT)));
+  if (p >= 0.76) return COUNT - 1;
+  const slice = 0.76 / (COUNT - 1);
+  return Math.min(COUNT - 2, Math.floor(p / slice));
 }
 
-function getScrollMetrics(sectionEl: HTMLElement) {
-  const sectionTop = sectionEl.offsetTop;
-  const scrollRange = Math.max(1, sectionEl.offsetHeight - window.innerHeight);
-  return { sectionTop, scrollRange };
-}
-
-function scrollToCategory(sectionEl: HTMLElement, index: number) {
-  const { sectionTop, scrollRange } = getScrollMetrics(sectionEl);
-  const progress = (index + 0.5) / COUNT;
-  window.scrollTo({ top: sectionTop + progress * scrollRange * (COUNT / TOTAL_STEPS), behavior: 'smooth' });
+function indexToProgress(index: number) {
+  if (index >= COUNT - 1) return 0.88;
+  const slice = 0.76 / (COUNT - 1);
+  return index * slice + slice * 0.5;
 }
 
 export default function ServicesScrollSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isDesktopRef = useRef(false);
   const [active, setActive] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
+  const updateFromScroll = useCallback(() => {
+    const el = sectionRef.current;
+    if (!el) return;
 
-  const scrollBarWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+    const scrollRange = el.offsetHeight - window.innerHeight;
+    if (scrollRange <= 0) return;
+
+    const scrolled = Math.min(scrollRange, Math.max(0, -el.getBoundingClientRect().top));
+    const p = scrolled / scrollRange;
+    setScrollProgress(p);
+    setActive(progressToIndex(p));
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
-    const update = () => {
-      setIsDesktop(mq.matches);
-      isDesktopRef.current = mq.matches;
-    };
+    const update = () => setIsDesktop(mq.matches);
     update();
     mq.addEventListener('change', update);
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  useMotionValueEvent(scrollYProgress, 'change', (progress) => {
-    if (!isDesktopRef.current) return;
-    setActive(progressToIndex(progress));
-  });
+  useEffect(() => {
+    if (!isDesktop) return;
+    updateFromScroll();
+    window.addEventListener('scroll', updateFromScroll, { passive: true });
+    window.addEventListener('resize', updateFromScroll);
+    return () => {
+      window.removeEventListener('scroll', updateFromScroll);
+      window.removeEventListener('resize', updateFromScroll);
+    };
+  }, [isDesktop, updateFromScroll]);
 
   const handleCategoryClick = (index: number) => {
     setActive(index);
-    if (isDesktop && sectionRef.current) {
-      scrollToCategory(sectionRef.current, index);
-    }
+    const el = sectionRef.current;
+    if (!isDesktop || !el) return;
+
+    const scrollRange = el.offsetHeight - window.innerHeight;
+    const target = el.offsetTop + indexToProgress(index) * scrollRange;
+    window.scrollTo({ top: target, behavior: 'smooth' });
   };
 
   const activeCategory = CATEGORIES[active];
@@ -174,7 +175,10 @@ export default function ServicesScrollSection() {
 
         {isDesktop && (
           <div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
-            <motion.div className="h-full rounded-full bg-brand-500" style={{ width: scrollBarWidth }} />
+            <div
+              className="h-full rounded-full bg-brand-500 transition-[width] duration-150 ease-out"
+              style={{ width: `${scrollProgress * 100}%` }}
+            />
           </div>
         )}
 
@@ -198,7 +202,7 @@ export default function ServicesScrollSection() {
         </Link>
       </div>
 
-      <div className="relative overflow-hidden lg:h-[min(420px,55vh)]">
+      <div className="relative overflow-hidden lg:h-[min(440px,58vh)]">
         <motion.div
           className="space-y-3 lg:space-y-4"
           animate={{ y: isDesktop ? -active * CARD_STEP_PX : 0 }}
@@ -213,10 +217,7 @@ export default function ServicesScrollSection() {
                 key={cat.id}
                 type="button"
                 onClick={() => handleCategoryClick(i)}
-                animate={{
-                  opacity: isActive ? 1 : 0.4,
-                  scale: isActive ? 1 : 0.97,
-                }}
+                animate={{ opacity: isActive ? 1 : 0.38, scale: isActive ? 1 : 0.97 }}
                 transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
                 className={`services-scroll-card group w-full rounded-2xl border bg-white text-left ${
                   isActive
@@ -273,8 +274,8 @@ export default function ServicesScrollSection() {
           })}
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-surface-50 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-surface-50 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-surface-50 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface-50 to-transparent" />
       </div>
     </div>
   );
@@ -291,7 +292,7 @@ export default function ServicesScrollSection() {
     <section
       ref={sectionRef}
       className="services-scroll-section relative bg-surface-50"
-      style={{ height: `${TOTAL_STEPS * VH_PER_STEP}vh` }}
+      style={{ height: `${SECTION_HEIGHT_VH}vh` }}
     >
       <div className="sticky top-24 flex h-[calc(100vh-6rem)] items-center py-8">
         <div className="section-container w-full">{content}</div>
