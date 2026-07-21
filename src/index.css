@@ -105,6 +105,36 @@
     @apply rounded-2xl border border-surface-200 bg-white p-6 shadow-card transition hover:border-brand-100 hover:shadow-cardHover;
   }
 
+  .service-card-fill {
+    @apply relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-card;
+    isolation: isolate;
+  }
+
+  .service-card-fill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(165deg, #8b5cf6 0%, #7c3aed 45%, #6d28d9 100%);
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .service-card-fill:hover::before,
+  .service-card-fill:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  .service-card-fill:hover {
+    @apply border-brand-500;
+    box-shadow: 0 22px 48px rgba(124, 58, 237, 0.28);
+  }
+
+  .service-card-fill__inner {
+    @apply relative z-10;
+  }
+
   .blog-strip {
     @apply flex w-full;
   }
