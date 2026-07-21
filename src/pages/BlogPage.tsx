@@ -1,5 +1,6 @@
 import { useApiData } from '../hooks/useApiData';
-import BlogCard from '../components/BlogCard';
+import BlogShowcaseStrip from '../components/BlogShowcaseStrip';
+import BlogMobileCard from '../components/BlogMobileCard';
 import CTA from '../components/CTA';
 
 export default function BlogPage() {
@@ -14,10 +15,13 @@ export default function BlogPage() {
         </div>
       </section>
       <section className="pb-20">
-        <div className="section-container grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
+        <div className="section-container">
+          <BlogShowcaseStrip posts={posts} />
+          <div className="mt-8 grid gap-6 md:hidden">
+            {posts.map((post) => (
+              <BlogMobileCard key={post.id} post={post} />
+            ))}
+          </div>
         </div>
       </section>
       <CTA />

@@ -46,6 +46,8 @@ export const fallbackData = {
     { id: 1, title: 'How to Migrate WordPress Without Breaking Your SEO', slug: 'migrate-wordpress-seo', excerpt: 'Most migrations break something the founder discovers too late.', image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600', published_at: '2025-06-12' },
     { id: 2, title: 'Website Redesign Checklist for Growing Businesses', slug: 'website-redesign-checklist', excerpt: 'Your website could be your biggest liability. Use this checklist before you scale.', image_url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600', published_at: '2025-05-15' },
     { id: 3, title: 'Why Stock WooCommerce Stops Working at Scale', slug: 'woocommerce-customization-scale', excerpt: 'Five customizations most founders need first when revenue crosses $1M ARR.', image_url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600', published_at: '2025-04-08' },
+    { id: 4, title: 'Core Web Vitals: A Practical Guide for WordPress', slug: 'core-web-vitals-wordpress', excerpt: 'Speed is not a nice-to-have anymore. Here is how to fix LCP, CLS, and INP on real business sites.', image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600', published_at: '2025-03-20' },
+    { id: 5, title: 'When to Hire a WordPress Agency vs In-House', slug: 'hire-wordpress-agency', excerpt: 'The decision framework we use with founders evaluating build, redesign, and long-term support.', image_url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600', published_at: '2025-02-10' },
   ] as BlogPost[],
 
   industries: [

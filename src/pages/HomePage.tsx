@@ -20,7 +20,7 @@ export default function HomePage() {
       <Testimonials />
       <StatsBar />
       <ToolsSection />
-      <Blog limit={3} />
+      <Blog limit={5} />
       <CTA />
     </>
   );
