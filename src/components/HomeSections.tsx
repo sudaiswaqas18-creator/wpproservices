@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { apiUrl } from '../config/api';
+import ServicesScrollSection from './ServicesScrollSection';
 
 interface SiteStat {
   stat_value: string;
@@ -126,37 +127,7 @@ function PhilosophySection() {
 }
 
 function ServiceCategoriesHome() {
-  const categories = [
-    { title: 'Website Development', desc: 'Custom tailored tech solutions scaling from robust infrastructures to beautiful, high-performance web applications.', links: [{ l: 'Custom WordPress Development', s: 'wordpress-website-development' }, { l: 'WooCommerce Development', s: 'woocommerce-development' }, { l: 'LearnDash Development', s: 'learndash-development' }] },
-    { title: 'Website Revamp', desc: 'Refresh existing experiences with focused redesign and migration work that lifts conversion.', links: [{ l: 'Website Redesign', s: 'wordpress-redesign' }, { l: 'WordPress Migration', s: 'wordpress-migration' }] },
-    { title: 'Performance Optimization', desc: 'Make sites measurably faster — page speed, server response, asset weight.', links: [{ l: 'Speed Optimization', s: 'wordpress-speed-optimization' }, { l: 'SEO Improvement', s: 'wordpress-seo-services' }] },
-    { title: 'Technology Partnership', desc: 'Long-term retainer engagements with dedicated WordPress / WooCommerce / LearnDash teams.', links: [{ l: 'WordPress Retainer', s: 'hire-wordpress-developers' }, { l: 'WooCommerce Retainer', s: 'hire-woocommerce-developers' }] },
-    { title: 'AI Automations', desc: 'Workflow automation that saves teams hours every week.', links: [{ l: 'Custom Automation Workflows', s: 'wordpress-ai-automation' }] },
-  ];
-
-  return (
-    <section className="py-20 bg-surface-50">
-      <div className="section-container">
-        <h2 className="section-title text-center">Our Services</h2>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
-            <div key={cat.title} className="card">
-              <h3 className="text-lg font-bold text-gray-900">{cat.title}</h3>
-              <p className="mt-2 text-sm text-gray-600">{cat.desc}</p>
-              <ul className="mt-4 space-y-2">
-                {cat.links.map((link) => (
-                  <li key={link.s}>
-                    <Link to={`/services/${link.s}`} className="text-sm font-medium text-brand-600 hover:underline">{link.l} →</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 text-center"><Link to="/services" className="btn-primary">View All Services</Link></div>
-      </div>
-    </section>
-  );
+  return <ServicesScrollSection />;
 }
 
 export {
