@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
+import AnimatedScrollbar from './components/AnimatedScrollbar';
 import App from './App';
 import './index.css';
 
@@ -10,6 +11,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ScrollToTop />
+      <AnimatedScrollbar />
       <AuthProvider>
         <App />
       </AuthProvider>

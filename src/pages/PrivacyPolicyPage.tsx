@@ -1,132 +1,289 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  Shield, Lock, Eye, Cookie, Mail, Globe, FileText, ChevronRight,
+} from 'lucide-react';
+import CTA from '../components/CTA';
 
 const sections = [
   {
-    title: '1. Introduction',
-    body: 'PixelForge Digital ("we", "us", or "our") respects your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you visit our website, submit a contact form, purchase a plugin, or use our WordPress development services.',
+    id: 'introduction',
+    icon: FileText,
+    title: 'Introduction',
+    content: `PixelForge Digital ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website pixelforge.digital, use our services, or interact with us through any communication channel.
+
+By using our website or submitting your information through our contact forms, you agree to the collection and use of information in accordance with this policy.`,
   },
   {
-    title: '2. Information We Collect',
-    body: 'We may collect the following types of information:',
-    list: [
-      'Contact details: name, email address, phone number, and company name',
-      'Project information: budget range, project details, and messages you send via our forms',
-      'Technical data: IP address, browser type, device information, and pages visited',
-      'Purchase enquiries: product name, price, and plugin purchase requests',
-      'Admin account data: login credentials for authorized staff only',
-    ],
+    id: 'information-we-collect',
+    icon: Eye,
+    title: 'Information We Collect',
+    content: `We may collect the following types of information:
+
+**Personal Information You Provide**
+• Name, email address, phone number, and company name when you fill out contact forms
+• Project details, budget range, and business requirements you share with us
+• Communications you send us via email or other channels
+
+**Automatically Collected Information**
+• IP address, browser type, operating system, and device information
+• Pages visited, time spent on pages, and referring URLs
+• Cookies and similar tracking technologies (see Cookies section below)
+
+We do not knowingly collect personal information from children under 16.`,
   },
   {
-    title: '3. How We Use Your Information',
-    body: 'We use your information to:',
-    list: [
-      'Respond to your enquiries and provide free consultations',
-      'Deliver WordPress development, design, and support services',
-      'Process plugin purchase requests and send license details',
-      'Improve our website, services, and user experience',
-      'Send service-related communications you have requested',
-      'Comply with legal obligations and prevent fraud or abuse',
-    ],
+    id: 'how-we-use',
+    icon: Globe,
+    title: 'How We Use Your Information',
+    content: `We use the information we collect to:
+
+• Respond to your inquiries and provide requested services
+• Send project proposals, quotes, and service-related communications
+• Improve our website, services, and user experience
+• Analyze website traffic and usage patterns
+• Comply with legal obligations and protect our rights
+• Send marketing communications (only with your explicit consent)
+
+We will never sell your personal information to third parties.`,
   },
   {
-    title: '4. Legal Basis for Processing',
-    body: 'We process personal data based on your consent (e.g. contact form submission), our legitimate business interests (e.g. responding to enquiries), and contractual necessity when you engage our services.',
+    id: 'data-sharing',
+    icon: Shield,
+    title: 'Data Sharing & Third Parties',
+    content: `We may share your information with:
+
+• **Service Providers** — trusted partners who assist with hosting, analytics, email delivery, and payment processing, bound by confidentiality agreements
+• **Legal Requirements** — when required by law, court order, or government request
+• **Business Transfers** — in connection with a merger, acquisition, or sale of assets
+
+All third-party providers are required to maintain the security of your personal information and use it only for the purposes we specify.`,
   },
   {
-    title: '5. Cookies & Analytics',
-    body: 'Our website may use cookies and similar technologies to remember preferences and analyze traffic. You can control cookies through your browser settings. We may use analytics tools such as Google Analytics to understand how visitors use our site.',
+    id: 'data-security',
+    icon: Lock,
+    title: 'Data Security',
+    content: `We implement industry-standard security measures to protect your personal information, including:
+
+• SSL/TLS encryption for data in transit
+• Secure server infrastructure with access controls
+• Regular security audits and vulnerability assessments
+• Employee training on data protection best practices
+
+While we strive to protect your information, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security but are committed to promptly addressing any breaches in accordance with applicable law.`,
   },
   {
-    title: '6. Sharing Your Information',
-    body: 'We do not sell your personal data. We may share information with trusted third parties only when necessary — such as hosting providers, email services, payment processors, or analytics tools — and only under appropriate data protection agreements.',
+    id: 'cookies',
+    icon: Cookie,
+    title: 'Cookies & Tracking',
+    content: `Our website uses cookies and similar technologies to:
+
+• Remember your preferences and settings
+• Analyze website traffic via analytics tools (e.g., Google Analytics)
+• Improve site performance and user experience
+
+You can control cookies through your browser settings. Disabling cookies may affect certain website functionality. We use both session cookies (deleted when you close your browser) and persistent cookies (stored for a defined period).`,
   },
   {
-    title: '7. Data Retention',
-    body: 'We retain contact form submissions and project enquiries for as long as needed to respond to you, deliver services, and meet legal or accounting requirements. You may request deletion of your data at any time, subject to applicable laws.',
+    id: 'your-rights',
+    icon: Shield,
+    title: 'Your Rights',
+    content: `Depending on your location, you may have the following rights regarding your personal data:
+
+• **Access** — request a copy of the personal data we hold about you
+• **Correction** — request correction of inaccurate or incomplete data
+• **Deletion** — request deletion of your personal data ("right to be forgotten")
+• **Portability** — request your data in a structured, machine-readable format
+• **Objection** — object to processing of your data for direct marketing
+• **Withdraw Consent** — withdraw consent at any time where processing is based on consent
+
+To exercise any of these rights, contact us at hello@pixelforge.digital. We will respond within 30 days.`,
   },
   {
-    title: '8. Data Security',
-    body: 'We implement reasonable technical and organizational measures to protect your information, including secure connections (HTTPS), access controls, and encrypted storage where appropriate. No method of transmission over the internet is 100% secure.',
+    id: 'data-retention',
+    icon: FileText,
+    title: 'Data Retention',
+    content: `We retain your personal information only as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law.
+
+• Contact form submissions: retained for up to 3 years after last interaction
+• Client project data: retained for the duration of the engagement plus 5 years
+• Analytics data: anonymized after 26 months
+
+When data is no longer needed, we securely delete or anonymize it.`,
   },
   {
-    title: '9. Your Rights',
-    body: 'Depending on your location, you may have the right to:',
-    list: [
-      'Access the personal data we hold about you',
-      'Request correction or deletion of your data',
-      'Withdraw consent at any time',
-      'Object to or restrict certain processing',
-      'Lodge a complaint with a data protection authority',
-    ],
+    id: 'international',
+    icon: Globe,
+    title: 'International Data Transfers',
+    content: `PixelForge Digital operates globally with offices in the United States, India, and the United Arab Emirates. Your information may be transferred to and processed in countries other than your own.
+
+We ensure appropriate safeguards are in place for international transfers, including standard contractual clauses and compliance with applicable data protection frameworks such as GDPR and applicable local regulations.`,
   },
   {
-    title: '10. Third-Party Links',
-    body: 'Our website may contain links to external sites (e.g. plugin stores, social media). We are not responsible for the privacy practices of those third-party websites.',
-  },
-  {
-    title: '11. Changes to This Policy',
-    body: 'We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of our website after changes constitutes acceptance of the updated policy.',
-  },
-  {
-    title: '12. Contact Us',
-    body: 'If you have questions about this Privacy Policy or wish to exercise your data rights, contact us at:',
-    contact: true,
+    id: 'contact',
+    icon: Mail,
+    title: 'Contact Us',
+    content: `If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
+
+**PixelForge Digital**
+Email: hello@pixelforge.digital
+USA: 2035 Sunset Lake Road, Suite B-2, Newark, Delaware, 19702
+India: 105, Aniket, Kolbad, Thane (West), Mumbai – 400 601
+UAE: T1-12-4K RAKEZ Amenity Centre, Al Hamra Industrial Zone FZ, RAK
+
+We aim to respond to all privacy-related inquiries within 5 business days.`,
   },
 ];
 
+function renderContent(text: string) {
+  return text.split('\n\n').map((block) => {
+    if (block.startsWith('**') && block.includes('**\n')) {
+      const [heading, ...rest] = block.split('\n');
+      const cleanHeading = heading.replace(/\*\*/g, '');
+      return (
+        <div key={block.slice(0, 30)} className="mt-4">
+          <p className="font-semibold text-gray-900">{cleanHeading}</p>
+          {rest.map((line) => (
+            <p key={line} className="mt-2 text-gray-600 leading-relaxed">{line.replace(/^• /, '· ')}</p>
+          ))}
+        </div>
+      );
+    }
+    return (
+      <p key={block.slice(0, 30)} className="mt-4 leading-relaxed text-gray-600">
+        {block.split('\n').map((line, i) => (
+          <span key={i}>
+            {line.startsWith('• ') ? `· ${line.slice(2)}` : line}
+            {i < block.split('\n').length - 1 && <br />}
+          </span>
+        ))}
+      </p>
+    );
+  });
+}
+
 export default function PrivacyPolicyPage() {
+  const [activeId, setActiveId] = useState(sections[0].id);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5] },
+    );
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
-        <div className="section-container max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Legal</p>
-          <h1 className="mt-2 text-4xl font-extrabold text-gray-900">Privacy Policy</h1>
-          <p className="mt-4 text-gray-600">
-            Last updated: July 20, 2026
-          </p>
-        </div>
-      </section>
-
-      <section className="pb-20">
-        <div className="section-container max-w-3xl">
-          <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-card lg:p-10">
-            <p className="text-gray-600 leading-relaxed">
-              At PixelForge Digital, we are committed to protecting your privacy. Please read this policy
-              carefully to understand how we handle your personal information.
-            </p>
-
-            <div className="mt-10 space-y-10">
-              {sections.map((section) => (
-                <div key={section.title}>
-                  <h2 className="text-lg font-bold text-gray-900">{section.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-600">{section.body}</p>
-                  {section.list && (
-                    <ul className="mt-3 space-y-2">
-                      {section.list.map((item) => (
-                        <li key={item} className="flex gap-2 text-sm text-gray-600">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {section.contact && (
-                    <ul className="mt-3 space-y-1 text-sm text-gray-600">
-                      <li><strong className="text-gray-900">Email:</strong> hello@pixelforge.digital</li>
-                      <li><strong className="text-gray-900">Phone:</strong> +1 (800) 555-0199</li>
-                      <li><strong className="text-gray-900">Website:</strong> <Link to="/contact" className="text-brand-600 hover:underline">Contact form</Link></li>
-                    </ul>
-                  )}
-                </div>
-              ))}
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-20 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.15),_transparent_60%)]" />
+        <div className="section-container relative text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500/20 ring-1 ring-brand-500/30">
+              <Shield size={28} className="text-brand-400" />
             </div>
-          </div>
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+              Privacy Policy
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
+              Your privacy matters to us. Learn how PixelForge Digital collects, uses, and protects your personal information.
+            </p>
+            <p className="mt-4 text-sm text-gray-500">Last updated: July 21, 2026</p>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="mt-8 text-center">
-            <Link to="/contact" className="btn-outline text-sm">Contact Us</Link>
+      {/* Quick stats */}
+      <section className="border-b border-gray-100 bg-white py-8">
+        <div className="section-container grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            { label: 'Data Sold', value: 'Never' },
+            { label: 'Encryption', value: 'SSL/TLS' },
+            { label: 'Response Time', value: '< 5 days' },
+            { label: 'Compliance', value: 'GDPR Ready' },
+          ].map((s) => (
+            <div key={s.label} className="rounded-xl border border-gray-100 bg-surface-50 px-4 py-3 text-center">
+              <p className="text-lg font-bold text-brand-600">{s.value}</p>
+              <p className="text-xs text-gray-500">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Content with sticky sidebar */}
+      <section className="py-16 lg:py-20">
+        <div className="section-container grid gap-12 lg:grid-cols-4">
+          {/* Sidebar TOC */}
+          <nav className="hidden lg:block lg:sticky lg:top-24 lg:self-start">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">On this page</p>
+            <ul className="mt-4 space-y-1">
+              {sections.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition ${
+                      activeId === s.id
+                        ? 'bg-brand-50 font-semibold text-brand-600'
+                        : 'text-gray-600 hover:bg-surface-50 hover:text-gray-900'
+                    }`}
+                  >
+                    <ChevronRight size={14} className={activeId === s.id ? 'text-brand-500' : 'text-gray-300'} />
+                    {s.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 rounded-xl border border-brand-100 bg-brand-50 p-4">
+              <p className="text-sm font-semibold text-gray-900">Have a question?</p>
+              <p className="mt-1 text-xs text-gray-600">Our team is happy to clarify anything about your data.</p>
+              <Link to="/contact" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                Contact Us <ChevronRight size={14} />
+              </Link>
+            </div>
+          </nav>
+
+          {/* Sections */}
+          <div className="lg:col-span-3 space-y-6">
+            {sections.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <motion.article
+                  key={s.id}
+                  id={s.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.4, delay: i * 0.03 }}
+                  className="scroll-mt-24 rounded-2xl border border-gray-100 bg-white p-6 shadow-card sm:p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                      <Icon size={20} />
+                    </div>
+                    <h2 className="text-xl font-bold text-gray-900">{s.title}</h2>
+                  </div>
+                  <div className="mt-2 text-sm">{renderContent(s.content)}</div>
+                </motion.article>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      <CTA />
     </>
   );
 }

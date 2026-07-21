@@ -7,7 +7,7 @@ export default function AdminLayout() {
     <ProtectedRoute>
       <div className="flex min-h-screen bg-gray-50">
         <AdminSidebar />
-        <main className="flex-1 overflow-auto p-8">
+        <main className="scroll-area flex-1 overflow-auto p-8">
           <Outlet />
         </main>
       </div>
