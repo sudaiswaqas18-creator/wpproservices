@@ -189,11 +189,13 @@ export default function Header() {
             <AnimatePresence>
               {openDropdown === 'services' && (
                 <motion.div
+                  key="services-menu"
                   id="dropdown-services"
                   role="menu"
                   aria-label="Services menu"
                   {...dropdownMotion}
-                  className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2"
+                  className="absolute top-full z-50 pt-2"
+                  style={{ left: 'calc(50% - 360px)' }}
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
@@ -265,6 +267,7 @@ export default function Header() {
             <AnimatePresence>
               {openDropdown === 'products' && (
                 <motion.div
+                  key="products-menu"
                   id="dropdown-products"
                   role="menu"
                   aria-label="Products menu"
@@ -313,6 +316,7 @@ export default function Header() {
             <AnimatePresence>
               {openDropdown === 'resources' && (
                 <motion.div
+                  key="resources-menu"
                   id="dropdown-resources"
                   role="menu"
                   aria-label="Resources menu"
