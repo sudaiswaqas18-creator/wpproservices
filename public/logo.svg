@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 80" fill="none">
-  <rect x="4" y="14" width="52" height="52" rx="13" fill="#0F172A"/>
-  <path d="M12 54 L17 28 L22 40 L27 28 L32 54" stroke="#14B8A6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M38 28 L38 54 M38 28 C38 28 46 28 46 35 C46 42 38 42 38 42" stroke="#F97316" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="68" y="38" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#0F172A">WP</text>
-  <text x="108" y="38" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#14B8A6">Pro</text>
-  <text x="152" y="38" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="400" fill="#475569">Services</text>
-  <text x="68" y="58" font-family="Inter, Segoe UI, sans-serif" font-size="10" font-weight="500" letter-spacing="0.16em" fill="#94A3B8">WORDPRESS AGENCY</text>
-</svg>
