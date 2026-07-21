@@ -1,6 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { apiUrl } from '../config/api';
+
+interface SiteStat {
+  stat_value: string;
+  stat_label: string;
+}
+
+const FALLBACK_STATS: SiteStat[] = [
+  { stat_value: '500+', stat_label: 'Projects Delivered' },
+  { stat_value: '27+', stat_label: 'Countries Served' },
+  { stat_value: '4.9★', stat_label: 'Clutch Rating' },
+  { stat_value: '10+', stat_label: 'Years Experience' },
+  { stat_value: '99.9%', stat_label: 'Uptime SLA' },
+  { stat_value: '50+', stat_label: 'Expert Developers' },
+  { stat_value: '24/7', stat_label: 'Support Available' },
+  { stat_value: '100%', stat_label: 'Client Satisfaction' },
+];
 
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
@@ -59,18 +76,34 @@ function FeaturedCases() {
 }
 
 function StatsBar() {
-  const [stats, setStats] = useState<{ stat_value: string; stat_label: string }[]>([]);
-  useEffect(() => { fetch('/api/site-stats').then((r) => r.json()).then((d) => setStats(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  const [stats, setStats] = useState<SiteStat[]>(FALLBACK_STATS);
+
+  useEffect(() => {
+    fetch(apiUrl('site-stats'))
+      .then((r) => r.json())
+      .then((d) => {
+        if (Array.isArray(d) && d.length > 0) setStats(d);
+      })
+      .catch(() => {});
+  }, []);
+
+  const marqueeItems = [...stats, ...stats];
 
   return (
-    <section className="border-y border-gray-100 bg-brand-50 py-10">
-      <div className="section-container grid grid-cols-2 gap-6 lg:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.stat_label} className="text-center">
-            <p className="text-3xl font-extrabold text-brand-600">{s.stat_value}</p>
-            <p className="mt-1 text-sm text-gray-600">{s.stat_label}</p>
-          </div>
-        ))}
+    <section className="stats-marquee-section relative overflow-hidden border-y border-brand-100/80 bg-gradient-to-r from-brand-50 via-brand-100/40 to-brand-50 py-5">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-brand-50 to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-brand-50 to-transparent sm:w-24" />
+
+      <div className="stats-marquee-viewport">
+        <div className="stats-marquee-track">
+          {marqueeItems.map((s, i) => (
+            <div key={`${s.stat_label}-${i}`} className="stats-marquee-item">
+              <span className="stats-marquee-value">{s.stat_value}</span>
+              <span className="stats-marquee-label">{s.stat_label}</span>
+              <span className="stats-marquee-dot" aria-hidden="true" />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
