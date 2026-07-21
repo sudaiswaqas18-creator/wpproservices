@@ -8,7 +8,7 @@ export default function AboutPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container max-w-3xl text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">About PixelForge Digital</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900">About WPServices</h1>
           <p className="mt-6 text-lg leading-relaxed text-gray-600">
             We are a WordPress development agency with 10+ years of experience building scalable,
             secure, and conversion-focused websites for businesses worldwide. Our team of 80+ developers

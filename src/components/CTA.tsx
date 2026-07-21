@@ -2,7 +2,7 @@ import ContactForm from './ContactForm';
 
 export default function CTA() {
   return (
-    <section className="bg-gradient-to-br from-brand-500 to-brand-700 py-20">
+    <section className="bg-gradient-to-br from-brand-400 via-brand-500 to-brand-600 py-20">
       <div className="section-container">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="text-white">

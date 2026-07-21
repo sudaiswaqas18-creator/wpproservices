@@ -11,7 +11,7 @@ const sections = [
     id: 'introduction',
     icon: FileText,
     title: 'Introduction',
-    content: `PixelForge Digital ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website pixelforge.digital, use our services, or interact with us through any communication channel.
+    content: `WPServices ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, use our services, or interact with us through any communication channel.
 
 By using our website or submitting your information through our contact forms, you agree to the collection and use of information in accordance with this policy.`,
   },
@@ -98,7 +98,7 @@ You can control cookies through your browser settings. Disabling cookies may aff
 • **Objection** — object to processing of your data for direct marketing
 • **Withdraw Consent** — withdraw consent at any time where processing is based on consent
 
-To exercise any of these rights, contact us at hello@pixelforge.digital. We will respond within 30 days.`,
+To exercise any of these rights, contact us at hello@wpservices.com. We will respond within 30 days.`,
   },
   {
     id: 'data-retention',
@@ -116,7 +116,7 @@ When data is no longer needed, we securely delete or anonymize it.`,
     id: 'international',
     icon: Globe,
     title: 'International Data Transfers',
-    content: `PixelForge Digital operates globally with offices in the United States, India, and the United Arab Emirates. Your information may be transferred to and processed in countries other than your own.
+    content: `WPServices operates globally with offices in the United States, India, and the United Arab Emirates. Your information may be transferred to and processed in countries other than your own.
 
 We ensure appropriate safeguards are in place for international transfers, including standard contractual clauses and compliance with applicable data protection frameworks such as GDPR and applicable local regulations.`,
   },
@@ -126,8 +126,8 @@ We ensure appropriate safeguards are in place for international transfers, inclu
     title: 'Contact Us',
     content: `If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
-**PixelForge Digital**
-Email: hello@pixelforge.digital
+**WPServices**
+Email: hello@wpservices.com
 USA: 2035 Sunset Lake Road, Suite B-2, Newark, Delaware, 19702
 India: 105, Aniket, Kolbad, Thane (West), Mumbai – 400 601
 UAE: T1-12-4K RAKEZ Amenity Centre, Al Hamra Industrial Zone FZ, RAK
@@ -184,24 +184,24 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-20 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.15),_transparent_60%)]" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-surface-100 py-20 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(14,165,233,0.12),_transparent_60%)]" />
         <div className="section-container relative text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500/20 ring-1 ring-brand-500/30">
-              <Shield size={28} className="text-brand-400" />
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-100 ring-1 ring-brand-200">
+              <Shield size={28} className="text-brand-600" />
             </div>
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-800 sm:text-5xl">
               Privacy Policy
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
-              Your privacy matters to us. Learn how PixelForge Digital collects, uses, and protects your personal information.
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
+              Your privacy matters to us. Learn how WPServices collects, uses, and protects your personal information.
             </p>
-            <p className="mt-4 text-sm text-gray-500">Last updated: July 21, 2026</p>
+            <p className="mt-4 text-sm text-slate-400">Last updated: July 21, 2026</p>
           </motion.div>
         </div>
       </section>

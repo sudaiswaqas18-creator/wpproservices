@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
-import { apiUrl } from '../config/api';
-import ContactLink from './ContactLink';
 
 const GROUP_LABELS: Record<string, string> = {
   build: 'BUILD — Creation & Foundation',
@@ -25,7 +23,7 @@ export default function Header() {
   const [grouped, setGrouped] = useState<GroupedServices>({});
 
   useEffect(() => {
-    fetch(apiUrl('services/grouped'))
+    fetch('/api/services/grouped')
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (data && typeof data === 'object' && !Array.isArray(data)) setGrouped(data);
@@ -34,7 +32,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/90 backdrop-blur-md shadow-sm shadow-brand-500/5">
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
         <Link to="/"><Logo /></Link>
 
@@ -42,9 +40,9 @@ export default function Header() {
           <Link to="/about" className="text-sm font-medium text-gray-600 hover:text-brand-600">About Us</Link>
 
           <div className="relative" onMouseEnter={() => setMega('services')} onMouseLeave={() => setMega(null)}>
-            <Link to="/services" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
+            <button type="button" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
               Services <ChevronDown size={14} />
-            </Link>
+            </button>
             {mega === 'services' && (
               <div className="absolute left-1/2 top-full z-50 mt-0 w-[720px] -translate-x-1/2 rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
                 <div className="grid grid-cols-3 gap-6">
@@ -70,9 +68,9 @@ export default function Header() {
           </div>
 
           <div className="relative" onMouseEnter={() => setMega('products')} onMouseLeave={() => setMega(null)}>
-            <Link to="/products" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
+            <button type="button" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
               Products <ChevronDown size={14} />
-            </Link>
+            </button>
             {mega === 'products' && (
               <div className="absolute left-0 top-full z-50 mt-0 w-64 rounded-xl border border-gray-100 bg-white py-3 shadow-card">
                 <p className="px-4 pb-2 text-[10px] font-bold uppercase text-gray-400">WooCommerce Plugins</p>
@@ -86,9 +84,9 @@ export default function Header() {
           </div>
 
           <div className="relative" onMouseEnter={() => setMega('resources')} onMouseLeave={() => setMega(null)}>
-            <Link to="/resources" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
+            <button type="button" className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-brand-600">
               Resources <ChevronDown size={14} />
-            </Link>
+            </button>
             {mega === 'resources' && (
               <div className="absolute right-0 top-full z-50 mt-0 w-72 rounded-xl border border-gray-100 bg-white py-3 shadow-card">
                 <p className="px-4 pb-1 text-[10px] font-bold uppercase text-gray-400">Insights</p>
@@ -105,7 +103,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <ContactLink className="btn-primary text-sm">Contact Us</ContactLink>
+          <Link to="/contact" className="btn-primary text-sm">Contact Us</Link>
         </div>
 
         <button type="button" className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -121,7 +119,7 @@ export default function Header() {
           <Link to="/resources" className="block py-2 text-sm" onClick={() => setOpen(false)}>Resources</Link>
           <Link to="/blog" className="block py-2 text-sm" onClick={() => setOpen(false)}>Blog</Link>
           <Link to="/case-studies" className="block py-2 text-sm" onClick={() => setOpen(false)}>Case Studies</Link>
-          <ContactLink className="btn-primary mt-3 block text-center" onClick={() => setOpen(false)}>Contact Us</ContactLink>
+          <Link to="/contact" className="btn-primary mt-3 block text-center" onClick={() => setOpen(false)}>Contact Us</Link>
         </div>
       )}
     </header>

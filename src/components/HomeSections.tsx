@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { apiUrl } from '../config/api';
 
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
 function AwardsSection() {
   const [awards, setAwards] = useState<Award[]>([]);
-  useEffect(() => { fetch(apiUrl('awards')).then((r) => r.json()).then((d) => setAwards(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  useEffect(() => { fetch('/api/awards').then((r) => r.json()).then((d) => setAwards(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
 
   return (
-    <section className="bg-gray-900 py-16 text-white">
+    <section className="border-y border-brand-100/60 bg-gradient-to-b from-brand-50/50 to-white py-16">
       <div className="section-container text-center">
-        <h2 className="text-2xl font-bold">Global Awards & Recognitions</h2>
+        <h2 className="text-2xl font-bold text-slate-800">Global Awards & Recognitions</h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {awards.map((a) => (
-            <div key={a.id} className="rounded-xl border border-gray-700 bg-gray-800/50 p-5">
-              <p className="text-xs text-brand-400">{a.year}</p>
-              <h3 className="mt-2 font-bold">{a.title}</h3>
-              <p className="text-sm text-gray-400">{a.organization}</p>
-              <p className="mt-3 text-lg font-extrabold text-brand-400">{a.badge_label}</p>
+            <div key={a.id} className="rounded-xl border border-brand-100/80 bg-white p-5 shadow-card transition hover:border-brand-200 hover:shadow-cardHover">
+              <p className="text-xs font-medium text-brand-600">{a.year}</p>
+              <h3 className="mt-2 font-bold text-slate-800">{a.title}</h3>
+              <p className="text-sm text-slate-500">{a.organization}</p>
+              <p className="mt-3 text-lg font-extrabold text-brand-600">{a.badge_label}</p>
             </div>
           ))}
         </div>
@@ -32,7 +31,7 @@ interface CaseStudy { id: number; title: string; client: string; slug: string; t
 
 function FeaturedCases() {
   const [cases, setCases] = useState<CaseStudy[]>([]);
-  useEffect(() => { fetch(apiUrl('case-studies/featured/list')).then((r) => r.json()).then((d) => setCases(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  useEffect(() => { fetch('/api/case-studies/featured/list').then((r) => r.json()).then((d) => setCases(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
 
   if (!cases.length) return null;
 
@@ -61,7 +60,7 @@ function FeaturedCases() {
 
 function StatsBar() {
   const [stats, setStats] = useState<{ stat_value: string; stat_label: string }[]>([]);
-  useEffect(() => { fetch(apiUrl('site-stats')).then((r) => r.json()).then((d) => setStats(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  useEffect(() => { fetch('/api/site-stats').then((r) => r.json()).then((d) => setStats(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
 
   return (
     <section className="border-y border-gray-100 bg-brand-50 py-10">

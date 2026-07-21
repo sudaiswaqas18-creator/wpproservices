@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
   return (
     <section className="py-20">
       <div className="section-container">
-        <h2 className="section-title">Why Businesses Choose PixelForge</h2>
+        <h2 className="section-title">Why Businesses Choose WPServices</h2>
         <p className="section-subtitle">
           We solve the challenges most businesses face — delivering ROI-focused, scalable, and
           future-ready WordPress &amp; WooCommerce solutions.
