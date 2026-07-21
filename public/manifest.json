@@ -1,11 +1,11 @@
 {
-  "name": "WPServices — WordPress Agency",
-  "short_name": "WPServices",
+  "name": "WPProServices — WordPress Agency",
+  "short_name": "WPProServices",
   "description": "Custom WordPress development, WooCommerce plugins, and ongoing maintenance.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafafa",
-  "theme_color": "#7c3aed",
+  "theme_color": "#14B8A6",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -14,10 +14,10 @@
       "purpose": "any"
     },
     {
-      "src": "/logo-placeholder.svg",
-      "sizes": "200x60",
+      "src": "/logo-icon.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
