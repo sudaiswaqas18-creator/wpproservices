@@ -6,7 +6,6 @@ import RouteSEO from '../seo/RouteSEO';
 import PageProgressBar from '../PageProgressBar';
 import CookieConsent from '../CookieConsent';
 import BackToTop from '../BackToTop';
-import WhatsAppButton from '../WhatsAppButton';
 import NewsletterSignup from '../NewsletterSignup';
 
 export default function Layout() {
@@ -23,7 +22,6 @@ export default function Layout() {
       <Footer />
       <CookieConsent />
       <BackToTop />
-      <WhatsAppButton />
     </div>
   );
 }
