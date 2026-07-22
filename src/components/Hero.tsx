@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ContactForm from './ContactForm';
+import HeroShowcase from './HeroShowcase';
 import ContactLink from './ContactLink';
 
 const stats = [
@@ -12,7 +12,7 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-surface-50 to-white pb-16 pt-10 lg:pb-24 lg:pt-16">
       <motion.div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-brand-200/30 blur-3xl" />
       <motion.div className="pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-accent-100/40 blur-3xl" />
-      <div className="section-container relative grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="section-container relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
           <p className="text-sm font-semibold text-brand-600">{stats[0].value} {stats[0].label}</p>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
@@ -26,9 +26,7 @@ export default function Hero() {
             <Link to="/services" className="btn-outline">View Services</Link>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-          <ContactForm compact />
-        </motion.div>
+        <HeroShowcase />
       </div>
     </section>
   );

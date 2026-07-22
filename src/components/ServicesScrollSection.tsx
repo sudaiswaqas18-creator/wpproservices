@@ -1,87 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ArrowRight,
-  Bot,
-  Code2,
-  Layers,
-  RefreshCw,
-  Users,
-  Zap,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowRight, Layers } from 'lucide-react';
+import { SERVICE_CATEGORIES } from '../data/serviceCategories';
 
-interface ServiceLink {
-  label: string;
-  slug: string;
-}
-
-interface ServiceCategory {
-  id: string;
-  title: string;
-  desc: string;
-  icon: LucideIcon;
-  links: ServiceLink[];
-}
-
-const CATEGORIES: ServiceCategory[] = [
-  {
-    id: 'development',
-    title: 'Website Development',
-    desc: 'Custom tailored tech solutions scaling from robust infrastructures to beautiful, high-performance web applications.',
-    icon: Code2,
-    links: [
-      { label: 'Custom WordPress Development', slug: 'wordpress-website-development' },
-      { label: 'WooCommerce Development', slug: 'woocommerce-development' },
-      { label: 'LearnDash Development', slug: 'learndash-development' },
-    ],
-  },
-  {
-    id: 'revamp',
-    title: 'Website Revamp',
-    desc: 'Refresh existing experiences with focused redesign and migration work that lifts conversion.',
-    icon: RefreshCw,
-    links: [
-      { label: 'Website Redesign', slug: 'wordpress-redesign' },
-      { label: 'WordPress Migration', slug: 'wordpress-migration' },
-    ],
-  },
-  {
-    id: 'performance',
-    title: 'Performance Optimization',
-    desc: 'Make sites measurably faster — page speed, server response, asset weight.',
-    icon: Zap,
-    links: [
-      { label: 'Speed Optimization', slug: 'wordpress-speed-optimization' },
-      { label: 'SEO Improvement', slug: 'wordpress-seo-services' },
-    ],
-  },
-  {
-    id: 'partnership',
-    title: 'Technology Partnership',
-    desc: 'Long-term retainer engagements with dedicated WordPress, WooCommerce, and LearnDash teams.',
-    icon: Users,
-    links: [
-      { label: 'WordPress Retainer', slug: 'hire-wordpress-developers' },
-      { label: 'WooCommerce Retainer', slug: 'hire-woocommerce-developers' },
-    ],
-  },
-  {
-    id: 'automation',
-    title: 'AI Automations',
-    desc: 'Workflow automation that saves teams hours every week.',
-    icon: Bot,
-    links: [{ label: 'Custom Automation Workflows', slug: 'wordpress-ai-automation' }],
-  },
-];
-
+const CATEGORIES = SERVICE_CATEGORIES;
 const COUNT = CATEGORIES.length;
-/** Tall section: each category + generous buffer so 05 never gets skipped */
 const SECTION_HEIGHT_VH = COUNT * 140 + 160;
 const CARD_STEP_PX = 96;
 
-/** Last category (05) owns the final 25% of scroll — cannot be skipped */
 function progressToIndex(progress: number) {
   const p = Math.min(1, Math.max(0, progress));
   if (p >= 0.76) return COUNT - 1;
@@ -133,7 +60,7 @@ export default function ServicesScrollSection() {
     };
   }, [isDesktop, updateFromScroll]);
 
-  const handleCategoryClick = (index: number) => {
+  const handleDotClick = (index: number) => {
     setActive(index);
     const el = sectionRef.current;
     if (!isDesktop || !el) return;
@@ -146,7 +73,7 @@ export default function ServicesScrollSection() {
   const activeCategory = CATEGORIES[active];
 
   const content = (
-    <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+    <motion.div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
       <div>
         <span className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700">
           <Layers size={14} />
@@ -174,12 +101,12 @@ export default function ServicesScrollSection() {
         </AnimatePresence>
 
         {isDesktop && (
-          <div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
+          <motion.div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
             <div
               className="h-full rounded-full bg-brand-500 transition-[width] duration-150 ease-out"
               style={{ width: `${scrollProgress * 100}%` }}
             />
-          </div>
+          </motion.div>
         )}
 
         <div className="mt-5 flex gap-2">
@@ -187,7 +114,7 @@ export default function ServicesScrollSection() {
             <button
               key={cat.id}
               type="button"
-              onClick={() => handleCategoryClick(i)}
+              onClick={() => handleDotClick(i)}
               className={`h-1.5 rounded-full transition-all duration-500 ${
                 i === active ? 'w-8 bg-brand-500' : 'w-1.5 bg-gray-300 hover:bg-brand-200'
               }`}
@@ -196,10 +123,18 @@ export default function ServicesScrollSection() {
           ))}
         </div>
 
-        <Link to="/services" className="btn-primary mt-8 inline-flex items-center gap-2">
-          View All Services
-          <ArrowRight size={16} />
-        </Link>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            to={`/services?category=${activeCategory.id}`}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            View {activeCategory.title}
+            <ArrowRight size={16} />
+          </Link>
+          <Link to="/services" className="btn-outline inline-flex items-center gap-2">
+            All Services
+          </Link>
+        </div>
       </div>
 
       <div className="relative overflow-hidden lg:h-[min(440px,58vh)]">
@@ -213,71 +148,79 @@ export default function ServicesScrollSection() {
             const isActive = i === active;
 
             return (
-              <motion.button
+              <motion.div
                 key={cat.id}
-                type="button"
-                onClick={() => handleCategoryClick(i)}
                 animate={{ opacity: isActive ? 1 : 0.38, scale: isActive ? 1 : 0.97 }}
                 transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
-                className={`services-scroll-card group w-full rounded-2xl border bg-white text-left ${
-                  isActive
-                    ? 'border-brand-200 shadow-cardHover ring-1 ring-brand-100'
-                    : 'border-slate-200/80 shadow-card'
-                }`}
               >
-                <div className="flex items-start gap-4 p-5 sm:p-6">
-                  <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
-                      isActive
-                        ? 'bg-brand-500 text-white shadow-md shadow-brand-500/25'
-                        : 'bg-brand-50 text-brand-600'
-                    }`}
-                  >
-                    <Icon size={22} />
-                  </div>
-                  <div className="min-w-0 flex-1 text-left">
-                    <h3 className={`text-lg font-bold ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
-                      {cat.title}
-                    </h3>
+                <Link
+                  to={`/services?category=${cat.id}`}
+                  className={`services-scroll-card group block w-full rounded-2xl border bg-white text-left transition-shadow ${
+                    isActive
+                      ? 'border-brand-200 shadow-cardHover ring-1 ring-brand-100'
+                      : 'border-slate-200/80 shadow-card hover:border-brand-200'
+                  }`}
+                >
+                  <motion.div className="flex items-start gap-4 p-5 sm:p-6">
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
+                        isActive
+                          ? 'bg-brand-500 text-white shadow-md shadow-brand-500/25'
+                          : 'bg-brand-50 text-brand-600 group-hover:bg-brand-500 group-hover:text-white'
+                      }`}
+                    >
+                      <Icon size={22} />
+                    </div>
+                    <motion.div className="min-w-0 flex-1 text-left">
+                      <h3 className={`text-lg font-bold ${isActive ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-900'}`}>
+                        {cat.title}
+                      </h3>
 
-                    <AnimatePresence initial={false}>
-                      {isActive && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
-                          className="overflow-hidden"
-                        >
-                          <p className="mt-2 text-sm leading-relaxed text-gray-600">{cat.desc}</p>
-                          <ul className="mt-4 space-y-2.5">
-                            {cat.links.map((link) => (
-                              <li key={link.slug}>
-                                <Link
-                                  to={`/services/${link.slug}`}
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline"
-                                >
-                                  {link.label}
-                                  <ArrowRight size={14} />
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </motion.button>
+                      <AnimatePresence initial={false}>
+                        {isActive && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <p className="mt-2 text-sm leading-relaxed text-gray-600">{cat.desc}</p>
+                            <ul className="mt-4 space-y-2.5">
+                              {cat.links.map((link) => (
+                                <li key={link.slug}>
+                                  <span
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      window.location.href = `/services/${link.slug}`;
+                                    }}
+                                    className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline"
+                                  >
+                                    {link.label}
+                                    <ArrowRight size={14} />
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 group-hover:gap-2">
+                              View category services <ArrowRight size={14} />
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  </motion.div>
+                </Link>
+              </motion.div>
             );
           })}
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-surface-50 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface-50 to-transparent" />
+        <motion.div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-surface-50 to-transparent" />
+        <motion.div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface-50 to-transparent" />
       </div>
-    </div>
+    </motion.div>
   );
 
   if (!isDesktop) {
