@@ -3,7 +3,6 @@ type LogoVariant = 'light' | 'dark' | 'icon';
 interface LogoProps {
   className?: string;
   variant?: LogoVariant;
-  /** @deprecated Tagline is part of the logo image assets */
   showTagline?: boolean;
 }
 
@@ -20,20 +19,23 @@ export default function Logo({
   const isIcon = variant === 'icon';
   const src = isDark ? LOGO.dark : LOGO.light;
 
+  const heightClass = isIcon
+    ? 'h-9'
+    : isDark
+      ? 'h-[38px] sm:h-[42px]'
+      : 'h-[38px] sm:h-[44px]';
+
   return (
-    <span className={`inline-flex shrink-0 items-center leading-none ${className}`}>
+    <span
+      className={`inline-flex shrink-0 items-center leading-none ${className}`}
+      aria-label="WPServices"
+    >
       <img
         src={src}
         alt="WPServices — WordPress Agency"
-        className={
-          isIcon
-            ? 'h-9 w-auto object-contain'
-            : isDark
-              ? 'h-10 w-auto max-w-[210px] object-contain'
-              : 'h-10 w-auto max-w-[230px] object-contain sm:h-11'
-        }
-        width={230}
-        height={52}
+        className={`block w-auto max-w-none object-contain object-left ${heightClass}`}
+        width={isDark ? 220 : 240}
+        height={44}
         loading="eager"
         decoding="async"
         draggable={false}

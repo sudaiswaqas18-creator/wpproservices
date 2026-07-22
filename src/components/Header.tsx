@@ -157,7 +157,11 @@ export default function Header() {
       className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/90 backdrop-blur-md shadow-sm shadow-brand-500/5"
     >
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
-        <Link to="/" onClick={() => { setMobileOpen(false); closeAll(); }}>
+        <Link
+          to="/"
+          className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+          onClick={() => { setMobileOpen(false); closeAll(); }}
+        >
           <Logo />
         </Link>
 
