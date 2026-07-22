@@ -1,6 +1,15 @@
 ﻿import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, ShieldCheck, Sparkles, Zap } from 'lucide-react';
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Globe2,
+  Lock,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+  Zap,
+} from 'lucide-react';
 
 const scenes = [
   {
@@ -14,7 +23,13 @@ const scenes = [
     deltaLabel: 'Faster load',
     accent: 'from-brand-500 to-violet-500',
     nav: ['Home', 'Work', 'Pricing'],
-    heroLines: ['Premium digital presence', 'Built to convert & scale'],
+    features: ['Custom theme', 'SEO ready', 'A11y'],
+    vitals: [
+      { label: 'LCP', value: '1.1s', good: true },
+      { label: 'INP', value: '48ms', good: true },
+      { label: 'CLS', value: '0.02', good: true },
+    ],
+    bars: [62, 78, 55, 88, 70, 92],
   },
   {
     id: 'commerce',
@@ -27,7 +42,13 @@ const scenes = [
     deltaLabel: 'TTI',
     accent: 'from-violet-600 to-indigo-500',
     nav: ['Shop', 'Cart', 'Account'],
-    heroLines: ['Product pages that sell', 'Frictionless checkout UX'],
+    features: ['Smart cart', 'Payments', 'Upsells'],
+    vitals: [
+      { label: 'AOV', value: '+18%', good: true },
+      { label: 'CR', value: '4.2%', good: true },
+      { label: 'Cart', value: '-22%', good: true },
+    ],
+    bars: [48, 70, 82, 64, 90, 75],
   },
   {
     id: 'scale',
@@ -40,37 +61,53 @@ const scenes = [
     deltaLabel: 'Uptime',
     accent: 'from-brand-600 to-purple-600',
     nav: ['Platform', 'Security', 'Support'],
-    heroLines: ['Global CDN delivery', 'Secure & maintainable'],
+    features: ['CDN', 'WAF', 'Backups'],
+    vitals: [
+      { label: 'LCP', value: '0.9s', good: true },
+      { label: 'INP', value: '32ms', good: true },
+      { label: 'CLS', value: '0.01', good: true },
+    ],
+    bars: [88, 94, 86, 97, 91, 99],
   },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function ScoreRing({ value, label }: { value: number; label: string }) {
-  const r = 36;
+  const r = 38;
   const c = 2 * Math.PI * r;
-  const pct = Math.min(100, value) / 100;
+  const pct = Math.min(100, Math.max(0, value > 100 ? 100 : value)) / 100;
+  // For commerce score 42 meaning %, still show as ring fill
+  const fill = value > 100 ? 1 : value / (value <= 50 && label.includes('%') ? 50 : 100);
+  const ringPct = Math.min(1, fill);
 
   return (
-    <div className="relative flex h-[88px] w-[88px] items-center justify-center">
-      <svg width="88" height="88" className="-rotate-90">
-        <circle cx="44" cy="44" r={r} fill="none" stroke="#EDE9FE" strokeWidth="7" />
+    <div className="relative flex h-[100px] w-[100px] items-center justify-center">
+      <motion.div
+        className="absolute inset-2 rounded-full bg-brand-400/10 blur-md"
+        animate={{ opacity: [0.35, 0.7, 0.35], scale: [0.95, 1.05, 0.95] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <svg width="100" height="100" className="-rotate-90">
+        <circle cx="50" cy="50" r={r} fill="none" stroke="#EDE9FE" strokeWidth="8" />
         <motion.circle
-          cx="44"
-          cy="44"
+          key={`${value}-${label}`}
+          cx="50"
+          cy="50"
           r={r}
           fill="none"
           stroke="url(#heroScoreGrad)"
-          strokeWidth="7"
+          strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={c}
           initial={{ strokeDashoffset: c }}
-          animate={{ strokeDashoffset: c * (1 - pct) }}
-          transition={{ duration: 1.1, ease }}
+          animate={{ strokeDashoffset: c * (1 - (value <= 50 && label.includes('lift') ? value / 50 : pct || ringPct)) }}
+          transition={{ duration: 1.25, ease }}
         />
         <defs>
           <linearGradient id="heroScoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#7C3AED" />
+            <stop offset="55%" stopColor="#A855F7" />
             <stop offset="100%" stopColor="#F97316" />
           </linearGradient>
         </defs>
@@ -78,13 +115,14 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <motion.span
           key={value}
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-lg font-extrabold tracking-tight text-gray-900"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 280, damping: 18 }}
+          className="text-xl font-extrabold tracking-tight text-gray-900"
         >
           {value}
         </motion.span>
-        <span className="text-[8px] font-semibold uppercase tracking-wider text-gray-400">{label}</span>
+        <span className="mt-0.5 text-[8px] font-bold uppercase tracking-wider text-gray-400">{label}</span>
       </div>
     </div>
   );
@@ -92,27 +130,39 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
 
 export default function HeroShowcase() {
   const [active, setActive] = useState(0);
-  const [cursor, setCursor] = useState({ x: 58, y: 42 });
+  const [cursor, setCursor] = useState({ x: 42, y: 48 });
+  const [sceneProgress, setSceneProgress] = useState(0);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActive((i) => (i + 1) % scenes.length);
-    }, 5200);
+      setSceneProgress(0);
+    }, 5600);
     return () => window.clearInterval(timer);
   }, []);
 
   useEffect(() => {
+    setSceneProgress(0);
+    const start = Date.now();
+    const tick = window.setInterval(() => {
+      setSceneProgress(Math.min(100, ((Date.now() - start) / 5600) * 100));
+    }, 50);
+    return () => window.clearInterval(tick);
+  }, [active]);
+
+  useEffect(() => {
     const path = [
-      { x: 28, y: 38 },
-      { x: 62, y: 48 },
-      { x: 48, y: 68 },
-      { x: 72, y: 36 },
+      { x: 32, y: 42 },
+      { x: 58, y: 55 },
+      { x: 44, y: 72 },
+      { x: 68, y: 38 },
+      { x: 36, y: 58 },
     ];
     let step = 0;
     const tick = window.setInterval(() => {
       setCursor(path[step % path.length]);
       step += 1;
-    }, 1300);
+    }, 1100);
     return () => window.clearInterval(tick);
   }, [active]);
 
@@ -126,50 +176,81 @@ export default function HeroShowcase() {
       className="relative mx-auto w-full max-w-lg lg:max-w-none"
       style={{ perspective: '1600px' }}
     >
-      {/* Ambient depth */}
       <motion.div
-        className="pointer-events-none absolute -inset-10 rounded-[40%] bg-gradient-to-br from-brand-400/25 via-violet-300/10 to-accent-400/20 blur-3xl"
-        animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        className="pointer-events-none absolute -inset-12 rounded-[42%] bg-gradient-to-br from-brand-400/30 via-violet-300/10 to-accent-400/25 blur-3xl"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Orbit ring */}
+      {/* Dual orbit rings */}
       <motion.div
-        className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[112%] w-[112%] -translate-x-1/2 -translate-y-1/2 rounded-[2.5rem] border border-brand-200/50 sm:block"
+        className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[118%] w-[118%] -translate-x-1/2 -translate-y-1/2 rounded-[2.75rem] border border-brand-200/40 sm:block"
         animate={{ rotate: 360 }}
-        transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
       >
-        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_16px_rgba(124,58,237,0.7)]" />
-        <span className="absolute bottom-8 right-4 h-1.5 w-1.5 rounded-full bg-accent-400/80" />
+        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_18px_rgba(124,58,237,0.75)]" />
+      </motion.div>
+      <motion.div
+        className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[104%] w-[104%] -translate-x-1/2 -translate-y-1/2 rounded-[2.2rem] border border-dashed border-accent-300/30 sm:block"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
+      >
+        <span className="absolute bottom-0 left-1/2 h-1.5 w-1.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent-400" />
       </motion.div>
 
       <motion.div
         className="relative"
         style={{ transformStyle: 'preserve-3d' }}
-        animate={{ rotateY: [-7, -4, -7], rotateX: [5, 7, 5] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ rotateY: [-6, -3.5, -6], rotateX: [4.5, 6.5, 4.5] }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
       >
-        {/* Floating status pill — top right */}
+        {/* Deployed badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: [0, -6, 0] }}
+          animate={{ opacity: 1, y: [0, -7, 0] }}
           transition={{
-            opacity: { delay: 0.5, duration: 0.5 },
-            y: { delay: 1.2, duration: 4.5, repeat: Infinity, ease: 'easeInOut' },
+            opacity: { delay: 0.45, duration: 0.5 },
+            y: { delay: 1.1, duration: 4.2, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-2 top-6 z-30 hidden items-center gap-2 rounded-2xl border border-white/80 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(124,58,237,0.35)] backdrop-blur-md sm:flex"
+          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(124,58,237,0.4)] backdrop-blur-md sm:block"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Deployed</p>
-            <p className="text-[11px] font-semibold text-gray-700">Launch-ready</p>
+          <div className="flex items-center gap-2.5 px-3.5 py-2.5">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-55" />
+              <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
+            </span>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Deployed</p>
+              <p className="text-[11px] font-semibold text-gray-700">Launch-ready build</p>
+            </div>
+          </div>
+          <div className="h-0.5 bg-gray-100">
+            <motion.div className="h-full bg-emerald-400" style={{ width: `${sceneProgress}%` }} />
           </div>
         </motion.div>
 
-        {/* Floating trust chip — bottom left */}
+        {/* Visitors chip */}
+        <motion.div
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0, y: [0, 6, 0] }}
+          transition={{
+            opacity: { delay: 0.65, duration: 0.5 },
+            y: { delay: 1.4, duration: 5.2, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(124,58,237,0.35)] backdrop-blur-md sm:flex"
+        >
+          <div className="flex -space-x-1.5">
+            {['#7C3AED', '#A855F7', '#F97316'].map((c) => (
+              <span key={c} className="h-5 w-5 rounded-full border-2 border-white" style={{ background: c }} />
+            ))}
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-gray-900">+128 visitors</p>
+            <p className="text-[9px] text-emerald-600">Live right now</p>
+          </div>
+        </motion.div>
+
+        {/* Security chip */}
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0, y: [0, 5, 0] }}
@@ -177,9 +258,9 @@ export default function HeroShowcase() {
             opacity: { delay: 0.7, duration: 0.5 },
             y: { delay: 1.5, duration: 5, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-3 bottom-16 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/80 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(124,58,237,0.3)] backdrop-blur-md sm:flex"
+          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(124,58,237,0.32)] backdrop-blur-md sm:flex"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 text-white shadow-md">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 text-white shadow-md">
             <ShieldCheck size={16} strokeWidth={2.5} />
           </div>
           <div>
@@ -188,133 +269,238 @@ export default function HeroShowcase() {
           </div>
         </motion.div>
 
-        {/* Main glass frame */}
-        <div className="relative z-10 overflow-hidden rounded-[1.35rem] border border-white/90 bg-white shadow-[0_40px_90px_-24px_rgba(124,58,237,0.45)]">
+        {/* Global chip */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: [0, -5, 0] }}
+          transition={{
+            opacity: { delay: 0.85, duration: 0.5 },
+            y: { delay: 1.8, duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(124,58,237,0.3)] backdrop-blur-md sm:flex"
+        >
+          <Globe2 size={14} className="text-brand-500" />
+          <span className="text-[10px] font-semibold text-gray-700">27+ countries</span>
+        </motion.div>
+
+        {/* Main frame */}
+        <div className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_42px_100px_-28px_rgba(124,58,237,0.5)]">
+          {/* Shimmer sweep */}
+          <motion.div
+            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+            animate={{ x: ['-120%', '320%'] }}
+            transition={{ duration: 4.5, repeat: Infinity, repeatDelay: 3.5, ease: 'easeInOut' }}
+          />
+
           {/* Browser chrome */}
-          <div className="flex items-center gap-3 border-b border-gray-100/90 bg-gradient-to-r from-slate-50 via-white to-brand-50/40 px-4 py-3">
+          <div className="relative flex items-center gap-3 border-b border-gray-100 bg-gradient-to-r from-slate-50 via-white to-brand-50/50 px-4 py-3">
             <div className="flex gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57] shadow-sm" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E] shadow-sm" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28C840] shadow-sm" />
             </div>
             <div className="flex flex-1 items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-[11px] text-gray-400 shadow-inner ring-1 ring-gray-100">
-              <Sparkles size={11} className="shrink-0 text-brand-400" />
+              <Lock size={10} className="shrink-0 text-emerald-500" />
               <AnimatePresence mode="wait">
                 <motion.span
                   key={scene.id}
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
-                  className="truncate font-medium"
+                  className="truncate font-medium text-gray-500"
                 >
-                  wpservices.com/{scene.id}
+                  https://wpservices.com/{scene.id}
                 </motion.span>
               </AnimatePresence>
+            </div>
+            <div className="hidden items-center gap-1 rounded-md bg-brand-50 px-2 py-1 text-[9px] font-bold text-brand-600 ring-1 ring-brand-100 sm:flex">
+              <Sparkles size={10} />
+              Studio
             </div>
           </div>
 
           {/* Stage */}
-          <div className="relative aspect-[16/11] overflow-hidden bg-gradient-to-br from-[#F8F7FF] via-white to-brand-50/50">
-            {/* Soft mesh */}
+          <div className="relative aspect-[16/11.2] overflow-hidden bg-gradient-to-br from-[#F7F5FF] via-white to-brand-50/60">
             <div
-              className="pointer-events-none absolute inset-0 opacity-60"
+              className="pointer-events-none absolute inset-0 opacity-70"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 15% 20%, rgba(124,58,237,0.12), transparent 42%), radial-gradient(circle at 85% 75%, rgba(249,115,22,0.1), transparent 38%)',
+                  'radial-gradient(circle at 12% 18%, rgba(124,58,237,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(249,115,22,0.12), transparent 36%)',
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.35]"
+              style={{
+                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(124,58,237,0.07) 1px, transparent 0)',
+                backgroundSize: '22px 22px',
               }}
             />
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={scene.id}
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 0.5, ease }}
-                className="absolute inset-0 flex flex-col p-4 sm:p-5"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45, ease }}
+                className="absolute inset-0 flex flex-col p-3.5 sm:p-5"
               >
                 {/* Mini site header */}
-                <div className="mb-3 flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 shadow-sm ring-1 ring-gray-100/80 backdrop-blur">
+                <div className="mb-3 flex items-center justify-between rounded-xl bg-white/85 px-3 py-2 shadow-sm ring-1 ring-gray-100/90 backdrop-blur">
                   <div className="flex items-center gap-2">
-                    <div className={`h-6 w-6 rounded-lg bg-gradient-to-br ${scene.accent} shadow-sm`} />
-                    <span className="text-[11px] font-bold text-gray-800">WP Studio</span>
+                    <div className={`relative h-7 w-7 overflow-hidden rounded-lg bg-gradient-to-br ${scene.accent} shadow-md`}>
+                      <span className="absolute inset-0 bg-white/20" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold leading-none text-gray-800">WP Studio</p>
+                      <p className="mt-0.5 text-[8px] font-medium text-gray-400">WordPress Agency</p>
+                    </div>
                   </div>
                   <div className="hidden items-center gap-3 sm:flex">
-                    {scene.nav.map((item) => (
-                      <span key={item} className="text-[10px] font-medium text-gray-400">
+                    {scene.nav.map((item, i) => (
+                      <motion.span
+                        key={item}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 + i * 0.06 }}
+                        className={`text-[10px] font-medium ${i === 0 ? 'text-brand-600' : 'text-gray-400'}`}
+                      >
                         {item}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
-                  <div className="flex h-6 items-center gap-1 rounded-md bg-brand-500 px-2 text-[9px] font-bold text-white">
+                  <div className="flex h-7 items-center gap-1 rounded-lg bg-gradient-to-r from-brand-500 to-violet-600 px-2.5 text-[9px] font-bold text-white shadow-md shadow-brand-500/25">
                     Get Started
-                    <ArrowUpRight size={10} />
+                    <ArrowUpRight size={11} />
                   </div>
                 </div>
 
-                {/* Mini hero + metrics */}
-                <div className="grid flex-1 gap-3 sm:grid-cols-[1.35fr_0.9fr]">
-                  <div className="relative overflow-hidden rounded-xl bg-white/90 p-3.5 shadow-sm ring-1 ring-gray-100/80">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-brand-600">{scene.eyebrow}</p>
-                    <p className="mt-1 text-sm font-extrabold tracking-tight text-gray-900 sm:text-[15px]">{scene.title}</p>
+                <div className="grid min-h-0 flex-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
+                  {/* Left content panel */}
+                  <div className="relative flex min-h-0 flex-col overflow-hidden rounded-xl bg-white/92 p-3.5 shadow-sm ring-1 ring-gray-100/90">
+                    <div className="mb-2 flex items-center gap-1.5">
+                      <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-brand-600 ring-1 ring-brand-100">
+                        {scene.eyebrow}
+                      </span>
+                      <CheckCircle2 size={12} className="text-emerald-500" />
+                    </div>
+                    <p className="text-[13px] font-extrabold tracking-tight text-gray-900 sm:text-[15px]">{scene.title}</p>
                     <p className="mt-1 text-[11px] leading-snug text-gray-500">{scene.subtitle}</p>
-                    <div className="mt-3 space-y-1.5">
-                      {scene.heroLines.map((line, i) => (
+
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {scene.features.map((f, i) => (
+                        <motion.span
+                          key={f}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2 + i * 0.08 }}
+                          className="rounded-md bg-slate-50 px-2 py-1 text-[9px] font-semibold text-gray-600 ring-1 ring-gray-100"
+                        >
+                          {f}
+                        </motion.span>
+                      ))}
+                    </div>
+
+                    {/* Mini analytics bars */}
+                    <div className="mt-3 flex min-h-[44px] flex-1 items-end gap-1 rounded-lg bg-gradient-to-b from-brand-50/50 to-white p-2 ring-1 ring-brand-100/50">
+                      {scene.bars.map((h, i) => (
                         <motion.div
-                          key={line}
-                          initial={{ width: 0, opacity: 0 }}
-                          animate={{ width: i === 0 ? '92%' : '72%', opacity: 1 }}
-                          transition={{ delay: 0.25 + i * 0.12, duration: 0.55, ease }}
-                          className="h-2 rounded-full bg-gradient-to-r from-brand-200/90 to-brand-100/40"
+                          key={`${scene.id}-bar-${i}`}
+                          className={`flex-1 rounded-t-sm bg-gradient-to-t ${scene.accent}`}
+                          initial={{ height: 0 }}
+                          animate={{ height: `${h}%` }}
+                          transition={{ delay: 0.3 + i * 0.05, duration: 0.65, ease }}
+                          style={{ opacity: 0.55 + (i % 3) * 0.15 }}
                         />
                       ))}
                     </div>
-                    <motion.div
-                      className={`mt-4 h-8 w-28 rounded-lg bg-gradient-to-r ${scene.accent} shadow-lg shadow-brand-500/25`}
-                      animate={{ boxShadow: ['0 8px 20px rgba(124,58,237,0.2)', '0 10px 28px rgba(124,58,237,0.4)', '0 8px 20px rgba(124,58,237,0.2)'] }}
-                      transition={{ duration: 2.4, repeat: Infinity }}
-                    />
 
-                    {/* Animated cursor */}
+                    <div className="mt-3 flex items-center gap-2">
+                      <motion.div
+                        className={`flex h-8 items-center gap-1 rounded-lg bg-gradient-to-r ${scene.accent} px-3 text-[10px] font-bold text-white shadow-lg shadow-brand-500/30`}
+                        animate={{
+                          boxShadow: [
+                            '0 8px 20px rgba(124,58,237,0.22)',
+                            '0 12px 28px rgba(124,58,237,0.42)',
+                            '0 8px 20px rgba(124,58,237,0.22)',
+                          ],
+                        }}
+                        transition={{ duration: 2.2, repeat: Infinity }}
+                      >
+                        Start project
+                        <ArrowUpRight size={11} />
+                      </motion.div>
+                      <div className="flex items-center gap-1 text-[9px] font-semibold text-emerald-600">
+                        <TrendingUp size={11} />
+                        +24% growth
+                      </div>
+                    </div>
+
+                    {/* Cursor */}
                     <motion.div
                       className="pointer-events-none absolute z-10"
                       animate={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
-                      transition={{ duration: 1.1, ease }}
+                      transition={{ duration: 1, ease }}
                       style={{ translateX: '-30%', translateY: '-20%' }}
                     >
                       <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
                         <path
                           d="M1 1L1 16.5L5.2 12.8L8.8 20.2L11.2 19L7.6 11.6L13.5 11.2L1 1Z"
-                          fill="#1F2937"
+                          fill="#111827"
                           stroke="white"
                           strokeWidth="1.2"
                         />
                       </svg>
                       <motion.span
-                        className="absolute left-3 top-4 h-5 w-5 rounded-full border-2 border-brand-400/70"
-                        animate={{ scale: [0.6, 1.3], opacity: [0.7, 0] }}
-                        transition={{ duration: 1.2, repeat: Infinity }}
+                        className="absolute left-3 top-4 h-5 w-5 rounded-full border-2 border-brand-400/80"
+                        animate={{ scale: [0.55, 1.35], opacity: [0.75, 0] }}
+                        transition={{ duration: 1.15, repeat: Infinity }}
                       />
                     </motion.div>
                   </div>
 
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex flex-1 items-center justify-center rounded-xl bg-white/90 p-2 shadow-sm ring-1 ring-gray-100/80">
+                  {/* Right metrics panel */}
+                  <div className="flex min-h-0 flex-col gap-2.5">
+                    <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-white/92 p-2.5 shadow-sm ring-1 ring-gray-100/90">
                       <ScoreRing value={scene.score} label={scene.scoreLabel} />
+                      <div className="mt-1 grid w-full grid-cols-3 gap-1">
+                        {scene.vitals.map((v) => (
+                          <div key={v.label} className="rounded-md bg-slate-50 px-1 py-1 text-center ring-1 ring-gray-100">
+                            <p className="text-[8px] font-bold text-gray-400">{v.label}</p>
+                            <p className={`text-[10px] font-extrabold ${v.good ? 'text-emerald-600' : 'text-gray-700'}`}>
+                              {v.value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="rounded-xl bg-gradient-to-br from-brand-600 to-violet-600 p-3 text-white shadow-lg shadow-brand-500/30">
-                      <div className="mb-1 flex items-center gap-1.5">
-                        <Zap size={12} className="text-accent-300" />
-                        <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-100">{scene.deltaLabel}</span>
+
+                    <div className={`rounded-xl bg-gradient-to-br ${scene.accent} p-3 text-white shadow-lg shadow-brand-500/30`}>
+                      <div className="mb-1 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <Zap size={12} className="text-accent-200" />
+                          <span className="text-[9px] font-semibold uppercase tracking-wider text-white/80">
+                            {scene.deltaLabel}
+                          </span>
+                        </div>
+                        <span className="rounded-full bg-white/15 px-1.5 py-0.5 text-[8px] font-bold">LIVE</span>
                       </div>
                       <motion.p
                         key={scene.delta}
-                        initial={{ opacity: 0, y: 6 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-xl font-extrabold tracking-tight"
+                        className="text-2xl font-extrabold tracking-tight"
                       >
                         {scene.delta}
                       </motion.p>
+                      <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/20">
+                        <motion.div
+                          className="h-full rounded-full bg-white/90"
+                          initial={{ width: 0 }}
+                          animate={{ width: '86%' }}
+                          transition={{ delay: 0.35, duration: 0.9, ease }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -323,19 +509,21 @@ export default function HeroShowcase() {
           </div>
         </div>
 
-        <div className="mx-8 mt-1.5 h-7 rounded-b-3xl bg-gradient-to-b from-brand-500/20 to-transparent blur-[3px]" />
+        <div className="mx-8 mt-1.5 h-8 rounded-b-3xl bg-gradient-to-b from-brand-500/25 to-transparent blur-[3px]" />
       </motion.div>
 
-      {/* Scene indicators */}
       <div className="mt-7 flex items-center justify-center gap-2.5">
         {scenes.map((s, i) => (
           <button
             key={s.id}
             type="button"
-            onClick={() => setActive(i)}
+            onClick={() => {
+              setActive(i);
+              setSceneProgress(0);
+            }}
             aria-label={s.title}
-            className="group relative h-1.5 overflow-hidden rounded-full bg-gray-200 transition-all duration-500"
-            style={{ width: i === active ? 44 : 10 }}
+            className="relative h-1.5 overflow-hidden rounded-full bg-gray-200 transition-all duration-500"
+            style={{ width: i === active ? 48 : 10 }}
           >
             {i === active && (
               <motion.span
