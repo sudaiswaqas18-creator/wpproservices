@@ -7,8 +7,8 @@ interface LogoProps {
 }
 
 const LOGO = {
-  light: '/logo-light.png?v=3',
-  dark: '/logo-dark.png?v=3',
+  light: '/logo-light.png?v=4',
+  dark: '/logo-dark.png?v=4',
 } as const;
 
 export default function Logo({
@@ -19,11 +19,12 @@ export default function Logo({
   const isIcon = variant === 'icon';
   const src = isDark ? LOGO.dark : LOGO.light;
 
+  // Light theme logo is intentionally larger — matches premium header presence
   const heightClass = isIcon
     ? 'h-9'
     : isDark
-      ? 'h-[38px] sm:h-[42px]'
-      : 'h-[38px] sm:h-[44px]';
+      ? 'h-[40px] sm:h-[44px]'
+      : 'h-[48px] sm:h-[56px]';
 
   return (
     <span
@@ -33,9 +34,9 @@ export default function Logo({
       <img
         src={src}
         alt="WPServices — WordPress Agency"
-        className={`block w-auto max-w-none object-contain object-left ${heightClass}`}
-        width={isDark ? 220 : 240}
-        height={44}
+        className={`block w-auto max-w-none object-contain object-left drop-shadow-sm ${heightClass}`}
+        width={isDark ? 220 : 280}
+        height={isDark ? 44 : 56}
         loading="eager"
         decoding="async"
         draggable={false}
