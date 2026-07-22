@@ -6,7 +6,7 @@ const organization = {
   '@type': 'Organization',
   name: SITE.name,
   url: SITE.url,
-  logo: `${SITE.url}/logo.svg`,
+  logo: `${SITE.url}/logo-light.png`,
   email: SITE.email,
   description:
     'Premium WordPress development agency specializing in custom websites, WooCommerce, plugins, and ongoing maintenance.',
@@ -22,7 +22,7 @@ const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: SITE.name,
-  image: `${SITE.url}/logo.svg`,
+  image: `${SITE.url}/logo-light.png`,
   url: SITE.url,
   email: SITE.email,
   address: {

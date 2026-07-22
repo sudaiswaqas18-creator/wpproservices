@@ -6,7 +6,7 @@ export const SITE = {
   phone: '+1 (302) 555-0198',
   whatsapp: '13025550198',
   themeColor: '#7C3AED',
-  ogImage: '/logo.svg',
+  ogImage: '/logo-light.png',
   lastUpdated: {
     privacy: 'July 21, 2026',
     terms: 'July 22, 2026',
