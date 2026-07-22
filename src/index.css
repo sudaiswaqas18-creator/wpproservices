@@ -313,4 +313,23 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  .whatsapp-fab {
+    animation: whatsapp-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes whatsapp-pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 4px 28px rgba(37, 211, 102, 0.65); }
+  }
+
+  @media print {
+    header, footer, .cookie-consent, .whatsapp-fab, .back-to-top {
+      display: none !important;
+    }
+    .legal-section {
+      break-inside: avoid;
+      box-shadow: none !important;
+    }
+  }
 }

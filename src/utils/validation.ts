@@ -50,7 +50,7 @@ export function validateBudget(budget: string): string | null {
 export function validateProjectDetails(text: string): string | null {
   const v = text.trim();
   if (!v) return 'Project details are required.';
-  if (v.length < 20) return 'Please describe your project in at least 20 characters.';
+  if (v.length < 10) return 'Please provide more details (at least 10 characters).';
   if (v.length > 5000) return 'Project details must be under 5000 characters.';
   return null;
 }

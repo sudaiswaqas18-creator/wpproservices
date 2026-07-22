@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://pixelforge-frontend-ten.vercel.app/sitemap.xml

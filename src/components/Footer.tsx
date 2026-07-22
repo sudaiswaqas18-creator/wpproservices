@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import SocialLinks from './SocialLinks';
+import { SITE } from '../config/site';
 
 const offices = [
   { city: 'USA Office', address: '2035 Sunset Lake Road, Suite B-2, Newark, Delaware, 19702, United States' },
@@ -18,6 +20,7 @@ export default function Footer() {
               WPServices builds scalable, secure, and conversion-focused WordPress websites for businesses worldwide.
             </p>
             <p className="mt-4 text-sm font-semibold text-slate-700">Delivering excellence across 27+ countries.</p>
+            <SocialLinks className="mt-6" />
           </div>
           <div>
             <h4 className="font-bold text-slate-800">Our Services</h4>
@@ -46,7 +49,7 @@ export default function Footer() {
               <li><Link to="/contact" className="hover:text-brand-600">Hire Us</Link></li>
               <li><Link to="/about" className="hover:text-brand-600">About Us</Link></li>
               <li><Link to="/pricing" className="hover:text-brand-600">Pricing</Link></li>
-              <li>hello@wpservices.com</li>
+              <li><a href={`mailto:${SITE.email}`} className="hover:text-brand-600">{SITE.email}</a></li>
             </ul>
           </div>
         </div>
@@ -62,7 +65,11 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-sm text-slate-400 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} WPServices. All rights reserved.</p>
-          <Link to="/privacy-policy" className="transition hover:text-brand-600">Privacy Policy</Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/privacy-policy" className="transition hover:text-brand-600">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="transition hover:text-brand-600">Terms of Service</Link>
+            <Link to="/cookie-policy" className="transition hover:text-brand-600">Cookie Policy</Link>
+          </div>
         </div>
       </div>
     </footer>

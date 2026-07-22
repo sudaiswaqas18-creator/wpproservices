@@ -1,5 +1,6 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, ShoppingBag, Loader2 } from 'lucide-react';
 import { api } from '../api/client';
 import { validateContactForm, fieldClass, FieldErrors, hasErrors } from '../utils/validation';
@@ -88,6 +89,35 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
   };
 
   const show = (field: string) => touched[field] && errors[field];
+  const canSubmit = !hasErrors(validate()) && form.name && form.email && form.budget && form.project_details && form.privacy_accepted;
+
+  if (status === 'success') {
+    return (
+      <div className="rounded-2xl border border-green-100 bg-white p-8 text-center shadow-card ring-1 ring-green-100">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600"
+        >
+          <CheckCircle size={32} />
+        </motion.div>
+        <h3 className="mt-6 text-2xl font-bold text-gray-900">Thank you for reaching out!</h3>
+        <p className="mt-3 text-gray-600">
+          We&apos;ll review your project details and get back to you within 24 hours.
+        </p>
+        <p className="mt-2 text-sm font-semibold text-brand-600">Expected Response Time: 1–2 Business Days</p>
+        <p className="mt-1 text-sm text-gray-500">Check your email for confirmation.</p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <button type="button" onClick={() => setStatus('idle')} className="btn-outline">
+            Submit Another Request
+          </button>
+          <Link to="/services" className="btn-primary">
+            View Our Services
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -128,7 +158,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             placeholder="John Smith"
             autoComplete="name"
           />
-          {show('name') && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+          {show('name') && <p className="mt-1 text-xs text-red-600" role="alert">⚠ {errors.name}</p>}
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-gray-700">Your Phone No.</label>
@@ -213,12 +243,6 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
         {show('privacy_accepted') && <p className="mt-1 text-xs text-red-600">{errors.privacy_accepted}</p>}
       </div>
 
-      {status === 'success' && (
-        <div className="mt-4 flex items-center gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700">
-          <CheckCircle size={18} />
-          {message}
-        </div>
-      )}
       {status === 'error' && message && (
         <div className="mt-4 flex items-center gap-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
           <AlertCircle size={18} />
@@ -228,7 +252,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
 
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === 'loading' || !canSubmit}
         className="btn-primary mt-5 w-full gap-2 disabled:opacity-60"
       >
         {status === 'loading' ? (

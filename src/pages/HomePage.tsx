@@ -6,10 +6,12 @@ import Testimonials from '../components/Testimonials';
 import ToolsSection from '../components/ToolsSection';
 import Blog from '../components/Blog';
 import CTA from '../components/CTA';
+import HomeStructuredData from '../components/seo/HomeStructuredData';
 
 export default function HomePage() {
   return (
     <>
+      <HomeStructuredData />
       <Hero />
       <TrustBadges />
       <PhilosophySection />
