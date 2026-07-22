@@ -7,8 +7,8 @@ interface LogoProps {
 }
 
 const LOGO = {
-  light: '/logo-light.png',
-  dark: '/logo-dark.png',
+  light: '/logo-light.png?v=3',
+  dark: '/logo-dark.png?v=3',
 } as const;
 
 export default function Logo({
