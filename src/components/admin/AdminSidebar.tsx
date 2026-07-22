@@ -33,7 +33,7 @@ export default function AdminSidebar() {
   return (
     <aside className="flex w-64 flex-col bg-gray-900 text-gray-300">
       <div className="border-b border-gray-800 p-5">
-        <Logo className="[&_span]:text-white [&_.text-brand-600]:text-brand-400" />
+        <Logo variant="dark" showTagline={false} />
         <p className="mt-2 text-xs text-gray-500">Admin Panel</p>
       </div>
 
