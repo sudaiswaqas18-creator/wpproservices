@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'WPServices',
   tagline: 'WordPress Development Agency',
-  url: 'https://pixelforge-frontend-ten.vercel.app',
+  url: 'https://wpproservices.vercel.app',
   email: 'hello@wpservices.com',
   phone: '+1 (302) 555-0198',
   whatsapp: '13025550198',
