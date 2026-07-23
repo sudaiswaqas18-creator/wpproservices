@@ -128,16 +128,28 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
   );
 }
 
+/** Cursor click targets inside the left content panel (%) */
+const clickPath = [
+  { x: 22, y: 38, target: 'feature-0' as const },
+  { x: 42, y: 38, target: 'feature-1' as const },
+  { x: 62, y: 38, target: 'feature-2' as const },
+  { x: 28, y: 86, target: 'cta' as const },
+];
+
 export default function HeroShowcase() {
   const [active, setActive] = useState(0);
-  const [cursor, setCursor] = useState({ x: 42, y: 48 });
+  const [cursor, setCursor] = useState({ x: 18, y: 28 });
   const [sceneProgress, setSceneProgress] = useState(0);
+  const [isClicking, setIsClicking] = useState(false);
+  const [clickFlash, setClickFlash] = useState(0);
+  const [activeFeature, setActiveFeature] = useState<number | null>(null);
+  const [ctaPressed, setCtaPressed] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActive((i) => (i + 1) % scenes.length);
       setSceneProgress(0);
-    }, 5600);
+    }, 7000);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -145,25 +157,82 @@ export default function HeroShowcase() {
     setSceneProgress(0);
     const start = Date.now();
     const tick = window.setInterval(() => {
-      setSceneProgress(Math.min(100, ((Date.now() - start) / 5600) * 100));
+      setSceneProgress(Math.min(100, ((Date.now() - start) / 7000) * 100));
     }, 50);
     return () => window.clearInterval(tick);
   }, [active]);
 
+  // Professional move → pause → click → feedback sequence
   useEffect(() => {
-    const path = [
-      { x: 32, y: 42 },
-      { x: 58, y: 55 },
-      { x: 44, y: 72 },
-      { x: 68, y: 38 },
-      { x: 36, y: 58 },
-    ];
-    let step = 0;
-    const tick = window.setInterval(() => {
-      setCursor(path[step % path.length]);
-      step += 1;
-    }, 1100);
-    return () => window.clearInterval(tick);
+    let cancelled = false;
+    const timers: number[] = [];
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => {
+        const id = window.setTimeout(() => resolve(), ms);
+        timers.push(id);
+      });
+
+    const run = async () => {
+      setActiveFeature(null);
+      setCtaPressed(false);
+      setIsClicking(false);
+      setCursor({ x: 16, y: 24 });
+
+      await wait(700);
+      if (cancelled) return;
+
+      for (let i = 0; i < clickPath.length; i++) {
+        if (cancelled) return;
+        const step = clickPath[i];
+
+        // Move toward target
+        setIsClicking(false);
+        setCursor({ x: step.x, y: step.y });
+        await wait(900);
+        if (cancelled) return;
+
+        // Hover settle
+        await wait(220);
+        if (cancelled) return;
+
+        // Press down
+        setIsClicking(true);
+        await wait(140);
+        if (cancelled) return;
+
+        // Click feedback
+        setClickFlash((n) => n + 1);
+        if (step.target.startsWith('feature-')) {
+          setActiveFeature(Number(step.target.split('-')[1]));
+          setCtaPressed(false);
+        } else {
+          setCtaPressed(true);
+        }
+
+        await wait(180);
+        if (cancelled) return;
+
+        // Release
+        setIsClicking(false);
+        await wait(520);
+        if (cancelled) return;
+
+        if (step.target === 'cta') {
+          setCtaPressed(false);
+        }
+      }
+
+      // Soft reset before scene change / loop
+      setActiveFeature(null);
+      setCursor({ x: 20, y: 30 });
+    };
+
+    void run();
+
+    return () => {
+      cancelled = true;
+      timers.forEach((id) => window.clearTimeout(id));
+    };
   }, [active]);
 
   const scene = scenes[active];
@@ -388,17 +457,27 @@ export default function HeroShowcase() {
                     <p className="mt-1 text-[11px] leading-snug text-gray-500">{scene.subtitle}</p>
 
                     <div className="mt-3 flex flex-wrap gap-1.5">
-                      {scene.features.map((f, i) => (
-                        <motion.span
-                          key={f}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.2 + i * 0.08 }}
-                          className="rounded-md bg-slate-50 px-2 py-1 text-[9px] font-semibold text-gray-600 ring-1 ring-gray-100"
-                        >
-                          {f}
-                        </motion.span>
-                      ))}
+                      {scene.features.map((f, i) => {
+                        const selected = activeFeature === i;
+                        return (
+                          <motion.span
+                            key={f}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{
+                              opacity: 1,
+                              scale: selected ? 1.06 : 1,
+                            }}
+                            transition={{ delay: 0.2 + i * 0.08, type: 'spring', stiffness: 380, damping: 22 }}
+                            className={`rounded-md px-2 py-1 text-[9px] font-semibold ring-1 ${
+                              selected
+                                ? 'bg-brand-50 text-brand-700 ring-brand-300 shadow-sm shadow-brand-500/20'
+                                : 'bg-slate-50 text-gray-600 ring-gray-100'
+                            }`}
+                          >
+                            {f}
+                          </motion.span>
+                        );
+                      })}
                     </div>
 
                     {/* Mini analytics bars */}
@@ -419,13 +498,16 @@ export default function HeroShowcase() {
                       <motion.div
                         className={`flex h-8 items-center gap-1 rounded-lg bg-gradient-to-r ${scene.accent} px-3 text-[10px] font-bold text-white shadow-lg shadow-brand-500/30`}
                         animate={{
-                          boxShadow: [
-                            '0 8px 20px rgba(124,58,237,0.22)',
-                            '0 12px 28px rgba(124,58,237,0.42)',
-                            '0 8px 20px rgba(124,58,237,0.22)',
-                          ],
+                          scale: ctaPressed ? 0.94 : 1,
+                          boxShadow: ctaPressed
+                            ? '0 4px 12px rgba(124,58,237,0.35)'
+                            : [
+                                '0 8px 20px rgba(124,58,237,0.22)',
+                                '0 12px 28px rgba(124,58,237,0.42)',
+                                '0 8px 20px rgba(124,58,237,0.22)',
+                              ],
                         }}
-                        transition={{ duration: 2.2, repeat: Infinity }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 24 }}
                       >
                         Start project
                         <ArrowUpRight size={11} />
@@ -436,26 +518,61 @@ export default function HeroShowcase() {
                       </div>
                     </div>
 
-                    {/* Cursor */}
+                    {/* Professional cursor + click feedback */}
                     <motion.div
-                      className="pointer-events-none absolute z-10"
-                      animate={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
-                      transition={{ duration: 1, ease }}
-                      style={{ translateX: '-30%', translateY: '-20%' }}
+                      className="pointer-events-none absolute z-20"
+                      animate={{
+                        left: `${cursor.x}%`,
+                        top: `${cursor.y}%`,
+                        scale: isClicking ? 0.82 : 1,
+                        y: isClicking ? 2 : 0,
+                      }}
+                      transition={{
+                        left: { duration: 0.85, ease },
+                        top: { duration: 0.85, ease },
+                        scale: { type: 'spring', stiffness: 520, damping: 28 },
+                        y: { type: 'spring', stiffness: 520, damping: 28 },
+                      }}
+                      style={{ translateX: '-18%', translateY: '-12%' }}
                     >
-                      <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
+                      <motion.span
+                        className="absolute left-[2px] top-[2px] h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-400/25 blur-[3px]"
+                        animate={{ opacity: isClicking ? 0.9 : 0.35, scale: isClicking ? 0.7 : 1 }}
+                      />
+
+                      <svg width="20" height="24" viewBox="0 0 18 22" fill="none" className="relative drop-shadow-md">
                         <path
                           d="M1 1L1 16.5L5.2 12.8L8.8 20.2L11.2 19L7.6 11.6L13.5 11.2L1 1Z"
-                          fill="#111827"
+                          fill={isClicking ? '#7C3AED' : '#111827'}
                           stroke="white"
-                          strokeWidth="1.2"
+                          strokeWidth="1.25"
                         />
                       </svg>
-                      <motion.span
-                        className="absolute left-3 top-4 h-5 w-5 rounded-full border-2 border-brand-400/80"
-                        animate={{ scale: [0.55, 1.35], opacity: [0.75, 0] }}
-                        transition={{ duration: 1.15, repeat: Infinity }}
-                      />
+
+                      <AnimatePresence>
+                        {clickFlash > 0 && (
+                          <motion.span
+                            key={`ripple-a-${clickFlash}`}
+                            className="absolute left-[3px] top-[3px] h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-brand-500"
+                            initial={{ scale: 0.35, opacity: 0.85 }}
+                            animate={{ scale: 1.6, opacity: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.55, ease }}
+                          />
+                        )}
+                      </AnimatePresence>
+                      <AnimatePresence>
+                        {clickFlash > 0 && (
+                          <motion.span
+                            key={`ripple-b-${clickFlash}`}
+                            className="absolute left-[3px] top-[3px] h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/30"
+                            initial={{ scale: 0.4, opacity: 0.7 }}
+                            animate={{ scale: 1.15, opacity: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.4, ease }}
+                          />
+                        )}
+                      </AnimatePresence>
                     </motion.div>
                   </div>
 
