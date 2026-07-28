@@ -40,34 +40,43 @@ app.get('/api/health', async (_req, res) => {
   }
 });
 
+const asyncHandler = (fn) => async (req, res, next) => {
+  try {
+    await fn(req, res, next);
+  } catch (err) {
+    console.error(`[API Error ${req.path}]:`, err.message);
+    res.status(503).json({ error: 'Database unavailable or query failed' });
+  }
+};
+
 // Public routes
-app.get('/api/testimonials', async (_req, res) => {
+app.get('/api/testimonials', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM testimonials ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/case-studies', async (_req, res) => {
+app.get('/api/case-studies', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM case_studies ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/case-studies/featured/list', async (_req, res) => {
+app.get('/api/case-studies/featured/list', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM case_studies WHERE is_featured = 1 ORDER BY sort_order LIMIT 6');
   res.json(rows);
-});
+}));
 
-app.get('/api/case-studies/:slug', async (req, res) => {
+app.get('/api/case-studies/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM case_studies WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Case study not found' });
   res.json(rows[0]);
-});
+}));
 
-app.get('/api/services', async (_req, res) => {
+app.get('/api/services', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM services ORDER BY sort_order');
   res.json(rows.map((s) => ({ ...s, features: parseJsonField(s.features) })));
-});
+}));
 
-app.get('/api/services/grouped', async (_req, res) => {
+app.get('/api/services/grouped', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM services ORDER BY sort_order');
   const services = rows.map((s) => ({ ...s, features: parseJsonField(s.features), is_new: Boolean(s.is_new) }));
   const grouped = { build: {}, manage: {}, enhance: {} };
@@ -79,97 +88,92 @@ app.get('/api/services/grouped', async (_req, res) => {
     grouped[g][sec].push(s);
   }
   res.json(grouped);
-});
+}));
 
-app.get('/api/services/:slug', async (req, res) => {
+app.get('/api/services/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM services WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Service not found' });
   res.json({ ...rows[0], features: parseJsonField(rows[0].features) });
-});
+}));
 
-app.get('/api/pricing', async (_req, res) => {
+app.get('/api/pricing', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM pricing_plans ORDER BY sort_order');
   res.json(rows.map((p) => ({
     ...p,
     features: parseJsonField(p.features),
     is_best_seller: Boolean(p.is_best_seller),
   })));
-});
+}));
 
-app.get('/api/faqs', async (req, res) => {
+app.get('/api/faqs', asyncHandler(async (req, res) => {
   const page = req.query.page || 'home';
   const [rows] = await pool.query('SELECT * FROM faqs WHERE page_slug = ? ORDER BY sort_order', [page]);
   res.json(rows);
-});
+}));
 
-app.get('/api/blog', async (_req, res) => {
+app.get('/api/blog', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT id, title, slug, excerpt, image_url, published_at, author FROM blog_posts ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/blog/:slug', async (req, res) => {
+app.get('/api/blog/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM blog_posts WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Post not found' });
   res.json(rows[0]);
-});
+}));
 
-app.get('/api/industries', async (_req, res) => {
+app.get('/api/industries', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM industries ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/products', async (_req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM products ORDER BY sort_order');
-    res.json(rows.map((p) => ({ ...p, features: parseJsonField(p.features) })));
-  } catch (err) {
-    console.error(err);
-    res.status(503).json({ error: 'Database unavailable' });
-  }
-});
+app.get('/api/products', asyncHandler(async (_req, res) => {
+  const [rows] = await pool.query('SELECT * FROM products ORDER BY sort_order');
+  res.json(rows.map((p) => ({ ...p, features: parseJsonField(p.features) })));
+}));
 
-app.get('/api/products/:slug', async (req, res) => {
+app.get('/api/products/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM products WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Product not found' });
   res.json({ ...rows[0], features: parseJsonField(rows[0].features) });
-});
+}));
 
-app.get('/api/tools', async (_req, res) => {
+app.get('/api/tools', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM tools ORDER BY sort_order');
   res.json(rows.map((t) => ({ ...t, is_new: Boolean(t.is_new) })));
-});
+}));
 
-app.get('/api/tools/:slug', async (req, res) => {
+app.get('/api/tools/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM tools WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Tool not found' });
   res.json({ ...rows[0], is_new: Boolean(rows[0].is_new) });
-});
+}));
 
-app.get('/api/guidebooks', async (_req, res) => {
+app.get('/api/guidebooks', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM guidebooks ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/guidebooks/:slug', async (req, res) => {
+app.get('/api/guidebooks/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query('SELECT * FROM guidebooks WHERE slug = ?', [req.params.slug]);
   if (!rows.length) return res.status(404).json({ error: 'Guidebook not found' });
   res.json(rows[0]);
-});
+}));
 
-app.get('/api/awards', async (_req, res) => {
+app.get('/api/awards', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM awards ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/site-stats', async (_req, res) => {
+app.get('/api/site-stats', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM site_stats ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
-app.get('/api/portfolio', async (_req, res) => {
+app.get('/api/portfolio', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM portfolio_items ORDER BY sort_order');
   res.json(rows);
-});
+}));
 
 app.post('/api/contact', async (req, res) => {
   const fieldErrors = validateContactPayload(req.body);

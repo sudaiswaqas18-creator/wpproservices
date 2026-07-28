@@ -22,9 +22,23 @@ const FALLBACK_STATS: SiteStat[] = [
 
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
+const FALLBACK_AWARDS: Award[] = [
+  { id: 1, title: 'Best UI Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+  { id: 2, title: 'Best UX Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+  { id: 3, title: 'Best Innovation', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+  { id: 4, title: 'Top WordPress Agency', organization: 'Clutch', year: '2026', badge_label: '4.7/5' },
+  { id: 5, title: 'Top Design Agency', organization: 'DesignRush', year: '2026', badge_label: '4.8/5' },
+];
+
 function AwardsSection() {
-  const [awards, setAwards] = useState<Award[]>([]);
-  useEffect(() => { fetch('/api/awards').then((r) => r.json()).then((d) => setAwards(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  const [awards, setAwards] = useState<Award[]>(FALLBACK_AWARDS);
+
+  useEffect(() => {
+    fetch(apiUrl('awards'))
+      .then((r) => r.json())
+      .then((d) => { if (Array.isArray(d) && d.length > 0) setAwards(d); })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="border-y border-brand-100/60 bg-gradient-to-b from-brand-50/50 to-white py-16">
@@ -47,9 +61,21 @@ function AwardsSection() {
 
 interface CaseStudy { id: number; title: string; client: string; slug: string; tech_stack: string; result_summary: string; }
 
+const FALLBACK_FEATURED_CASES: CaseStudy[] = [
+  { id: 1, title: 'Smart Shipping Rules Boost Repeat Orders', client: 'FreshHarvest Market', slug: 'freshharvest-shipping', tech_stack: 'WooCommerce + PHP', result_summary: '+38% Returning Orders' },
+  { id: 2, title: 'Gated LMS for Private Education', client: 'EduVault Members', slug: 'eduvault-lms', tech_stack: 'LearnDash + React', result_summary: '+32% Completion Rate' },
+  { id: 3, title: 'Cart Recovery Increases Revenue', client: 'StyleBox Boutique', slug: 'stylebox-cart-recovery', tech_stack: 'Custom Plugin + REST API', result_summary: '+25% Recovery Rate' },
+];
+
 function FeaturedCases() {
-  const [cases, setCases] = useState<CaseStudy[]>([]);
-  useEffect(() => { fetch('/api/case-studies/featured/list').then((r) => r.json()).then((d) => setCases(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  const [cases, setCases] = useState<CaseStudy[]>(FALLBACK_FEATURED_CASES);
+
+  useEffect(() => {
+    fetch(apiUrl('case-studies/featured/list'))
+      .then((r) => r.json())
+      .then((d) => { if (Array.isArray(d) && d.length > 0) setCases(d); })
+      .catch(() => {});
+  }, []);
 
   if (!cases.length) return null;
 

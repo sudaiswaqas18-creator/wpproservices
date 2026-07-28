@@ -63,6 +63,32 @@ export const fallbackData = {
     { id: 3, title: 'LearnSphere Academy', category: 'LMS Dashboard', image_url: 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?w=800' },
     { id: 4, title: 'NovaTech Solutions', category: 'B2B Portal', image_url: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800' },
   ] as PortfolioItem[],
+
+  awards: [
+    { id: 1, title: 'Best UI Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+    { id: 2, title: 'Best UX Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+    { id: 3, title: 'Best Innovation', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
+    { id: 4, title: 'Top WordPress Agency', organization: 'Clutch', year: '2026', badge_label: '4.7/5' },
+    { id: 5, title: 'Top Design Agency', organization: 'DesignRush', year: '2026', badge_label: '4.8/5' },
+  ],
+
+  tools: [
+    { id: 1, title: 'Speed & Performance Estimator', slug: 'speed-estimator', description: 'Estimate potential page speed improvements and Core Web Vitals gains.', icon: 'zap', is_new: true },
+    { id: 2, title: 'Security Hardening Checklist', slug: 'security-checklist', description: 'Audit your WordPress installation against 15+ common vulnerability vectors.', icon: 'shield', is_new: false },
+    { id: 3, title: 'Plugin Conflict Troubleshooter', slug: 'plugin-troubleshooter', description: 'Step-by-step diagnostic workflow to locate incompatible plugins fast.', icon: 'bug', is_new: false },
+  ],
+
+  guidebooks: [
+    { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800' },
+    { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for maximum conversion.', content: 'Proven techniques for sub-2-second WooCommerce page loads.', image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800' },
+  ],
+
+  siteStats: [
+    { stat_value: '500+', stat_label: 'Projects Delivered' },
+    { stat_value: '27+', stat_label: 'Countries Served' },
+    { stat_value: '4.9★', stat_label: 'Clutch Rating' },
+    { stat_value: '10+', stat_label: 'Years Experience' },
+  ],
 };
 
 export async function fetchWithFallback<T>(fetcher: () => Promise<T>, fallback: T): Promise<T> {

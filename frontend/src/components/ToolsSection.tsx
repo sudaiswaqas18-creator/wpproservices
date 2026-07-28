@@ -7,9 +7,20 @@ const iconMap: Record<string, typeof Bug> = { bug: Bug, palette: Palette, 'messa
 
 interface Tool { id: number; title: string; slug: string; description: string; icon: string; is_new: boolean; }
 
+const FALLBACK_TOOLS: Tool[] = [
+  { id: 1, title: 'Speed & Performance Estimator', slug: 'speed-estimator', description: 'Estimate potential page speed improvements and Core Web Vitals gains.', icon: 'zap', is_new: true },
+  { id: 2, title: 'Security Hardening Checklist', slug: 'security-checklist', description: 'Audit your WordPress installation against 15+ common vulnerability vectors.', icon: 'shield', is_new: false },
+  { id: 3, title: 'Plugin Conflict Troubleshooter', slug: 'plugin-troubleshooter', description: 'Step-by-step diagnostic workflow to locate incompatible plugins fast.', icon: 'bug', is_new: false },
+];
+
 export default function ToolsSection() {
-  const [tools, setTools] = useState<Tool[]>([]);
-  useEffect(() => { fetch(apiUrl('tools')).then((r) => r.json()).then((d) => setTools(Array.isArray(d) ? d : [])).catch(() => {}); }, []);
+  const [tools, setTools] = useState<Tool[]>(FALLBACK_TOOLS);
+  useEffect(() => {
+    fetch(apiUrl('tools'))
+      .then((r) => r.json())
+      .then((d) => { if (Array.isArray(d) && d.length > 0) setTools(d); })
+      .catch(() => {});
+  }, []);
 
   if (!tools.length) return null;
 

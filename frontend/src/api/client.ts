@@ -117,6 +117,11 @@ export const api = {
   getBlogPost: (slug: string) => fetchApi<BlogPostDetail>(`/blog/${slug}`),
   getIndustries: () => fetchApi<Industry[]>('/industries'),
   getPortfolio: () => fetchApi<PortfolioItem[]>('/portfolio'),
+  getAwards: () => fetchApi<unknown[]>('/awards'),
+  getTools: () => fetchApi<unknown[]>('/tools'),
+  getGuidebooks: () => fetchApi<unknown[]>('/guidebooks'),
+  getSiteStats: () => fetchApi<unknown[]>('/site-stats'),
+  getProducts: () => fetchApi<unknown[]>('/products'),
   submitContact: async (data: ContactPayload) => {
     const res = await fetch(`${API_BASE}/contact`, {
       method: 'POST',

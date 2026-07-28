@@ -23,6 +23,10 @@ export function useApiData<K extends DataKey>(key: K) {
       blog: api.getBlog,
       industries: api.getIndustries,
       portfolio: api.getPortfolio,
+      awards: api.getAwards,
+      tools: api.getTools,
+      guidebooks: api.getGuidebooks,
+      siteStats: api.getSiteStats,
     };
 
     fetchWithFallback(fetchers[key], fallback)
