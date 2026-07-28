@@ -275,7 +275,7 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for the full VPS deployment guide with:
 
 ## 📞 Contact
 
-- **Project Owner**: [Your Name]
+- **Project Owner**: [M.Sudais]
 - **Email**: info@technogiallc.com
 - **Domain**: wpproservices.com
 
