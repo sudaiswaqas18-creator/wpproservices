@@ -1,0 +1,29 @@
+# WPServices
+
+> Premium WordPress development agency building scalable, secure, conversion-focused websites, WooCommerce plugins, and ongoing maintenance for businesses worldwide.
+
+WPServices (https://wpproservices.vercel.app) designs and develops high-performance WordPress and WooCommerce experiences. Use the links below as the source of truth for services, products, pricing, and contact details.
+
+## Services
+- [All Services](https://wpproservices.vercel.app/services): Full catalog of WordPress services
+- [Website Development](https://wpproservices.vercel.app/services/wordpress-website-development): Custom WordPress website builds
+- [Website Redesign](https://wpproservices.vercel.app/services/wordpress-redesign): Modern WordPress redesign and revamp
+- [Speed Optimization](https://wpproservices.vercel.app/services/wordpress-speed-optimization): Performance and Core Web Vitals work
+- [Maintenance](https://wpproservices.vercel.app/services/wordpress-maintenance): Ongoing WordPress care and support
+- [AI Automation](https://wpproservices.vercel.app/services/wordpress-ai-automation): WordPress AI and automation services
+
+## Products & Resources
+- [Products](https://wpproservices.vercel.app/products): WooCommerce plugins and digital products
+- [Pricing](https://wpproservices.vercel.app/pricing): Packages and pricing guidance
+- [Blog](https://wpproservices.vercel.app/blog): WordPress guides and insights
+- [Case Studies](https://wpproservices.vercel.app/case-studies): Client results and project stories
+- [Resources](https://wpproservices.vercel.app/resources): Guidebooks, tools, and resource hub
+- [Guidebooks](https://wpproservices.vercel.app/resources/guidebooks): Downloadable WordPress guidebooks
+- [Tools](https://wpproservices.vercel.app/resources/tools): Free WordPress tools
+
+## Company
+- [About](https://wpproservices.vercel.app/about): Agency background and approach
+- [Contact](https://wpproservices.vercel.app/contact): Start a free consultation
+- [Privacy Policy](https://wpproservices.vercel.app/privacy-policy): Privacy and data practices
+- [Terms of Service](https://wpproservices.vercel.app/terms-of-service): Terms of use
+- [Cookie Policy](https://wpproservices.vercel.app/cookie-policy): Cookie usage details
