@@ -231,7 +231,7 @@ export default function ServicesScrollSection() {
 
   if (!isDesktop) {
     return (
-      <section className="services-scroll-section bg-surface-50 py-20">
+      <section className="services-scroll-section bg-background py-20">
         <div className="section-container">{content}</div>
       </section>
     );
@@ -240,7 +240,7 @@ export default function ServicesScrollSection() {
   return (
     <section
       ref={sectionRef}
-      className="services-scroll-section relative bg-surface-50"
+      className="services-scroll-section relative bg-background"
       style={{ height: `${SECTION_HEIGHT_VH}vh` }}
     >
       <div className="sticky top-24 flex h-[calc(100vh-6rem)] items-center py-8">

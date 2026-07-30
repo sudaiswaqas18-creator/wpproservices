@@ -5,11 +5,11 @@ import { adminApi } from '../../api/admin';
 
 const statConfig = [
   { key: 'blog_posts', label: 'Blog Posts', icon: FileText, color: 'bg-brand-500', link: '/admin/blogs' },
-  { key: 'case_studies', label: 'Case Studies', icon: Briefcase, color: 'bg-purple-500', link: '/admin/case-studies' },
-  { key: 'services', label: 'Services', icon: Wrench, color: 'bg-brand-500', link: '/admin/services' },
-  { key: 'testimonials', label: 'Testimonials', icon: Star, color: 'bg-yellow-500', link: '/admin/testimonials' },
+  { key: 'case_studies', label: 'Case Studies', icon: Briefcase, color: 'bg-surface-dark', link: '/admin/case-studies' },
+  { key: 'services', label: 'Services', icon: Wrench, color: 'bg-surface-dark', link: '/admin/services' },
+  { key: 'testimonials', label: 'Testimonials', icon: Star, color: 'bg-brand-600', link: '/admin/testimonials' },
   { key: 'portfolio_items', label: 'Portfolio', icon: Image, color: 'bg-green-500', link: '/admin/portfolio' },
-  { key: 'faqs', label: 'FAQs', icon: HelpCircle, color: 'bg-indigo-500', link: '/admin/faqs' },
+  { key: 'faqs', label: 'FAQs', icon: HelpCircle, color: 'bg-surface-dark', link: '/admin/faqs' },
   { key: 'contact_leads', label: 'New Leads', icon: Mail, color: 'bg-red-500', link: '/admin/leads' },
 ];
 

@@ -19,9 +19,9 @@ const scenes = [
     subtitle: 'Custom themes built for conversion',
     score: 98,
     scoreLabel: 'PageSpeed',
-    delta: '+3.2×',
+    delta: '+3.2x',
     deltaLabel: 'Faster load',
-    accent: 'from-brand-500 to-violet-500',
+    accent: 'from-brand-500 to-brand-400',
     nav: ['Home', 'Work', 'Pricing'],
     features: ['Custom theme', 'SEO ready', 'A11y'],
     vitals: [
@@ -40,7 +40,7 @@ const scenes = [
     scoreLabel: 'Conv. lift %',
     delta: '1.2s',
     deltaLabel: 'TTI',
-    accent: 'from-violet-600 to-indigo-500',
+    accent: 'from-ink to-ink',
     nav: ['Shop', 'Cart', 'Account'],
     features: ['Smart cart', 'Payments', 'Upsells'],
     vitals: [
@@ -59,7 +59,7 @@ const scenes = [
     scoreLabel: 'CWV Score',
     delta: '99.9%',
     deltaLabel: 'Uptime',
-    accent: 'from-brand-600 to-purple-600',
+    accent: 'from-brand-600 to-brand-600',
     nav: ['Platform', 'Security', 'Support'],
     features: ['CDN', 'WAF', 'Backups'],
     vitals: [
@@ -89,7 +89,7 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       />
       <svg width="100" height="100" className="-rotate-90">
-        <circle cx="50" cy="50" r={r} fill="none" stroke="#EDE9FE" strokeWidth="8" />
+        <circle cx="50" cy="50" r={r} fill="none" stroke="#E8EDE9" strokeWidth="8" />
         <motion.circle
           key={`${value}-${label}`}
           cx="50"
@@ -106,9 +106,9 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
         />
         <defs>
           <linearGradient id="heroScoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#7C3AED" />
-            <stop offset="55%" stopColor="#A855F7" />
-            <stop offset="100%" stopColor="#F97316" />
+            <stop offset="0%" stopColor="#2D4A3E" />
+            <stop offset="55%" stopColor="#2D4A3E" />
+            <stop offset="100%" stopColor="#B8956A" />
           </linearGradient>
         </defs>
       </svg>
@@ -162,7 +162,7 @@ export default function HeroShowcase() {
     return () => window.clearInterval(tick);
   }, [active]);
 
-  // Professional move → pause → click → feedback sequence
+  // Professional move ? pause ? click ? feedback sequence
   useEffect(() => {
     let cancelled = false;
     const timers: number[] = [];
@@ -246,7 +246,7 @@ export default function HeroShowcase() {
       style={{ perspective: '1600px' }}
     >
       <motion.div
-        className="pointer-events-none absolute -inset-12 rounded-[42%] bg-gradient-to-br from-brand-400/30 via-violet-300/10 to-accent-400/25 blur-3xl"
+        className="pointer-events-none absolute -inset-12 rounded-[42%] bg-gradient-to-br from-brand-400/30 via-brand-200/20 to-accent-400/25 blur-3xl"
         animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.9, 0.5] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
@@ -257,7 +257,7 @@ export default function HeroShowcase() {
         animate={{ rotate: 360 }}
         transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
       >
-        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_18px_rgba(124,58,237,0.75)]" />
+        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_18px_rgba(45, 74, 62,0.75)]" />
       </motion.div>
       <motion.div
         className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[104%] w-[104%] -translate-x-1/2 -translate-y-1/2 rounded-[2.2rem] border border-dashed border-accent-300/30 sm:block"
@@ -281,7 +281,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.45, duration: 0.5 },
             y: { delay: 1.1, duration: 4.2, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(124,58,237,0.4)] backdrop-blur-md sm:block"
+          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(45, 74, 62,0.4)] backdrop-blur-md sm:block"
         >
           <div className="flex items-center gap-2.5 px-3.5 py-2.5">
             <span className="relative flex h-2.5 w-2.5">
@@ -306,10 +306,10 @@ export default function HeroShowcase() {
             opacity: { delay: 0.65, duration: 0.5 },
             y: { delay: 1.4, duration: 5.2, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(124,58,237,0.35)] backdrop-blur-md sm:flex"
+          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(45, 74, 62,0.35)] backdrop-blur-md sm:flex"
         >
           <div className="flex -space-x-1.5">
-            {['#7C3AED', '#A855F7', '#F97316'].map((c) => (
+            {['#2D4A3E', '#4A6B5C', '#B8956A'].map((c) => (
               <span key={c} className="h-5 w-5 rounded-full border-2 border-white" style={{ background: c }} />
             ))}
           </div>
@@ -327,14 +327,14 @@ export default function HeroShowcase() {
             opacity: { delay: 0.7, duration: 0.5 },
             y: { delay: 1.5, duration: 5, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(124,58,237,0.32)] backdrop-blur-md sm:flex"
+          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(45, 74, 62,0.32)] backdrop-blur-md sm:flex"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 text-white shadow-md">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-surface-dark text-white shadow-md">
             <ShieldCheck size={16} strokeWidth={2.5} />
           </div>
           <div>
             <p className="text-[10px] font-bold text-gray-900">Enterprise security</p>
-            <p className="text-[10px] text-gray-500">SSL · Hardening · Backups</p>
+            <p className="text-[10px] text-gray-500">SSL ? Hardening ? Backups</p>
           </div>
         </motion.div>
 
@@ -346,14 +346,14 @@ export default function HeroShowcase() {
             opacity: { delay: 0.85, duration: 0.5 },
             y: { delay: 1.8, duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(124,58,237,0.3)] backdrop-blur-md sm:flex"
+          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(45, 74, 62,0.3)] backdrop-blur-md sm:flex"
         >
           <Globe2 size={14} className="text-brand-500" />
           <span className="text-[10px] font-semibold text-gray-700">27+ countries</span>
         </motion.div>
 
         {/* Main frame */}
-        <div className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_42px_100px_-28px_rgba(124,58,237,0.5)]">
+        <div className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_42px_100px_-28px_rgba(45, 74, 62,0.5)]">
           {/* Shimmer sweep */}
           <motion.div
             className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
@@ -389,18 +389,18 @@ export default function HeroShowcase() {
           </div>
 
           {/* Stage */}
-          <div className="relative aspect-[16/11.2] overflow-hidden bg-gradient-to-br from-[#F7F5FF] via-white to-brand-50/60">
+          <div className="relative aspect-[16/11.2] overflow-hidden bg-gradient-to-br from-background via-white to-accent-soft/60">
             <div
               className="pointer-events-none absolute inset-0 opacity-70"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 12% 18%, rgba(124,58,237,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(249,115,22,0.12), transparent 36%)',
+                  'radial-gradient(circle at 12% 18%, rgba(45, 74, 62,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(184, 149, 106,0.12), transparent 36%)',
               }}
             />
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.35]"
               style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(124,58,237,0.07) 1px, transparent 0)',
+                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(45, 74, 62,0.07) 1px, transparent 0)',
                 backgroundSize: '22px 22px',
               }}
             />
@@ -438,7 +438,7 @@ export default function HeroShowcase() {
                       </motion.span>
                     ))}
                   </div>
-                  <div className="flex h-7 items-center gap-1 rounded-lg bg-gradient-to-r from-brand-500 to-violet-600 px-2.5 text-[9px] font-bold text-white shadow-md shadow-brand-500/25">
+                  <div className="flex h-7 items-center gap-1 rounded-lg bg-gradient-to-r from-brand-500 to-surface-dark px-2.5 text-[9px] font-bold text-white shadow-md shadow-brand-500/25">
                     Get Started
                     <ArrowUpRight size={11} />
                   </div>
@@ -500,8 +500,8 @@ export default function HeroShowcase() {
                         animate={{
                           scale: ctaPressed ? 0.94 : 1,
                           boxShadow: ctaPressed
-                            ? '0 4px 12px rgba(124,58,237,0.35)'
-                            : '0 10px 24px rgba(124,58,237,0.32)',
+                            ? '0 4px 12px rgba(45, 74, 62,0.35)'
+                            : '0 10px 24px rgba(45, 74, 62,0.32)',
                         }}
                         transition={{
                           scale: { type: 'spring', stiffness: 420, damping: 24 },
@@ -542,7 +542,7 @@ export default function HeroShowcase() {
                       <svg width="20" height="24" viewBox="0 0 18 22" fill="none" className="relative drop-shadow-md">
                         <path
                           d="M1 1L1 16.5L5.2 12.8L8.8 20.2L11.2 19L7.6 11.6L13.5 11.2L1 1Z"
-                          fill={isClicking ? '#7C3AED' : '#111827'}
+                          fill={isClicking ? '#2D4A3E' : '#111827'}
                           stroke="white"
                           strokeWidth="1.25"
                         />
@@ -594,7 +594,7 @@ export default function HeroShowcase() {
                     <div className={`rounded-xl bg-gradient-to-br ${scene.accent} p-3 text-white shadow-lg shadow-brand-500/30`}>
                       <div className="mb-1 flex items-center justify-between">
                         <div className="flex items-center gap-1.5">
-                          <Zap size={12} className="text-accent-200" />
+                          <Zap size={12} className="text-secondary" />
                           <span className="text-[9px] font-semibold uppercase tracking-wider text-white/80">
                             {scene.deltaLabel}
                           </span>

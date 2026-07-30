@@ -12,9 +12,12 @@ const iconMap = {
 
 interface SocialLinksProps {
   className?: string;
+  variant?: 'light' | 'dark';
 }
 
-export default function SocialLinks({ className = '' }: SocialLinksProps) {
+export default function SocialLinks({ className = '', variant = 'light' }: SocialLinksProps) {
+  const isDark = variant === 'dark';
+
   return (
     <div className={`flex flex-wrap gap-2 ${className}`}>
       {SOCIAL_LINKS.map((link) => {
@@ -26,7 +29,11 @@ export default function SocialLinks({ className = '' }: SocialLinksProps) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={link.label}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition hover:scale-105 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
+            className={
+              isDark
+                ? 'flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-gray-300 transition hover:scale-105 hover:border-secondary hover:bg-secondary/20 hover:text-secondary'
+                : 'flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-ink-light transition hover:scale-105 hover:border-accent/30 hover:bg-accent-soft hover:text-accent'
+            }
           >
             <Icon size={18} />
           </a>

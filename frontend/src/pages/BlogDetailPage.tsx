@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar, Clock, User, CheckCircle2, ArrowRight, BookOpen } 
 import { api, BlogPostDetail, BlogPost } from '../api/client';
 import { fallbackData, fetchWithFallback } from '../api/fallback';
 import { getBlogEnrichment } from '../data/blogEnrichment';
+import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 
 function getInitials(name: string) {
@@ -113,7 +114,16 @@ export default function BlogDetailPage() {
       {post.image_url && (
         <div className="section-container -mt-6 max-w-5xl">
           <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-xl shadow-brand-500/10">
-            <img src={post.image_url} alt={post.title} className="aspect-[21/9] w-full object-cover" />
+            <img
+              src={optimizeImageUrl(post.image_url, 1200)}
+              alt={post.title}
+              width={1200}
+              height={514}
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="aspect-[21/9] w-full object-cover"
+            />
           </div>
         </div>
       )}
@@ -200,8 +210,12 @@ export default function BlogDetailPage() {
                 >
                   <div className="aspect-video overflow-hidden">
                     <img
-                      src={item.image_url}
+                      src={optimizeImageUrl(item.image_url, 600)}
                       alt={item.title}
+                      width={600}
+                      height={338}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>

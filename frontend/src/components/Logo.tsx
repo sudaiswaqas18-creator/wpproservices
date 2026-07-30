@@ -7,8 +7,8 @@ interface LogoProps {
 }
 
 const LOGO = {
-  light: '/logo-light-header.png?v=12',
-  dark: '/logo-dark.png?v=5',
+  light: '/logo-light-header.webp?v=13',
+  dark: '/logo-dark.webp?v=13',
 } as const;
 
 export default function Logo({
@@ -28,15 +28,16 @@ export default function Logo({
   return (
     <span
       className={`inline-flex shrink-0 items-center leading-none ${className}`}
-      aria-label="WPServices"
+      aria-label="WPServices Home"
     >
       <img
         src={src}
-        alt="WPServices — WordPress Agency"
+        alt="WPServices — WordPress Development Agency"
         className={`block w-auto max-w-none object-contain object-left ${heightClass}`}
         width={isDark ? 220 : 220}
         height={isDark ? 44 : 56}
         loading="eager"
+        fetchPriority="high"
         decoding="async"
         draggable={false}
       />

@@ -29,14 +29,14 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#FAFAFF] pb-20 pt-12 lg:pb-28 lg:pt-20">
+    <section className="relative overflow-hidden bg-background pb-20 pt-12 lg:pb-28 lg:pt-20">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full bg-brand-300/20 blur-[100px]" />
-        <div className="absolute -bottom-24 -left-24 h-[400px] w-[400px] rounded-full bg-accent-300/15 blur-[90px]" />
+        <div className="absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full bg-accent/5 blur-[100px]" />
+        <div className="absolute -bottom-24 -left-24 h-[400px] w-[400px] rounded-full bg-black/[0.02] blur-[90px]" />
         <div
           className="absolute inset-0 opacity-[0.4]"
           style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(124,58,237,0.06) 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(10, 10, 10, 0.06) 1px, transparent 0)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -45,41 +45,41 @@ export default function Hero() {
       <div className="section-container relative">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-200/80 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm backdrop-blur">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-semibold text-accent shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-500" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
-              <Sparkles size={14} className="text-brand-500" aria-hidden="true" />
+              <Sparkles size={14} className="text-accent" aria-hidden="true" />
               Premium WordPress Development Agency
             </div>
 
-            <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl lg:text-[3.35rem]">
+            <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
               Website Experiences{' '}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-violet-400 bg-clip-text text-transparent">
-                  Beautifully Crafted
-                </span>
-                <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-brand-500 to-accent-400" />
+                <span className="text-accent">Beautifully Crafted</span>
+                <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-secondary" />
               </span>
             </h1>
 
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-gray-700">
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
               We design and develop high-performance WordPress websites that help ambitious brands
               stand out, convert visitors, and scale with confidence.
             </p>
 
             <ul className="mt-6 space-y-2.5">
               {highlights.map((item) => (
-                <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-gray-700">
-                  <CheckCircle2 size={18} className="shrink-0 text-brand-500" aria-hidden="true" />
+                <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-ink-muted">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-soft">
+                    <CheckCircle2 size={16} className="text-accent" aria-hidden="true" />
+                  </span>
                   {item}
                 </li>
               ))}
             </ul>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <ContactLink className="btn-primary group inline-flex items-center gap-2 px-7 py-3.5 text-base shadow-lg shadow-brand-500/25">
+              <ContactLink className="btn-primary group inline-flex items-center gap-2 px-7 py-3.5 text-base shadow-lg shadow-accent/25">
                 Start Your Project
                 <ArrowRight size={18} className="transition group-hover:translate-x-0.5" aria-hidden="true" />
               </ContactLink>
@@ -88,10 +88,10 @@ export default function Hero() {
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-gray-200/80 pt-8">
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-8">
               {trustPoints.map((point) => (
-                <span key={point} className="text-sm font-semibold text-gray-700">
-                  <span className="text-brand-600" aria-hidden="true">●</span> {point}
+                <span key={point} className="text-sm font-semibold text-ink-muted">
+                  <span className="text-accent" aria-hidden="true">●</span> {point}
                 </span>
               ))}
             </div>

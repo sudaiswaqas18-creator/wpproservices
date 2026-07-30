@@ -8,7 +8,7 @@ export default function Pricing() {
   if (!plans.length) return null;
 
   return (
-    <section id="pricing" className="bg-surface-50 py-20">
+    <section id="pricing" className="bg-surface-elevated py-20">
       <div className="section-container">
         <div className="text-center">
           <h2 className="section-title">All-In-One WordPress Packages</h2>

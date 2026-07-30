@@ -62,8 +62,8 @@ export default function LegalPageLayout({
     <>
       <SEO title={seoTitle} description={seoDescription} path={seoPath} />
 
-      <section className="legal-hero relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-surface-100 py-16 lg:py-24 print:py-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(124,58,237,0.12),_transparent_60%)]" />
+      <section className="legal-hero relative overflow-hidden bg-gradient-to-br from-accent-soft via-surface to-surface-elevated py-16 lg:py-24 print:py-8">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(45, 74, 62,0.08),_transparent_60%)]" />
         <div className="section-container relative text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-800 sm:text-5xl">{title}</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">{subtitle}</p>

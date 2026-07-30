@@ -12,7 +12,7 @@ export default function Blog({ limit, showViewAll = true }: Props) {
   if (!items.length) return null;
 
   return (
-    <section className="py-20">
+    <section className="bg-surface-elevated py-20">
       <div className="section-container">
         <h2 className="section-title">WordPress Development Insights</h2>
         <p className="section-subtitle">Expert articles on migration, optimization, and scaling your WordPress business.</p>

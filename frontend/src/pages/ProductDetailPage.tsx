@@ -6,6 +6,7 @@ import BuyPluginButton from '../components/BuyPluginButton';
 import CTA from '../components/CTA';
 import { apiUrl } from '../config/api';
 import { getProductEnrichment, getSupplementalProduct } from '../data/productEnrichment';
+import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface Product {
   title: string; slug: string; subtitle: string; description: string; full_content: string;
@@ -65,7 +66,16 @@ export default function ProductDetailPage() {
         <div className="section-container grid items-start gap-12 lg:grid-cols-2">
           <motion.div {...fadeUp}>
             {product.image_url && (
-              <img src={product.image_url} alt={product.title} className="rounded-2xl shadow-card ring-1 ring-gray-100" />
+              <img
+                src={optimizeImageUrl(product.image_url, 800)}
+                alt={product.title}
+                width={800}
+                height={600}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="w-full rounded-2xl shadow-card ring-1 ring-gray-100"
+              />
             )}
           </motion.div>
           <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
+import { optimizeImageUrl } from '../utils/imageUrl';
 import ContactLink from './ContactLink';
 
 export default function Portfolio() {
@@ -30,8 +31,12 @@ export default function Portfolio() {
           >
             <div className="relative aspect-video overflow-hidden bg-gray-100">
               <img
-                src={items[active].image_url}
+                src={optimizeImageUrl(items[active].image_url, 800)}
                 alt={items[active].title}
+                width={800}
+                height={450}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

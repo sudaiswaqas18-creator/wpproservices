@@ -141,7 +141,7 @@ export default function Header() {
 
   const navBtnClass = (active: boolean) =>
     `flex items-center gap-1 text-sm font-medium transition-colors ${
-      active ? 'text-brand-600' : 'text-gray-600 hover:text-brand-600'
+      active ? 'text-accent' : 'text-ink hover:text-accent'
     }`;
 
   const dropdownMotion = {
@@ -154,7 +154,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/90 backdrop-blur-md shadow-sm shadow-brand-500/5"
+      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md"
     >
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
         <Link
@@ -166,7 +166,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Main navigation">
-          <Link to="/about" className="text-sm font-medium text-gray-600 hover:text-brand-600">About Us</Link>
+          <Link to="/about" className="text-sm font-medium text-ink hover:text-accent">About Us</Link>
 
           {/* Services — original mega menu design */}
           <div
@@ -207,7 +207,7 @@ export default function Header() {
                     <div className="grid grid-cols-3 gap-6">
                       {Object.entries(grouped).map(([group, sections]) => (
                         <div key={group}>
-                          <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-brand-600">
+                          <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-accent">
                             {GROUP_LABELS[group]}
                           </p>
                           {Object.entries(sections).map(([sec, items]) => (
@@ -218,7 +218,7 @@ export default function Header() {
                                   key={s.slug}
                                   to={`/services/${s.slug}`}
                                   role="menuitem"
-                                  className="block py-1 text-sm text-gray-700 hover:text-brand-600"
+                                  className="block py-1 text-sm text-ink hover:text-accent"
                                   onClick={closeAll}
                                 >
                                   {s.title}
@@ -235,7 +235,7 @@ export default function Header() {
                     <Link
                       to="/services"
                       role="menuitem"
-                      className="mt-4 block text-center text-sm font-semibold text-brand-600 hover:underline"
+                      className="mt-4 block text-center text-sm font-semibold text-accent hover:underline"
                       onClick={closeAll}
                     >
                       View all Services →
@@ -288,7 +288,7 @@ export default function Header() {
                     <Link to="/products/sales-boost-pack" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>SalesBoost Pack</Link>
                     <Link to="/products/stock-alert-pro" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>StockAlert Pro</Link>
                     <Link to="/products/review-boost" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>ReviewBoost</Link>
-                    <Link to="/products" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-brand-600" onClick={closeAll}>View All Products →</Link>
+                    <Link to="/products" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>View All Products →</Link>
                   </div>
                 </motion.div>
               )}
@@ -337,7 +337,7 @@ export default function Header() {
                     <Link to="/resources/guidebooks" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>All Guidebooks</Link>
                     <p className="mt-2 px-4 pb-1 text-[10px] font-bold uppercase text-gray-400">Tools</p>
                     <Link to="/resources/tools" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>All Tools</Link>
-                    <Link to="/resources" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-brand-600" onClick={closeAll}>Resources Hub →</Link>
+                    <Link to="/resources" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>Resources Hub →</Link>
                   </div>
                 </motion.div>
               )}
@@ -361,13 +361,13 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t bg-white px-4 py-4 lg:hidden">
-          <Link to="/about" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>About Us</Link>
-          <Link to="/services" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>Services</Link>
-          <Link to="/products" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>Products</Link>
-          <Link to="/resources" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>Resources</Link>
-          <Link to="/blog" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>Blog</Link>
-          <Link to="/case-studies" className="block min-h-[44px] py-2 text-sm" onClick={() => setMobileOpen(false)}>Case Studies</Link>
+        <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 lg:hidden">
+          <Link to="/about" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>About Us</Link>
+          <Link to="/services" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Services</Link>
+          <Link to="/products" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Products</Link>
+          <Link to="/resources" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
+          <Link to="/blog" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Blog</Link>
+          <Link to="/case-studies" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Case Studies</Link>
           <Link to="/contact" className="btn-primary mt-3 block min-h-[44px] text-center" onClick={() => setMobileOpen(false)}>Contact Us</Link>
         </div>
       )}

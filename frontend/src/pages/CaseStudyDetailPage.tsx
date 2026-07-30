@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TrendingUp, ArrowLeft } from 'lucide-react';
 import { api, CaseStudyDetail } from '../api/client';
+import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 
 export default function CaseStudyDetailPage() {
@@ -26,7 +27,15 @@ export default function CaseStudyDetailPage() {
 
       {study.image_url && (
         <div className="section-container -mt-4">
-          <img src={study.image_url} alt={study.title} className="w-full rounded-2xl shadow-card max-h-96 object-cover" />
+          <img
+            src={optimizeImageUrl(study.image_url, 1200)}
+            alt={study.title}
+            width={1200}
+            height={400}
+            loading="lazy"
+            decoding="async"
+            className="w-full rounded-2xl shadow-card max-h-96 object-cover"
+          />
         </div>
       )}
 

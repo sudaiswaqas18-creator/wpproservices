@@ -23,7 +23,7 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <section className="border-t border-surface-200 bg-gradient-to-r from-brand-50/50 to-white py-12">
+    <section className="border-t border-border bg-surface-elevated py-12">
       <div className="section-container">
         <div className="mx-auto max-w-2xl rounded-2xl border border-brand-100 bg-white p-8 text-center shadow-card">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">

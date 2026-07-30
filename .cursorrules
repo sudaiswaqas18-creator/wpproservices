@@ -1,0 +1,18 @@
+---
+After completing ANY code changes or feature implementation, always:
+
+1. Run: git add .
+2. Run: git commit -m "<descriptive message about what was changed>"
+3. Run: git push origin <current-branch>
+4. Show the push confirmation to the user
+
+Commit message format:
+- feat: for new features
+- fix: for bug fixes  
+- style: for UI/color/styling changes
+- refactor: for code restructuring
+- docs: for documentation
+
+Always use clear, descriptive commit messages that explain WHAT changed and WHY.
+Never skip the push step unless explicitly told to.
+---

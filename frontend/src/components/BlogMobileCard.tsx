@@ -22,7 +22,7 @@ export default function BlogMobileCard({ post }: BlogMobileCardProps) {
       <div className="aspect-video overflow-hidden">
         <img
           src={optimizeImageUrl(post.image_url, 720)}
-          alt=""
+          alt={post.title}
           className="h-full w-full object-cover"
           loading="lazy"
           decoding="async"

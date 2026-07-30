@@ -31,7 +31,7 @@ export default function ProductsSection() {
   if (!products.length) return null;
 
   return (
-    <section className="bg-surface-50 py-20">
+    <section className="bg-surface-elevated py-20">
       <div className="section-container">
         <h2 className="section-title text-center">High-Impact WordPress Plugins</h2>
         <p className="section-subtitle mx-auto text-center">For Growth-Focused Businesses</p>
@@ -50,7 +50,7 @@ export default function ProductsSection() {
                     <div className="relative h-36 overflow-hidden">
                       <img
                         src={optimizeImageUrl(p.image_url, 480)}
-                        alt=""
+                        alt={p.title}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                         loading="lazy"
                         decoding="async"

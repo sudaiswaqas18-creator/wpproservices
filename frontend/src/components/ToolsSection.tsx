@@ -25,7 +25,7 @@ export default function ToolsSection() {
   if (!tools.length) return null;
 
   return (
-    <section className="py-20">
+    <section className="bg-background py-20">
       <div className="section-container">
         <h2 className="section-title text-center">On-Demand Website Tools</h2>
         <p className="section-subtitle mx-auto text-center">Practical tools for clarity and direction — without waiting on support.</p>

@@ -22,10 +22,12 @@ export default function BlogExpandCard({ post }: BlogExpandCardProps) {
     >
       <img
         src={optimizeImageUrl(post.image_url, 800)}
-        alt=""
+        alt={post.title}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
         loading="lazy"
         decoding="async"
+        width={800}
+        height={500}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/35 to-gray-900/10 transition-opacity duration-500 group-hover/card:from-gray-900/95" />
 

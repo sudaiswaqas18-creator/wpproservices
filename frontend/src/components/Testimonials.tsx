@@ -71,7 +71,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="overflow-hidden py-20">
+    <section className="overflow-hidden bg-background py-20">
       <div className="section-container">
         <h2 className="section-title text-center">Success Stories from Our Clients</h2>
         <p className="section-subtitle mx-auto mt-4 max-w-2xl text-center">
@@ -97,7 +97,7 @@ export default function Testimonials() {
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-500/30">
                   {initials(t.name)}
                 </div>
-                <Quote size={36} className="mt-6 text-brand-200" strokeWidth={1.5} />
+                <Quote size={36} className="mt-6 text-brand-400" strokeWidth={1.5} />
                 <blockquote className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-700 sm:text-xl">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>

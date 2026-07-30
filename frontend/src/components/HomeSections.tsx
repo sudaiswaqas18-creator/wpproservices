@@ -41,16 +41,16 @@ function AwardsSection() {
   }, []);
 
   return (
-    <section className="border-y border-brand-100/60 bg-gradient-to-b from-brand-50/50 to-white py-16">
+    <section className="border-y border-border bg-gradient-to-b from-background to-surface py-16">
       <div className="section-container text-center">
-        <h2 className="text-2xl font-bold text-slate-800">Global Awards & Recognitions</h2>
+        <h2 className="text-2xl font-bold text-ink">Global Awards & Recognitions</h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {awards.map((a) => (
-            <div key={a.id} className="rounded-xl border border-brand-100/80 bg-white p-5 shadow-card transition hover:border-brand-200 hover:shadow-cardHover">
+            <div key={a.id} className="rounded-xl border border-surface-200 bg-white p-5 shadow-card transition hover:border-brand-400 hover:shadow-cardHover">
               <p className="text-xs font-medium text-brand-600">{a.year}</p>
-              <h3 className="mt-2 font-bold text-slate-800">{a.title}</h3>
-              <p className="text-sm text-slate-500">{a.organization}</p>
-              <p className="mt-3 text-lg font-extrabold text-brand-600">{a.badge_label}</p>
+              <h3 className="mt-2 font-bold text-ink">{a.title}</h3>
+              <p className="text-sm text-ink-light">{a.organization}</p>
+              <p className="mt-3 text-lg font-extrabold text-brand-500">{a.badge_label}</p>
             </div>
           ))}
         </div>
@@ -80,7 +80,7 @@ function FeaturedCases() {
   if (!cases.length) return null;
 
   return (
-    <section className="py-20">
+    <section className="bg-surface-elevated py-20">
       <div className="section-container">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Featured Cases</p>
         <h2 className="section-title mt-2">Driving Change Through Innovative Projects</h2>
@@ -117,10 +117,10 @@ function StatsBar() {
   const marqueeItems = [...stats, ...stats];
 
   return (
-    <section className="stats-marquee-section relative overflow-hidden border-y border-brand-200/60 bg-brand-50 py-7 sm:py-8">
+    <section className="stats-marquee-section relative overflow-hidden border-y border-border bg-surface-elevated py-7 sm:py-8">
       <div className="stats-marquee-glow pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-brand-50 to-transparent sm:w-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-brand-50 to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-surface-elevated to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-surface-elevated to-transparent sm:w-20" />
 
       <div className="stats-marquee-viewport">
         <div className="stats-marquee-track">
@@ -139,9 +139,9 @@ function StatsBar() {
 
 function PhilosophySection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="bg-surface py-16">
       <div className="section-container max-w-4xl text-center">
-        <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+        <h2 className="text-2xl font-bold text-ink sm:text-3xl">
           Our Bar Is Simple: Websites Should Feel Effortless For Users, And Stay Dependable For Teams.
         </h2>
         <p className="mt-4 text-lg text-gray-600">

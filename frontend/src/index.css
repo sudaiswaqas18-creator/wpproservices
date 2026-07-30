@@ -11,12 +11,17 @@
 
   html.is-scrolling,
   html:hover {
-    scrollbar-color: rgba(124, 58, 237, 0.4) transparent;
+    scrollbar-color: #2D4A3E #EDE7DC;
   }
 
   body {
-    @apply bg-surface-50 text-ink antialiased;
+    @apply bg-background text-ink antialiased;
     overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #2D4A3E;
+    color: #F5F1EA;
   }
 
   ::-webkit-scrollbar {
@@ -31,7 +36,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #EDE7DC;
     margin: 4px 0;
   }
 
@@ -45,15 +50,15 @@
 
   html.is-scrolling ::-webkit-scrollbar-thumb,
   html:hover ::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.5);
+    background-color: #2D4A3E;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(124, 58, 237, 0.65) !important;
+    background-color: #1F3529 !important;
   }
 
   ::-webkit-scrollbar-thumb:active {
-    background-color: rgba(109, 40, 217, 0.75) !important;
+    background-color: #1A1A1A !important;
   }
 
   ::-webkit-scrollbar-corner {
@@ -67,7 +72,7 @@
 
   .scroll-area:hover,
   .scroll-area.is-scrolling {
-    scrollbar-color: rgba(124, 58, 237, 0.35) transparent;
+    scrollbar-color: #2D4A3E #EDE7DC;
   }
 
   .scroll-area::-webkit-scrollbar {
@@ -75,13 +80,17 @@
     height: 4px;
   }
 
+  .scroll-area::-webkit-scrollbar-track {
+    background: #EDE7DC;
+  }
+
   .scroll-area:hover::-webkit-scrollbar-thumb,
   .scroll-area.is-scrolling::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.45);
+    background-color: #2D4A3E;
   }
 
   .scroll-area::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(124, 58, 237, 0.55);
+    background-color: #1F3529;
   }
 }
 
@@ -96,17 +105,17 @@
     @apply mt-4 max-w-3xl text-lg text-ink-muted;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-brand-500/25 transition hover:bg-brand-600 hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2 disabled:opacity-60;
+    @apply inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md shadow-accent/20 transition hover:bg-accent-hover hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 disabled:opacity-60;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-lg border-2 border-brand-500 bg-white px-6 py-3 text-sm font-semibold text-brand-600 shadow-sm transition hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-lg border border-border-strong bg-surface px-6 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent/30 focus:ring-offset-2;
   }
   .card {
-    @apply rounded-2xl border border-surface-200 bg-white p-6 shadow-card transition hover:border-brand-100 hover:shadow-cardHover;
+    @apply rounded-xl border border-border bg-surface p-6 shadow-card transition hover:border-border-strong hover:shadow-cardHover;
   }
 
   .service-card-fill {
-    @apply relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-card;
+    @apply relative overflow-hidden rounded-xl border border-border bg-surface shadow-card;
     isolation: isolate;
   }
 
@@ -115,7 +124,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: linear-gradient(165deg, #8b5cf6 0%, #7c3aed 45%, #6d28d9 100%);
+    background: linear-gradient(165deg, #1A1A1A 0%, #2D4A3E 55%, #1A1A1A 100%);
     transform: scaleY(0);
     transform-origin: bottom center;
     transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
@@ -127,8 +136,8 @@
   }
 
   .service-card-fill:hover {
-    @apply border-brand-500;
-    box-shadow: 0 22px 48px rgba(124, 58, 237, 0.28);
+    @apply border-accent;
+    box-shadow: 0 22px 48px rgba(26, 26, 26, 0.16);
   }
 
   .service-card-fill__inner {
@@ -142,7 +151,7 @@
   .blog-strip__card {
     flex: 1 1 0;
     transition: flex 0.65s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s ease;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 8px 30px rgba(26, 26, 26, 0.06);
   }
 
   .blog-strip:hover .blog-strip__card {
@@ -151,11 +160,11 @@
 
   .blog-strip__card:hover {
     flex: 3.4 1 0 !important;
-    box-shadow: 0 20px 50px rgba(124, 58, 237, 0.22);
+    box-shadow: 0 20px 50px rgba(45, 74, 62, 0.16);
   }
 
   .article-lead {
-    @apply border-l-4 border-brand-500 bg-brand-50/50 px-5 py-4 text-lg font-medium leading-relaxed text-gray-800 sm:text-xl;
+    @apply border-l-4 border-accent bg-accent-soft/80 px-5 py-4 text-lg font-medium leading-relaxed text-ink-muted sm:text-xl;
   }
 
   .article-section {
@@ -163,23 +172,23 @@
   }
 
   .article-heading {
-    @apply text-2xl font-bold tracking-tight text-gray-900;
+    @apply text-2xl font-bold tracking-tight text-ink;
   }
 
   .article-paragraph {
-    @apply mt-4 text-base leading-8 text-gray-700;
+    @apply mt-4 text-base leading-8 text-ink-muted;
   }
 
   .article-list {
-    @apply mt-5 space-y-3 rounded-2xl border border-slate-200/80 bg-surface-50 p-5;
+    @apply mt-5 space-y-3 rounded-xl border border-border bg-background p-5;
   }
 
   .article-list li {
-    @apply flex gap-3 text-sm leading-relaxed text-gray-700 sm:text-base;
+    @apply flex gap-3 text-sm leading-relaxed text-ink-muted sm:text-base;
   }
 
   .article-conclusion {
-    @apply mt-12 flex gap-4 rounded-2xl border border-brand-100 bg-gradient-to-r from-brand-50 to-white p-6 shadow-sm;
+    @apply mt-12 flex gap-4 rounded-xl border border-border bg-gradient-to-r from-accent-soft to-white p-6 shadow-sm;
   }
 
   .testimonial-stage {
@@ -250,7 +259,7 @@
     left: -30%;
     width: 30%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.12), transparent);
+    background: linear-gradient(90deg, transparent, rgba(45, 74, 62, 0.1), transparent);
     animation: stats-bar-sweep 3s ease-in-out infinite;
   }
 
@@ -287,7 +296,7 @@
     font-size: 1.75rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #7c3aed;
+    color: #2D4A3E;
   }
 
   @media (min-width: 640px) {
@@ -300,13 +309,13 @@
     white-space: nowrap;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #475569;
+    color: #3D3D3D;
   }
 
   .stats-marquee-sep {
     margin-left: 0.5rem;
     font-size: 0.45rem;
-    color: #c4b5fd;
+    color: #B8956A;
   }
 
   @keyframes stats-marquee-slide {

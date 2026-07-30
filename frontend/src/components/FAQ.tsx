@@ -11,7 +11,7 @@ export default function FAQ() {
   if (!faqs.length) return null;
 
   return (
-    <section id="faq" className="bg-surface-50 py-20">
+    <section id="faq" className="bg-surface-elevated py-20">
       <div className="section-container">
         <h2 className="section-title text-center">FAQs — Questions You May Have</h2>
 
@@ -19,16 +19,16 @@ export default function FAQ() {
           {faqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (
-              <div key={faq.id} className="overflow-hidden rounded-xl border border-gray-100 bg-white">
+              <div key={faq.id} className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition hover:border-accent/40">
                 <button
                   type="button"
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
                   className="flex w-full items-center justify-between px-6 py-5 text-left"
                 >
-                  <span className="pr-4 font-semibold text-gray-900">{faq.question}</span>
+                  <span className="pr-4 font-semibold text-ink">{faq.question}</span>
                   <ChevronDown
                     size={20}
-                    className={`shrink-0 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                    className={`shrink-0 text-accent transition-transform ${isOpen ? 'rotate-180' : ''}`}
                   />
                 </button>
                 <AnimatePresence>

@@ -4,8 +4,8 @@
   "description": "Custom WordPress development, WooCommerce plugins, and ongoing maintenance.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#7C3AED",
+  "background_color": "#F5F1EA",
+  "theme_color": "#2D4A3E",
   "icons": [
     {
       "src": "/favicon.svg",

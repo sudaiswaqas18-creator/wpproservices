@@ -31,8 +31,8 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="flex w-64 flex-col bg-gray-900 text-gray-300">
-      <div className="border-b border-gray-800 px-4 py-5">
+    <aside className="flex w-64 flex-col bg-surface-dark text-gray-300">
+      <div className="border-b border-white/10 px-4 py-5">
         <Logo variant="dark" />
         <p className="mt-2 text-xs text-gray-500">Admin Panel</p>
       </div>
@@ -45,7 +45,7 @@ export default function AdminSidebar() {
             end={end}
             className={({ isActive }) =>
               `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
-                isActive ? 'bg-brand-500 text-white' : 'hover:bg-gray-800 hover:text-white'
+                isActive ? 'bg-accent text-white' : 'hover:bg-white/10 hover:text-white'
               }`
             }
           >
@@ -55,11 +55,11 @@ export default function AdminSidebar() {
         ))}
       </nav>
 
-      <div className="border-t border-gray-800 p-4">
+      <div className="border-t border-white/10 p-4">
         <p className="truncate text-sm font-medium text-white">{admin?.name}</p>
         <p className="truncate text-xs text-gray-500">{admin?.email}</p>
         <div className="mt-3 flex gap-2">
-          <a href="/" target="_blank" rel="noreferrer" className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-xs hover:bg-gray-700">
+          <a href="/" target="_blank" rel="noreferrer" className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-xs hover:bg-white/15">
             <ExternalLink size={12} /> Site
           </a>
           <button type="button" onClick={handleLogout} className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-red-900/50 px-3 py-2 text-xs text-red-300 hover:bg-red-900">
