@@ -1,8 +1,6 @@
 import pool from './db.js';
 import { runSeed } from './seed.js';
 
-export { syncSiteContent };
-
 async function ensureProductsCategoryColumn() {
   try {
     await pool.query(
