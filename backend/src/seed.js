@@ -44,14 +44,7 @@ async function runSeed(options = {}) {
   }
   await connection.query('SET FOREIGN_KEY_CHECKS = 1');
 
-  await connection.query(`INSERT INTO testimonials (name, company, country, quote, metric_label, sort_order) VALUES ?`, [[
-    ['Alex Rivera', 'E-commerce Client — Apparel | USA', 'USA', 'They rebuilt our WooCommerce theme so editors can update seasonal landing pages in Gutenberg without breaking checkout. Staging reviews before go-live made the launch uneventful.', 'Checkout confidence', 1],
-    ['Priya Shah', 'Education Client — LMS | Singapore', 'Singapore', 'LearnDash enrollment, drip schedules, and progress tracking finally match how our instructors teach. Ticket volume on broken lesson pages dropped after handoff.', 'Learner experience', 2],
-    ['Jonas Berg', 'Retail Client — Migration | Poland', 'Poland', 'WordPress migration kept redirects and product URLs intact. We reviewed everything on staging first — Search Console stayed calm after cutover.', 'SEO continuity', 3],
-    ['Maya Okonkwo', 'Services Client — Healthcare | UK', 'UK', 'Accessible templates, careful forms, and a maintainable theme. The team explained WordPress decisions in plain language our ops staff could follow.', 'Editor independence', 4],
-    ['Erik Lindqvist', 'Education Client — Courses | Sweden', 'Sweden', 'Custom LearnDash reporting and access rules arrived with documentation. We were not left guessing which plugin owned which behavior.', 'Admin clarity', 5],
-    ['Sofia Conti', 'E-commerce Client — Specialty Foods | Italy', 'Italy', 'Performance work on product and cart templates plus a small custom plugin for shipping rules. Core Web Vitals and store ops both felt better after launch.', 'Storefront speed', 6],
-  ]]);
+  // Testimonials intentionally empty — add real quotes from Admin later.
 
   const caseStudies = [
     ['Loyalty Shipping Rules That Cut Cart Friction', 'E-commerce Client — Grocery', 'Returning shoppers paid shipping on every order, which hurt repeat checkouts.', 'Built WooCommerce rules that unlock free shipping for eligible returning customers using order history.', 'Illustrative engagement: a grocery-style WooCommerce store needed loyalty shipping without manual coupons. We delivered rule-based shipping at checkout with staging QA before cutover.', 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200', 'Repeat Checkouts', 'Improved', 'Cart Completion', 'Improved', 'Average Order Value', 'Improved', 'freshharvest-shipping', 1],

@@ -36,7 +36,10 @@ export default function AdminTestimonials() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Testimonials</h1></div>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Testimonials</h1>
+          <p className="text-sm text-gray-500">Optional — left empty until you add real client quotes. Public site does not show placeholder testimonials.</p>
+        </div>
         <button type="button" onClick={() => { setForm(empty); setEditId(null); setFieldErrors({}); setModal(true); }} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add</button>
       </div>
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
@@ -45,6 +48,13 @@ export default function AdminTestimonials() {
             <tr><th className="px-4 py-3">Name</th><th className="px-4 py-3">Company</th><th className="px-4 py-3">Actions</th></tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
+            {items.length === 0 && (
+              <tr>
+                <td colSpan={3} className="px-4 py-10 text-center text-sm text-gray-500">
+                  No testimonials yet. Add only real client quotes when you have permission to publish them.
+                </td>
+              </tr>
+            )}
             {items.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium">{row.name}</td>

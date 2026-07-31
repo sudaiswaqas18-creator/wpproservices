@@ -10,35 +10,7 @@ import type {
 } from './client';
 
 export const fallbackData = {
-  testimonials: [
-    {
-      id: 1,
-      name: 'Alex Rivera',
-      company: 'E-commerce Client — Apparel | USA',
-      country: 'USA',
-      quote:
-        'They rebuilt our WooCommerce theme so editors can update seasonal landing pages in Gutenberg without breaking checkout. Staging reviews before go-live made the launch uneventful.',
-      metric_label: 'Checkout confidence',
-    },
-    {
-      id: 2,
-      name: 'Priya Shah',
-      company: 'Education Client — LMS | Singapore',
-      country: 'Singapore',
-      quote:
-        'LearnDash enrollment, drip schedules, and progress tracking finally match how our instructors teach. Ticket volume on broken lesson pages dropped after handoff.',
-      metric_label: 'Learner experience',
-    },
-    {
-      id: 3,
-      name: 'Jonas Berg',
-      company: 'Retail Client — Migration | Poland',
-      country: 'Poland',
-      quote:
-        'Our WordPress migration kept redirects and product URLs intact. Everything was reviewed on staging first — Search Console stayed calm after cutover.',
-      metric_label: 'SEO continuity',
-    },
-  ] as Testimonial[],
+  testimonials: [] as Testimonial[],
 
   caseStudies: [
     {

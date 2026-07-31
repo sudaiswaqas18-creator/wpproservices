@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
-import { fallbackData } from '../api/fallback';
 
 const AUTOPLAY_MS = 6000;
 const DOT_SIZE = 10;
@@ -37,12 +36,13 @@ function pillOffset(index: number) {
 export default function Testimonials() {
   const { data: apiItems } = useApiData('testimonials');
   const items = useMemo(() => {
-    const safe = apiItems.filter((t) => !isLegacy(t.name || '', t.company || '', t.quote || ''));
-    return safe.length > 0 ? safe : fallbackData.testimonials;
+    return apiItems.filter((t) => !isLegacy(t.name || '', t.company || '', t.quote || ''));
   }, [apiItems]);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
+
+  if (!items.length) return null;
 
   const go = useCallback((next: number) => {
     if (next === current) return;

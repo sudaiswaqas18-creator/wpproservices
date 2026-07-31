@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import pool from '../db.js';
 import { authMiddleware, signToken } from '../middleware/auth.js';
 import { slugify, parseJsonField } from '../utils.js';
+import { syncSiteContent } from '../ensureDb.js';
 
 const router = Router();
 
@@ -257,6 +258,13 @@ router.put('/products/:id', authMiddleware, async (req, res) => {
 router.delete('/products/:id', authMiddleware, async (req, res) => {
   await pool.query('DELETE FROM products WHERE id = ?', [req.params.id]);
   res.json({ message: 'Deleted' });
+});
+
+router.post('/products/sync-catalog', authMiddleware, async (_req, res) => {
+  await syncSiteContent();
+  const [[{ count }]] = await pool.query('SELECT COUNT(*) as count FROM products');
+  const [[{ testimonials }]] = await pool.query('SELECT COUNT(*) as testimonials FROM testimonials');
+  res.json({ message: 'Plugin catalog synced', products: count, testimonials });
 });
 
 // ─── Tools CRUD ───────────────────────────────────────

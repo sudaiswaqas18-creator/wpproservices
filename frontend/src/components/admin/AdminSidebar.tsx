@@ -12,12 +12,12 @@ const links = [
   { to: '/admin/blogs', label: 'Blog Posts', icon: FileText },
   { to: '/admin/case-studies', label: 'Case Studies', icon: Briefcase },
   { to: '/admin/services', label: 'Services', icon: Wrench },
-  { to: '/admin/products', label: 'Products', icon: Package },
+  { to: '/admin/products', label: 'Plugins', icon: Package },
   { to: '/admin/tools', label: 'Tools', icon: Bot },
   { to: '/admin/guidebooks', label: 'Guidebooks', icon: BookOpen },
-  { to: '/admin/testimonials', label: 'Testimonials', icon: Star },
   { to: '/admin/portfolio', label: 'Portfolio', icon: Image },
   { to: '/admin/faqs', label: 'FAQs', icon: HelpCircle },
+  { to: '/admin/testimonials', label: 'Testimonials', icon: Star },
   { to: '/admin/leads', label: 'Contact Leads', icon: Mail },
 ];
 

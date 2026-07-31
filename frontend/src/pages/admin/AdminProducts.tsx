@@ -17,10 +17,24 @@ export default function AdminProducts() {
   const [featuresText, setFeaturesText] = useState('');
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const load = () => adminApi.getProducts().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
+
+  const syncCatalog = async () => {
+    setSyncing(true);
+    try {
+      const result = await adminApi.syncPluginCatalog();
+      await load();
+      alert(`Synced ${result.products} WooCommerce plugins. Testimonials cleared: ${result.testimonials === 0 ? 'yes' : 'remaining ' + result.testimonials}.`);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Sync failed — is the backend DB connected?');
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   const openCreate = () => { setForm(empty); setFeaturesText(''); setEditId(null); setFieldErrors({}); setModal(true); };
   const openEdit = (row: ProductRow) => {
@@ -51,10 +65,23 @@ export default function AdminProducts() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Plugins</h1><p className="text-sm text-gray-500">Manage WooCommerce plugins catalog by category</p></div>
-        <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Plugin</button>
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Plugins</h1>
+          <p className="text-sm text-gray-500">WooCommerce plugins catalog — same records as the public /products page</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={syncCatalog} disabled={syncing} className="btn-outline gap-2 text-sm">
+            {syncing ? 'Syncing…' : 'Sync catalog to DB'}
+          </button>
+          <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Plugin</button>
+        </div>
       </div>
+      {items.length === 0 && (
+        <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          No plugins in the database yet. Click <strong>Sync catalog to DB</strong> to load all WooCommerce plugins, or add one manually.
+        </p>
+      )}
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
