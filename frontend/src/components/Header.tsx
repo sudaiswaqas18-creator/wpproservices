@@ -262,7 +262,7 @@ export default function Header() {
               onKeyDown={(e) => handleMenuKeyDown(e, 'products')}
               className={navBtnClass(openDropdown === 'products')}
             >
-              Products
+              Plugins
               <ChevronDown
                 size={14}
                 className={`transition-transform duration-200 ${openDropdown === 'products' ? 'rotate-180' : ''}`}
@@ -274,7 +274,7 @@ export default function Header() {
                   key="products-menu"
                   id="dropdown-products"
                   role="menu"
-                  aria-label="Products menu"
+                  aria-label="Plugins menu"
                   {...dropdownMotion}
                   className="absolute left-0 top-full z-50 pt-2"
                   onMouseEnter={cancelClose}
@@ -288,7 +288,7 @@ export default function Header() {
                     <Link to="/products/sales-boost-pack" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>SalesBoost Pack</Link>
                     <Link to="/products/stock-alert-pro" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>StockAlert Pro</Link>
                     <Link to="/products/review-boost" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>ReviewBoost</Link>
-                    <Link to="/products" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>View All Products →</Link>
+                    <Link to="/products" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>View All Plugins →</Link>
                   </div>
                 </motion.div>
               )}
@@ -364,7 +364,7 @@ export default function Header() {
         <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 lg:hidden">
           <Link to="/about" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>About Us</Link>
           <Link to="/services" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Services</Link>
-          <Link to="/products" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Products</Link>
+          <Link to="/products" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Plugins</Link>
           <Link to="/resources" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
           <Link to="/blog" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Blog</Link>
           <Link to="/case-studies" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Case Studies</Link>

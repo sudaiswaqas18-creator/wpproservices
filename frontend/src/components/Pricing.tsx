@@ -11,10 +11,9 @@ export default function Pricing() {
     <section id="pricing" className="bg-surface-elevated py-20">
       <div className="section-container">
         <div className="text-center">
-          <h2 className="section-title">All-In-One WordPress Packages</h2>
+          <h2 className="section-title">WordPress Packages With Clear Boundaries</h2>
           <p className="section-subtitle mx-auto">
-            Design, development, and advanced customization — handled by one team. No handoffs,
-            no disconnect. High-performing WordPress &amp; WooCommerce websites.
+            Design, theme build, and launch support from one WordPress team. WooCommerce depth, custom plugins, and migrations are scoped separately after discovery.
           </p>
         </div>
 
@@ -58,7 +57,7 @@ export default function Pricing() {
               </ul>
 
               <ContactLink className="btn-primary mt-8 w-full block text-center">
-                Get a Free Consultation
+                Get a Project Quote
               </ContactLink>
             </div>
           ))}

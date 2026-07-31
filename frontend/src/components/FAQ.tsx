@@ -13,7 +13,7 @@ export default function FAQ() {
   return (
     <section id="faq" className="bg-surface-elevated py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">FAQs — Questions You May Have</h2>
+        <h2 className="section-title text-center">WordPress Agency FAQs</h2>
 
         <div className="mx-auto mt-12 max-w-3xl space-y-3">
           {faqs.map((faq) => {
@@ -51,7 +51,7 @@ export default function FAQ() {
         </div>
 
         <div className="mt-12 text-center">
-          <ContactLink className="btn-primary">Start with a Free Consultation</ContactLink>
+          <ContactLink className="btn-primary">Book a WordPress Consultation</ContactLink>
         </div>
       </div>
     </section>

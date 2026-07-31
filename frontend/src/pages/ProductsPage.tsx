@@ -36,9 +36,9 @@ export default function ProductsPage() {
           <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-600">
             <Package size={12} /> WooCommerce Plugins
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">High-Impact Plugins</h1>
+          <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">WooCommerce Plugins for Real Stores</h1>
           <p className="section-subtitle mx-auto mt-4">
-            Premium WooCommerce plugins built for conversions, B2B pricing, subscriptions, and store growth.
+            Purpose-built WordPress plugins for inventory alerts, reviews, subscriptions, checkout, B2B pricing, and storefront conversion — each with clear pricing and a Get Plugin enquiry flow.
           </p>
         </div>
       </section>

@@ -10,8 +10,10 @@ export default function BlogPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">WordPress Development Insights</h1>
-          <p className="section-subtitle mx-auto mt-4">Expert articles on migration, optimization, and scaling your WordPress business.</p>
+          <h1 className="text-4xl font-extrabold text-gray-900">WordPress Insights & Playbooks</h1>
+          <p className="section-subtitle mx-auto mt-4">
+            Practical writing on migrations, Core Web Vitals, WooCommerce, security, plugins, and maintenance — written for operators who live in wp-admin.
+          </p>
         </div>
       </section>
       <section className="pb-20">

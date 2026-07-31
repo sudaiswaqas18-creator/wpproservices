@@ -9,88 +9,88 @@ export interface PageSEO {
 }
 
 const defaultDesc =
-  'WPServices delivers premium WordPress development, WooCommerce solutions, custom plugins, speed optimization, and ongoing maintenance for ambitious businesses worldwide.';
+  'WPServices builds and maintains WordPress sites, WooCommerce stores, and custom plugins — with staging QA, clear handoffs, and performance in mind.';
 
 export const STATIC_SEO: Record<string, PageSEO> = {
   '/': {
-    title: 'WPServices | Premium WordPress Development Agency',
+    title: 'WPServices | WordPress Development Agency',
     description:
-      'Premium WordPress development agency building fast, secure, conversion-focused websites. Custom WordPress, WooCommerce, plugins, and maintenance.',
-    keywords: 'WordPress development agency, WooCommerce development, custom WordPress, WordPress maintenance',
+      'Custom WordPress themes, WooCommerce stores, plugins, migrations, and care plans. A WordPress development agency focused on maintainable delivery.',
+    keywords: 'WordPress development agency, WooCommerce development, custom WordPress themes, WordPress maintenance',
     path: '/',
   },
   '/about': {
-    title: 'About Us | WPServices - WordPress Development Agency',
+    title: 'About WPServices | WordPress Studio',
     description:
-      'Meet WPServices — a global WordPress agency with 10+ years of experience delivering scalable websites for businesses in 27+ countries.',
-    keywords: 'WordPress agency, about WPServices, WordPress experts',
+      'Learn how WPServices approaches WordPress builds — discovery, staging, and long-term maintainability for growing teams.',
+    keywords: 'WordPress agency, about WPServices, WordPress developers',
     path: '/about',
   },
   '/services': {
-    title: 'Our Services | WPServices - WordPress Development Agency',
+    title: 'WordPress Services | WPServices',
     description:
-      'Explore WordPress development services: custom builds, WooCommerce, redesign, migration, speed optimization, retainers, and AI automation.',
-    keywords: 'WordPress services, WooCommerce development, WordPress redesign',
+      'Browse WordPress services: custom builds, WooCommerce, LearnDash, migrations, speed work, SEO, retainers, and plugin development.',
+    keywords: 'WordPress services, WooCommerce development, WordPress migration, plugin development',
     path: '/services',
   },
   '/products': {
-    title: 'Products | WPServices - WooCommerce Plugins & Tools',
+    title: 'WooCommerce Plugins | WPServices',
     description:
-      'Premium WooCommerce plugins and WordPress tools built by WPServices to boost conversions, pricing, bundles, and store performance.',
-    keywords: 'WooCommerce plugins, WordPress products, ecommerce tools',
+      'WooCommerce plugins for quotes, pricing, bundles, inventory alerts, reviews, subscriptions, and checkout — built for real stores.',
+    keywords: 'WooCommerce plugins, WordPress plugins, ecommerce plugins',
     path: '/products',
   },
   '/resources': {
-    title: 'Resources | WPServices - WordPress Guides & Tools',
+    title: 'WordPress Resources | WPServices',
     description:
-      'Free WordPress resources, guidebooks, tools, and expert insights from the WPServices team to help you grow your website.',
+      'WordPress guides, tools, case studies, and articles on performance, security, WooCommerce, and migrations.',
     keywords: 'WordPress resources, WordPress guides, WordPress tools',
     path: '/resources',
   },
   '/case-studies': {
-    title: 'Case Studies | WPServices - WordPress Success Stories',
+    title: 'WordPress Case Studies | WPServices',
     description:
-      'See how WPServices helps businesses grow with custom WordPress, WooCommerce, and LMS solutions. Real results from real clients.',
-    keywords: 'WordPress case studies, client success stories',
+      'Selected WordPress and WooCommerce projects with honest outcome notes — migrations, LMS builds, and store improvements.',
+    keywords: 'WordPress case studies, WooCommerce projects',
     path: '/case-studies',
   },
   '/blog': {
-    title: 'Blog | WPServices - WordPress Insights & Tips',
+    title: 'WordPress Blog | WPServices',
     description:
-      'WordPress development insights, SEO tips, WooCommerce strategies, and agency advice from the WPServices team.',
-    keywords: 'WordPress blog, WooCommerce tips, WordPress SEO',
+      'Practical WordPress articles on migrations, Core Web Vitals, WooCommerce limits, SEO foundations, and agency partnerships.',
+    keywords: 'WordPress blog, WooCommerce tips, Core Web Vitals, WordPress SEO',
     path: '/blog',
   },
   '/pricing': {
-    title: 'Pricing | WPServices - WordPress Development Packages',
+    title: 'WordPress Pricing | WPServices',
     description:
-      'Transparent WordPress development pricing. Build & launch packages, redesign projects, and custom quotes for growing businesses.',
-    keywords: 'WordPress pricing, website development cost',
+      'WordPress package options for new builds and redesigns, plus custom quotes for stores, plugins, and retainers.',
+    keywords: 'WordPress pricing, website development cost, WooCommerce cost',
     path: '/pricing',
   },
   '/contact': {
-    title: 'Contact Us | WPServices - WordPress Development Agency',
+    title: 'Contact WPServices | WordPress Consultation',
     description:
-      'Get a free WordPress consultation. Tell us about your project and our team will respond within 24 hours.',
-    keywords: 'contact WordPress agency, free consultation',
+      'Request a WordPress consultation. Share your brief — we typically reply within one to two business days.',
+    keywords: 'contact WordPress agency, WordPress consultation',
     path: '/contact',
   },
   '/privacy-policy': {
     title: 'Privacy Policy | WPServices',
     description:
-      'Learn how WPServices collects, uses, and protects your personal information. GDPR-ready privacy practices for our clients.',
+      'How WPServices collects, uses, and protects personal information when you use our website or request services.',
     path: '/privacy-policy',
   },
   '/terms-of-service': {
     title: 'Terms of Service | WPServices',
     description:
-      'Terms of Service for WPServices WordPress development services including project delivery, payments, IP ownership, and liability.',
+      'Terms for WPServices WordPress development engagements, including delivery, payments, and intellectual property.',
     path: '/terms-of-service',
   },
   '/cookie-policy': {
     title: 'Cookie Policy | WPServices',
     description:
-      'Understand how WPServices uses cookies for essential functionality, analytics, and preferences on our website.',
+      'How WPServices uses cookies for essential site functions, analytics, and preferences.',
     path: '/cookie-policy',
   },
 };
@@ -108,5 +108,5 @@ export function getStaticSEO(pathname: string): PageSEO {
 
 export function buildTitle(pageTitle: string) {
   if (pageTitle.includes(SITE.name)) return pageTitle;
-  return `${pageTitle} | ${SITE.name} - ${SITE.tagline}`;
+  return `${pageTitle} | ${SITE.name}`;
 }

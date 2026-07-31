@@ -30,12 +30,12 @@ export default function ServicesPage() {
         <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-brand-100/30 blur-3xl" />
         <motion.div className="section-container relative text-center">
           <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
-            {activeCategory ? activeCategory.title : 'Our WordPress Services'}
+            {activeCategory ? activeCategory.title : 'WordPress Services'}
           </h1>
           <p className="section-subtitle mx-auto mt-4">
             {activeCategory
               ? activeCategory.desc
-              : 'End-to-end WordPress development — from design and migration to custom plugins, WooCommerce, and ongoing maintenance.'}
+              : 'Custom themes, WooCommerce, LearnDash, migrations, speed, SEO, security care, and dedicated WordPress developers — scoped per engagement with staging and handoff documentation.'}
           </p>
 
           {activeCategory && (

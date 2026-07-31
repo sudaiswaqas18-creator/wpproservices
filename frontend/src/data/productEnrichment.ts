@@ -30,8 +30,8 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     categoryLabel: 'Sales & Enquiries',
     tagline: 'Turn product views into qualified leads',
     highlights: [
-      { label: 'Enquiries', value: '+40% avg lift' },
-      { label: 'Setup', value: '5 minutes' },
+      { label: 'Enquiries', value: 'Qualified leads' },
+      { label: 'Setup', value: 'Minutes' },
       { label: 'Integrations', value: 'WhatsApp, Email' },
     ],
     features: [
@@ -68,24 +68,24 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     highlights: [
       { label: 'Bundles', value: 'Mix & match' },
       { label: 'Pricing', value: 'Fixed or dynamic' },
-      { label: 'AOV Boost', value: '+25% avg' },
+      { label: 'Catalog fit', value: 'Kits & boxes' },
     ],
     features: [
       'Mix-and-match product boxes',
       'Fixed or percentage bundle discounts',
       'Pre-built kits for quick purchase',
       'Inventory sync across bundle items',
-      'Beautiful bundle builder UI',
+      'Clear bundle builder UI',
     ],
     useCases: ['Gift boxes', 'Subscription kits', 'Build-your-own sets'],
     compatibility: 'WooCommerce 8+ · Variable products',
   },
   'sales-boost-pack': {
     categoryLabel: 'Conversion Tools',
-    tagline: 'Create urgency and drive more sales',
+    tagline: 'Create urgency for campaign windows',
     highlights: [
       { label: 'Tools', value: '5-in-1 pack' },
-      { label: 'Conversion', value: '+18% avg' },
+      { label: 'Campaigns', value: 'Flash & seasonal' },
       { label: 'Setup', value: 'Plug & play' },
     ],
     features: [
@@ -111,7 +111,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
       'Custom threshold per product/variation',
       'Daily inventory summary reports',
       'Back-in-stock customer notifications',
-      'Multi-warehouse support',
+      'Multi-warehouse friendly setup',
     ],
     useCases: ['High-volume stores', 'Multi-SKU catalogs', 'Dropshipping ops'],
     compatibility: 'WooCommerce 8+ · HPOS compatible',
@@ -121,8 +121,8 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     tagline: 'Collect product feedback buyers trust',
     highlights: [
       { label: 'Reviews', value: 'Auto-collect' },
-      { label: 'Display', value: 'Rich snippets' },
-      { label: 'Trust', value: 'Schema ready' },
+      { label: 'Display', value: 'Widgets' },
+      { label: 'Markup', value: 'Schema ready' },
     ],
     features: [
       'Automated post-purchase review requests',
@@ -140,7 +140,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     highlights: [
       { label: 'Billing', value: 'Weekly to yearly' },
       { label: 'MRR', value: 'Dashboard included' },
-      { label: 'Gateways', value: 'Stripe & PayPal' },
+      { label: 'Portal', value: 'Self-service' },
     ],
     features: [
       'Flexible subscription intervals',
@@ -157,14 +157,14 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     tagline: 'Fewer steps between cart and paid order',
     highlights: [
       { label: 'Steps', value: '1-page checkout' },
-      { label: 'Abandonment', value: 'Lower friction' },
-      { label: 'Fields', value: 'Smart auto-fill' },
+      { label: 'Friction', value: 'Lower on mobile' },
+      { label: 'Fields', value: 'Smart helpers' },
     ],
     features: [
       'Distraction-free one-page checkout',
       'Address auto-complete & validation',
       'Order bump upsells at checkout',
-      'Express pay (Apple Pay, Google Pay)',
+      'Express pay when gateways allow',
       'Mobile-optimized layout',
     ],
     useCases: ['DTC brands', 'High-traffic stores', 'Mobile-first shops'],

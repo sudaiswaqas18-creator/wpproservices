@@ -4,46 +4,46 @@ import { DollarSign, Clock, RefreshCw, HeadphonesIcon } from 'lucide-react';
 const reasons = [
   {
     icon: DollarSign,
-    title: 'Transparent Pricing',
-    desc: 'No hidden costs. ROI-focused solutions that maximize your investment.',
+    title: 'Written scope before build',
+    desc: 'You see what is included for themes, plugins, and WooCommerce work — before development starts.',
   },
   {
     icon: Clock,
-    title: 'Fast Turnaround',
-    desc: 'Launch quickly without compromising on quality or performance.',
+    title: 'Staging-first delivery',
+    desc: 'Review WordPress changes on staging when hosting allows, then cut over with a clear checklist.',
   },
   {
     icon: RefreshCw,
-    title: 'Multiple Iterations',
-    desc: 'Flexible revisions to ensure the website matches your vision.',
+    title: 'Editor-friendly outcomes',
+    desc: 'Templates and blocks your team can update without breaking layouts or checkout flows.',
   },
   {
     icon: HeadphonesIcon,
-    title: 'Dedicated Support',
-    desc: 'Reliable post-launch assistance and troubleshooting.',
+    title: 'Care after launch',
+    desc: 'Support windows and retainers for updates, small fixes, and WordPress plugin hygiene.',
   },
 ];
 
 const extraServices = [
   { label: 'WordPress Migration', to: '/services/wordpress-migration' },
-  { label: 'Plugin Development', to: '/services/plugin-development' },
+  { label: 'Custom Plugin Development', to: '/services/plugin-development' },
   { label: 'LearnDash Development', to: '/services/learndash-development' },
   { label: 'API & Integrations', to: '/services/api-integrations' },
-  { label: 'E-Commerce Development', to: '/services/woocommerce-development' },
-  { label: 'Security Hardening', to: '/services/security-hardening' },
-  { label: 'Headless WordPress', to: '/services/headless-wordpress' },
-  { label: 'Multisite Solutions', to: '/services/multisite-solutions' },
-  { label: 'Code Audit & Optimization', to: '/services/code-audit' },
+  { label: 'WooCommerce Development', to: '/services/woocommerce-development' },
+  { label: 'WordPress Maintenance', to: '/services/wordpress-maintenance' },
+  { label: 'WordPress Speed Optimization', to: '/services/wordpress-speed-optimization' },
+  { label: 'WordPress SEO Services', to: '/services/wordpress-seo-services' },
+  { label: 'WordPress Redesign', to: '/services/wordpress-redesign' },
 ];
 
 export default function WhyChooseUs() {
   return (
     <section className="py-20">
       <div className="section-container">
-        <h2 className="section-title">Why Businesses Choose WPServices</h2>
+        <h2 className="section-title">Why Teams Choose This WordPress Studio</h2>
         <p className="section-subtitle">
-          We solve the challenges most businesses face — delivering ROI-focused, scalable, and
-          future-ready WordPress &amp; WooCommerce solutions.
+          Focused WordPress and WooCommerce delivery — maintainable themes, careful migrations, and
+          specialists who work in wp-admin every day.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
         </div>
 
         <div className="mt-16">
-          <h3 className="text-center text-xl font-bold text-gray-900">Additional WordPress Services</h3>
+          <h3 className="text-center text-xl font-bold text-gray-900">Explore More WordPress Services</h3>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             {extraServices.map((s) => (
               <Link
@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link to="/contact" className="btn-primary">Get Your WordPress Website Today</Link>
+          <Link to="/contact" className="btn-primary">Start a WordPress Conversation</Link>
         </div>
       </div>
     </section>

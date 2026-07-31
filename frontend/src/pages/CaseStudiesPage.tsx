@@ -10,8 +10,10 @@ export default function CaseStudiesPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">Case Studies</h1>
-          <p className="section-subtitle mx-auto mt-4">Real projects with measurable growth — improved speed, UX, and conversions.</p>
+          <h1 className="text-4xl font-extrabold text-gray-900">WordPress Case Studies</h1>
+          <p className="section-subtitle mx-auto mt-4">
+            Selected WordPress and WooCommerce engagements with honest outcome notes. Client names below are illustrative placeholders you can replace with approved references.
+          </p>
         </div>
       </section>
       <section className="pb-20">

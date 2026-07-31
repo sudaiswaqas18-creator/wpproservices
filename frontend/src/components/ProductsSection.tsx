@@ -95,7 +95,7 @@ export default function ProductsSection() {
           })}
         </div>
         <div className="mt-8 text-center">
-          <Link to="/products" className="btn-outline">View All Products</Link>
+          <Link to="/products" className="btn-outline">View All Plugins</Link>
         </div>
       </div>
     </section>

@@ -47,7 +47,7 @@ export default function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Products</h1><p className="text-sm text-gray-500">Manage WooCommerce plugins</p></div>
+        <div><h1 className="text-2xl font-bold text-gray-900">Plugins</h1><p className="text-sm text-gray-500">Manage WooCommerce plugins catalog</p></div>
         <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Product</button>
       </div>
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">

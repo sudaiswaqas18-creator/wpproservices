@@ -11,7 +11,7 @@ import SEO from '../components/seo/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { buildTitle } from '../config/seo';
-import { getServiceEnrichment } from '../data/serviceEnrichment';
+import { getServiceEnrichment, getServiceSeoDescription } from '../data/serviceEnrichment';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -46,10 +46,9 @@ export default function ServiceDetailPage() {
     <>
       <SEO
         title={buildTitle(service.title)}
-        description={service.description.slice(0, 160)}
+        description={(service.description || getServiceSeoDescription(service.slug)).slice(0, 160)}
         path={`/services/${service.slug}`}
-      />
-      <Breadcrumbs items={[
+      />      <Breadcrumbs items={[
         { label: 'Services', href: '/services' },
         { label: service.title },
       ]} />
@@ -114,7 +113,9 @@ export default function ServiceDetailPage() {
             <motion.div {...fadeUp}>
               <h2 className="text-2xl font-bold text-gray-900">{service.subtitle}</h2>
               <p className="mt-4 text-base leading-relaxed text-gray-600">
-                {service.full_content || service.description}
+                {service.full_content && service.full_content !== service.description
+                  ? service.full_content
+                  : enriched.intro}
               </p>
             </motion.div>
 
@@ -190,14 +191,37 @@ export default function ServiceDetailPage() {
                 </div>
 
                 <Link to="/contact" className="btn-primary mt-6 w-full">
-                  Start Your Project
+                  Request a Quote
                 </Link>
                 <p className="mt-3 text-center text-xs text-gray-500">
-                  Free consultation · No commitment required
+                  Discovery call · Written scope before build
                 </p>
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="border-t border-gray-100 bg-white py-16 lg:py-20">
+        <div className="section-container max-w-3xl">
+          <h2 className="text-2xl font-bold text-gray-900">Questions about {service.title}</h2>
+          <p className="mt-2 text-gray-600">
+            Straight answers specific to this WordPress service — not generic agency filler.
+          </p>
+          <div className="mt-8 space-y-4">
+            {enriched.faqs.map((item) => (
+              <div key={item.question} className="rounded-xl border border-gray-100 bg-surface-50 p-5">
+                <h3 className="font-semibold text-gray-900">{item.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-sm text-gray-600">
+            Looking for related work? See{' '}
+            <Link to="/services" className="font-semibold text-brand-600 hover:underline">all WordPress services</Link>
+            {' '}or{' '}
+            <Link to="/case-studies" className="font-semibold text-brand-600 hover:underline">case studies</Link>.
+          </p>
         </div>
       </section>
 
@@ -207,7 +231,7 @@ export default function ServiceDetailPage() {
           <motion.div {...fadeUp} className="text-center">
             <h2 className="text-2xl font-bold text-gray-900">Request a Quote</h2>
             <p className="mt-2 text-gray-600">
-              Tell us about your {service.title.toLowerCase()} needs — we respond within 24 hours.
+              Tell us about your {service.title.toLowerCase()} needs — we typically reply within 1–2 business days.
             </p>
           </motion.div>
           <motion.div {...fadeUp} className="mt-8 rounded-2xl border border-gray-100 bg-white p-6 shadow-card sm:p-8">

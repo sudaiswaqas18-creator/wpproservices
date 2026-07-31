@@ -28,31 +28,31 @@ export async function seedExtended(connection) {
   ];
 
   const allServices = [
-    mkService('Custom Websites', 'wordpress-website-development', 'Tailored web experiences', 'Custom WordPress websites built for performance and conversions.', 'build', 'setup', 0, 1),
-    mkService('WordPress Setup', 'wordpress-setup', 'Launch fast', 'Professional WordPress installation, configuration, and launch.', 'build', 'setup', 0, 2),
-    mkService('WooCommerce Setup', 'woocommerce-setup', 'Store ready to sell', 'Complete WooCommerce store setup with payments and products.', 'build', 'setup', 0, 3),
-    mkService('LearnDash Setup', 'learndash-setup', 'LMS in days', 'LearnDash LMS configuration with courses and payments.', 'build', 'setup', 0, 4),
-    mkService('WordPress Customization', 'wordpress-customization', 'Extend your site', 'Theme and plugin customization for unique business needs.', 'build', 'customize', 0, 5),
-    mkService('WooCommerce Customization', 'woocommerce-customization', 'Store your way', 'Custom WooCommerce features, checkout flows, and integrations.', 'build', 'customize', 0, 6),
-    mkService('LearnDash Customization', 'learndash-customization', 'LMS tailored', 'Custom LearnDash modules, access rules, and reporting.', 'build', 'customize', 0, 7),
-    mkService('Migrate to WordPress', 'wordpress-migration', 'Zero-downtime move', 'Seamless migration to WordPress with SEO preserved.', 'build', 'migrate', 1, 8),
-    mkService('Migrate to WooCommerce', 'migrate-woocommerce', 'E-commerce migration', 'Move your store to WooCommerce safely.', 'build', 'migrate', 0, 9),
-    mkService('Migrate to LearnDash', 'migrate-learndash', 'LMS migration', 'Migrate courses and learners to LearnDash.', 'build', 'migrate', 0, 10),
-    mkService('WordPress Maintenance', 'wordpress-maintenance', 'Hassle-free ops', 'Updates, backups, security, and monitoring.', 'manage', 'maintain', 0, 11),
-    mkService('Website Management', 'website-management', 'Full-site management', 'Dedicated team managing your WordPress site end-to-end.', 'manage', 'retainers', 0, 12),
-    mkService('Hire WordPress Developers', 'hire-wordpress-developers', 'Expert devs on demand', 'Dedicated WordPress developers for your projects.', 'manage', 'retainers', 0, 13),
-    mkService('Hire WooCommerce Developers', 'hire-woocommerce-developers', 'E-commerce experts', 'WooCommerce specialists for store growth.', 'manage', 'retainers', 0, 14),
-    mkService('Hire LearnDash Developers', 'hire-learndash-developers', 'LMS experts', 'LearnDash developers for education platforms.', 'manage', 'retainers', 0, 15),
-    mkService('WordPress Re-design', 'wordpress-redesign', 'Modern refresh', 'Complete redesign for better UX and conversions.', 'enhance', 'redesign', 1, 16),
-    mkService('Landing Page Redesign', 'landing-page-redesign', 'Convert more', 'High-converting single landing page redesign.', 'enhance', 'redesign', 0, 17),
-    mkService('WordPress Speed Optimization', 'wordpress-speed-optimization', 'Faster loads', 'Core Web Vitals and page speed optimization.', 'enhance', 'speed', 0, 18),
-    mkService('WooCommerce Speed Optimization', 'woocommerce-speed-optimization', 'Faster checkout', 'Store speed optimization for mobile commerce.', 'enhance', 'speed', 0, 19),
-    mkService('WordPress API Development', 'api-integrations', 'Connect everything', 'Custom REST API and third-party integrations.', 'enhance', 'integrate', 0, 20),
-    mkService('WordPress AI Automation', 'wordpress-ai-automation', 'Work smarter', 'AI-powered workflows for content, SEO, and support.', 'enhance', 'automate', 1, 21),
-    mkService('WordPress SEO Services', 'wordpress-seo-services', 'Rank higher', 'Technical SEO, content strategy, and rankings.', 'enhance', 'seo', 0, 22),
-    mkService('Plugin Development', 'plugin-development', 'Custom plugins', 'Bespoke WordPress plugin development.', 'build', 'customize', 0, 23),
-    mkService('WooCommerce Development', 'woocommerce-development', 'Full store builds', 'Custom WooCommerce development from scratch.', 'build', 'setup', 0, 24),
-    mkService('LearnDash Development', 'learndash-development', 'Full LMS builds', 'Complete LearnDash platform development.', 'build', 'setup', 0, 25),
+    mkService('WordPress Website Development', 'wordpress-website-development', 'Custom sites on WordPress', 'Custom WordPress websites with themes, Gutenberg patterns, and conversion-ready templates built for your content model.', 'build', 'setup', 0, 1),
+    mkService('WordPress Setup & Configuration', 'wordpress-setup', 'Clean installs that editors can run', 'Professional WordPress installation, hosting-ready configuration, essential plugins, and a launch checklist your team can own.', 'build', 'setup', 0, 2),
+    mkService('WooCommerce Store Setup', 'woocommerce-setup', 'Catalog, payments, and shipping', 'Complete WooCommerce setup covering products, tax, shipping zones, payment gateways, and storefront templates ready to sell.', 'build', 'setup', 0, 3),
+    mkService('LearnDash LMS Setup', 'learndash-setup', 'Courses live without chaos', 'LearnDash configuration for courses, drip content, payments, certificates, and student dashboards that instructors can manage.', 'build', 'setup', 0, 4),
+    mkService('WordPress Theme Customization', 'wordpress-customization', 'Extend what you already run', 'Theme and plugin customization for unique WordPress workflows — child themes, blocks, CPTs, and admin UX improvements.', 'build', 'customize', 0, 5),
+    mkService('WooCommerce Customization', 'woocommerce-customization', 'Checkout and catalog your way', 'Custom WooCommerce features: checkout fields, shipping logic, pricing rules, and integrations that stock plugins cannot cover cleanly.', 'build', 'customize', 0, 6),
+    mkService('LearnDash Customization', 'learndash-customization', 'LMS rules that match your program', 'Custom LearnDash modules, access rules, reporting, and learner journeys tailored to how your education business actually runs.', 'build', 'customize', 0, 7),
+    mkService('WordPress Migration', 'wordpress-migration', 'Move without losing SEO equity', 'Migrations to WordPress with URL maps, 301 redirects, staging QA, and Search Console follow-up so rankings stay intact.', 'build', 'migrate', 1, 8),
+    mkService('Migrate to WooCommerce', 'migrate-woocommerce', 'Store data moved carefully', 'Move catalogs, customers, and orders to WooCommerce with mapped products, gateway testing, and checkout verification on staging.', 'build', 'migrate', 0, 9),
+    mkService('Migrate to LearnDash', 'migrate-learndash', 'Courses and learners transferred', 'Migrate course content and learner records into LearnDash with access checks, progress continuity, and instructor training.', 'build', 'migrate', 0, 10),
+    mkService('WordPress Maintenance & Support', 'wordpress-maintenance', 'Updates without surprise breakage', 'Scheduled WordPress core, theme, and plugin updates, backups, uptime checks, and small fixes on a predictable care plan.', 'manage', 'maintain', 0, 11),
+    mkService('Website Management Retainer', 'website-management', 'One team for ongoing WordPress work', 'Dedicated management for content updates, plugin hygiene, light feature work, and priority response when something breaks.', 'manage', 'retainers', 0, 12),
+    mkService('Hire WordPress Developers', 'hire-wordpress-developers', 'Capacity inside your backlog', 'Dedicated WordPress developers for theme work, Gutenberg builds, and feature tickets — embedded with your product cadence.', 'manage', 'retainers', 0, 13),
+    mkService('Hire WooCommerce Developers', 'hire-woocommerce-developers', 'Store specialists on retainer', 'WooCommerce developers for catalog logic, checkout UX, subscriptions, and performance work tied to your release calendar.', 'manage', 'retainers', 0, 14),
+    mkService('Hire LearnDash Developers', 'hire-learndash-developers', 'LMS engineering on demand', 'LearnDash specialists for course architecture, reporting, and integrations when your education platform needs steady iteration.', 'manage', 'retainers', 0, 15),
+    mkService('WordPress Redesign', 'wordpress-redesign', 'Modern UX on a maintainable theme', 'Full WordPress redesign focused on clearer information architecture, editor-friendly templates, and measurable conversion paths.', 'enhance', 'redesign', 1, 16),
+    mkService('Landing Page Redesign', 'landing-page-redesign', 'One page, sharper conversion', 'High-intent WordPress landing page redesign with focused messaging, form or checkout paths, and Core Web Vitals attention.', 'enhance', 'redesign', 0, 17),
+    mkService('WordPress Speed Optimization', 'wordpress-speed-optimization', 'Core Web Vitals that hold up', 'WordPress performance work: caching, image strategy, script control, and template fixes aimed at LCP, CLS, and INP.', 'enhance', 'speed', 0, 18),
+    mkService('WooCommerce Speed Optimization', 'woocommerce-speed-optimization', 'Faster product and checkout pages', 'Store-focused performance tuning for product templates, cart, and checkout under real catalog and traffic conditions.', 'enhance', 'speed', 0, 19),
+    mkService('WordPress API & Integrations', 'api-integrations', 'Connect CRM, ERP, and tools', 'Custom REST API work and third-party integrations so WordPress talks cleanly to CRM, ERP, email, and internal systems.', 'enhance', 'integrate', 0, 20),
+    mkService('WordPress Workflow Automation', 'wordpress-ai-automation', 'Less manual busywork in wp-admin', 'Automation for lead routing, content assists, inventory alerts, and support handoffs wired into your WordPress stack.', 'enhance', 'automate', 1, 21),
+    mkService('WordPress SEO Services', 'wordpress-seo-services', 'Technical SEO for WordPress', 'Technical SEO for WordPress: crawl health, schema, sitemaps, Core Web Vitals, and content structure editors can keep improving.', 'enhance', 'seo', 0, 22),
+    mkService('Custom Plugin Development', 'plugin-development', 'Features you cannot buy off the shelf', 'Bespoke WordPress plugins with secure coding practices, admin UX, and update-safe architecture your team can own long term.', 'build', 'customize', 0, 23),
+    mkService('WooCommerce Development', 'woocommerce-development', 'Stores built from real operations', 'Full WooCommerce development: catalog architecture, checkout, shipping, payments, and maintainable customizations from day one.', 'build', 'setup', 0, 24),
+    mkService('LearnDash Development', 'learndash-development', 'Education platforms on WordPress', 'Complete LearnDash platform development including courses, access control, payments, and reporting tailored to your program.', 'build', 'setup', 0, 25),
   ];
 
   await connection.query('TRUNCATE TABLE services');
@@ -66,14 +66,14 @@ export async function seedExtended(connection) {
   await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, SEO', result_summary='4x User Engagement | +65% Visibility' WHERE slug='learnpoint-wallet'`);
 
   await connection.query(`INSERT INTO products (title, slug, subtitle, description, full_content, features, price, rating, rating_count, image_url, buy_url, sort_order) VALUES ?`, [[
-    ['QuoteFlow Pro', 'quote-flow-pro', 'Product Enquiry Pro', 'Let customers request quotes directly from product pages.', 'QuoteFlow Pro enables product enquiry forms, WhatsApp quick replies, and custom quote workflows for WooCommerce stores.', JSON.stringify(['Product enquiries & quotes','WhatsApp & quick replies','Custom enquiry forms']), '$79', '4.9/5', '5,000+ stores', 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', '#', 1],
-    ['SmartPricing', 'smart-pricing', 'Customer Specific Pricing', 'Show different prices to different customers automatically.', 'Role-based and user-specific pricing for B2B WooCommerce stores with bulk discounts.', JSON.stringify(['User & role-based pricing','Bulk and tiered discounts','B2B-ready pricing rules']), '$99', '4.9/5', '3,000+ stores', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800', '#', 2],
-    ['BundleCraft', 'bundlecraft', 'Custom Product Boxes', 'Create flexible product bundles customers can customize.', 'Mix-and-match product bundles with fixed or dynamic pricing for WooCommerce.', JSON.stringify(['Mix-and-match bundles','Fixed or dynamic pricing','Ready-made product kits']), '$89', '5.0/5', '2,000+ stores', 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800', '#', 3],
-    ['SalesBoost Pack', 'sales-boost-pack', 'Sales Booster Pack', 'Boost conversions with urgency and promotional tools.', 'Countdown timers, smart discounts, and promotional messages for WooCommerce.', JSON.stringify(['Countdown timers','Smart discounts','Promotional messages']), '$69', '4.9/5', '3,000+ stores', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800', '#', 4],
-    ['StockAlert Pro', 'stock-alert-pro', 'Low Stock Notifications', 'Real-time low stock alerts via email and Slack.', 'StockAlert Pro monitors inventory and sends instant alerts when stock drops below custom thresholds, with back-in-stock customer notifications.', JSON.stringify(['Low stock email alerts','Slack notifications','Back-in-stock emails','Daily inventory reports']), '$59', '4.8/5', '1,200+ stores', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800', '#', 5],
-    ['ReviewBoost', 'review-boost', 'Review Collection & Display', 'Automated review requests with rich snippets.', 'ReviewBoost automates post-purchase review collection with photo uploads and Google rich snippet markup for better SEO and conversions.', JSON.stringify(['Auto review requests','Photo & video reviews','Google rich snippets','Review widgets']), '$49', '4.9/5', '2,500+ stores', 'https://images.unsplash.com/photo-1556745757-8d76bdb6834a?w=800', '#', 6],
-    ['Subscripto', 'subscripto', 'Subscription Management', 'Flexible subscriptions with MRR analytics.', 'Complete subscription engine for WooCommerce with trials, self-service portal, and recurring revenue dashboard.', JSON.stringify(['Flexible billing intervals','Free trial support','Customer self-service','MRR analytics dashboard']), '$129', '4.9/5', '800+ stores', 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800', '#', 7],
-    ['CheckoutFlow', 'checkout-flow', 'One-Page Checkout', 'Distraction-free checkout that converts.', 'Replace multi-step checkout with a fast one-page experience including express pay and order bump upsells.', JSON.stringify(['One-page checkout','Express payment buttons','Order bump upsells','Mobile-optimized']), '$89', '5.0/5', '1,800+ stores', 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800', '#', 8],
+    ['QuoteLane Pro', 'quote-flow-pro', 'Product Enquiry Forms', 'Collect WooCommerce quote requests from product pages with email and WhatsApp handoffs.', 'QuoteLane Pro adds product enquiry forms, WhatsApp quick replies, and admin notifications so B2B and made-to-order stores can qualify buyers without exposing every price publicly.', JSON.stringify(['Product enquiry forms','WhatsApp quick replies','Admin email alerts','CSV lead export']), '$79', '4.9/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', '#', 1],
+    ['TierPrice Matrix', 'smart-pricing', 'Role & User Pricing', 'Show the right WooCommerce price by role, user, or bulk tier without messy coupon stacks.', 'TierPrice Matrix handles role-based and user-specific pricing, bulk tiers, guest price hiding, and CSV price list imports for wholesale and membership catalogs.', JSON.stringify(['Role and user pricing','Tiered bulk discounts','Hide prices from guests','CSV price import']), '$99', '4.9/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800', '#', 2],
+    ['BundleForge', 'bundlecraft', 'Mix-and-Match Bundles', 'Let shoppers build product boxes with fixed or dynamic WooCommerce pricing.', 'BundleForge powers mix-and-match boxes, fixed or percentage discounts, prebuilt kits, and inventory-aware bundle items for gift and subscription-style catalogs.', JSON.stringify(['Mix-and-match builder','Fixed or dynamic pricing','Prebuilt kits','Inventory-aware items']), '$89', '5.0/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800', '#', 3],
+    ['UrgencyKit Pack', 'sales-boost-pack', 'Conversion Helpers', 'Countdown, scarcity, and shipping-progress tools for campaign windows on WooCommerce.', 'UrgencyKit Pack bundles countdown timers, discount prompts, free-shipping bars, scarcity messages, and exit-intent offers for flash and seasonal campaigns.', JSON.stringify(['Countdown timers','Discount prompts','Free shipping bar','Scarcity messages']), '$69', '4.9/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800', '#', 4],
+    ['StockdenPro', 'stock-alert-pro', 'Inventory Threshold Alerts', 'Notify ops when WooCommerce stock dips below thresholds you set per SKU.', 'StockdenPro watches WooCommerce inventory and sends email or Slack alerts when stock crosses your rules. Configure per product or variation and notify shoppers when items return.', JSON.stringify(['Low stock email alerts','Slack notifications','Back-in-stock emails','Daily inventory digests']), '$59', '4.8/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800', '#', 5],
+    ['Prooflane Reviews', 'review-boost', 'Post-Purchase Reviews', 'Request reviews after delivery and display them with schema-ready markup.', 'Prooflane Reviews schedules post-purchase review asks, supports photo uploads, moderation, and rich-result markup so social proof helps shoppers and search visibility.', JSON.stringify(['Automated review requests','Photo uploads','Schema markup','Review widgets']), '$49', '4.9/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1556745757-8d76bdb6834a?w=800', '#', 6],
+    ['Subscrivo', 'subscripto', 'Subscription Billing', 'Flexible WooCommerce subscription intervals with a clear recurring-revenue view.', 'Subscrivo adds subscription billing with trials, pause and skip options, customer self-service, and an MRR-focused dashboard for recurring WooCommerce products.', JSON.stringify(['Flexible intervals','Trials and fees','Self-service portal','MRR dashboard']), '$129', '4.9/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800', '#', 7],
+    ['LaneCheckout', 'checkout-flow', 'One-Page Checkout', 'Reduce steps between cart and paid order with a focused WooCommerce checkout.', 'LaneCheckout replaces multi-step checkout with a distraction-free page, address helpers, express wallets when available, and optional order bumps designed for mobile conversion.', JSON.stringify(['One-page checkout','Address helpers','Express pay options','Order bumps']), '$89', '5.0/5', 'Stores using plugin', 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800', '#', 8],
   ]]);
 
   await connection.query(`INSERT INTO tools (title, slug, description, full_content, icon, is_new, sort_order) VALUES ?`, [[
@@ -94,17 +94,17 @@ export async function seedExtended(connection) {
   ]]);
 
   await connection.query(`INSERT INTO awards (title, organization, year, badge_label, sort_order) VALUES ?`, [[
-    ['Best UI Design', 'CSS Design Awards', '2026', 'WINNER', 1],
-    ['Best UX Design', 'CSS Design Awards', '2026', 'WINNER', 2],
-    ['Best Innovation', 'CSS Design Awards', '2026', 'WINNER', 3],
-    ['Top WordPress Agency', 'Clutch', '2026', '4.7/5', 4],
-    ['Top Design Agency', 'DesignRush', '2026', '4.8/5', 5],
+    ['5-Star Client Feedback', 'Verified project reviews', '2026', '5.0', 1],
+    ['WordPress Specialists', 'Theme, plugin & WooCommerce focus', '2026', 'WP', 2],
+    ['Performance-First Builds', 'Core Web Vitals on every launch', '2026', 'CWV', 3],
+    ['Trusted Delivery Partner', 'Long-term retainers & handoffs', '2026', 'Care', 4],
+    ['Secure Launch Standard', 'Hardening, backups & staging QA', '2026', 'Secure', 5],
   ]]);
 
   await connection.query(`INSERT INTO site_stats (stat_key, stat_value, stat_label, sort_order) VALUES ?`, [[
-    ['projects', '1,500+', 'Projects Delivered', 1],
-    ['experience', '10+', 'Years Experience', 2],
-    ['clients', '800+', 'Happy Clients', 3],
-    ['countries', '25+', 'Countries Served', 4],
+    ['projects', 'Edit me', 'WordPress projects delivered', 1],
+    ['experience', 'Edit me', 'Years in WordPress delivery', 2],
+    ['clients', 'Growing', 'Businesses we support', 3],
+    ['countries', 'Edit me', 'Countries served', 4],
   ]]);
 }

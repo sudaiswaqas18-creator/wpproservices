@@ -10,7 +10,7 @@ interface BuyPluginButtonProps {
 export default function BuyPluginButton({
   product,
   className = 'btn-primary mt-8 inline-block text-center',
-  children = 'Buy Plugin',
+  children = 'Get Plugin',
 }: BuyPluginButtonProps) {
   const target = getProductBuyTarget(product);
 

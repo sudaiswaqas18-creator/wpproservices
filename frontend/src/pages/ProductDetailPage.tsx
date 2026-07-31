@@ -53,7 +53,7 @@ export default function ProductDetailPage() {
     return (
       <div className="section-container py-32 text-center">
         <h1 className="text-2xl font-bold">Product not found</h1>
-        <Link to="/products" className="btn-primary mt-4 inline-flex">All Products</Link>
+        <Link to="/products" className="btn-primary mt-4 inline-flex">All Plugins</Link>
       </div>
     );
   }
@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
             )}
           </motion.div>
           <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>
-            <Link to="/products" className="text-sm font-medium text-brand-600 hover:underline">← All Products</Link>
+            <Link to="/products" className="text-sm font-medium text-brand-600 hover:underline">← All Plugins</Link>
             <span className="ml-3 rounded-full bg-brand-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-brand-600">
               {enriched.categoryLabel}
             </span>

@@ -8,14 +8,16 @@ export default function ContactPage() {
       <Breadcrumbs items={[{ label: 'Contact Us' }]} />
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">Contact Us</h1>
-          <p className="section-subtitle mx-auto mt-4">Start with a free consultation. We respond within 24 hours.</p>
+          <h1 className="text-4xl font-extrabold text-gray-900">Contact Our WordPress Team</h1>
+          <p className="section-subtitle mx-auto mt-4">
+            Tell us about your theme, WooCommerce store, migration, or retainer needs. We typically reply within 1–2 business days.
+          </p>
         </div>
       </section>
       <section className="pb-20">
         <div className="section-container grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Get in Touch</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Reach the studio</h2>
             <ul className="mt-6 space-y-4 text-gray-600">
               <li>
                 <strong className="text-gray-900">Email:</strong>{' '}
@@ -41,12 +43,12 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-8 rounded-2xl bg-brand-50 p-6">
-              <h3 className="font-bold text-gray-900">Why WPServices?</h3>
+              <h3 className="font-bold text-gray-900">What to expect</h3>
               <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                <li>✓ Free initial consultation</li>
-                <li>✓ 10+ years WordPress expertise</li>
-                <li>✓ 1,500+ successful projects</li>
-                <li>✓ Dedicated post-launch support</li>
+                <li>✓ Discovery call focused on your WordPress stack</li>
+                <li>✓ Written scope before build work begins</li>
+                <li>✓ Staging review when hosting allows</li>
+                <li>✓ Post-launch support window on every project</li>
               </ul>
             </div>
           </div>

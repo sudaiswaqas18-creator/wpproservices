@@ -1,23 +1,23 @@
 const steps = [
   {
     num: '01',
-    title: 'Discovery & Planning',
-    desc: 'Business goals, audience insights, and project scope defined to align strategy and success metrics.',
+    title: 'Discover the WordPress stack',
+    desc: 'Hosting, theme, plugins, WooCommerce or LearnDash constraints, content model, and success criteria — mapped before any build estimate.',
   },
   {
     num: '02',
-    title: 'Architecture & Design',
-    desc: 'Custom layouts and wireframes aligned to your brand, focused on clarity and conversions.',
+    title: 'Scope themes, data & flows',
+    desc: 'Wireframes or tickets for templates, custom post types, checkout or LMS paths, redirects, and staging access — written so nothing is assumed.',
   },
   {
     num: '03',
-    title: 'Development & QA',
-    desc: 'Agile sprints with clean code, integrations, and testing to ensure flawless performance.',
+    title: 'Build on staging & QA',
+    desc: 'Theme and plugin work in a staging environment with editor walkthroughs, Core Web Vitals checks on key templates, and regression passes.',
   },
   {
     num: '04',
-    title: 'Launch & Optimization',
-    desc: 'Seamless deployment with post-launch monitoring, speed, and SEO improvements.',
+    title: 'Launch, handoff & care',
+    desc: 'DNS or deploy cutover, redirect verification, documentation for your team, and a post-launch support window for WordPress quirks.',
   },
 ];
 
@@ -25,7 +25,7 @@ export default function Process() {
   return (
     <section id="process" className="py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">Our Proven Development Process</h2>
+        <h2 className="section-title text-center">How WordPress Projects Move Here</h2>
 
         <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
