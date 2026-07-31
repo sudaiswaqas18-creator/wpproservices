@@ -88,8 +88,8 @@ export function validateLoginForm(email: string, password: string): FieldErrors 
   const errors: FieldErrors = {};
   const emailErr = validateEmail(email);
   if (emailErr) errors.email = emailErr;
-  const passErr = validatePassword(password);
-  if (passErr) errors.password = passErr;
+  // Login only checks non-empty — strength rules are for creating new passwords
+  if (!password.trim()) errors.password = 'Password is required.';
   return errors;
 }
 
