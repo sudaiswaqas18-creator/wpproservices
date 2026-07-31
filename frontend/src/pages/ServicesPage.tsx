@@ -88,11 +88,11 @@ export default function ServicesPage() {
               <Link to="/services" className="btn-primary mt-6 inline-flex">Browse all services</Link>
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredServices.map((s, i) => {
                 const Icon = iconMap[s.icon] || Code;
                 const enriched = getServiceEnrichment(s.slug, s.features);
-                const previewFeatures = enriched.features.slice(0, 3);
+                const previewFeatures = enriched.features.slice(0, 2);
                 const media = getServiceImage(s.slug);
 
                 return (
@@ -102,12 +102,12 @@ export default function ServicesPage() {
                       className="service-card-fill group flex h-full"
                     >
                       <div className="service-card-fill__inner flex h-full flex-col overflow-hidden">
-                        <div className="relative h-40 overflow-hidden bg-surface-100">
+                        <div className="relative h-28 overflow-hidden bg-surface-100 sm:h-32">
                           <img
-                            src={optimizeImageUrl(media.image_url, 640)}
+                            src={optimizeImageUrl(media.image_url, 480)}
                             alt={media.image_alt}
-                            width={640}
-                            height={160}
+                            width={480}
+                            height={128}
                             loading="lazy"
                             decoding="async"
                             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
@@ -115,46 +115,40 @@ export default function ServicesPage() {
                               e.currentTarget.style.opacity = '0';
                             }}
                           />
-                          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-600 backdrop-blur-sm">
+                          <span className="absolute left-2.5 top-2.5 rounded-full bg-white/90 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-brand-600 backdrop-blur-sm">
                             {enriched.categoryLabel}
                           </span>
                         </div>
-                        <div className="flex flex-1 flex-col p-6">
-                        <div className="flex items-start justify-between">
-                          <motion.div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 transition-colors duration-500 group-hover:bg-white/20">
-                            <Icon size={22} className="text-brand-600 transition-colors duration-500 group-hover:text-white" />
-                          </motion.div>
-                        </div>
+                        <div className="flex flex-1 flex-col p-4">
+                          <div className="flex items-center gap-2.5">
+                            <motion.div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 transition-colors duration-500 group-hover:bg-white/20">
+                              <Icon size={16} className="text-brand-600 transition-colors duration-500 group-hover:text-white" />
+                            </motion.div>
+                            <h2 className="text-[15px] font-bold leading-snug text-gray-900 transition-colors duration-500 group-hover:text-white line-clamp-2">
+                              {s.title}
+                            </h2>
+                          </div>
+                          <p className="mt-2 text-xs leading-relaxed text-gray-600 line-clamp-2 transition-colors duration-500 group-hover:text-white/85">
+                            {s.description}
+                          </p>
 
-                        <h2 className="mt-4 text-lg font-bold text-gray-900 transition-colors duration-500 group-hover:text-white">
-                          {s.title}
-                        </h2>
-                        <p className="mt-2 text-sm leading-relaxed text-gray-600 line-clamp-2 transition-colors duration-500 group-hover:text-white/85">
-                          {s.description}
-                        </p>
-
-                        <ul className="mt-4 flex-1 space-y-2 border-t border-gray-50 pt-4 transition-colors duration-500 group-hover:border-white/20">
-                          {previewFeatures.map((f) => (
-                            <li key={f} className="flex items-start gap-2 text-xs text-gray-600 transition-colors duration-500 group-hover:text-white/90">
-                              <Check size={12} className="mt-0.5 shrink-0 text-brand-500 transition-colors duration-500 group-hover:text-white" />
-                              <span className="line-clamp-1">{f}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="mt-5 flex items-center justify-between border-t border-gray-50 pt-4 transition-colors duration-500 group-hover:border-white/20">
-                          <motion.div className="flex gap-3 text-xs text-gray-500 transition-colors duration-500 group-hover:text-white/75">
-                            {enriched.highlights.slice(0, 2).map((h) => (
-                              <span key={h.label}>
-                                <span className="font-semibold text-gray-700 transition-colors duration-500 group-hover:text-white">{h.value}</span>{' '}
-                                <span className="text-gray-400 transition-colors duration-500 group-hover:text-white/70">{h.label}</span>
-                              </span>
+                          <ul className="mt-3 space-y-1.5 border-t border-gray-50 pt-3 transition-colors duration-500 group-hover:border-white/20">
+                            {previewFeatures.map((f) => (
+                              <li key={f} className="flex items-start gap-1.5 text-[11px] text-gray-600 transition-colors duration-500 group-hover:text-white/90">
+                                <Check size={11} className="mt-0.5 shrink-0 text-brand-500 transition-colors duration-500 group-hover:text-white" />
+                                <span className="line-clamp-1">{f}</span>
+                              </li>
                             ))}
-                          </motion.div>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-all duration-500 group-hover:gap-2 group-hover:text-white">
-                            Learn more <ArrowRight size={14} />
-                          </span>
-                        </div>
+                          </ul>
+
+                          <div className="mt-3 flex items-center justify-between border-t border-gray-50 pt-3 transition-colors duration-500 group-hover:border-white/20">
+                            <span className="text-[10px] font-medium text-gray-500 transition-colors duration-500 group-hover:text-white/75">
+                              {enriched.highlights[0]?.value}
+                            </span>
+                            <span className="inline-flex items-center gap-0.5 text-xs font-semibold text-brand-600 transition-all duration-500 group-hover:gap-1.5 group-hover:text-white">
+                              Learn more <ArrowRight size={12} />
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </Link>

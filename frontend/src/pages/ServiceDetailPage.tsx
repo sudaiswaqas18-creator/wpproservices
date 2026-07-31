@@ -83,7 +83,7 @@ export default function ServiceDetailPage() {
               height={520}
               loading="eager"
               decoding="async"
-              className="w-full rounded-2xl shadow-card ring-1 ring-gray-100 object-cover max-h-[420px]"
+              className="w-full rounded-2xl shadow-card ring-1 ring-gray-100 object-cover max-h-[320px]"
               onError={(e) => {
                 e.currentTarget.classList.add('hidden');
               }}
