@@ -285,11 +285,11 @@ export default function HeroShowcase() {
         >
           <div className="flex items-center gap-2.5 px-3.5 py-2.5">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-55" />
-              <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
+              <span className="absolute inset-0 animate-ping rounded-full bg-gray-400 opacity-55" />
+              <span className="relative h-2.5 w-2.5 rounded-full bg-brand-500 ring-2 ring-brand-100" />
             </span>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Deployed</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-brand-600">Deployed</p>
               <p className="text-[11px] font-semibold text-gray-700">Launch-ready build</p>
             </div>
           </div>
@@ -451,7 +451,7 @@ export default function HeroShowcase() {
                       <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-brand-600 ring-1 ring-brand-100">
                         {scene.eyebrow}
                       </span>
-                      <CheckCircle2 size={12} className="text-emerald-500" />
+                      <CheckCircle2 size={12} className="text-brand-500" />
                     </div>
                     <p className="text-[13px] font-extrabold tracking-tight text-gray-900 sm:text-[15px]">{scene.title}</p>
                     <p className="mt-1 text-[11px] leading-snug text-gray-500">{scene.subtitle}</p>
@@ -511,7 +511,7 @@ export default function HeroShowcase() {
                         Start project
                         <ArrowUpRight size={11} />
                       </motion.div>
-                      <div className="flex items-center gap-1 text-[9px] font-semibold text-emerald-600">
+                      <div className="flex items-center gap-1 text-[9px] font-semibold text-brand-600">
                         <TrendingUp size={11} />
                         +24% growth
                       </div>
@@ -583,7 +583,7 @@ export default function HeroShowcase() {
                         {scene.vitals.map((v) => (
                           <div key={v.label} className="rounded-md bg-slate-50 px-1 py-1 text-center ring-1 ring-gray-100">
                             <p className="text-[8px] font-bold text-gray-400">{v.label}</p>
-                            <p className={`text-[10px] font-extrabold ${v.good ? 'text-emerald-600' : 'text-gray-700'}`}>
+                            <p className={`text-[10px] font-extrabold ${v.good ? 'text-brand-600' : 'text-gray-700'}`}>
                               {v.value}
                             </p>
                           </div>
