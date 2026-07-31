@@ -10,6 +10,7 @@ export async function seedExtended(connection) {
     "ALTER TABLE case_studies ADD COLUMN tech_stack VARCHAR(200)",
     "ALTER TABLE case_studies ADD COLUMN result_summary VARCHAR(300)",
     "ALTER TABLE products ADD COLUMN category VARCHAR(40) DEFAULT 'conversion'",
+    "ALTER TABLE awards MODIFY COLUMN year VARCHAR(40)",
   ];
   for (const sql of alters) {
     try { await connection.query(sql); } catch (e) {

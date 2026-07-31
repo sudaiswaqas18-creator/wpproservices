@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS awards (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
   organization VARCHAR(100) NOT NULL,
-  year VARCHAR(10),
+  year VARCHAR(40),
   badge_label VARCHAR(50),
   sort_order INT DEFAULT 0
 );
