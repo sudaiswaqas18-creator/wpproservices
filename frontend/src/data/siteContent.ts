@@ -133,6 +133,46 @@ export const PRODUCT_IMAGES: Record<string, { image_url: string; image_alt: stri
     image_url: '/section-images/plugin-checkout.jpg',
     image_alt: 'Mobile payment moment for one-page WooCommerce checkout',
   },
+  'catalog-cloak': {
+    image_url: '/section-images/plugin-catalog-cloak.jpg',
+    image_alt: 'Wholesale login gate hiding prices on a B2B WooCommerce catalog',
+  },
+  'relate-lane': {
+    image_url: '/section-images/plugin-relate-lane.jpg',
+    image_alt: 'Merchandiser arranging related product recommendations',
+  },
+  'kit-lane': {
+    image_url: '/section-images/plugin-kit-lane.jpg',
+    image_alt: 'Product kit components laid out for inventory-honest bundles',
+  },
+  'sticky-lane': {
+    image_url: '/section-images/plugin-sticky-lane.jpg',
+    image_alt: 'Mobile shopper with sticky add-to-cart bar on a product page',
+  },
+  'banner-forge': {
+    image_url: '/section-images/plugin-banner-forge.jpg',
+    image_alt: 'Campaign banner planning board for ecommerce promotions',
+  },
+  'stock-map': {
+    image_url: '/section-images/plugin-stock-map.jpg',
+    image_alt: 'Multi-warehouse shelves mapped for WooCommerce stock locations',
+  },
+  'restock-pulse': {
+    image_url: '/section-images/plugin-restock-pulse.jpg',
+    image_alt: 'Ops team reviewing a restock planning digest checklist',
+  },
+  'seal-strip': {
+    image_url: '/section-images/plugin-seal-strip.jpg',
+    image_alt: 'Trust seals and guarantee cues near an online checkout',
+  },
+  'cycle-flex': {
+    image_url: '/section-images/plugin-cycle-flex.jpg',
+    image_alt: 'Subscriber pausing or skipping a recurring delivery in a portal',
+  },
+  'tier-access': {
+    image_url: '/section-images/plugin-tier-access.jpg',
+    image_alt: 'Membership tiers unlocking gated WooCommerce catalog access',
+  },
 };
 
 export function getProductImage(slug: string, fallbackUrl?: string) {

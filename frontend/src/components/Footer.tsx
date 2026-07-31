@@ -31,6 +31,7 @@ export default function Footer() {
             <p className="font-bold text-text-inverse">Plugins & Resources</p>
             <ul className="mt-4 space-y-2.5">
               <li><Link to="/products" className="text-sm text-gray-400 transition hover:text-secondary">WooCommerce Plugins</Link></li>
+              <li><Link to="/industries" className="text-sm text-gray-400 transition hover:text-secondary">Industries</Link></li>
               <li><Link to="/resources" className="text-sm text-gray-400 transition hover:text-secondary">Resources Hub</Link></li>
               <li><Link to="/blog" className="text-sm text-gray-400 transition hover:text-secondary">Blog</Link></li>
               <li><Link to="/case-studies" className="text-sm text-gray-400 transition hover:text-secondary">Case Studies</Link></li>

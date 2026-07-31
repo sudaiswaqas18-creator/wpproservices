@@ -34,11 +34,18 @@ export const STATIC_SEO: Record<string, PageSEO> = {
     path: '/services',
   },
   '/products': {
-    title: 'WooCommerce Plugins | WPServices',
+    title: 'WooCommerce Plugins by Category | WPServices',
     description:
-      'WooCommerce plugins for quotes, pricing, bundles, inventory alerts, reviews, subscriptions, and checkout — built for real stores.',
-    keywords: 'WooCommerce plugins, WordPress plugins, ecommerce plugins',
+      'Browse WooCommerce plugins by category: B2B pricing, catalogs, campaigns, inventory ops, checkout trust, and subscriptions — original product copy for real stores.',
+    keywords: 'WooCommerce plugins, WordPress plugins, B2B pricing plugins, subscription plugins',
     path: '/products',
+  },
+  '/industries': {
+    title: 'Industries We Serve | WordPress Agency',
+    description:
+      'WordPress and WooCommerce delivery for retail, education, healthcare, and B2B teams — themes, stores, LMS, and care plans shaped to each industry.',
+    keywords: 'WordPress agency industries, WooCommerce for retail, LearnDash for education',
+    path: '/industries',
   },
   '/resources': {
     title: 'WordPress Resources | WPServices',

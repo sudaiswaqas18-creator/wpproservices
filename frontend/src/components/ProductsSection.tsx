@@ -36,8 +36,26 @@ export default function ProductsSection() {
       <div className="section-container">
         <h2 className="section-title text-center">WooCommerce Plugins Built for Real Stores</h2>
         <p className="section-subtitle mx-auto text-center">
-          Practical extensions for inventory, reviews, subscriptions, and checkout — maintained for modern WooCommerce.
+          Six categories for B2B pricing, catalogs, campaigns, inventory, checkout trust, and subscriptions.
         </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          {[
+            { id: 'sales-b2b', label: 'Sales & B2B' },
+            { id: 'catalog', label: 'Catalog' },
+            { id: 'conversion', label: 'Conversion' },
+            { id: 'ops-inventory', label: 'Ops' },
+            { id: 'trust-checkout', label: 'Checkout' },
+            { id: 'subscriptions', label: 'Subscriptions' },
+          ].map((c) => (
+            <Link
+              key={c.id}
+              to={`/products?category=${c.id}`}
+              className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-gray-600 shadow-sm ring-1 ring-gray-100 transition hover:text-brand-700 hover:ring-brand-200"
+            >
+              {c.label}
+            </Link>
+          ))}
+        </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((p, i) => {
             const enriched = getProductEnrichment(p.slug, p.features);

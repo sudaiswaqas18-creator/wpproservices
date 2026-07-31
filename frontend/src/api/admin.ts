@@ -186,7 +186,7 @@ export interface LeadRow {
 
 export interface ProductRow {
   id: number; title: string; slug: string; subtitle: string; description: string;
-  full_content: string; features: string[]; price: string; rating: string;
+  full_content: string; features: string[]; category: string; price: string; rating: string;
   rating_count: string; image_url: string; buy_url: string; sort_order: number;
 }
 export type ProductForm = Omit<ProductRow, 'id'>;

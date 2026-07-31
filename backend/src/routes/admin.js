@@ -239,8 +239,8 @@ router.get('/products', authMiddleware, async (_req, res) => {
 router.post('/products', authMiddleware, async (req, res) => {
   const b = req.body;
   const [result] = await pool.query(
-    `INSERT INTO products (title, slug, subtitle, description, full_content, features, price, rating, rating_count, image_url, buy_url, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
-    [b.title, b.slug || slugify(b.title), b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0]
+    `INSERT INTO products (title, slug, subtitle, description, full_content, features, category, price, rating, rating_count, image_url, buy_url, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [b.title, b.slug || slugify(b.title), b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.category || 'conversion', b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0]
   );
   res.status(201).json({ id: result.insertId });
 });
@@ -248,8 +248,8 @@ router.post('/products', authMiddleware, async (req, res) => {
 router.put('/products/:id', authMiddleware, async (req, res) => {
   const b = req.body;
   await pool.query(
-    `UPDATE products SET title=?, slug=?, subtitle=?, description=?, full_content=?, features=?, price=?, rating=?, rating_count=?, image_url=?, buy_url=?, sort_order=? WHERE id=?`,
-    [b.title, b.slug, b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0, req.params.id]
+    `UPDATE products SET title=?, slug=?, subtitle=?, description=?, full_content=?, features=?, category=?, price=?, rating=?, rating_count=?, image_url=?, buy_url=?, sort_order=? WHERE id=?`,
+    [b.title, b.slug, b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.category || 'conversion', b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0, req.params.id]
   );
   res.json({ message: 'Updated' });
 });

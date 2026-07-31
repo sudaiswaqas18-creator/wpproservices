@@ -25,12 +25,12 @@ export const NAV_SERVICES: NavItem[] = [
 ];
 
 export const NAV_PRODUCTS: NavItem[] = [
-  { title: 'QuoteFlow Pro', slug: 'quote-flow-pro', href: '/products/quote-flow-pro', icon: Package },
-  { title: 'SmartPricing', slug: 'smart-pricing', href: '/products/smart-pricing', icon: Package },
-  { title: 'BundleCraft', slug: 'bundlecraft', href: '/products/bundlecraft', icon: Package },
-  { title: 'SalesBoost Pack', slug: 'sales-boost-pack', href: '/products/sales-boost-pack', icon: Package },
-  { title: 'StockAlert Pro', slug: 'stock-alert-pro', href: '/products/stock-alert-pro', icon: Package },
-  { title: 'ReviewBoost', slug: 'review-boost', href: '/products/review-boost', icon: Package },
+  { title: 'Sales & B2B Pricing', slug: 'sales-b2b', href: '/products?category=sales-b2b', icon: Package },
+  { title: 'Catalog & Bundles', slug: 'catalog', href: '/products?category=catalog', icon: Package },
+  { title: 'Conversion & Campaigns', slug: 'conversion', href: '/products?category=conversion', icon: Package },
+  { title: 'Ops & Inventory', slug: 'ops-inventory', href: '/products?category=ops-inventory', icon: Package },
+  { title: 'Trust & Checkout', slug: 'trust-checkout', href: '/products?category=trust-checkout', icon: Package },
+  { title: 'Subscriptions & Membership', slug: 'subscriptions', href: '/products?category=subscriptions', icon: Package },
 ];
 
 export const NAV_RESOURCES: { label: string; items: NavItem[] }[] = [
@@ -39,6 +39,7 @@ export const NAV_RESOURCES: { label: string; items: NavItem[] }[] = [
     items: [
       { title: 'Blog', slug: 'blog', href: '/blog', icon: FileText },
       { title: 'Case Studies', slug: 'case-studies', href: '/case-studies', icon: Briefcase },
+      { title: 'Industries', slug: 'industries', href: '/industries', icon: Briefcase },
     ],
   },
   {

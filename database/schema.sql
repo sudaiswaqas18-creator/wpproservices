@@ -144,6 +144,7 @@ CREATE TABLE IF NOT EXISTS products (
   description TEXT NOT NULL,
   full_content TEXT,
   features JSON,
+  category VARCHAR(40) DEFAULT 'conversion',
   price VARCHAR(50),
   rating VARCHAR(20),
   rating_count VARCHAR(30),

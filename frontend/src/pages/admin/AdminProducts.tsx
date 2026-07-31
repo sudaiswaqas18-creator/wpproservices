@@ -3,10 +3,11 @@ import { Plus } from 'lucide-react';
 import { adminApi, ProductRow, ProductForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
 import { validateProductForm, hasErrors, FieldErrors } from '../../utils/validation';
+import { PLUGIN_CATEGORIES, PLUGIN_CATEGORY_LABELS } from '../../data/productCategories';
 
 const empty: ProductForm = {
   title: '', slug: '', subtitle: '', description: '', full_content: '', features: [],
-  price: '', rating: '', rating_count: '', image_url: '', buy_url: '', sort_order: 0,
+  category: 'conversion', price: '', rating: '', rating_count: '', image_url: '', buy_url: '', sort_order: 0,
 };
 
 export default function AdminProducts() {
@@ -24,7 +25,11 @@ export default function AdminProducts() {
   const openCreate = () => { setForm(empty); setFeaturesText(''); setEditId(null); setFieldErrors({}); setModal(true); };
   const openEdit = (row: ProductRow) => {
     const { id, ...rest } = row;
-    setForm(rest); setFeaturesText((rest.features || []).join('\n')); setEditId(id); setFieldErrors({}); setModal(true);
+    setForm({ ...empty, ...rest, category: rest.category || 'conversion' });
+    setFeaturesText((rest.features || []).join('\n'));
+    setEditId(id);
+    setFieldErrors({});
+    setModal(true);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -47,18 +52,24 @@ export default function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Plugins</h1><p className="text-sm text-gray-500">Manage WooCommerce plugins catalog</p></div>
-        <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Product</button>
+        <div><h1 className="text-2xl font-bold text-gray-900">Plugins</h1><p className="text-sm text-gray-500">Manage WooCommerce plugins catalog by category</p></div>
+        <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Plugin</button>
       </div>
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
-            <tr><th className="px-4 py-3">Title</th><th className="px-4 py-3">Price</th><th className="px-4 py-3">Actions</th></tr>
+            <tr>
+              <th className="px-4 py-3">Title</th>
+              <th className="px-4 py-3">Category</th>
+              <th className="px-4 py-3">Price</th>
+              <th className="px-4 py-3">Actions</th>
+            </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
             {items.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium">{row.title}</td>
+                <td className="px-4 py-3 text-gray-500">{PLUGIN_CATEGORY_LABELS[row.category] || row.category || '—'}</td>
                 <td className="px-4 py-3 text-gray-500">{row.price}</td>
                 <td className="px-4 py-3 flex gap-1">
                   <EditBtn onClick={() => openEdit(row)} />
@@ -69,13 +80,20 @@ export default function AdminProducts() {
           </tbody>
         </table>
       </div>
-      <AdminModal title={editId ? 'Edit Product' : 'Add Product'} open={modal} onClose={() => setModal(false)} wide>
+      <AdminModal title={editId ? 'Edit Plugin' : 'Add Plugin'} open={modal} onClose={() => setModal(false)} wide>
         <form onSubmit={handleSubmit} noValidate>
           <div className="grid gap-4 sm:grid-cols-2">
             <FormField label="Title *" error={fieldErrors.title}><input className={fieldInputClass(!!fieldErrors.title)} value={form.title} onChange={(e) => set('title', e.target.value)} /></FormField>
             <FormField label="Slug" error={fieldErrors.slug}><input className={fieldInputClass(!!fieldErrors.slug)} value={form.slug} onChange={(e) => set('slug', e.target.value)} /></FormField>
           </div>
           <FormField label="Subtitle"><input className={fieldInputClass()} value={form.subtitle} onChange={(e) => set('subtitle', e.target.value)} /></FormField>
+          <FormField label="Category">
+            <select className={fieldInputClass()} value={form.category || 'conversion'} onChange={(e) => set('category', e.target.value)}>
+              {PLUGIN_CATEGORIES.map((c) => (
+                <option key={c.id} value={c.id}>{c.title}</option>
+              ))}
+            </select>
+          </FormField>
           <FormField label="Description" error={fieldErrors.description}><textarea rows={2} className={`${textareaClass}${fieldErrors.description ? ' border-red-400' : ''}`} value={form.description} onChange={(e) => set('description', e.target.value)} /></FormField>
           <FormField label="Full Content"><textarea rows={3} className={textareaClass} value={form.full_content} onChange={(e) => set('full_content', e.target.value)} /></FormField>
           <FormField label="Features (one per line)"><textarea rows={3} className={textareaClass} value={featuresText} onChange={(e) => setFeaturesText(e.target.value)} /></FormField>

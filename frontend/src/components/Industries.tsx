@@ -13,8 +13,8 @@ export default function Industries() {
       <div className="section-container">
         <h2 className="section-title">Industries We Serve</h2>
         <p className="section-subtitle">
-          With over 10+ years of WordPress and WooCommerce expertise, we partner with businesses
-          across diverse industries to craft scalable, impactful solutions.
+          We apply WordPress themes, WooCommerce stores, LearnDash programs, and care plans to the
+          industries we work in most — with scopes shaped to how each sector actually buys and operates.
         </p>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
