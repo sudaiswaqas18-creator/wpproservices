@@ -100,7 +100,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
   },
   'stock-alert-pro': {
     categoryLabel: 'Inventory',
-    tagline: 'Never miss a sale due to stockouts',
+    tagline: 'Catch low stock before it becomes a stockout',
     highlights: [
       { label: 'Alerts', value: 'Real-time' },
       { label: 'Channels', value: 'Email & Slack' },
@@ -118,11 +118,11 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
   },
   'review-boost': {
     categoryLabel: 'Social Proof',
-    tagline: 'Collect and showcase reviews that sell',
+    tagline: 'Collect product feedback buyers trust',
     highlights: [
       { label: 'Reviews', value: 'Auto-collect' },
       { label: 'Display', value: 'Rich snippets' },
-      { label: 'Trust', value: '+22% conversion' },
+      { label: 'Trust', value: 'Schema ready' },
     ],
     features: [
       'Automated post-purchase review requests',
@@ -136,7 +136,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
   },
   'subscripto': {
     categoryLabel: 'Subscriptions',
-    tagline: 'Recurring revenue made simple',
+    tagline: 'Recurring WooCommerce billing without clutter',
     highlights: [
       { label: 'Billing', value: 'Weekly to yearly' },
       { label: 'MRR', value: 'Dashboard included' },
@@ -154,10 +154,10 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
   },
   'checkout-flow': {
     categoryLabel: 'Checkout',
-    tagline: 'One-page checkout that converts',
+    tagline: 'Fewer steps between cart and paid order',
     highlights: [
       { label: 'Steps', value: '1-page checkout' },
-      { label: 'Abandonment', value: '-30% avg' },
+      { label: 'Abandonment', value: 'Lower friction' },
       { label: 'Fields', value: 'Smart auto-fill' },
     ],
     features: [
@@ -193,11 +193,11 @@ export function getProductEnrichment(slug: string, apiFeatures?: string[]): Prod
 export const supplementalProducts = [
   {
     id: 9001,
-    title: 'StockAlert Pro',
+    title: 'StockdenPro',
     slug: 'stock-alert-pro',
-    subtitle: 'Low Stock Notifications',
-    description: 'Real-time low stock alerts via email and Slack so you never miss a reorder.',
-    full_content: 'StockAlert Pro monitors your WooCommerce inventory around the clock and sends instant alerts when stock drops below your custom thresholds. Set per-product rules, get daily summary reports, and notify customers when items are back in stock.',
+    subtitle: 'Inventory Threshold Alerts',
+    description: 'Notify your ops team when WooCommerce stock dips below thresholds you set per SKU.',
+    full_content: 'StockdenPro watches WooCommerce inventory and sends email or Slack alerts when stock crosses your rules. Configure per product or variation, send daily digests, and notify shoppers when items are back in stock.',
     price: '$59',
     rating: '4.8/5',
     rating_count: '1,200+ stores',
@@ -205,11 +205,11 @@ export const supplementalProducts = [
   },
   {
     id: 9002,
-    title: 'ReviewBoost',
+    title: 'Prooflane Reviews',
     slug: 'review-boost',
-    subtitle: 'Review Collection & Display',
-    description: 'Automated review requests with photo uploads and Google rich snippets.',
-    full_content: 'ReviewBoost automates post-purchase review collection, supports photo and video uploads, and outputs schema markup for Google rich snippets — turning social proof into a conversion engine.',
+    subtitle: 'Post-Purchase Review Collection',
+    description: 'Request reviews automatically after delivery and display them with schema markup.',
+    full_content: 'Prooflane Reviews schedules post-purchase review asks, supports photo uploads, and outputs rich-result markup so social proof helps both shoppers and search visibility.',
     price: '$49',
     rating: '4.9/5',
     rating_count: '2,500+ stores',
@@ -217,11 +217,11 @@ export const supplementalProducts = [
   },
   {
     id: 9003,
-    title: 'Subscripto',
+    title: 'Subscrivo',
     slug: 'subscripto',
-    subtitle: 'Subscription Management',
-    description: 'Flexible subscriptions with trials, self-service portal, and MRR analytics.',
-    full_content: 'Subscripto gives WooCommerce stores a complete subscription engine — flexible billing intervals, free trials, customer self-service, and an MRR dashboard to track recurring revenue growth.',
+    subtitle: 'Subscription Billing for WooCommerce',
+    description: 'Flexible intervals, self-service portal, and a clear view of recurring revenue.',
+    full_content: 'Subscrivo adds subscription billing to WooCommerce with trials, pause and skip options, customer self-service, and an MRR dashboard for recurring revenue tracking.',
     price: '$129',
     rating: '4.9/5',
     rating_count: '800+ stores',
@@ -229,11 +229,11 @@ export const supplementalProducts = [
   },
   {
     id: 9004,
-    title: 'CheckoutFlow',
+    title: 'LaneCheckout',
     slug: 'checkout-flow',
-    subtitle: 'One-Page Checkout',
-    description: 'Distraction-free checkout with express pay and order bump upsells.',
-    full_content: 'CheckoutFlow replaces your multi-step checkout with a fast, mobile-optimized one-page experience. Includes address validation, express payment buttons, and strategic order bumps to increase average order value.',
+    subtitle: 'Streamlined One-Page Checkout',
+    description: 'Reduce steps at checkout with express pay options and optional order bumps.',
+    full_content: 'LaneCheckout replaces multi-step checkout with a focused one-page flow, address helpers, express wallets, and optional bumps designed to protect conversion on mobile.',
     price: '$89',
     rating: '5.0/5',
     rating_count: '1,800+ stores',

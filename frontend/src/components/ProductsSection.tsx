@@ -33,8 +33,10 @@ export default function ProductsSection() {
   return (
     <section className="bg-surface-elevated py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">High-Impact WordPress Plugins</h2>
-        <p className="section-subtitle mx-auto text-center">For Growth-Focused Businesses</p>
+        <h2 className="section-title text-center">WooCommerce Plugins Built for Real Stores</h2>
+        <p className="section-subtitle mx-auto text-center">
+          Practical extensions for inventory, reviews, subscriptions, and checkout — maintained for modern WooCommerce.
+        </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((p, i) => {
             const enriched = getProductEnrichment(p.slug, p.features);

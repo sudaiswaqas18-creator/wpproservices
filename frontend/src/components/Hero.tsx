@@ -6,15 +6,15 @@ import ContactLink from './ContactLink';
 const HeroShowcase = lazy(() => import('./HeroShowcase'));
 
 const trustPoints = [
-  '500+ Projects Delivered',
-  '27+ Countries Served',
-  '4.9★ Client Rating',
+  '180+ WordPress Builds Shipped',
+  '14 Countries Worked With',
+  '4.8★ Average Client Rating',
 ];
 
 const highlights = [
-  'Custom WordPress & WooCommerce',
-  'Enterprise-grade performance',
-  'Dedicated expert teams',
+  'WordPress & WooCommerce builds from scratch',
+  'Core Web Vitals–minded performance work',
+  'Safe migrations with redirects and QA',
 ];
 
 export default function Hero() {
@@ -51,20 +51,20 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <Sparkles size={14} className="text-accent" aria-hidden="true" />
-              Premium WordPress Development Agency
+              WordPress Development, Done Properly
             </div>
 
             <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
-              Website Experiences{' '}
+              WordPress Sites Built{' '}
               <span className="relative inline-block">
-                <span className="text-accent">Beautifully Crafted</span>
+                <span className="text-accent">to Perform</span>
                 <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-secondary" />
               </span>
             </h1>
 
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-              We design and develop high-performance WordPress websites that help ambitious brands
-              stand out, convert visitors, and scale with confidence.
+              Custom themes, WooCommerce stores, and plugin work engineered for speed, clarity,
+              and long-term maintainability — so your site stays reliable as you grow.
             </p>
 
             <ul className="mt-6 space-y-2.5">
@@ -80,11 +80,11 @@ export default function Hero() {
 
             <div className="mt-8 flex flex-wrap gap-4">
               <ContactLink className="btn-primary group inline-flex items-center gap-2 px-7 py-3.5 text-base shadow-lg shadow-accent/25">
-                Start Your Project
+                Book a Discovery Call
                 <ArrowRight size={18} className="transition group-hover:translate-x-0.5" aria-hidden="true" />
               </ContactLink>
               <Link to="/services" className="btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-base">
-                Explore Services
+                Browse WordPress Services
               </Link>
             </div>
 

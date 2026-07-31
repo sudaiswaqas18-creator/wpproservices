@@ -6,7 +6,7 @@ import { api } from '../api/client';
 import { validateContactForm, fieldClass, FieldErrors, hasErrors } from '../utils/validation';
 
 const budgets = [
-  'Select your Budget',
+  'Select a budget range',
   'Under $1,500',
   '$1,500 - $3,000',
   '$3,000 - $5,000',
@@ -101,12 +101,12 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
         >
           <CheckCircle size={32} />
         </motion.div>
-        <h3 className="mt-6 text-2xl font-bold text-gray-900">Thank you for reaching out!</h3>
+        <h3 className="mt-6 text-2xl font-bold text-gray-900">Thanks — we received your brief</h3>
         <p className="mt-3 text-gray-600">
-          We&apos;ll review your project details and get back to you within 24 hours.
+          A WordPress specialist will review your notes and follow up with next steps.
         </p>
-        <p className="mt-2 text-sm font-semibold text-brand-600">Expected Response Time: 1–2 Business Days</p>
-        <p className="mt-1 text-sm text-gray-500">Check your email for confirmation.</p>
+        <p className="mt-2 text-sm font-semibold text-brand-600">Typical reply window: 1–2 business days</p>
+        <p className="mt-1 text-sm text-gray-500">Watch your inbox for our confirmation email.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button type="button" onClick={() => setStatus('idle')} className="btn-outline">
             Submit Another Request
@@ -129,12 +129,12 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
       {!compact && (
         <div className="mb-6">
           <h3 className="text-xl font-bold text-gray-900">
-            {purchaseProduct ? 'Complete Your Plugin Purchase' : 'Start with a FREE Consultation'}
+            {purchaseProduct ? 'Complete Your Plugin Enquiry' : 'Request a WordPress Consultation'}
           </h3>
           <p className="mt-1 text-sm text-gray-500">
             {purchaseProduct
-              ? `You're enquiring about ${purchaseProduct}${purchasePrice ? ` (${purchasePrice})` : ''}. We respond within 24 hours.`
-              : 'Tell us about your project — we respond within 24 hours.'}
+              ? `You're asking about ${purchaseProduct}${purchasePrice ? ` (${purchasePrice})` : ''}. We typically reply within one business day.`
+              : 'Share a short brief — we usually reply within one business day.'}
           </p>
         </div>
       )}
@@ -148,7 +148,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-gray-700">Your Name *</label>
+          <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-gray-700">Full Name *</label>
           <input
             id="contact-name"
             type="text"
@@ -156,13 +156,13 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             onChange={(e) => update('name', e.target.value)}
             onBlur={() => blur('name')}
             className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('name')))}
-            placeholder="John Smith"
+            placeholder="Alex Morgan"
             autoComplete="name"
           />
           {show('name') && <p className="mt-1 text-xs text-red-600" role="alert">⚠ {errors.name}</p>}
         </div>
         <div>
-          <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium text-gray-700">Your Phone No.</label>
+          <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium text-gray-700">Phone (optional)</label>
           <input
             id="contact-phone"
             type="tel"
@@ -170,7 +170,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             onChange={(e) => update('phone', e.target.value)}
             onBlur={() => blur('phone')}
             className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('phone')))}
-            placeholder="+1 (555) 000-0000"
+            placeholder="+1 (555) 123-4567"
             autoComplete="tel"
           />
           {show('phone') && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
@@ -184,13 +184,13 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             onChange={(e) => update('email', e.target.value)}
             onBlur={() => blur('email')}
             className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('email')))}
-            placeholder="you@company.com"
+            placeholder="alex@yourcompany.com"
             autoComplete="email"
           />
           {show('email') && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="contact-budget" className="mb-1.5 block text-sm font-medium text-gray-700">Your Budget *</label>
+          <label htmlFor="contact-budget" className="mb-1.5 block text-sm font-medium text-gray-700">Project Budget *</label>
           <select
             id="contact-budget"
             value={form.budget}
@@ -199,7 +199,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('budget')))}
           >
             {budgets.map((b) => (
-              <option key={b} value={b === 'Select your Budget' ? '' : b}>
+              <option key={b} value={b === 'Select a budget range' ? '' : b}>
                 {b}
               </option>
             ))}
@@ -209,16 +209,16 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
       </div>
 
       <div className="mt-4">
-        <label htmlFor="contact-details" className="mb-1.5 block text-sm font-medium text-gray-700">Project Details *</label>
-        <textarea
-          id="contact-details"
-          rows={4}
-          value={form.project_details}
-          onChange={(e) => update('project_details', e.target.value)}
-          onBlur={() => blur('project_details')}
-          className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('project_details')))}
-          placeholder="Describe your project goals, timeline, and any specific requirements..."
-        />
+          <label htmlFor="contact-details" className="mb-1.5 block text-sm font-medium text-gray-700">Project Brief *</label>
+          <textarea
+            id="contact-details"
+            rows={4}
+            value={form.project_details}
+            onChange={(e) => update('project_details', e.target.value)}
+            onBlur={() => blur('project_details')}
+            className={fieldClass(`${inputBase} border-gray-200 focus:border-brand-500 focus:ring-brand-500/20`, Boolean(show('project_details')))}
+            placeholder="Example: WooCommerce rebuild, custom plugin, migration from Shopify, or ongoing WordPress care…"
+          />
         <div className="mt-1 flex justify-between">
           {show('project_details') ? (
             <p className="text-xs text-red-600">{errors.project_details}</p>
@@ -267,7 +267,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
           </>
         ) : (
           <>
-            Get Free Consultation
+            Send Project Brief
             <Send size={16} />
           </>
         )}

@@ -10,24 +10,24 @@ interface SiteStat {
 }
 
 const FALLBACK_STATS: SiteStat[] = [
-  { stat_value: '500+', stat_label: 'Projects Delivered' },
-  { stat_value: '27+', stat_label: 'Countries Served' },
-  { stat_value: '4.9★', stat_label: 'Clutch Rating' },
-  { stat_value: '10+', stat_label: 'Years Experience' },
-  { stat_value: '99.9%', stat_label: 'Uptime SLA' },
-  { stat_value: '50+', stat_label: 'Expert Developers' },
-  { stat_value: '24/7', stat_label: 'Support Available' },
-  { stat_value: '100%', stat_label: 'Client Satisfaction' },
+  { stat_value: '180+', stat_label: 'WordPress Projects' },
+  { stat_value: '14', stat_label: 'Countries Worked With' },
+  { stat_value: '4.8★', stat_label: 'Client Satisfaction' },
+  { stat_value: '8+', stat_label: 'Years on WordPress' },
+  { stat_value: '60+', stat_label: 'WooCommerce Stores' },
+  { stat_value: '40+', stat_label: 'Custom Plugins Shipped' },
+  { stat_value: '48h', stat_label: 'Typical Proposal Turnaround' },
+  { stat_value: '95%', stat_label: 'Clients Under Retainer Care' },
 ];
 
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
 const FALLBACK_AWARDS: Award[] = [
-  { id: 1, title: 'Best UI Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-  { id: 2, title: 'Best UX Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-  { id: 3, title: 'Best Innovation', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-  { id: 4, title: 'Top WordPress Agency', organization: 'Clutch', year: '2026', badge_label: '4.7/5' },
-  { id: 5, title: 'Top Design Agency', organization: 'DesignRush', year: '2026', badge_label: '4.8/5' },
+  { id: 1, title: '5-Star Client Feedback', organization: 'Verified project reviews', year: '2026', badge_label: '5.0' },
+  { id: 2, title: 'WordPress Specialists', organization: 'Theme, plugin & WooCommerce focus', year: '2026', badge_label: '100%' },
+  { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals on every launch', year: '2026', badge_label: 'CWV' },
+  { id: 4, title: 'Trusted Delivery Partner', organization: 'Long-term retainers & handoffs', year: '2026', badge_label: 'Partner' },
+  { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & staging QA', year: '2026', badge_label: 'Secure' },
 ];
 
 function AwardsSection() {
@@ -43,7 +43,7 @@ function AwardsSection() {
   return (
     <section className="border-y border-border bg-gradient-to-b from-background to-surface py-16">
       <div className="section-container text-center">
-        <h2 className="text-2xl font-bold text-ink">Global Awards & Recognitions</h2>
+        <h2 className="text-2xl font-bold text-ink">Trust Signals We Stand Behind</h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {awards.map((a) => (
             <div key={a.id} className="rounded-xl border border-surface-200 bg-white p-5 shadow-card transition hover:border-brand-400 hover:shadow-cardHover">
@@ -62,9 +62,9 @@ function AwardsSection() {
 interface CaseStudy { id: number; title: string; client: string; slug: string; tech_stack: string; result_summary: string; }
 
 const FALLBACK_FEATURED_CASES: CaseStudy[] = [
-  { id: 1, title: 'Smart Shipping Rules Boost Repeat Orders', client: 'FreshHarvest Market', slug: 'freshharvest-shipping', tech_stack: 'WooCommerce + PHP', result_summary: '+38% Returning Orders' },
-  { id: 2, title: 'Gated LMS for Private Education', client: 'EduVault Members', slug: 'eduvault-lms', tech_stack: 'LearnDash + React', result_summary: '+32% Completion Rate' },
-  { id: 3, title: 'Cart Recovery Increases Revenue', client: 'StyleBox Boutique', slug: 'stylebox-cart-recovery', tech_stack: 'Custom Plugin + REST API', result_summary: '+25% Recovery Rate' },
+  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'Northgrove Grocers', slug: 'freshharvest-shipping', tech_stack: 'WooCommerce + Custom PHP', result_summary: '+31% Repeat Checkouts' },
+  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Brightline Learning Co.', slug: 'eduvault-lms', tech_stack: 'LearnDash + Custom Theme', result_summary: '+28% Course Completions' },
+  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'Thread & Loom Studio', slug: 'stylebox-cart-recovery', tech_stack: 'Custom Plugin + Email API', result_summary: '+22% Recovered Carts' },
 ];
 
 function FeaturedCases() {
@@ -82,8 +82,8 @@ function FeaturedCases() {
   return (
     <section className="bg-surface-elevated py-20">
       <div className="section-container">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Featured Cases</p>
-        <h2 className="section-title mt-2">Driving Change Through Innovative Projects</h2>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Selected Work</p>
+        <h2 className="section-title mt-2">WordPress Projects With Measurable Outcomes</h2>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {cases.map((cs) => (
             <article key={cs.id} className="card">
@@ -142,10 +142,11 @@ function PhilosophySection() {
     <section className="bg-surface py-16">
       <div className="section-container max-w-4xl text-center">
         <h2 className="text-2xl font-bold text-ink sm:text-3xl">
-          Our Bar Is Simple: Websites Should Feel Effortless For Users, And Stay Dependable For Teams.
+          Our Standard Is Clear: WordPress Should Feel Fast for Visitors and Steady for Your Team.
         </h2>
         <p className="mt-4 text-lg text-gray-600">
-          That is why we build solutions that perform when real users, real traffic, and real growth hit.
+          We ship themes, stores, and plugins that hold up under real traffic — with clean code, staging QA,
+          and handoff docs your editors can actually use.
         </p>
       </div>
     </section>

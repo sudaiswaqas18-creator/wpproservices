@@ -24,8 +24,8 @@ export interface ServiceCategoryDef {
 export const SERVICE_CATEGORIES: ServiceCategoryDef[] = [
   {
     id: 'development',
-    title: 'Website Development',
-    desc: 'Custom tailored tech solutions scaling from robust infrastructures to beautiful, high-performance web applications.',
+    title: 'WordPress & WooCommerce Development',
+    desc: 'Custom themes, storefronts, and plugin features built for your catalog, content model, and editorial workflow — not a one-size template.',
     icon: Code2,
     slugs: [
       'wordpress-website-development',
@@ -43,8 +43,8 @@ export const SERVICE_CATEGORIES: ServiceCategoryDef[] = [
   },
   {
     id: 'revamp',
-    title: 'Website Revamp',
-    desc: 'Refresh existing experiences with focused redesign and migration work that lifts conversion.',
+    title: 'Redesign & Migration',
+    desc: 'Refresh outdated WordPress sites or move from another CMS with a redirect plan, content map, and staged cutover so SEO and checkout stay intact.',
     icon: RefreshCw,
     slugs: ['wordpress-redesign', 'wordpress-migration'],
     links: [
@@ -54,8 +54,8 @@ export const SERVICE_CATEGORIES: ServiceCategoryDef[] = [
   },
   {
     id: 'performance',
-    title: 'Performance Optimization',
-    desc: 'Make sites measurably faster — page speed, server response, asset weight.',
+    title: 'Speed, SEO & Maintenance',
+    desc: 'Improve LCP, reduce plugin bloat, tighten caching, and keep WordPress, themes, and plugins patched on a predictable cadence.',
     icon: Zap,
     slugs: ['wordpress-speed-optimization', 'wordpress-seo-services', 'wordpress-maintenance'],
     links: [
@@ -65,8 +65,8 @@ export const SERVICE_CATEGORIES: ServiceCategoryDef[] = [
   },
   {
     id: 'partnership',
-    title: 'Technology Partnership',
-    desc: 'Long-term retainer engagements with dedicated WordPress, WooCommerce, and LearnDash teams.',
+    title: 'Dedicated WordPress Teams',
+    desc: 'Ongoing capacity for feature work, WooCommerce tweaks, and LearnDash updates — with a retainer so you are not starting from zero each sprint.',
     icon: Users,
     slugs: ['hire-wordpress-developers', 'hire-woocommerce-developers'],
     links: [
@@ -76,8 +76,8 @@ export const SERVICE_CATEGORIES: ServiceCategoryDef[] = [
   },
   {
     id: 'automation',
-    title: 'AI Automations',
-    desc: 'Workflow automation that saves teams hours every week.',
+    title: 'WordPress Workflow Automation',
+    desc: 'Connect forms, CRM, and store events so lead routing, inventory alerts, and content tasks run without manual busywork.',
     icon: Bot,
     slugs: ['wordpress-ai-automation'],
     links: [{ label: 'Custom Automation Workflows', slug: 'wordpress-ai-automation' }],

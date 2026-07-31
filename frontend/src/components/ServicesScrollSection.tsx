@@ -77,10 +77,10 @@ export default function ServicesScrollSection() {
       <div>
         <span className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700">
           <Layers size={14} />
-          Services
+          WordPress Services
         </span>
 
-        <h2 className="section-title mt-5">Our Services</h2>
+        <h2 className="section-title mt-5">How We Help WordPress Teams Ship</h2>
 
         <p className="mt-2 text-sm font-semibold text-brand-600">
           {String(active + 1).padStart(2, '0')} / {String(COUNT).padStart(2, '0')}

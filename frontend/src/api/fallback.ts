@@ -11,83 +11,319 @@ import type {
 
 export const fallbackData = {
   testimonials: [
-    { id: 1, name: 'Sarah Mitchell', company: 'Horizon Analytics | USA', country: 'USA', quote: 'WPProServices delivered beyond expectations. Their team understood our analytics platform needs and built a WordPress site that converts visitors into qualified leads consistently.', metric_label: 'Monthly lead growth' },
-    { id: 2, name: 'David Chen', company: 'SkillBridge Academy | Singapore', country: 'Singapore', quote: 'What impressed me most was their thorough discovery process. They asked questions we never considered and built an LMS that our students actually enjoy using.', metric_label: 'Student engagement' },
-    { id: 3, name: 'Anna Kowalski', company: 'GreenPath Retail | Poland', country: 'Poland', quote: 'We migrated from a legacy platform with zero downtime. WPProServices handled every detail — speed, SEO, and checkout flow all improved dramatically.', metric_label: 'Checkout conversion' },
+    {
+      id: 1,
+      name: 'Elena Vargas',
+      company: 'Coastline Analytics | USA',
+      country: 'USA',
+      quote:
+        'They rebuilt our marketing site on WordPress with a clean block theme and clearer lead forms. Our team can publish without breaking layouts, and page speed finally matches what sales promised clients.',
+      metric_label: 'Qualified form completions',
+    },
+    {
+      id: 2,
+      name: 'Kenji Nakamura',
+      company: 'Harbor Course Labs | Singapore',
+      country: 'Singapore',
+      quote:
+        'The LearnDash work was careful and practical. Enrollment, drip content, and progress tracking feel dependable — and our instructors stopped filing tickets about broken lesson pages.',
+      metric_label: 'Course completion rate',
+    },
+    {
+      id: 3,
+      name: 'Marta Nowak',
+      company: 'Field & Thread Retail | Poland',
+      country: 'Poland',
+      quote:
+        'Our WooCommerce migration stayed online the whole weekend. Redirects, product data, and checkout were checked in staging first — that discipline made the cutover uneventful in the best way.',
+      metric_label: 'Checkout completion',
+    },
   ] as Testimonial[],
 
   caseStudies: [
-    { id: 1, title: 'Smart Shipping Rules Boost Repeat Orders', client: 'FreshHarvest Market (E-commerce)', challenge: 'Repeat customers were charged shipping on every order, reducing cart completion and loyalty.', solution: 'Built a custom WooCommerce plugin that auto-applies free shipping for returning customers based on address history and order thresholds.', metric1_label: 'Returning Orders', metric1_value: '+38%', metric2_label: 'Cart Conversion', metric2_value: '+29%', metric3_label: 'Average Order Value', metric3_value: '+15%', slug: 'freshharvest-shipping' },
-    { id: 2, title: 'Gated LMS for Private Education Community', client: 'EduVault Members', challenge: 'A closed learning community needed secure access, live sessions, and custom workflows beyond standard plugins.', solution: 'Developed a LearnDash-powered platform with bespoke access control, scheduling, and member-only content delivery.', metric1_label: 'Completion Rate', metric1_value: '+32%', metric2_label: 'Admin Time Saved', metric2_value: '-45%', metric3_label: 'Uptime', metric3_value: '99.9%', slug: 'eduvault-lms' },
+    {
+      id: 1,
+      title: 'Loyalty Shipping Rules That Cut Cart Friction',
+      client: 'Northgrove Grocers (E-commerce)',
+      challenge: 'Returning shoppers paid shipping on every order, which hurt repeat checkouts.',
+      solution:
+        'Built WooCommerce rules that unlock free shipping for eligible returning customers using order history and address matching.',
+      metric1_label: 'Repeat Checkouts',
+      metric1_value: '+31%',
+      metric2_label: 'Cart Completion',
+      metric2_value: '+24%',
+      metric3_label: 'Average Order Value',
+      metric3_value: '+12%',
+      slug: 'freshharvest-shipping',
+    },
+    {
+      id: 2,
+      title: 'Member-Only LMS With Controlled Access',
+      client: 'Brightline Learning Co.',
+      challenge: 'A private training community needed gated courses and admin tools beyond stock LMS plugins.',
+      solution:
+        'Delivered a LearnDash setup with custom access rules, scheduling helpers, and clearer progress views for members and staff.',
+      metric1_label: 'Course Completions',
+      metric1_value: '+28%',
+      metric2_label: 'Admin Hours',
+      metric2_value: '-40%',
+      metric3_label: 'Uptime',
+      metric3_value: '99.9%',
+      slug: 'eduvault-lms',
+    },
   ] as CaseStudy[],
 
   services: [
-    { id: 1, title: 'Website Design', subtitle: 'Build a powerful first impression', description: 'We craft user-friendly, modern, and conversion-focused WordPress websites that reflect your brand and engage your audience from the first click.', icon: 'palette' },
-    { id: 2, title: 'Custom Development', subtitle: 'Beyond setup, built to perform', description: 'From optimized hosting to advanced WordPress architecture, we create secure, scalable environments that run flawlessly under real-world traffic.', icon: 'code' },
-    { id: 3, title: 'Ongoing Maintenance', subtitle: 'Hassle-free website management', description: 'Regular updates, automated backups, and proactive security monitoring keep your site running smoothly without interruptions.', icon: 'shield' },
-    { id: 4, title: 'Payment Integration', subtitle: 'Simplify online payments', description: 'We integrate Stripe, PayPal, Razorpay, and Authorize.net for seamless, secure checkout experiences your customers trust.', icon: 'credit-card' },
-    { id: 5, title: 'Speed & SEO Optimization', subtitle: 'Rank higher, load faster', description: 'Core Web Vitals optimization, mobile-first design, and SEO best practices to drive organic traffic and conversions.', icon: 'zap' },
-    { id: 6, title: 'Theme & Plugin Customization', subtitle: 'Tailored solutions for your needs', description: 'Custom themes, bespoke plugins, and extended functionality — WordPress shaped exactly to your business goals.', icon: 'puzzle' },
+    {
+      id: 1,
+      title: 'Custom WordPress Themes',
+      subtitle: 'Editorial-ready front ends',
+      description:
+        'Block-friendly themes tailored to your brand, content types, and editor workflows — without fragile page-builder lock-in.',
+      icon: 'palette',
+    },
+    {
+      id: 2,
+      title: 'WooCommerce Development',
+      subtitle: 'Stores that stay maintainable',
+      description:
+        'Catalog structure, checkout UX, shipping logic, and payment integrations built for how your operations actually run.',
+      icon: 'code',
+    },
+    {
+      id: 3,
+      title: 'WordPress Care & Updates',
+      subtitle: 'Steady after launch',
+      description:
+        'Scheduled updates, backups, uptime checks, and small fixes so your site does not drift into plugin debt.',
+      icon: 'shield',
+    },
+    {
+      id: 4,
+      title: 'Checkout & Payments',
+      subtitle: 'Reliable purchase flows',
+      description:
+        'Stripe, PayPal, and related gateways wired carefully with testing for edge cases that break carts in production.',
+      icon: 'credit-card',
+    },
+    {
+      id: 5,
+      title: 'Speed & Technical SEO',
+      subtitle: 'Faster pages, clearer crawl paths',
+      description:
+        'Caching, image strategy, database cleanup, and on-page structure improvements aimed at Core Web Vitals and indexing health.',
+      icon: 'zap',
+    },
+    {
+      id: 6,
+      title: 'Custom Plugin Development',
+      subtitle: 'Features you cannot buy off the shelf',
+      description:
+        'Purpose-built plugins for pricing rules, memberships, integrations, and store workflows — documented for long-term ownership.',
+      icon: 'puzzle',
+    },
   ] as Service[],
 
   pricing: [
-    { id: 1, name: 'Build & Launch', tagline: 'Built for businesses that need a robust, future-ready WordPress presence from day one.', price: '$4,200', original_price: '$6,800', discount_label: '38% Off', is_best_seller: true, features: ['Foundational SEO audit for launch readiness', 'Core keyword mapping & SEO-friendly structure', 'Website design & development — 5 key pages', 'Conversion-focused, responsive layouts', 'Complete setup, testing & launch', 'Google Analytics & Search Console setup'] },
-    { id: 2, name: 'Re-Design & Convert', tagline: 'For sites with outdated design that aren\'t converting.', price: 'Custom Quote', original_price: '$5,200', discount_label: '45% Off', is_best_seller: false, features: ['Custom design tailored to your brand identity', 'CTA-focused wireframe planning', 'UX improvements for clarity & engagement', 'WordPress build with Elementor or Gutenberg', 'Advanced analytics & conversion reporting', 'SEO-optimized copywriting included'] },
+    {
+      id: 1,
+      name: 'Build & Launch',
+      tagline: 'A solid WordPress foundation for marketing sites that need to ship cleanly.',
+      price: '$4,200',
+      original_price: '$6,800',
+      discount_label: '38% Off',
+      is_best_seller: true,
+      features: [
+        'Launch-ready SEO structure',
+        'Core keyword mapping',
+        'Up to 5 key page templates',
+        'Responsive theme build',
+        'Staging, QA & go-live',
+        'Analytics & Search Console setup',
+      ],
+    },
+    {
+      id: 2,
+      name: 'Re-Design & Convert',
+      tagline: 'For WordPress sites that look dated or leak conversions.',
+      price: 'Custom Quote',
+      original_price: '$5,200',
+      discount_label: '45% Off',
+      is_best_seller: false,
+      features: [
+        'Brand-aligned redesign',
+        'CTA-focused information architecture',
+        'UX improvements for clarity',
+        'Gutenberg or Elementor build',
+        'Conversion reporting setup',
+        'SEO-conscious copy support',
+      ],
+    },
   ] as PricingPlan[],
 
   faqs: [
-    { id: 1, question: 'Does WPProServices provide custom themes and plugins?', answer: 'Yes. We design and develop custom WordPress themes aligned with your brand and build plugins that extend functionality exactly how your business needs.' },
-    { id: 2, question: 'Why choose WPProServices for WordPress development?', answer: 'We specialize in scalable, conversion-focused WordPress websites. Our team combines design excellence with clean code and long-term maintainability.' },
-    { id: 3, question: 'What is the cost of building a WordPress website?', answer: 'Cost varies by complexity, features, and customization. We provide detailed quotes after understanding your goals.' },
-    { id: 4, question: 'How long does development typically take?', answer: 'Most projects take 4–8 weeks depending on scope — covering discovery, design, development, testing, and revisions.' },
+    {
+      id: 1,
+      question: 'Do you build custom WordPress themes and plugins?',
+      answer:
+        'Yes. We design and develop custom themes and plugins when stock options cannot cover your workflow, pricing, or content model.',
+    },
+    {
+      id: 2,
+      question: 'Why work with a WordPress-focused studio?',
+      answer:
+        'We stay inside the WordPress ecosystem daily — WooCommerce, LearnDash, performance, and migrations — so delivery stays practical and maintainable.',
+    },
+    {
+      id: 3,
+      question: 'How is project pricing determined?',
+      answer:
+        'Scope, integrations, content volume, and timeline drive cost. After a short discovery call we provide a written estimate.',
+    },
+    {
+      id: 4,
+      question: 'How long does a typical build take?',
+      answer:
+        'Most marketing sites and mid-size stores take about 4–8 weeks from discovery through launch, depending on feedback cycles and content readiness.',
+    },
   ] as FAQ[],
 
   blog: [
-    { id: 1, title: 'How to Migrate WordPress Without Breaking Your SEO', slug: 'migrate-wordpress-seo', excerpt: 'Most migrations break something the founder discovers too late.', image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600', published_at: '2025-06-12' },
-    { id: 2, title: 'Website Redesign Checklist for Growing Businesses', slug: 'website-redesign-checklist', excerpt: 'Your website could be your biggest liability. Use this checklist before you scale.', image_url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600', published_at: '2025-05-15' },
-    { id: 3, title: 'Why Stock WooCommerce Stops Working at Scale', slug: 'woocommerce-customization-scale', excerpt: 'Five customizations most founders need first when revenue crosses $1M ARR.', image_url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600', published_at: '2025-04-08' },
-    { id: 4, title: 'Core Web Vitals: A Practical Guide for WordPress', slug: 'core-web-vitals-wordpress', excerpt: 'Speed is not a nice-to-have anymore. Here is how to fix LCP, CLS, and INP on real business sites.', image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600', published_at: '2025-03-20' },
-    { id: 5, title: 'When to Hire a WordPress Agency vs In-House', slug: 'hire-wordpress-agency', excerpt: 'The decision framework we use with founders evaluating build, redesign, and long-term support.', image_url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600', published_at: '2025-02-10' },
+    {
+      id: 1,
+      title: 'A Safer WordPress Migration Checklist for SEO',
+      slug: 'migrate-wordpress-seo',
+      excerpt: 'Redirect maps, staging checks, and post-cutover Search Console habits that prevent ranking surprises.',
+      image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600',
+      published_at: '2025-06-12',
+    },
+    {
+      id: 2,
+      title: 'When a WordPress Redesign Is Worth the Investment',
+      slug: 'website-redesign-checklist',
+      excerpt: 'Signals that your theme, UX, or conversion paths are costing more than a structured rebuild.',
+      image_url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600',
+      published_at: '2025-05-15',
+    },
+    {
+      id: 3,
+      title: 'Where Stock WooCommerce Starts to Strain',
+      slug: 'woocommerce-customization-scale',
+      excerpt: 'Checkout friction, shipping rules, and plugin conflicts that show up as catalogs and traffic grow.',
+      image_url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600',
+      published_at: '2025-04-08',
+    },
+    {
+      id: 4,
+      title: 'Core Web Vitals Fixes That Matter on WordPress',
+      slug: 'core-web-vitals-wordpress',
+      excerpt: 'Practical LCP, CLS, and INP improvements for theme and WooCommerce pages — not lab-only tips.',
+      image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600',
+      published_at: '2025-03-20',
+    },
+    {
+      id: 5,
+      title: 'Agency vs In-House WordPress Capacity',
+      slug: 'hire-wordpress-agency',
+      excerpt: 'How to decide between a retainer team and hiring when you need themes, plugins, and care coverage.',
+      image_url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600',
+      published_at: '2025-02-10',
+    },
   ] as BlogPost[],
 
   industries: [
-    { id: 1, title: 'E-Commerce & Retail', description: 'Launch WooCommerce stores with sub-2-second load times and app-like mobile experiences.', has_case_study: true },
-    { id: 2, title: 'Education & E-Learning', description: 'Interactive lessons, progress tracking, and mobile-first LMS interfaces.', has_case_study: false },
-    { id: 3, title: 'Healthcare & Wellness', description: 'Patient-friendly navigation, online booking, and secure forms.', has_case_study: false },
-    { id: 4, title: 'Corporate & B2B', description: 'Clear service showcases, lead-generation forms, and professional layouts.', has_case_study: true },
+    {
+      id: 1,
+      title: 'E-Commerce & Retail',
+      description: 'WooCommerce catalogs, checkout polish, and performance work for product-led businesses.',
+      has_case_study: true,
+    },
+    {
+      id: 2,
+      title: 'Education & E-Learning',
+      description: 'LearnDash and membership setups with clear progress tracking and gated content.',
+      has_case_study: false,
+    },
+    {
+      id: 3,
+      title: 'Healthcare & Wellness',
+      description: 'Accessible WordPress sites with booking forms and careful handling of sensitive content.',
+      has_case_study: false,
+    },
+    {
+      id: 4,
+      title: 'Corporate & B2B',
+      description: 'Service sites with lead capture, case study templates, and editor-friendly page patterns.',
+      has_case_study: true,
+    },
   ] as Industry[],
 
   portfolio: [
-    { id: 1, title: 'Urban Brew Coffee', category: 'WooCommerce Store', image_url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800' },
-    { id: 2, title: 'AccessAbility UK', category: 'Corporate Website', image_url: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800' },
-    { id: 3, title: 'LearnSphere Academy', category: 'LMS Dashboard', image_url: 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?w=800' },
-    { id: 4, title: 'NovaTech Solutions', category: 'B2B Portal', image_url: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800' },
+    { id: 1, title: 'Harbor Roast Co.', category: 'WooCommerce Store', image_url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800' },
+    { id: 2, title: 'AccessFirst Partners', category: 'Corporate Website', image_url: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800' },
+    { id: 3, title: 'North Course Academy', category: 'LMS Dashboard', image_url: 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?w=800' },
+    { id: 4, title: 'ParcelForge Systems', category: 'B2B Portal', image_url: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800' },
   ] as PortfolioItem[],
 
   awards: [
-    { id: 1, title: 'Best UI Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-    { id: 2, title: 'Best UX Design', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-    { id: 3, title: 'Best Innovation', organization: 'CSS Design Awards', year: '2026', badge_label: 'WINNER' },
-    { id: 4, title: 'Top WordPress Agency', organization: 'Clutch', year: '2026', badge_label: '4.7/5' },
-    { id: 5, title: 'Top Design Agency', organization: 'DesignRush', year: '2026', badge_label: '4.8/5' },
+    { id: 1, title: '5-Star Client Feedback', organization: 'Verified project reviews', year: '2026', badge_label: '5.0' },
+    { id: 2, title: 'WordPress Specialists', organization: 'Theme, plugin & WooCommerce focus', year: '2026', badge_label: '100%' },
+    { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals on every launch', year: '2026', badge_label: 'CWV' },
+    { id: 4, title: 'Trusted Delivery Partner', organization: 'Long-term retainers & handoffs', year: '2026', badge_label: 'Partner' },
+    { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & staging QA', year: '2026', badge_label: 'Secure' },
   ],
 
   tools: [
-    { id: 1, title: 'Speed & Performance Estimator', slug: 'speed-estimator', description: 'Estimate potential page speed improvements and Core Web Vitals gains.', icon: 'zap', is_new: true },
-    { id: 2, title: 'Security Hardening Checklist', slug: 'security-checklist', description: 'Audit your WordPress installation against 15+ common vulnerability vectors.', icon: 'shield', is_new: false },
-    { id: 3, title: 'Plugin Conflict Troubleshooter', slug: 'plugin-troubleshooter', description: 'Step-by-step diagnostic workflow to locate incompatible plugins fast.', icon: 'bug', is_new: false },
+    {
+      id: 1,
+      title: 'Core Web Vitals Scorecard',
+      slug: 'speed-estimator',
+      description: 'Estimate where your WordPress or WooCommerce pages lose time — LCP, CLS, and server response.',
+      icon: 'zap',
+      is_new: true,
+    },
+    {
+      id: 2,
+      title: 'WordPress Hardening Checklist',
+      slug: 'security-checklist',
+      description: 'Walk through login protection, file permissions, backups, and common misconfigurations before launch.',
+      icon: 'shield',
+      is_new: false,
+    },
+    {
+      id: 3,
+      title: 'Plugin Conflict Diagnostic',
+      slug: 'plugin-troubleshooter',
+      description: 'A structured isolation path to find which plugin or theme update broke your checkout or admin screens.',
+      icon: 'bug',
+      is_new: false,
+    },
   ],
 
   guidebooks: [
-    { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800' },
-    { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for maximum conversion.', content: 'Proven techniques for sub-2-second WooCommerce page loads.', image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800' },
+    {
+      id: 1,
+      title: 'WordPress Pre-Launch Checklist (2026)',
+      slug: 'pre-launch-checklist',
+      description: 'Performance, SEO, security, and analytics checks to run before DNS cutover.',
+      content: 'A practical launch checklist for WordPress site owners and agencies.',
+      image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+    },
+    {
+      id: 2,
+      title: 'WooCommerce Core Web Vitals Playbook',
+      slug: 'woocommerce-speed-playbook',
+      description: 'Checkout, images, and query patterns that keep storefront pages responsive under load.',
+      content: 'Field-tested notes for improving WooCommerce page experience.',
+      image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
+    },
   ],
 
   siteStats: [
-    { stat_value: '500+', stat_label: 'Projects Delivered' },
-    { stat_value: '27+', stat_label: 'Countries Served' },
-    { stat_value: '4.9★', stat_label: 'Clutch Rating' },
-    { stat_value: '10+', stat_label: 'Years Experience' },
+    { stat_value: '180+', stat_label: 'WordPress Projects' },
+    { stat_value: '14', stat_label: 'Countries Worked With' },
+    { stat_value: '4.8★', stat_label: 'Client Satisfaction' },
+    { stat_value: '8+', stat_label: 'Years on WordPress' },
   ],
 };
 

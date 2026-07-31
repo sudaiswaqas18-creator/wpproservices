@@ -8,9 +8,9 @@ const iconMap: Record<string, typeof Bug> = { bug: Bug, palette: Palette, 'messa
 interface Tool { id: number; title: string; slug: string; description: string; icon: string; is_new: boolean; }
 
 const FALLBACK_TOOLS: Tool[] = [
-  { id: 1, title: 'Speed & Performance Estimator', slug: 'speed-estimator', description: 'Estimate potential page speed improvements and Core Web Vitals gains.', icon: 'zap', is_new: true },
-  { id: 2, title: 'Security Hardening Checklist', slug: 'security-checklist', description: 'Audit your WordPress installation against 15+ common vulnerability vectors.', icon: 'shield', is_new: false },
-  { id: 3, title: 'Plugin Conflict Troubleshooter', slug: 'plugin-troubleshooter', description: 'Step-by-step diagnostic workflow to locate incompatible plugins fast.', icon: 'bug', is_new: false },
+  { id: 1, title: 'Core Web Vitals Scorecard', slug: 'speed-estimator', description: 'Estimate where your WordPress or WooCommerce pages lose time — LCP, CLS, and server response.', icon: 'zap', is_new: true },
+  { id: 2, title: 'WordPress Hardening Checklist', slug: 'security-checklist', description: 'Walk through login protection, file permissions, backups, and common misconfigurations before launch.', icon: 'shield', is_new: false },
+  { id: 3, title: 'Plugin Conflict Diagnostic', slug: 'plugin-troubleshooter', description: 'A structured isolation path to find which plugin or theme update broke your checkout or admin screens.', icon: 'bug', is_new: false },
 ];
 
 export default function ToolsSection() {
@@ -27,8 +27,10 @@ export default function ToolsSection() {
   return (
     <section className="bg-background py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">On-Demand Website Tools</h2>
-        <p className="section-subtitle mx-auto text-center">Practical tools for clarity and direction — without waiting on support.</p>
+        <h2 className="section-title text-center">Practical WordPress Tools</h2>
+        <p className="section-subtitle mx-auto text-center">
+          Quick checks for performance, security, and plugin conflicts — useful before you book a full engagement.
+        </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((t) => {
             const Icon = iconMap[t.icon] || Zap;

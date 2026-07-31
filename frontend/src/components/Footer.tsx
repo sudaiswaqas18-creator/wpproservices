@@ -11,9 +11,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Logo variant="dark" />
             <p className="mt-4 text-sm leading-relaxed text-gray-400">
-              WPServices builds scalable, secure, and conversion-focused WordPress websites for businesses worldwide.
+              WPServices is a WordPress development studio focused on custom themes, WooCommerce,
+              plugins, migrations, and ongoing care for teams that need reliable delivery.
             </p>
-            <p className="mt-4 text-sm font-semibold text-gray-300">Delivering excellence across 27+ countries.</p>
+            <p className="mt-4 text-sm font-semibold text-gray-300">Remote-first delivery across multiple time zones.</p>
             <SocialLinks className="mt-6" variant="dark" />
           </div>
           <div>

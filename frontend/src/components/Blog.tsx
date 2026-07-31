@@ -14,8 +14,10 @@ export default function Blog({ limit, showViewAll = true }: Props) {
   return (
     <section className="bg-surface-elevated py-20">
       <div className="section-container">
-        <h2 className="section-title">WordPress Development Insights</h2>
-        <p className="section-subtitle">Expert articles on migration, optimization, and scaling your WordPress business.</p>
+        <h2 className="section-title">WordPress Notes From the Build Floor</h2>
+        <p className="section-subtitle">
+          Straight talk on migrations, Core Web Vitals, WooCommerce limits, and keeping sites maintainable after launch.
+        </p>
 
         <BlogShowcaseStrip posts={items} />
 
