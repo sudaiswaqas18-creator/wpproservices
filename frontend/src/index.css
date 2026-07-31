@@ -11,7 +11,7 @@
 
   html.is-scrolling,
   html:hover {
-    scrollbar-color: #2D4A3E #EDE7DC;
+    scrollbar-color: #1A1A1A #EDE7DC;
   }
 
   body {
@@ -20,7 +20,7 @@
   }
 
   ::selection {
-    background-color: #2D4A3E;
+    background-color: #1A1A1A;
     color: #F5F1EA;
   }
 
@@ -50,11 +50,11 @@
 
   html.is-scrolling ::-webkit-scrollbar-thumb,
   html:hover ::-webkit-scrollbar-thumb {
-    background-color: #2D4A3E;
+    background-color: #1A1A1A;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #1F3529 !important;
+    background-color: #111111 !important;
   }
 
   ::-webkit-scrollbar-thumb:active {
@@ -72,7 +72,7 @@
 
   .scroll-area:hover,
   .scroll-area.is-scrolling {
-    scrollbar-color: #2D4A3E #EDE7DC;
+    scrollbar-color: #1A1A1A #EDE7DC;
   }
 
   .scroll-area::-webkit-scrollbar {
@@ -86,11 +86,11 @@
 
   .scroll-area:hover::-webkit-scrollbar-thumb,
   .scroll-area.is-scrolling::-webkit-scrollbar-thumb {
-    background-color: #2D4A3E;
+    background-color: #1A1A1A;
   }
 
   .scroll-area::-webkit-scrollbar-thumb:hover {
-    background-color: #1F3529;
+    background-color: #111111;
   }
 }
 
@@ -124,7 +124,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: linear-gradient(165deg, #1A1A1A 0%, #2D4A3E 55%, #1A1A1A 100%);
+    background: linear-gradient(165deg, #0A0A0A 0%, #2D2D2D 55%, #1A1A1A 100%);
     transform: scaleY(0);
     transform-origin: bottom center;
     transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
@@ -160,7 +160,7 @@
 
   .blog-strip__card:hover {
     flex: 3.4 1 0 !important;
-    box-shadow: 0 20px 50px rgba(45, 74, 62, 0.16);
+    box-shadow: 0 20px 50px rgba(26, 26, 26, 0.16);
   }
 
   .article-lead {
@@ -259,7 +259,7 @@
     left: -30%;
     width: 30%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(45, 74, 62, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.1), transparent);
     animation: stats-bar-sweep 3s ease-in-out infinite;
   }
 
@@ -296,7 +296,7 @@
     font-size: 1.75rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #2D4A3E;
+    color: #1A1A1A;
   }
 
   @media (min-width: 640px) {
@@ -315,7 +315,7 @@
   .stats-marquee-sep {
     margin-left: 0.5rem;
     font-size: 0.45rem;
-    color: #B8956A;
+    color: #6B6B6B;
   }
 
   @keyframes stats-marquee-slide {

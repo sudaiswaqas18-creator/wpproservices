@@ -5,7 +5,7 @@ export const SITE = {
   email: 'info@technogiallc.com',
   phone: '+1 (904) 243-5044',
   whatsapp: '19042435044',
-  themeColor: '#2D4A3E',
+  themeColor: '#1A1A1A',
   ogImage: '/logo-light.png',
   lastUpdated: {
     privacy: 'July 21, 2026',

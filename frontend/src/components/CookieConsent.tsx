@@ -20,7 +20,7 @@ export default function CookieConsent() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-brand-100 bg-white/95 p-4 shadow-[0_-8px_30px_rgba(45, 74, 62),0.12)] backdrop-blur-md sm:p-5"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-brand-100 bg-white/95 p-4 shadow-[0_-8px_30px_rgba(26,26,26,0.12)] backdrop-blur-md sm:p-5"
       role="dialog"
       aria-label="Cookie consent"
     >

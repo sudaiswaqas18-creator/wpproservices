@@ -185,7 +185,7 @@ export default function PrivacyPolicyPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-accent-soft via-surface to-surface-elevated py-20 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(45, 74, 62,0.08),_transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(26, 26, 26,0.08),_transparent_60%)]" />
         <div className="section-container relative text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

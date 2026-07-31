@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUpRight,
@@ -89,7 +89,7 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       />
       <svg width="100" height="100" className="-rotate-90">
-        <circle cx="50" cy="50" r={r} fill="none" stroke="#E8EDE9" strokeWidth="8" />
+        <circle cx="50" cy="50" r={r} fill="none" stroke="#F3F3F3" strokeWidth="8" />
         <motion.circle
           key={`${value}-${label}`}
           cx="50"
@@ -106,9 +106,9 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
         />
         <defs>
           <linearGradient id="heroScoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#2D4A3E" />
-            <stop offset="55%" stopColor="#2D4A3E" />
-            <stop offset="100%" stopColor="#B8956A" />
+            <stop offset="0%" stopColor="#1A1A1A" />
+            <stop offset="55%" stopColor="#404040" />
+            <stop offset="100%" stopColor="#737373" />
           </linearGradient>
         </defs>
       </svg>
@@ -257,7 +257,7 @@ export default function HeroShowcase() {
         animate={{ rotate: 360 }}
         transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
       >
-        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_18px_rgba(45, 74, 62,0.75)]" />
+        <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-500 to-accent-400 shadow-[0_0_18px_rgba(26, 26, 26,0.75)]" />
       </motion.div>
       <motion.div
         className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[104%] w-[104%] -translate-x-1/2 -translate-y-1/2 rounded-[2.2rem] border border-dashed border-accent-300/30 sm:block"
@@ -281,7 +281,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.45, duration: 0.5 },
             y: { delay: 1.1, duration: 4.2, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(45, 74, 62,0.4)] backdrop-blur-md sm:block"
+          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(26, 26, 26,0.4)] backdrop-blur-md sm:block"
         >
           <div className="flex items-center gap-2.5 px-3.5 py-2.5">
             <span className="relative flex h-2.5 w-2.5">
@@ -306,16 +306,16 @@ export default function HeroShowcase() {
             opacity: { delay: 0.65, duration: 0.5 },
             y: { delay: 1.4, duration: 5.2, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(45, 74, 62,0.35)] backdrop-blur-md sm:flex"
+          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26, 26, 26,0.35)] backdrop-blur-md sm:flex"
         >
           <div className="flex -space-x-1.5">
-            {['#2D4A3E', '#4A6B5C', '#B8956A'].map((c) => (
+            {['#1A1A1A', '#737373', '#D4D4D4'].map((c) => (
               <span key={c} className="h-5 w-5 rounded-full border-2 border-white" style={{ background: c }} />
             ))}
           </div>
           <div>
             <p className="text-[10px] font-bold text-gray-900">+128 visitors</p>
-            <p className="text-[9px] text-emerald-600">Live right now</p>
+            <p className="text-[9px] text-gray-500">Live right now</p>
           </div>
         </motion.div>
 
@@ -327,7 +327,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.7, duration: 0.5 },
             y: { delay: 1.5, duration: 5, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(45, 74, 62,0.32)] backdrop-blur-md sm:flex"
+          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(26, 26, 26,0.32)] backdrop-blur-md sm:flex"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-surface-dark text-white shadow-md">
             <ShieldCheck size={16} strokeWidth={2.5} />
@@ -346,14 +346,14 @@ export default function HeroShowcase() {
             opacity: { delay: 0.85, duration: 0.5 },
             y: { delay: 1.8, duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(45, 74, 62,0.3)] backdrop-blur-md sm:flex"
+          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26, 26, 26,0.3)] backdrop-blur-md sm:flex"
         >
           <Globe2 size={14} className="text-brand-500" />
           <span className="text-[10px] font-semibold text-gray-700">27+ countries</span>
         </motion.div>
 
         {/* Main frame */}
-        <div className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_42px_100px_-28px_rgba(45, 74, 62,0.5)]">
+        <div className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_42px_100px_-28px_rgba(26, 26, 26,0.5)]">
           {/* Shimmer sweep */}
           <motion.div
             className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
@@ -394,13 +394,13 @@ export default function HeroShowcase() {
               className="pointer-events-none absolute inset-0 opacity-70"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 12% 18%, rgba(45, 74, 62,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(184, 149, 106,0.12), transparent 36%)',
+                  'radial-gradient(circle at 12% 18%, rgba(26, 26, 26,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(184, 149, 106,0.12), transparent 36%)',
               }}
             />
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.35]"
               style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(45, 74, 62,0.07) 1px, transparent 0)',
+                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(26, 26, 26,0.07) 1px, transparent 0)',
                 backgroundSize: '22px 22px',
               }}
             />
@@ -500,8 +500,8 @@ export default function HeroShowcase() {
                         animate={{
                           scale: ctaPressed ? 0.94 : 1,
                           boxShadow: ctaPressed
-                            ? '0 4px 12px rgba(45, 74, 62,0.35)'
-                            : '0 10px 24px rgba(45, 74, 62,0.32)',
+                            ? '0 4px 12px rgba(26, 26, 26,0.35)'
+                            : '0 10px 24px rgba(26, 26, 26,0.32)',
                         }}
                         transition={{
                           scale: { type: 'spring', stiffness: 420, damping: 24 },
@@ -542,7 +542,7 @@ export default function HeroShowcase() {
                       <svg width="20" height="24" viewBox="0 0 18 22" fill="none" className="relative drop-shadow-md">
                         <path
                           d="M1 1L1 16.5L5.2 12.8L8.8 20.2L11.2 19L7.6 11.6L13.5 11.2L1 1Z"
-                          fill={isClicking ? '#2D4A3E' : '#111827'}
+                          fill={isClicking ? '#1A1A1A' : '#111827'}
                           stroke="white"
                           strokeWidth="1.25"
                         />
