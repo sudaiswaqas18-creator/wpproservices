@@ -81,30 +81,30 @@ async function runSeed(options = {}) {
   ]]);
 
   const blogPosts = [
-    ['A Safer WordPress Migration Checklist for SEO', 'migrate-wordpress-seo', 'Redirect maps, staging checks, and Search Console habits that protect rankings after cutover.', 'Migrating WordPress is more than copying files. Export your sitemap, map URLs, stage redirects, test forms and checkout, then monitor crawl errors for weeks after DNS cutover.', 'WPServices Team', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800', '2025-06-12', 1],
-    ['When a WordPress Redesign Is Worth the Investment', 'website-redesign-checklist', 'Signals that theme debt, UX friction, or Core Web Vitals are costing more than a structured rebuild.', 'Audit top landing pages, mobile conversion, and editor pain before you buy a redesign. Set measurable goals and plan content migration as its own workstream.', 'WPServices Team', 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800', '2025-05-15', 2],
-    ['Where Stock WooCommerce Starts to Strain', 'woocommerce-customization-scale', 'Checkout friction, shipping rules, and plugin conflicts that appear as catalogs and traffic grow.', 'At scale, generic plugin stacks collide. Invest in clear cart rules, lean queries, and checkout paths that match how your operations actually ship and bill.', 'WPServices Team', 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', '2025-04-08', 3],
-    ['Core Web Vitals Fixes That Matter on WordPress', 'core-web-vitals-wordpress', 'Practical LCP, CLS, and INP improvements for theme and WooCommerce templates — not lab-only tips.', 'Focus on hero media, font loading, third-party scripts, and product template queries. Measure field data after each change, not only Lighthouse screenshots.', 'WPServices Team', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800', '2025-03-20', 4],
-    ['Agency vs In-House WordPress Capacity', 'hire-wordpress-agency', 'How to decide between a retainer team and hiring when you need themes, plugins, and care coverage.', 'Ask about staging habits, code ownership, update cadence, and who answers when a plugin update breaks checkout. Vague timelines are a red flag.', 'WPServices Team', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800', '2025-04-22', 5],
+    ['A Safer WordPress Migration Checklist for SEO', 'migrate-wordpress-seo', 'Redirect maps, staging checks, and Search Console habits that protect rankings after cutover.', 'Migrating WordPress is more than copying files. Export your sitemap, map URLs, stage redirects, test forms and checkout, then monitor crawl errors for weeks after DNS cutover.', 'WPServices Team', '/section-images/blog-migrate-wordpress-seo.jpg', '2025-06-12', 1],
+    ['When a WordPress Redesign Is Worth the Investment', 'website-redesign-checklist', 'Signals that theme debt, UX friction, or Core Web Vitals are costing more than a structured rebuild.', 'Audit top landing pages, mobile conversion, and editor pain before you buy a redesign. Set measurable goals and plan content migration as its own workstream.', 'WPServices Team', '/section-images/blog-website-redesign-checklist.jpg', '2025-05-15', 2],
+    ['Where Stock WooCommerce Starts to Strain', 'woocommerce-customization-scale', 'Checkout friction, shipping rules, and plugin conflicts that appear as catalogs and traffic grow.', 'At scale, generic plugin stacks collide. Invest in clear cart rules, lean queries, and checkout paths that match how your operations actually ship and bill.', 'WPServices Team', '/section-images/blog-woocommerce-customization-scale.jpg', '2025-04-08', 3],
+    ['Core Web Vitals Fixes That Matter on WordPress', 'core-web-vitals-wordpress', 'Practical LCP, CLS, and INP improvements for theme and WooCommerce templates — not lab-only tips.', 'Focus on hero media, font loading, third-party scripts, and product template queries. Measure field data after each change, not only Lighthouse screenshots.', 'WPServices Team', '/section-images/blog-core-web-vitals-wordpress.jpg', '2025-03-20', 4],
+    ['Agency vs In-House WordPress Capacity', 'hire-wordpress-agency', 'How to decide between a retainer team and hiring when you need themes, plugins, and care coverage.', 'Ask about staging habits, code ownership, update cadence, and who answers when a plugin update breaks checkout. Vague timelines are a red flag.', 'WPServices Team', '/section-images/blog-hire-wordpress-agency.jpg', '2025-04-22', 5],
   ];
   await connection.query(`INSERT INTO blog_posts (title, slug, excerpt, content, author, image_url, published_at, sort_order) VALUES ?`, [blogPosts]);
 
   await connection.query(`INSERT INTO industries (title, description, has_case_study, sort_order) VALUES ?`, [[
-    ['E-Commerce & Retail', 'WooCommerce stores with sub-2-second load times and intuitive buying experiences.', 1, 1],
-    ['Education & E-Learning', 'Interactive lessons, progress tracking, and mobile-first LMS interfaces.', 0, 2],
-    ['Healthcare & Wellness', 'Patient-friendly navigation, online booking, and secure medical forms.', 0, 3],
-    ['Corporate & B2B', 'Service showcases, lead forms, and professional layouts that impress clients.', 1, 4],
-    ['Hospitality & Travel', 'Seamless booking and vivid destination showcases.', 0, 5],
-    ['Non-Profit & NGO', 'Donation pathways and compelling storytelling layouts.', 0, 6],
-    ['Real Estate', 'Searchable listings and high-quality property galleries.', 0, 7],
-    ['Startup & Tech', 'Product showcases and modern layouts that accelerate growth.', 0, 8],
+    ['E-Commerce & Retail', 'WooCommerce catalogs, checkout paths, and shipping rules shaped for retailers that sell online and in-store.', 1, 1],
+    ['Education & E-Learning', 'LearnDash courses, drip schedules, and learner dashboards built for cohorts and self-paced programs.', 0, 2],
+    ['Healthcare & Wellness', 'WordPress sites with clear booking flows, accessible layouts, and form handling for clinics and wellness brands.', 0, 3],
+    ['Corporate & B2B', 'Service sites, lead capture, and member-style portals for teams that sell expertise, not just products.', 1, 4],
+    ['Hospitality & Travel', 'WordPress booking-friendly pages and destination storytelling without bloated page-builder stacks.', 0, 5],
+    ['Non-Profit & NGO', 'Donation-ready WordPress layouts, campaign pages, and editor-friendly storytelling templates.', 0, 6],
+    ['Real Estate', 'Listing-friendly WordPress structures, inquiry forms, and gallery-heavy property pages.', 0, 7],
+    ['Startup & Tech', 'Launch sites and product marketing pages on WordPress with room to add docs, blogs, and gated content.', 0, 8],
   ]]);
 
   await connection.query(`INSERT INTO portfolio_items (title, category, image_url, sort_order) VALUES ?`, [[
-    ['E-commerce Client — Specialty Coffee', 'WooCommerce Store', 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800', 1],
-    ['Services Client — Corporate Site', 'Corporate Website', 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800', 2],
-    ['Education Client — LMS Dashboard', 'LMS Dashboard', 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?w=800', 3],
-    ['B2B Client — Member Portal', 'B2B Portal', 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800', 4],
+    ['E-commerce Client — Specialty Coffee', 'WooCommerce Store', '/section-images/portfolio-coffee.jpg', 1],
+    ['Services Client — Corporate Site', 'Corporate Website', '/section-images/portfolio-corporate.jpg', 2],
+    ['Education Client — LMS Dashboard', 'LMS Dashboard', '/section-images/portfolio-lms.jpg', 3],
+    ['B2B Client — Member Portal', 'B2B Portal', '/section-images/portfolio-b2b.jpg', 4],
   ]]);
 
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@wpproservices.com';

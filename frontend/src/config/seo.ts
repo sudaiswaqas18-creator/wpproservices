@@ -47,6 +47,27 @@ export const STATIC_SEO: Record<string, PageSEO> = {
     keywords: 'WordPress agency industries, WooCommerce for retail, LearnDash for education',
     path: '/industries',
   },
+  '/faq': {
+    title: 'WordPress Agency FAQs | WPServices',
+    description:
+      'FAQs on WordPress builds, WooCommerce migrations, retainers, timelines, and staging-first delivery.',
+    keywords: 'WordPress agency FAQ, WooCommerce cost questions, WordPress migration FAQ',
+    path: '/faq',
+  },
+  '/portfolio': {
+    title: 'WordPress Portfolio | WPServices',
+    description:
+      'WordPress portfolio samples: WooCommerce stores, corporate sites, LearnDash dashboards, and B2B portals.',
+    keywords: 'WordPress portfolio, WooCommerce examples, LearnDash portfolio',
+    path: '/portfolio',
+  },
+  '/process': {
+    title: 'Our WordPress Process | WPServices',
+    description:
+      'How we scope, stage, launch, and care for WordPress and WooCommerce projects with clear handoffs.',
+    keywords: 'WordPress agency process, WooCommerce delivery process, staging-first WordPress',
+    path: '/process',
+  },
   '/resources': {
     title: 'WordPress Resources | WPServices',
     description:

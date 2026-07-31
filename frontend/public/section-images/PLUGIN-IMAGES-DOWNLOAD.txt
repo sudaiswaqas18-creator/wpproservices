@@ -1,52 +1,22 @@
-PLUGIN IMAGES TO DOWNLOAD
-=========================
-Put these JPG files in:
+PLUGIN IMAGES — STATUS
+======================
+All 10 new plugin images are mapped in:
   frontend/public/section-images/
 
-Existing (already present — do not rename):
-  plugin-quotes.jpg
-  plugin-pricing.jpg
-  plugin-bundles.jpg
-  plugin-urgency.jpg
-  plugin-stock.jpg
-  plugin-reviews.jpg
-  plugin-subscriptions.jpg
-  plugin-checkout.jpg
+Canonical filenames now present:
+  plugin-catalog-cloak.jpg
+  plugin-relate-lane.jpg
+  plugin-kit-lane.jpg
+  plugin-sticky-lane.jpg
+  plugin-banner-forge.jpg
+  plugin-stock-map.jpg
+  plugin-restock-pulse.jpg
+  plugin-seal-strip.jpg
+  plugin-cycle-flex.jpg
+  plugin-tier-access.jpg
 
-NEW — download these 10 with the EXACT filenames below:
+Plus original eight:
+  plugin-quotes.jpg, plugin-pricing.jpg, plugin-bundles.jpg, plugin-urgency.jpg,
+  plugin-stock.jpg, plugin-reviews.jpg, plugin-subscriptions.jpg, plugin-checkout.jpg
 
-1) plugin-catalog-cloak.jpg
-   Context: Wholesale / B2B catalog behind login. Visual idea: laptop product grid with blurred or locked prices, wholesale badge, or login gate on a storefront.
-
-2) plugin-relate-lane.jpg
-   Context: Related products merchandising. Visual idea: product cards arranged as “you may also like” recommendations, fashion or gift catalog shelves.
-
-3) plugin-kit-lane.jpg
-   Context: Product kits / component inventory. Visual idea: open kit box with child items laid out (starter kit, hardware pieces, or gift set components).
-
-4) plugin-sticky-lane.jpg
-   Context: Mobile sticky add-to-cart. Visual idea: phone showing a long product page with a sticky bottom bar (price + Add to cart).
-
-5) plugin-banner-forge.jpg
-   Context: Campaign / promo banners. Visual idea: homepage hero banner mock, marketing board with seasonal sale creative, desktop + mobile frames.
-
-6) plugin-stock-map.jpg
-   Context: Multi-location warehouse stock. Visual idea: warehouse aisles with location labels, map pins on shelves, or ops dashboard of stock by room.
-
-7) plugin-restock-pulse.jpg
-   Context: Restock planning digests. Visual idea: clipboard / checklist of SKUs, ops desk with inventory report email, calendar “weekly digest”.
-
-8) plugin-seal-strip.jpg
-   Context: Trust seals near checkout. Visual idea: guarantee / secure checkout / free shipping icons strip beside a cart or product buy box (generic seals — not Visa/PayPal logos).
-
-9) plugin-cycle-flex.jpg
-   Context: Subscription pause / skip. Visual idea: customer portal calendar with “Skip next” or “Pause” controls, delivery box with pause icon.
-
-10) plugin-tier-access.jpg
-   Context: Membership tiers / gated catalog. Visual idea: tier cards (Basic / Pro / VIP) unlocking products or content after purchase.
-
-Tips:
-- Prefer original photos or properly licensed stock.
-- Avoid competitor screenshots and trademarked UI.
-- Landscape ~1600px wide JPG is enough.
-- After download, tell the agent — images will be wired automatically via PRODUCT_IMAGES.
+Do not keep staging folders (New folder / CaseA / Case B / etc). Only these canonical names.

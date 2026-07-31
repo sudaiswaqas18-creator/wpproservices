@@ -39,7 +39,10 @@ export const NAV_RESOURCES: { label: string; items: NavItem[] }[] = [
     items: [
       { title: 'Blog', slug: 'blog', href: '/blog', icon: FileText },
       { title: 'Case Studies', slug: 'case-studies', href: '/case-studies', icon: Briefcase },
+      { title: 'Portfolio', slug: 'portfolio', href: '/portfolio', icon: Briefcase },
       { title: 'Industries', slug: 'industries', href: '/industries', icon: Briefcase },
+      { title: 'Our Process', slug: 'process', href: '/process', icon: Briefcase },
+      { title: 'FAQs', slug: 'faq', href: '/faq', icon: FileText },
     ],
   },
   {

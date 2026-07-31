@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FileText, BookOpen, Wrench, Briefcase, Building2 } from 'lucide-react';
+import { FileText, BookOpen, Wrench, Briefcase, Building2, HelpCircle, Image, Route } from 'lucide-react';
 import CTA from '../components/CTA';
 
 export default function ResourcesPage() {
@@ -9,16 +9,19 @@ export default function ResourcesPage() {
         <div className="section-container text-center">
           <h1 className="text-4xl font-extrabold text-gray-900">WordPress Resources</h1>
           <p className="section-subtitle mx-auto mt-4">
-            Guides, tools, case studies, industries, and blog notes for operators running WordPress, WooCommerce, and LearnDash sites.
+            Guides, tools, proof pages, and operator notes for teams running WordPress, WooCommerce, and LearnDash.
           </p>
         </div>
       </section>
       <section className="pb-20">
-        <div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[
-            { to: '/blog', icon: FileText, title: 'Blog', desc: 'Migrations, performance, WooCommerce, and maintenance' },
-            { to: '/case-studies', icon: Briefcase, title: 'Case Studies', desc: 'WordPress project stories with honest outcomes' },
+            { to: '/blog', icon: FileText, title: 'Blog', desc: 'Migrations, Core Web Vitals, WooCommerce limits, and retainers' },
+            { to: '/case-studies', icon: Briefcase, title: 'Case Studies', desc: 'Project stories with honest outcome notes' },
+            { to: '/portfolio', icon: Image, title: 'Portfolio', desc: 'Visual WordPress and WooCommerce samples' },
             { to: '/industries', icon: Building2, title: 'Industries', desc: 'How we apply WordPress by sector' },
+            { to: '/process', icon: Route, title: 'Our Process', desc: 'Scope, staging, launch, and handoff' },
+            { to: '/faq', icon: HelpCircle, title: 'FAQs', desc: 'Timelines, migrations, and care-plan questions' },
             { to: '/resources/guidebooks', icon: BookOpen, title: 'Guidebooks', desc: 'Checklists for launch, LMS, and store moves' },
             { to: '/resources/tools', icon: Wrench, title: 'Tools', desc: 'Speed, security, and conflict helpers' },
           ].map(({ to, icon: Icon, title, desc }) => (

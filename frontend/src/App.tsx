@@ -18,6 +18,9 @@ const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const IndustriesPage = lazy(() => import('./pages/IndustriesPage'));
+const FaqPage = lazy(() => import('./pages/FaqPage'));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const ProcessPage = lazy(() => import('./pages/ProcessPage'));
 const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
 const ToolsListPage = lazy(() => import('./pages/ToolsPages').then((m) => ({ default: m.ToolsListPage })));
 const ToolDetailPage = lazy(() => import('./pages/ToolsPages'));
@@ -49,6 +52,9 @@ export default function App() {
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/:slug" element={<ProductDetailPage />} />
         <Route path="industries" element={<IndustriesPage />} />
+        <Route path="faq" element={<FaqPage />} />
+        <Route path="portfolio" element={<PortfolioPage />} />
+        <Route path="process" element={<ProcessPage />} />
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="resources/tools" element={<ToolsListPage />} />
         <Route path="resources/tools/:slug" element={<ToolDetailPage />} />

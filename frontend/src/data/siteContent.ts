@@ -135,43 +135,43 @@ export const PRODUCT_IMAGES: Record<string, { image_url: string; image_alt: stri
   },
   'catalog-cloak': {
     image_url: '/section-images/plugin-catalog-cloak.jpg',
-    image_alt: 'Wholesale login gate hiding prices on a B2B WooCommerce catalog',
+    image_alt: 'Organized product shelves representing role-gated WooCommerce catalog visibility',
   },
   'relate-lane': {
     image_url: '/section-images/plugin-relate-lane.jpg',
-    image_alt: 'Merchandiser arranging related product recommendations',
+    image_alt: 'Curated retail product display for rule-based related WooCommerce products',
   },
   'kit-lane': {
     image_url: '/section-images/plugin-kit-lane.jpg',
-    image_alt: 'Product kit components laid out for inventory-honest bundles',
+    image_alt: 'Component parts kit for inventory-honest WooCommerce product kits',
   },
   'sticky-lane': {
     image_url: '/section-images/plugin-sticky-lane.jpg',
-    image_alt: 'Mobile shopper with sticky add-to-cart bar on a product page',
+    image_alt: 'Secure online payment moment supporting sticky add-to-cart conversion',
   },
   'banner-forge': {
     image_url: '/section-images/plugin-banner-forge.jpg',
-    image_alt: 'Campaign banner planning board for ecommerce promotions',
+    image_alt: 'Editorial campaign imagery for scheduled WooCommerce banner slots',
   },
   'stock-map': {
     image_url: '/section-images/plugin-stock-map.jpg',
-    image_alt: 'Multi-warehouse shelves mapped for WooCommerce stock locations',
+    image_alt: 'Warehouse forklift and pallet racks for multi-location WooCommerce stock',
   },
   'restock-pulse': {
     image_url: '/section-images/plugin-restock-pulse.jpg',
-    image_alt: 'Ops team reviewing a restock planning digest checklist',
+    image_alt: 'Planning board and charts for WooCommerce restock digests',
   },
   'seal-strip': {
     image_url: '/section-images/plugin-seal-strip.jpg',
-    image_alt: 'Trust seals and guarantee cues near an online checkout',
+    image_alt: 'Checkout UI with trust cues near complete-order actions',
   },
   'cycle-flex': {
     image_url: '/section-images/plugin-cycle-flex.jpg',
-    image_alt: 'Subscriber pausing or skipping a recurring delivery in a portal',
+    image_alt: 'Delivered parcel moment for pause and skip subscription controls',
   },
   'tier-access': {
     image_url: '/section-images/plugin-tier-access.jpg',
-    image_alt: 'Membership tiers unlocking gated WooCommerce catalog access',
+    image_alt: 'Membership stamp graphic for WooCommerce tiered catalog access',
   },
 };
 
