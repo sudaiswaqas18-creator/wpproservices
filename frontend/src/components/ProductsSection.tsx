@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Star, Check, ArrowRight } from 'lucide-react';
 import { apiUrl } from '../config/api';
 import { getProductEnrichment, mergeProducts } from '../data/productEnrichment';
+import { getProductImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface Product {
@@ -41,6 +42,7 @@ export default function ProductsSection() {
           {products.map((p, i) => {
             const enriched = getProductEnrichment(p.slug, p.features);
             const previewFeatures = enriched.features.slice(0, 2);
+            const media = getProductImage(p.slug, p.image_url);
 
             return (
               <motion.div key={p.id} {...fadeUp} transition={{ duration: 0.35, delay: i * 0.05 }}>
@@ -48,22 +50,20 @@ export default function ProductsSection() {
                   to={`/products/${p.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-card transition hover:border-brand-200 hover:shadow-cardHover"
                 >
-                  {p.image_url && (
-                    <div className="relative h-36 overflow-hidden">
-                      <img
-                        src={optimizeImageUrl(p.image_url, 480)}
-                        alt={p.title}
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                        width={480}
-                        height={192}
-                      />
-                      <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[9px] font-semibold uppercase text-brand-600 backdrop-blur-sm">
-                        {enriched.categoryLabel}
-                      </span>
-                    </div>
-                  )}
+                  <div className="relative h-36 overflow-hidden">
+                    <img
+                      src={optimizeImageUrl(media.image_url, 480)}
+                      alt={media.image_alt}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                      width={480}
+                      height={192}
+                    />
+                    <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[9px] font-semibold uppercase text-brand-600 backdrop-blur-sm">
+                      {enriched.categoryLabel}
+                    </span>
+                  </div>
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="font-bold text-gray-900 group-hover:text-brand-600">{p.title}</h3>
                     <p className="mt-0.5 text-xs text-brand-600">{p.subtitle}</p>

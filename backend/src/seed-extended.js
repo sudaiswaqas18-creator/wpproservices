@@ -94,11 +94,11 @@ export async function seedExtended(connection) {
   ]]);
 
   await connection.query(`INSERT INTO awards (title, organization, year, badge_label, sort_order) VALUES ?`, [[
-    ['5-Star Client Feedback', 'Verified project reviews', '2026', '5.0', 1],
-    ['WordPress Specialists', 'Theme, plugin & WooCommerce focus', '2026', 'WP', 2],
-    ['Performance-First Builds', 'Core Web Vitals on every launch', '2026', 'CWV', 3],
-    ['Trusted Delivery Partner', 'Long-term retainers & handoffs', '2026', 'Care', 4],
-    ['Secure Launch Standard', 'Hardening, backups & staging QA', '2026', 'Secure', 5],
+    ['5-Star Client Feedback', 'Reviews from delivered WordPress projects', 'Ongoing', '5★', 1],
+    ['WordPress Specialists', 'Themes, plugins & WooCommerce focus', 'Daily', 'WP', 2],
+    ['Performance-First Builds', 'Core Web Vitals checks before launch', 'Every launch', 'CWV', 3],
+    ['Trusted Delivery Partner', 'Retainers, staging QA & clear handoffs', 'Long-term', 'Care', 4],
+    ['Secure Launch Standard', 'Hardening, backups & update discipline', 'Standard', 'Secure', 5],
   ]]);
 
   await connection.query(`INSERT INTO site_stats (stat_key, stat_value, stat_label, sort_order) VALUES ?`, [[

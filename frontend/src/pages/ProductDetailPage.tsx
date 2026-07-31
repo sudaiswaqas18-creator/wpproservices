@@ -6,6 +6,7 @@ import BuyPluginButton from '../components/BuyPluginButton';
 import CTA from '../components/CTA';
 import { apiUrl } from '../config/api';
 import { getProductEnrichment, getSupplementalProduct } from '../data/productEnrichment';
+import { getProductImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface Product {
@@ -59,24 +60,23 @@ export default function ProductDetailPage() {
   }
 
   const enriched = getProductEnrichment(product.slug, product.features);
+  const media = getProductImage(product.slug, product.image_url);
 
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-surface-50 to-white py-16 lg:py-20">
         <div className="section-container grid items-start gap-12 lg:grid-cols-2">
           <motion.div {...fadeUp}>
-            {product.image_url && (
-              <img
-                src={optimizeImageUrl(product.image_url, 800)}
-                alt={product.title}
-                width={800}
-                height={600}
-                fetchPriority="high"
-                loading="eager"
-                decoding="async"
-                className="w-full rounded-2xl shadow-card ring-1 ring-gray-100"
-              />
-            )}
+            <img
+              src={optimizeImageUrl(media.image_url, 800)}
+              alt={media.image_alt}
+              width={800}
+              height={600}
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="w-full rounded-2xl shadow-card ring-1 ring-gray-100"
+            />
           </motion.div>
           <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>
             <Link to="/products" className="text-sm font-medium text-brand-600 hover:underline">← All Plugins</Link>

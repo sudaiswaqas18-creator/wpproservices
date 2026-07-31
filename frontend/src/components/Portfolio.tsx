@@ -15,10 +15,9 @@ export default function Portfolio() {
     <section id="portfolio" className="bg-surface-50 py-20">
       <div className="section-container">
         <div className="text-center">
-          <h2 className="section-title">Your Vision Made Real — Websites We Built</h2>
+          <h2 className="section-title">WordPress Work Showcase</h2>
           <p className="section-subtitle mx-auto">
-            Great design speaks louder than words. Here is a showcase of custom WordPress websites,
-            WooCommerce stores, and LMS dashboards we crafted for global brands.
+            Sample WordPress, WooCommerce, and LearnDash builds — images match each project type for a clear visual story.
           </p>
         </div>
 

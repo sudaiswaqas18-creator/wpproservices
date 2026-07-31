@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { apiUrl } from '../config/api';
 import ServicesScrollSection from './ServicesScrollSection';
+import { getCaseStudyMedia, isFakeAwardContent, TRUST_AWARDS } from '../data/siteContent';
+import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface SiteStat {
   stat_value: string;
@@ -22,21 +24,17 @@ const FALLBACK_STATS: SiteStat[] = [
 
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
-const FALLBACK_AWARDS: Award[] = [
-  { id: 1, title: '5-Star Client Feedback', organization: 'Verified project reviews', year: '2026', badge_label: '5.0' },
-  { id: 2, title: 'WordPress Specialists', organization: 'Theme, plugin & WooCommerce focus', year: '2026', badge_label: '100%' },
-  { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals on every launch', year: '2026', badge_label: 'CWV' },
-  { id: 4, title: 'Trusted Delivery Partner', organization: 'Long-term retainers & handoffs', year: '2026', badge_label: 'Partner' },
-  { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & staging QA', year: '2026', badge_label: 'Secure' },
-];
-
 function AwardsSection() {
-  const [awards, setAwards] = useState<Award[]>(FALLBACK_AWARDS);
+  const [awards, setAwards] = useState<Award[]>([...TRUST_AWARDS]);
 
   useEffect(() => {
     fetch(apiUrl('awards'))
       .then((r) => r.json())
-      .then((d) => { if (Array.isArray(d) && d.length > 0) setAwards(d); })
+      .then((d) => {
+        if (!Array.isArray(d) || d.length === 0) return;
+        const safe = d.filter((a: Award) => !isFakeAwardContent(a.title || '', a.organization || ''));
+        if (safe.length > 0) setAwards(safe);
+      })
       .catch(() => {});
   }, []);
 
@@ -44,6 +42,9 @@ function AwardsSection() {
     <section className="border-y border-border bg-gradient-to-b from-background to-surface py-16">
       <div className="section-container text-center">
         <h2 className="text-2xl font-bold text-ink">Trust Signals We Stand Behind</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-ink-light">
+          Honest delivery standards for WordPress work — not invented award badges or third-party logos we do not own.
+        </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {awards.map((a) => (
             <div key={a.id} className="rounded-xl border border-surface-200 bg-white p-5 shadow-card transition hover:border-brand-400 hover:shadow-cardHover">
@@ -59,12 +60,20 @@ function AwardsSection() {
   );
 }
 
-interface CaseStudy { id: number; title: string; client: string; slug: string; tech_stack: string; result_summary: string; }
+interface CaseStudy {
+  id: number;
+  title: string;
+  client: string;
+  slug: string;
+  tech_stack?: string;
+  result_summary?: string;
+  image_url?: string;
+}
 
 const FALLBACK_FEATURED_CASES: CaseStudy[] = [
-  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'Northgrove Grocers', slug: 'freshharvest-shipping', tech_stack: 'WooCommerce + Custom PHP', result_summary: '+31% Repeat Checkouts' },
-  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Brightline Learning Co.', slug: 'eduvault-lms', tech_stack: 'LearnDash + Custom Theme', result_summary: '+28% Course Completions' },
-  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'Thread & Loom Studio', slug: 'stylebox-cart-recovery', tech_stack: 'Custom Plugin + Email API', result_summary: '+22% Recovered Carts' },
+  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'E-commerce Client — Grocery', slug: 'freshharvest-shipping' },
+  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Education Client — Private Cohort', slug: 'eduvault-lms' },
+  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'E-commerce Client — Apparel', slug: 'stylebox-cart-recovery' },
 ];
 
 function FeaturedCases() {
@@ -85,17 +94,39 @@ function FeaturedCases() {
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Selected Work</p>
         <h2 className="section-title mt-2">WordPress Projects With Measurable Outcomes</h2>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {cases.map((cs) => (
-            <article key={cs.id} className="card">
-              <p className="text-xs font-medium text-brand-600">{cs.client}</p>
-              <h3 className="mt-2 text-lg font-bold text-gray-900">{cs.title}</h3>
-              {cs.tech_stack && <p className="mt-3 text-xs font-bold uppercase text-gray-600">Tech Stack: {cs.tech_stack}</p>}
-              {cs.result_summary && <p className="mt-2 text-sm font-semibold text-brand-600">{cs.result_summary}</p>}
-              <Link to={`/case-studies/${cs.slug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
-                Read the Story <ArrowRight size={14} />
-              </Link>
-            </article>
-          ))}
+          {cases.map((cs) => {
+            const media = getCaseStudyMedia(cs.slug);
+            return (
+              <article key={cs.id} className="card overflow-hidden p-0">
+                <div className="relative h-44 overflow-hidden bg-gray-100">
+                  <img
+                    src={optimizeImageUrl(cs.image_url || media.image_url, 640)}
+                    alt={media.image_alt}
+                    width={640}
+                    height={176}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-medium text-brand-600">{media.client_label}</p>
+                  <h3 className="mt-2 text-lg font-bold text-gray-900">{cs.title}</h3>
+                  <p className="mt-3 text-xs font-bold uppercase text-gray-600">
+                    Tech Stack: {cs.tech_stack || media.tech_stack}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-brand-600">
+                    {cs.result_summary && !/[+]?\d+%/.test(cs.result_summary)
+                      ? cs.result_summary
+                      : media.result_summary}
+                  </p>
+                  <Link to={`/case-studies/${cs.slug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                    Read the Story <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -109,7 +140,10 @@ function StatsBar() {
     fetch(apiUrl('site-stats'))
       .then((r) => r.json())
       .then((d) => {
-        if (Array.isArray(d) && d.length > 0) setStats(d);
+        if (Array.isArray(d) && d.length > 0) {
+          const usable = d.filter((s: SiteStat) => s.stat_value && !/^edit me$/i.test(s.stat_value));
+          if (usable.length > 0) setStats(usable);
+        }
       })
       .catch(() => {});
   }, []);

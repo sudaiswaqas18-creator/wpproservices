@@ -2,8 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TrendingUp, ArrowLeft } from 'lucide-react';
 import { api, CaseStudyDetail } from '../api/client';
+import { getCaseStudyMedia } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
+
+function softMetric(value?: string) {
+  if (!value) return 'Documented';
+  if (/[+]?\d+%/.test(value) || value === '99.9%' || value === '-100%') return 'Improved';
+  return value;
+}
 
 export default function CaseStudyDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -15,21 +22,24 @@ export default function CaseStudyDetailPage() {
 
   if (!study) return <div className="section-container py-32 text-center text-gray-500">Loading...</div>;
 
+  const media = getCaseStudyMedia(study.slug || slug || '');
+  const heroImage = study.image_url || media.image_url;
+
   return (
     <>
       <section className="bg-surface-50 py-12">
         <div className="section-container">
           <Link to="/case-studies" className="inline-flex items-center gap-1 text-sm text-brand-600 hover:underline"><ArrowLeft size={14} /> All Case Studies</Link>
           <h1 className="mt-4 text-4xl font-extrabold text-gray-900">{study.title}</h1>
-          <p className="mt-2 text-brand-600 font-medium">Client: {study.client}</p>
+          <p className="mt-2 text-brand-600 font-medium">Client: {media.client_label}</p>
         </div>
       </section>
 
-      {study.image_url && (
+      {heroImage && (
         <div className="section-container -mt-4">
           <img
-            src={optimizeImageUrl(study.image_url, 1200)}
-            alt={study.title}
+            src={optimizeImageUrl(heroImage, 1200)}
+            alt={media.image_alt}
             width={1200}
             height={400}
             loading="lazy"
@@ -62,7 +72,7 @@ export default function CaseStudyDetailPage() {
             {[{ l: study.metric1_label, v: study.metric1_value }, { l: study.metric2_label, v: study.metric2_value }, { l: study.metric3_label, v: study.metric3_value }].map((m) => (
               <div key={m.l} className="mt-4 flex items-center justify-between border-b border-gray-100 pb-4 last:border-0">
                 <span className="text-sm text-gray-600">{m.l}</span>
-                <span className="flex items-center gap-1 font-bold text-brand-600"><TrendingUp size={14} />{m.v}</span>
+                <span className="flex items-center gap-1 font-bold text-brand-600"><TrendingUp size={14} />{softMetric(m.v)}</span>
               </div>
             ))}
             <Link to="/contact" className="btn-primary mt-6 w-full">Start Similar Project</Link>

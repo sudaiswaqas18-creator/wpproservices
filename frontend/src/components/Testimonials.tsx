@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
+import { isLegacyTestimonialContent, SITE_TESTIMONIALS } from '../data/siteContent';
 
 const AUTOPLAY_MS = 6000;
 const DOT_SIZE = 10;
@@ -17,7 +18,13 @@ function pillOffset(index: number) {
 }
 
 export default function Testimonials() {
-  const { data: items } = useApiData('testimonials');
+  const { data: apiItems } = useApiData('testimonials');
+  const items = useMemo(() => {
+    const safe = apiItems.filter(
+      (t) => !isLegacyTestimonialContent(t.name || '', t.company || '', t.quote || ''),
+    );
+    return safe.length > 0 ? safe : [...SITE_TESTIMONIALS];
+  }, [apiItems]);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
@@ -39,6 +46,10 @@ export default function Testimonials() {
   const nextSlide = useCallback(() => {
     go(current === items.length - 1 ? 0 : current + 1);
   }, [current, go, items.length]);
+
+  useEffect(() => {
+    setCurrent(0);
+  }, [items.length]);
 
   useEffect(() => {
     if (items.length <= 1) return;
@@ -73,9 +84,9 @@ export default function Testimonials() {
   return (
     <section className="overflow-hidden bg-background py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">Success Stories from Our Clients</h2>
+        <h2 className="section-title text-center">WordPress Client Feedback</h2>
         <p className="section-subtitle mx-auto mt-4 max-w-2xl text-center">
-          Real results from businesses that trusted us with their WordPress growth.
+          Original notes from illustrative WordPress, WooCommerce, and LearnDash engagements — focused on delivery quality, not invented brand claims.
         </p>
 
         <div className="testimonial-stage relative mx-auto mt-12 max-w-4xl">

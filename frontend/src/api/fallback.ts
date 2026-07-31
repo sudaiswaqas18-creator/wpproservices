@@ -13,30 +13,30 @@ export const fallbackData = {
   testimonials: [
     {
       id: 1,
-      name: 'Elena Vargas',
-      company: 'Coastline Analytics | USA',
+      name: 'Alex Rivera',
+      company: 'E-commerce Client — Apparel | USA',
       country: 'USA',
       quote:
-        'They rebuilt our marketing site on WordPress with a clean block theme and clearer lead forms. Our team can publish without breaking layouts, and page speed finally matches what sales promised clients.',
-      metric_label: 'Qualified form completions',
+        'They rebuilt our WooCommerce theme so editors can update seasonal landing pages in Gutenberg without breaking checkout. Staging reviews before go-live made the launch uneventful.',
+      metric_label: 'Checkout confidence',
     },
     {
       id: 2,
-      name: 'Kenji Nakamura',
-      company: 'Harbor Course Labs | Singapore',
+      name: 'Priya Shah',
+      company: 'Education Client — LMS | Singapore',
       country: 'Singapore',
       quote:
-        'The LearnDash work was careful and practical. Enrollment, drip content, and progress tracking feel dependable — and our instructors stopped filing tickets about broken lesson pages.',
-      metric_label: 'Course completion rate',
+        'LearnDash enrollment, drip schedules, and progress tracking finally match how our instructors teach. Ticket volume on broken lesson pages dropped after handoff.',
+      metric_label: 'Learner experience',
     },
     {
       id: 3,
-      name: 'Marta Nowak',
-      company: 'Field & Thread Retail | Poland',
+      name: 'Jonas Berg',
+      company: 'Retail Client — Migration | Poland',
       country: 'Poland',
       quote:
-        'Our WooCommerce migration stayed online the whole weekend. Redirects, product data, and checkout were checked in staging first — that discipline made the cutover uneventful in the best way.',
-      metric_label: 'Checkout completion',
+        'Our WordPress migration kept redirects and product URLs intact. Everything was reviewed on staging first — Search Console stayed calm after cutover.',
+      metric_label: 'SEO continuity',
     },
   ] as Testimonial[],
 
@@ -266,11 +266,11 @@ export const fallbackData = {
   ] as PortfolioItem[],
 
   awards: [
-    { id: 1, title: '5-Star Client Feedback', organization: 'Verified project reviews', year: '2026', badge_label: '5.0' },
-    { id: 2, title: 'WordPress Specialists', organization: 'Theme, plugin & WooCommerce focus', year: '2026', badge_label: '100%' },
-    { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals on every launch', year: '2026', badge_label: 'CWV' },
-    { id: 4, title: 'Trusted Delivery Partner', organization: 'Long-term retainers & handoffs', year: '2026', badge_label: 'Partner' },
-    { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & staging QA', year: '2026', badge_label: 'Secure' },
+    { id: 1, title: '5-Star Client Feedback', organization: 'Reviews from delivered WordPress projects', year: 'Ongoing', badge_label: '5★' },
+    { id: 2, title: 'WordPress Specialists', organization: 'Themes, plugins & WooCommerce focus', year: 'Daily', badge_label: 'WP' },
+    { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals checks before launch', year: 'Every launch', badge_label: 'CWV' },
+    { id: 4, title: 'Trusted Delivery Partner', organization: 'Retainers, staging QA & clear handoffs', year: 'Long-term', badge_label: 'Care' },
+    { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & update discipline', year: 'Standard', badge_label: 'Secure' },
   ],
 
   tools: [
