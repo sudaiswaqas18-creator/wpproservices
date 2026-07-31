@@ -2,12 +2,29 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
-import { isLegacyTestimonialContent, SITE_TESTIMONIALS } from '../data/siteContent';
+import { fallbackData } from '../api/fallback';
 
 const AUTOPLAY_MS = 6000;
 const DOT_SIZE = 10;
 const DOT_HIT = 44;
 const PILL_WIDTH = 32;
+
+const LEGACY_MARKERS = [
+  'skillbridge',
+  'horizon analytics',
+  'greenpath retail',
+  'medconnect',
+  'nordic learning',
+  'artisan foods',
+  'david chen',
+  'sarah mitchell',
+  'wpproservices delivered beyond',
+];
+
+function isLegacy(name: string, company: string, quote: string) {
+  const hay = `${name} ${company} ${quote}`.toLowerCase();
+  return LEGACY_MARKERS.some((m) => hay.includes(m));
+}
 
 function initials(name: string) {
   return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
@@ -20,10 +37,8 @@ function pillOffset(index: number) {
 export default function Testimonials() {
   const { data: apiItems } = useApiData('testimonials');
   const items = useMemo(() => {
-    const safe = apiItems.filter(
-      (t) => !isLegacyTestimonialContent(t.name || '', t.company || '', t.quote || ''),
-    );
-    return safe.length > 0 ? safe : [...SITE_TESTIMONIALS];
+    const safe = apiItems.filter((t) => !isLegacy(t.name || '', t.company || '', t.quote || ''));
+    return safe.length > 0 ? safe : fallbackData.testimonials;
   }, [apiItems]);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);

@@ -33,7 +33,7 @@ export default function CaseStudiesPage() {
                 <div className="grid lg:grid-cols-5">
                   <div className="relative h-52 overflow-hidden bg-gray-100 lg:col-span-2 lg:h-auto min-h-[220px]">
                     <img
-                      src={optimizeImageUrl(cs.image_url || media.image_url, 800)}
+                      src={optimizeImageUrl(media.image_url, 800)}
                       alt={media.image_alt}
                       width={800}
                       height={440}

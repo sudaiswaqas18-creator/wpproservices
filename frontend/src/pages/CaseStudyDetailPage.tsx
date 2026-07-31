@@ -23,7 +23,7 @@ export default function CaseStudyDetailPage() {
   if (!study) return <div className="section-container py-32 text-center text-gray-500">Loading...</div>;
 
   const media = getCaseStudyMedia(study.slug || slug || '');
-  const heroImage = study.image_url || media.image_url;
+  const heroImage = media.image_url;
 
   return (
     <>

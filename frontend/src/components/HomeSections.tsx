@@ -100,7 +100,7 @@ function FeaturedCases() {
               <article key={cs.id} className="card overflow-hidden p-0">
                 <div className="relative h-44 overflow-hidden bg-gray-100">
                   <img
-                    src={optimizeImageUrl(cs.image_url || media.image_url, 640)}
+                    src={optimizeImageUrl(media.image_url, 640)}
                     alt={media.image_alt}
                     width={640}
                     height={176}

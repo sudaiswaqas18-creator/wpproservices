@@ -37,55 +37,6 @@ export const TRUST_AWARDS = [
   },
 ] as const;
 
-/** Original testimonial copy — illustrative roles, no invented award bodies or famous brands. */
-export const SITE_TESTIMONIALS = [
-  {
-    id: 1,
-    name: 'Alex Rivera',
-    company: 'E-commerce Client — Apparel | USA',
-    country: 'USA',
-    quote:
-      'They rebuilt our WooCommerce theme so editors can update seasonal landing pages in Gutenberg without breaking checkout. Staging reviews before go-live made the launch uneventful.',
-    metric_label: 'Checkout confidence',
-  },
-  {
-    id: 2,
-    name: 'Priya Shah',
-    company: 'Education Client — LMS | Singapore',
-    country: 'Singapore',
-    quote:
-      'LearnDash enrollment, drip schedules, and progress tracking finally match how our instructors teach. Ticket volume on broken lesson pages dropped after handoff.',
-    metric_label: 'Learner experience',
-  },
-  {
-    id: 3,
-    name: 'Jonas Berg',
-    company: 'Retail Client — Migration | Poland',
-    country: 'Poland',
-    quote:
-      'Our WordPress migration kept redirects and product URLs intact. Everything was reviewed on staging first — Search Console stayed calm after cutover.',
-    metric_label: 'SEO continuity',
-  },
-  {
-    id: 4,
-    name: 'Maya Okonkwo',
-    company: 'Services Client — Healthcare | UK',
-    country: 'UK',
-    quote:
-      'Accessible templates, careful forms, and a maintainable theme. The team explained WordPress decisions in plain language our ops staff could follow.',
-    metric_label: 'Editor independence',
-  },
-  {
-    id: 5,
-    name: 'Sofia Conti',
-    company: 'E-commerce Client — Specialty Foods | Italy',
-    country: 'Italy',
-    quote:
-      'Performance work on product and cart templates plus a small custom plugin for shipping rules. Core Web Vitals and store ops both felt better after launch.',
-    metric_label: 'Storefront speed',
-  },
-] as const;
-
 export interface CaseStudyMedia {
   image_url: string;
   image_alt: string;
@@ -94,39 +45,42 @@ export interface CaseStudyMedia {
   tech_stack: string;
 }
 
-/** Thematic Unsplash images + safe labels keyed by case-study slug. */
+/**
+ * Local images live in `frontend/public/section-images/`.
+ * Replace any file with the same filename — no code change needed.
+ */
 export const CASE_STUDY_MEDIA: Record<string, CaseStudyMedia> = {
   'freshharvest-shipping': {
-    image_url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
-    image_alt: 'Fresh grocery produce representing a WooCommerce retail shipping project',
+    image_url: '/section-images/case-grocery.jpg',
+    image_alt: 'Grocery shelves for a WooCommerce loyalty shipping case study',
     client_label: 'E-commerce Client — Grocery',
     result_summary: 'Repeat checkouts improved after loyalty shipping rules',
     tech_stack: 'WooCommerce + Custom PHP',
   },
   'eduvault-lms': {
-    image_url: 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?auto=format&fit=crop&w=1200&q=80',
-    image_alt: 'Laptop and notebooks for a gated LearnDash LMS engagement',
+    image_url: '/section-images/case-lms.jpg',
+    image_alt: 'Learners collaborating for a gated LearnDash LMS case study',
     client_label: 'Education Client — Private Cohort',
     result_summary: 'Member access and course completions clarified',
     tech_stack: 'LearnDash + Custom Theme',
   },
   'stylebox-cart-recovery': {
-    image_url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
-    image_alt: 'Apparel retail floor for a WooCommerce cart recovery project',
+    image_url: '/section-images/case-apparel.jpg',
+    image_alt: 'Apparel retail floor for a WooCommerce cart recovery case study',
     client_label: 'E-commerce Client — Apparel',
     result_summary: 'Recovered carts improved with staged email triggers',
     tech_stack: 'Custom Plugin + Email API',
   },
   'clearview-subscriptions': {
-    image_url: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1200&q=80',
+    image_url: '/section-images/case-optics.jpg',
     image_alt: 'Eyewear display for attribute-driven WooCommerce subscriptions',
     client_label: 'E-commerce Client — Specialty Retail',
     result_summary: 'Renewals stabilized with attribute-based pricing',
     tech_stack: 'WooCommerce Subscriptions + Custom Logic',
   },
   'learnpoint-wallet': {
-    image_url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-    image_alt: 'Online learning workspace for wallet-based course checkout',
+    image_url: '/section-images/case-courses.jpg',
+    image_alt: 'Student studying online for wallet-based course checkout',
     client_label: 'Education Client — Online Courses',
     result_summary: 'Payment drop-offs reduced with wallet checkout',
     tech_stack: 'WordPress LMS + Wallet Checkout',
@@ -136,8 +90,8 @@ export const CASE_STUDY_MEDIA: Record<string, CaseStudyMedia> = {
 export function getCaseStudyMedia(slug: string): CaseStudyMedia {
   return (
     CASE_STUDY_MEDIA[slug] ?? {
-      image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      image_alt: 'WordPress agency project analytics and delivery workspace',
+      image_url: '/section-images/case-courses.jpg',
+      image_alt: 'WordPress project workspace for an agency case study',
       client_label: 'WordPress Client — Confidential',
       result_summary: 'Outcomes documented after staging QA and launch',
       tech_stack: 'WordPress',
@@ -145,45 +99,45 @@ export function getCaseStudyMedia(slug: string): CaseStudyMedia {
   );
 }
 
-/** Plugin card images matched to each product’s purpose (Unsplash). */
+/** Plugin card images — local files in /section-images */
 export const PRODUCT_IMAGES: Record<string, { image_url: string; image_alt: string }> = {
   'quote-flow-pro': {
-    image_url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Business discussion representing WooCommerce product quote enquiries',
+    image_url: '/section-images/plugin-quotes.jpg',
+    image_alt: 'Store counter conversation for WooCommerce product quote enquiries',
   },
   'smart-pricing': {
-    image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Analytics dashboard for role-based WooCommerce pricing rules',
+    image_url: '/section-images/plugin-pricing.jpg',
+    image_alt: 'Analytics charts for role-based WooCommerce pricing',
   },
   bundlecraft: {
-    image_url: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Shopping bags for mix-and-match WooCommerce product bundles',
+    image_url: '/section-images/plugin-bundles.jpg',
+    image_alt: 'Gift and shopping bags for WooCommerce product bundles',
   },
   'sales-boost-pack': {
-    image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Conversion metrics for WooCommerce campaign urgency tools',
+    image_url: '/section-images/plugin-urgency.jpg',
+    image_alt: 'Campaign planning desk for WooCommerce urgency tools',
   },
   'stock-alert-pro': {
-    image_url: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Warehouse inventory shelves for WooCommerce stock alerts',
+    image_url: '/section-images/plugin-stock.jpg',
+    image_alt: 'Warehouse racks for WooCommerce low-stock alerts',
   },
   'review-boost': {
-    image_url: 'https://images.unsplash.com/photo-1556745757-8d76bdb6834a?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Customer reviewing a purchase for WooCommerce review collection',
+    image_url: '/section-images/plugin-reviews.jpg',
+    image_alt: 'Team reviewing feedback for WooCommerce review collection',
   },
   subscripto: {
-    image_url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Recurring billing paperwork for WooCommerce subscriptions',
+    image_url: '/section-images/plugin-subscriptions.jpg',
+    image_alt: 'Billing paperwork for WooCommerce subscription management',
   },
   'checkout-flow': {
-    image_url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80',
-    image_alt: 'Secure mobile checkout for a streamlined WooCommerce flow',
+    image_url: '/section-images/plugin-checkout.jpg',
+    image_alt: 'Mobile payment moment for one-page WooCommerce checkout',
   },
 };
 
 export function getProductImage(slug: string, fallbackUrl?: string) {
   return PRODUCT_IMAGES[slug] ?? {
-    image_url: fallbackUrl || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80',
+    image_url: fallbackUrl || '/section-images/plugin-quotes.jpg',
     image_alt: 'WooCommerce plugin for WordPress online stores',
   };
 }
@@ -203,21 +157,4 @@ const FAKE_AWARD_MARKERS = [
 export function isFakeAwardContent(title: string, organization: string) {
   const hay = `${title} ${organization}`.toLowerCase();
   return FAKE_AWARD_MARKERS.some((m) => hay.includes(m));
-}
-
-const LEGACY_TESTIMONIAL_MARKERS = [
-  'skillbridge',
-  'horizon analytics',
-  'greenpath retail',
-  'medconnect',
-  'nordic learning',
-  'artisan foods',
-  'david chen',
-  'sarah mitchell',
-  'wpproservices delivered beyond',
-];
-
-export function isLegacyTestimonialContent(name: string, company: string, quote: string) {
-  const hay = `${name} ${company} ${quote}`.toLowerCase();
-  return LEGACY_TESTIMONIAL_MARKERS.some((m) => hay.includes(m));
 }

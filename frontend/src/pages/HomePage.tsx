@@ -11,7 +11,7 @@ import {
 import HomeStructuredData from '../components/seo/HomeStructuredData';
 
 const ProductsSection = lazy(() => import('../components/ProductsSection'));
-const Testimonials = lazy(() => import('../components/Testimonials'));
+const WordPressFitSection = lazy(() => import('../components/WordPressFitSection'));
 const ToolsSection = lazy(() => import('../components/ToolsSection'));
 const Blog = lazy(() => import('../components/Blog'));
 const CTA = lazy(() => import('../components/CTA'));
@@ -32,7 +32,7 @@ export default function HomePage() {
       <FeaturedCases />
       <Suspense fallback={<BelowFoldFallback />}>
         <ProductsSection />
-        <Testimonials />
+        <WordPressFitSection />
         <StatsBar />
         <ToolsSection />
         <Blog limit={5} />
