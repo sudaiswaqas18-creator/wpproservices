@@ -55,6 +55,23 @@ export async function syncSiteContent() {
 
   // Testimonials are off until real client quotes are added via admin
   await pool.query('DELETE FROM testimonials');
+
+  // Replace placeholder / vanity stats with honest capability phrases (SEO-safe)
+  const STAT_ROWS = [
+    ['wordpress', 'WordPress', 'Custom themes & rebuilds', 1],
+    ['woocommerce', 'WooCommerce', 'Stores built for checkout', 2],
+    ['plugins', 'Plugins', 'Purpose-built store extensions', 3],
+    ['performance', 'Performance', 'Core Web Vitals before launch', 4],
+    ['migrations', 'Migrations', 'Redirect maps & staging QA', 5],
+    ['learndash', 'LearnDash', 'LMS access rules that hold', 6],
+    ['care', 'Care plans', 'Updates, backups & retainers', 7],
+    ['handoff', 'Handoff', 'Docs your editors can use', 8],
+  ];
+  await pool.query('DELETE FROM site_stats');
+  await pool.query(
+    `INSERT INTO site_stats (stat_key, stat_value, stat_label, sort_order) VALUES ?`,
+    [STAT_ROWS],
+  );
 }
 
 export async function ensureDatabase() {

@@ -292,10 +292,12 @@ export const fallbackData = {
   ],
 
   siteStats: [
-    { stat_value: '180+', stat_label: 'WordPress Projects' },
-    { stat_value: '14', stat_label: 'Countries Worked With' },
-    { stat_value: '4.8★', stat_label: 'Client Satisfaction' },
-    { stat_value: '8+', stat_label: 'Years on WordPress' },
+    { stat_value: 'WordPress', stat_label: 'Custom themes & rebuilds' },
+    { stat_value: 'WooCommerce', stat_label: 'Stores built for checkout' },
+    { stat_value: 'Plugins', stat_label: 'Purpose-built store extensions' },
+    { stat_value: 'Performance', stat_label: 'Core Web Vitals before launch' },
+    { stat_value: 'Migrations', stat_label: 'Redirect maps & staging QA' },
+    { stat_value: 'Care plans', stat_label: 'Updates, backups & retainers' },
   ],
 };
 

@@ -6,9 +6,9 @@ import ContactLink from './ContactLink';
 const HeroShowcase = lazy(() => import('./HeroShowcase'));
 
 const trustPoints = [
-  '180+ WordPress Builds Shipped',
-  '14 Countries Worked With',
-  '4.8★ Average Client Rating',
+  'Custom WordPress themes & WooCommerce stores',
+  'Core Web Vitals checks before every launch',
+  'Staging QA, migrations & clear handoff docs',
 ];
 
 const highlights = [
@@ -16,7 +16,6 @@ const highlights = [
   'Core Web Vitals–minded performance work',
   'Safe migrations with redirects and QA',
 ];
-
 export default function Hero() {
   const [showShowcase, setShowShowcase] = useState(false);
 

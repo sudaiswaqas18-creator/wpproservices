@@ -11,17 +11,28 @@ interface SiteStat {
   stat_label: string;
 }
 
+/** Honest capability phrases — no invented project counts or ratings */
 const FALLBACK_STATS: SiteStat[] = [
-  { stat_value: '180+', stat_label: 'WordPress Projects' },
-  { stat_value: '14', stat_label: 'Countries Worked With' },
-  { stat_value: '4.8★', stat_label: 'Client Satisfaction' },
-  { stat_value: '8+', stat_label: 'Years on WordPress' },
-  { stat_value: '60+', stat_label: 'WooCommerce Stores' },
-  { stat_value: '40+', stat_label: 'Custom Plugins Shipped' },
-  { stat_value: '48h', stat_label: 'Typical Proposal Turnaround' },
-  { stat_value: '95%', stat_label: 'Clients Under Retainer Care' },
+  { stat_value: 'WordPress', stat_label: 'Custom themes & rebuilds' },
+  { stat_value: 'WooCommerce', stat_label: 'Stores built for checkout' },
+  { stat_value: 'Plugins', stat_label: 'Purpose-built store extensions' },
+  { stat_value: 'Performance', stat_label: 'Core Web Vitals before launch' },
+  { stat_value: 'Migrations', stat_label: 'Redirect maps & staging QA' },
+  { stat_value: 'LearnDash', stat_label: 'LMS access rules that hold' },
+  { stat_value: 'Care plans', stat_label: 'Updates, backups & retainers' },
+  { stat_value: 'Handoff', stat_label: 'Docs your editors can use' },
 ];
 
+function isUsableStat(s: SiteStat) {
+  const value = (s.stat_value || '').trim();
+  const label = (s.stat_label || '').trim();
+  if (!value || !label) return false;
+  if (/^edit me$/i.test(value)) return false;
+  if (/^growing$/i.test(value)) return false;
+  // Block unverified vanity metrics until real numbers are confirmed in admin
+  if (/^\d+\+?$/.test(value) || /^\d+(\.\d+)?★$/.test(value) || /^\d+%$/.test(value)) return false;
+  return true;
+}
 interface Award { id: number; title: string; organization: string; year: string; badge_label: string; }
 
 function AwardsSection() {
@@ -141,13 +152,12 @@ function StatsBar() {
       .then((r) => r.json())
       .then((d) => {
         if (Array.isArray(d) && d.length > 0) {
-          const usable = d.filter((s: SiteStat) => s.stat_value && !/^edit me$/i.test(s.stat_value));
+          const usable = d.filter(isUsableStat);
           if (usable.length > 0) setStats(usable);
         }
       })
       .catch(() => {});
   }, []);
-
   const marqueeItems = [...stats, ...stats];
 
   return (

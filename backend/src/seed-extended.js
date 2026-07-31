@@ -119,9 +119,13 @@ export async function seedExtended(connection) {
   ]]);
 
   await connection.query(`INSERT INTO site_stats (stat_key, stat_value, stat_label, sort_order) VALUES ?`, [[
-    ['projects', 'Edit me', 'WordPress projects delivered', 1],
-    ['experience', 'Edit me', 'Years in WordPress delivery', 2],
-    ['clients', 'Growing', 'Businesses we support', 3],
-    ['countries', 'Edit me', 'Countries served', 4],
+    ['wordpress', 'WordPress', 'Custom themes & rebuilds', 1],
+    ['woocommerce', 'WooCommerce', 'Stores built for checkout', 2],
+    ['plugins', 'Plugins', 'Purpose-built store extensions', 3],
+    ['performance', 'Performance', 'Core Web Vitals before launch', 4],
+    ['migrations', 'Migrations', 'Redirect maps & staging QA', 5],
+    ['learndash', 'LearnDash', 'LMS access rules that hold', 6],
+    ['care', 'Care plans', 'Updates, backups & retainers', 7],
+    ['handoff', 'Handoff', 'Docs your editors can use', 8],
   ]]);
 }
