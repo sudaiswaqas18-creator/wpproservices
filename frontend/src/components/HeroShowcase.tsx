@@ -294,7 +294,7 @@ export default function HeroShowcase() {
             </div>
           </div>
           <div className="h-0.5 bg-gray-100">
-            <motion.div className="h-full bg-emerald-400" style={{ width: `${sceneProgress}%` }} />
+            <motion.div className="h-full bg-brand-500" style={{ width: `${sceneProgress}%` }} />
           </div>
         </motion.div>
 
@@ -369,7 +369,7 @@ export default function HeroShowcase() {
               <span className="h-2.5 w-2.5 rounded-full bg-[#28C840] shadow-sm" />
             </div>
             <div className="flex flex-1 items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-[11px] text-gray-400 shadow-inner ring-1 ring-gray-100">
-              <Lock size={10} className="shrink-0 text-emerald-500" />
+              <Lock size={10} className="shrink-0 text-brand-500" />
               <AnimatePresence mode="wait">
                 <motion.span
                   key={scene.id}
@@ -394,7 +394,7 @@ export default function HeroShowcase() {
               className="pointer-events-none absolute inset-0 opacity-70"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 12% 18%, rgba(26, 26, 26,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(184, 149, 106,0.12), transparent 36%)',
+                  'radial-gradient(circle at 12% 18%, rgba(26, 26, 26,0.14), transparent 40%), radial-gradient(circle at 88% 78%, rgba(26, 26, 26,0.06), transparent 36%)',
               }}
             />
             <div
