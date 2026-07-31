@@ -18,9 +18,9 @@ const scenes = [
     title: 'Brand-led WordPress',
     subtitle: 'Custom themes built for conversion',
     score: 98,
-    scoreLabel: 'PageSpeed',
-    delta: '+3.2x',
-    deltaLabel: 'Faster load',
+    scoreLabel: 'Example CWV',
+    delta: 'Staging',
+    deltaLabel: 'Pre-launch QA',
     accent: 'from-sky-600 to-slate-800',
     ringFrom: '#0EA5E9',
     ringTo: '#1A1A1A',
@@ -40,10 +40,10 @@ const scenes = [
     eyebrow: 'WooCommerce',
     title: 'High-converting store',
     subtitle: 'Checkout flows that drive revenue',
-    score: 42,
-    scoreLabel: 'Conv. lift %',
-    delta: '1.2s',
-    deltaLabel: 'TTI',
+    score: 88,
+    scoreLabel: 'Checkout UX',
+    delta: 'Scoped',
+    deltaLabel: 'Written brief',
     accent: 'from-amber-600 to-stone-800',
     ringFrom: '#D97706',
     ringTo: '#1A1A1A',
@@ -52,9 +52,9 @@ const scenes = [
     nav: ['Shop', 'Cart', 'Account'],
     features: ['Smart cart', 'Payments', 'Upsells'],
     vitals: [
-      { label: 'AOV', value: '+18%', good: true },
-      { label: 'CR', value: '4.2%', good: true },
-      { label: 'Cart', value: '-22%', good: true },
+      { label: 'Cart', value: 'Clear', good: true },
+      { label: 'Pay', value: 'Focused', good: true },
+      { label: 'Stock', value: 'Honest', good: true },
     ],
     bars: [48, 70, 82, 64, 90, 75],
   },
@@ -63,10 +63,10 @@ const scenes = [
     eyebrow: 'Enterprise',
     title: 'Always-on performance',
     subtitle: 'Core Web Vitals locked in and stable',
-    score: 100,
-    scoreLabel: 'CWV Score',
-    delta: '99.9%',
-    deltaLabel: 'Uptime',
+    score: 96,
+    scoreLabel: 'Launch ready',
+    delta: 'Care',
+    deltaLabel: 'Retainer path',
     accent: 'from-teal-600 to-slate-800',
     ringFrom: '#0D9488',
     ringTo: '#1A1A1A',
@@ -75,9 +75,9 @@ const scenes = [
     nav: ['Platform', 'Security', 'Support'],
     features: ['CDN', 'WAF', 'Backups'],
     vitals: [
-      { label: 'LCP', value: '0.9s', good: true },
-      { label: 'INP', value: '32ms', good: true },
-      { label: 'CLS', value: '0.01', good: true },
+      { label: 'SSL', value: 'On', good: true },
+      { label: 'Backup', value: 'Scheduled', good: true },
+      { label: 'Updates', value: 'Staged', good: true },
     ],
     bars: [88, 94, 86, 97, 91, 99],
   },
@@ -275,8 +275,8 @@ export default function HeroShowcase() {
               <span className="relative h-2.5 w-2.5 rounded-full bg-teal-500 ring-2 ring-teal-100" />
             </span>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-teal-700">Deployed</p>
-              <p className="text-[11px] font-semibold text-gray-700">Launch-ready build</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-teal-700">Staging</p>
+              <p className="text-[11px] font-semibold text-gray-700">QA before go-live</p>
             </div>
           </div>
           <div className="h-0.5 bg-gray-100">
@@ -303,8 +303,8 @@ export default function HeroShowcase() {
             ))}
           </div>
           <div>
-            <p className="text-[10px] font-bold text-gray-900">+128 visitors</p>
-            <p className="text-[9px] text-gray-500">Live right now</p>
+            <p className="text-[10px] font-bold text-gray-900">Editor-ready</p>
+            <p className="text-[9px] text-gray-500">Gutenberg patterns</p>
           </div>
         </motion.div>
 
@@ -321,7 +321,7 @@ export default function HeroShowcase() {
             <ShieldCheck size={16} strokeWidth={2.5} />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-gray-900">Enterprise security</p>
+            <p className="text-[10px] font-bold text-gray-900">Security basics</p>
             <p className="text-[10px] text-gray-500">SSL · Hardening · Backups</p>
           </div>
         </motion.div>
@@ -336,7 +336,7 @@ export default function HeroShowcase() {
           className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.2)] backdrop-blur-md sm:flex"
         >
           <Globe2 size={14} className="text-sky-600" />
-          <span className="text-[10px] font-semibold text-gray-700">27+ countries</span>
+          <span className="text-[10px] font-semibold text-gray-700">WooCommerce · LearnDash</span>
         </motion.div>
 
         {/* Main frame — gentle float, no spinning orbits / hard 3D tilt */}
@@ -489,7 +489,7 @@ export default function HeroShowcase() {
                       </motion.div>
                       <div className="flex items-center gap-1 text-[9px] font-semibold text-amber-700">
                         <TrendingUp size={11} />
-                        +24% growth
+                        Clear handoff
                       </div>
                     </div>
 

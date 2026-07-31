@@ -70,9 +70,8 @@ export default function WordPressFitSection() {
             When a Specialist WordPress Team Fits Best
           </h2>
           <p className="section-subtitle mx-auto mt-4">
-            High-performing WordPress agency sites spell out who they serve. If your work lives in
-            themes, WooCommerce, LearnDash, migrations, or care plans — this is the engagement model
-            built for you.
+            WPServices is a strong fit when your roadmap lives in WordPress themes, WooCommerce,
+            LearnDash, custom plugins, migrations, or ongoing care — not a generic “website package.”
           </p>
         </div>
 

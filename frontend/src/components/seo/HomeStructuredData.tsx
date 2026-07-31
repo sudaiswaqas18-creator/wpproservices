@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import { SITE } from '../../config/site';
+import { OFFICES, SITE } from '../../config/site';
+
+const usOffice = OFFICES.find((o) => o.city === 'USA') ?? OFFICES[0];
 
 const organization = {
   '@context': 'https://schema.org',
@@ -9,31 +11,27 @@ const organization = {
   logo: `${SITE.url}/logo-light.png`,
   email: SITE.email,
   description:
-    'Premium WordPress development agency specializing in custom websites, WooCommerce, plugins, and ongoing maintenance.',
-  sameAs: [
-    'https://facebook.com/wpservices',
-    'https://twitter.com/wpservices',
-    'https://linkedin.com/company/wpservices',
-    'https://github.com/wpservices',
-  ],
+    'WordPress development studio for custom themes, WooCommerce stores, LearnDash LMS, plugins, migrations, and care retainers.',
 };
 
 const localBusiness = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'ProfessionalService',
   name: SITE.name,
   image: `${SITE.url}/logo-light.png`,
   url: SITE.url,
   email: SITE.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'St. Petersburg',
+    streetAddress: usOffice.address,
     addressLocality: 'St. Petersburg',
     addressRegion: 'FL',
     postalCode: '33702',
     addressCountry: 'US',
   },
   telephone: SITE.phone,
+  areaServed: 'Worldwide',
+  priceRange: '$$',
 };
 
 const website = {
@@ -41,11 +39,6 @@ const website = {
   '@type': 'WebSite',
   name: SITE.name,
   url: SITE.url,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE.url}/services?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 export default function HomeStructuredData() {

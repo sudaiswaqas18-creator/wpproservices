@@ -17,6 +17,7 @@ interface SocialLinksProps {
 
 export default function SocialLinks({ className = '', variant = 'light' }: SocialLinksProps) {
   const isDark = variant === 'dark';
+  if (!SOCIAL_LINKS.length) return null;
 
   return (
     <div className={`flex flex-wrap gap-2 ${className}`}>

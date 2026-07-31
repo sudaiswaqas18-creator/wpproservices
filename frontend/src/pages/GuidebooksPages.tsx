@@ -52,7 +52,7 @@ export default function GuidebookDetailPage() {
         to={`/contact?product=${encodeURIComponent(book.title)}&type=guidebook`}
         className="btn-primary mt-8 inline-flex gap-2"
       >
-        <Download size={16} /> Download Guide
+        <Download size={16} /> Request this guide
       </Link>
     </div></section>
   );

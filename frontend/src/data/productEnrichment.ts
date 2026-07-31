@@ -9,19 +9,19 @@ export interface ProductEnrichment {
 
 const defaultEnrichment: ProductEnrichment = {
   categoryLabel: 'WooCommerce Plugin',
-  tagline: 'Built for growing online stores',
+  tagline: 'Built for operators who need cleaner store workflows',
   highlights: [
-    { label: 'Updates', value: 'Lifetime' },
-    { label: 'Support', value: '1 year' },
-    { label: 'Sites', value: 'Unlimited' },
+    { label: 'License', value: 'Per purchase terms' },
+    { label: 'Support', value: 'As listed at checkout' },
+    { label: 'Stack', value: 'WooCommerce 8+' },
   ],
   features: [
-    'Easy setup — no coding required',
-    'Works with any WooCommerce theme',
-    'Regular updates & security patches',
-    'Detailed documentation included',
+    'Admin controls your team can understand',
+    'Built for WooCommerce storefront templates',
+    'Documented setup and common edge cases',
+    'Designed to avoid brittle theme lock-in',
   ],
-  useCases: ['Small businesses', 'Growing stores', 'Agencies'],
+  useCases: ['Specialty retailers', 'Wholesale catalogs', 'Subscription operators'],
   compatibility: 'WooCommerce 8+ · WordPress 6+',
 };
 
@@ -380,8 +380,8 @@ export const supplementalProducts = [
     full_content: 'CatalogCloak keeps sensitive B2B pricing and SKUs behind login while still letting shoppers browse approved public collections.',
     category: 'sales-b2b',
     price: '$69',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-catalog-cloak.jpg',
   },
   {
@@ -393,8 +393,8 @@ export const supplementalProducts = [
     full_content: 'RelateLane lets merchandisers define related and upsell sets by category, tag, or manual lists so product pages stay commercially intentional.',
     category: 'catalog',
     price: '$59',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-relate-lane.jpg',
   },
   {
@@ -406,8 +406,8 @@ export const supplementalProducts = [
     full_content: 'KitLane keeps kit parents and component inventory aligned so you do not oversell a bundle when one piece is out of stock.',
     category: 'catalog',
     price: '$79',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-kit-lane.jpg',
   },
   {
@@ -419,8 +419,8 @@ export const supplementalProducts = [
     full_content: 'StickyLane ATC adds a compact sticky bar with price, variation summary, and add-to-cart so mobile shoppers do not lose the purchase action while scrolling.',
     category: 'conversion',
     price: '$49',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-sticky-lane.jpg',
   },
   {
@@ -432,8 +432,8 @@ export const supplementalProducts = [
     full_content: 'BannerForge gives marketing teams dated banner slots for campaigns without handing them a page-builder free-for-all.',
     category: 'conversion',
     price: '$55',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-banner-forge.jpg',
   },
   {
@@ -445,8 +445,8 @@ export const supplementalProducts = [
     full_content: 'StockMap adds location-aware stock fields and admin views for teams that store inventory across warehouses or retail rooms.',
     category: 'ops-inventory',
     price: '$89',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-stock-map.jpg',
   },
   {
@@ -458,8 +458,8 @@ export const supplementalProducts = [
     full_content: 'RestockPulse turns inventory thresholds into planning digests so purchasing does not rely on last-minute panic buys.',
     category: 'ops-inventory',
     price: '$65',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-restock-pulse.jpg',
   },
   {
@@ -471,8 +471,8 @@ export const supplementalProducts = [
     full_content: 'SealStrip places editor-controlled trust seals on product and cart templates.',
     category: 'trust-checkout',
     price: '$39',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-seal-strip.jpg',
   },
   {
@@ -484,8 +484,8 @@ export const supplementalProducts = [
     full_content: 'CycleFlex focuses on self-service subscription lifecycle controls so customers can adjust deliveries without calling your team.',
     category: 'subscriptions',
     price: '$79',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-cycle-flex.jpg',
   },
   {
@@ -497,8 +497,8 @@ export const supplementalProducts = [
     full_content: 'TierAccess maps membership tiers to catalog and content access so digital products and member pricing stay consistent after checkout.',
     category: 'subscriptions',
     price: '$99',
-    rating: '4.8/5',
-    rating_count: 'Stores using plugin',
+    rating: '',
+    rating_count: 'WooCommerce extension',
     image_url: '/section-images/plugin-tier-access.jpg',
   },
 ] as const;

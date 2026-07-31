@@ -14,7 +14,9 @@ export default function CaseStudies({ limit, showViewAll = true }: Props) {
     <section className="bg-surface-50 py-20">
       <div className="section-container">
         <h2 className="section-title">WordPress Development Case Studies</h2>
-        <p className="section-subtitle">Real projects showing custom websites, seamless migrations, and measurable growth.</p>
+        <p className="section-subtitle">
+          Anonymized WordPress, WooCommerce, and LearnDash engagements that show how we approach scope, build, and handoff.
+        </p>
         <div className="mt-12 space-y-6">
           {items.map((cs) => (
             <article key={cs.id} className="card overflow-hidden p-0">

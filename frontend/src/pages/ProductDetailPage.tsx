@@ -86,10 +86,16 @@ export default function ProductDetailPage() {
             <h1 className="mt-4 text-4xl font-extrabold text-gray-900">{product.title}</h1>
             <p className="mt-2 text-lg text-brand-600">{product.subtitle}</p>
             <p className="mt-3 text-gray-600">{enriched.tagline}</p>
-            <p className="mt-4 flex items-center gap-1 text-yellow-600">
-              <Star size={16} className="fill-yellow-400 text-yellow-400" />
-              {product.rating} rated by {product.rating_count}
-            </p>
+            {product.rating && /\d/.test(product.rating) ? (
+              <p className="mt-4 flex items-center gap-1 text-yellow-600">
+                <Star size={16} className="fill-yellow-400 text-yellow-400" />
+                {product.rating} · {product.rating_count}
+              </p>
+            ) : (
+              <p className="mt-4 text-sm font-medium text-gray-500">
+                {product.rating_count || 'WooCommerce extension'} · terms confirmed at purchase
+              </p>
+            )}
             <p className="mt-4 text-3xl font-bold text-gray-900">{product.price}</p>
             <p className="mt-4 leading-relaxed text-gray-600">{product.full_content || product.description}</p>
             <BuyPluginButton product={product} className="btn-primary mt-8 inline-flex" />
@@ -144,13 +150,18 @@ export default function ProductDetailPage() {
             <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-card">
               <div className="bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-5">
                 <h3 className="text-lg font-bold text-white">Get {product.title}</h3>
-                <p className="mt-1 text-sm text-brand-100">One-time purchase · Lifetime updates</p>
+                <p className="mt-1 text-sm text-brand-100">Purchase terms shown at checkout</p>
               </div>
               <div className="p-6">
                 <p className="text-3xl font-bold text-gray-900">{product.price}</p>
-                <p className="mt-1 text-sm text-gray-500">Includes 1 year of premium support</p>
+                <p className="mt-1 text-sm text-gray-500">Support window and license details confirmed before payment</p>
                 <ul className="mt-5 space-y-2.5">
-                  {['Lifetime plugin updates', '1 year premium support', 'Unlimited site license', '30-day money-back guarantee'].map((item) => (
+                  {[
+                    'WooCommerce-focused feature set',
+                    'Setup notes for common store themes',
+                    'License and update terms at checkout',
+                    'Support options listed with the purchase',
+                  ].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
                       <Check size={14} className="text-brand-500" />{item}
                     </li>

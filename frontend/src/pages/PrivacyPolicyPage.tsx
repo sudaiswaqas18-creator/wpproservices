@@ -98,7 +98,7 @@ You can control cookies through your browser settings. Disabling cookies may aff
 • **Objection** — object to processing of your data for direct marketing
 • **Withdraw Consent** — withdraw consent at any time where processing is based on consent
 
-To exercise any of these rights, contact us at hello@wpservices.com. We will respond within 30 days.`,
+To exercise any of these rights, contact us at info@technogiallc.com. We will respond within 30 days.`,
   },
   {
     id: 'data-retention',
@@ -116,7 +116,7 @@ When data is no longer needed, we securely delete or anonymize it.`,
     id: 'international',
     icon: Globe,
     title: 'International Data Transfers',
-    content: `WPServices operates globally with offices in the United States, India, and the United Arab Emirates. Your information may be transferred to and processed in countries other than your own.
+    content: `WPServices operates with team presence in the United States, the United Arab Emirates, and Pakistan. Your information may be transferred to and processed in countries other than your own.
 
 We ensure appropriate safeguards are in place for international transfers, including standard contractual clauses and compliance with applicable data protection frameworks such as GDPR and applicable local regulations.`,
   },
@@ -127,10 +127,10 @@ We ensure appropriate safeguards are in place for international transfers, inclu
     content: `If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
 **WPServices**
-Email: hello@wpservices.com
-USA: 2035 Sunset Lake Road, Suite B-2, Newark, Delaware, 19702
-India: 105, Aniket, Kolbad, Thane (West), Mumbai – 400 601
-UAE: T1-12-4K RAKEZ Amenity Centre, Al Hamra Industrial Zone FZ, RAK
+Email: info@technogiallc.com
+USA: St. Petersburg, FL 33702
+UAE: Sahara Health Care City, Regus 524, Dubai
+Pakistan: Gujranwala, Punjab
 
 We aim to respond to all privacy-related inquiries within 5 business days.`,
   },

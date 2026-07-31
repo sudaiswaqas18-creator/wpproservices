@@ -32,11 +32,10 @@ export const OFFICES = [
   },
 ] as const;
 
-export const SOCIAL_LINKS = [
-  { label: 'Facebook', href: 'https://facebook.com/wpservices', icon: 'facebook' as const },
-  { label: 'Twitter', href: 'https://twitter.com/wpservices', icon: 'twitter' as const },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/wpservices', icon: 'linkedin' as const },
-  { label: 'Instagram', href: 'https://instagram.com/wpservices', icon: 'instagram' as const },
-  { label: 'GitHub', href: 'https://github.com/wpservices', icon: 'github' as const },
-  { label: 'YouTube', href: 'https://youtube.com/@wpservices', icon: 'youtube' as const },
+export const SOCIAL_LINKS: {
+  label: string;
+  href: string;
+  icon: 'facebook' | 'twitter' | 'linkedin' | 'instagram' | 'github' | 'youtube';
+}[] = [
+  // Add only verified profiles you own. Empty until then — avoids false Organization sameAs claims.
 ];

@@ -69,7 +69,7 @@ export async function seedExtended(connection) {
 
   const img = (name) => `/section-images/${name}`;
   const mkPlugin = (title, slug, subtitle, desc, full, features, category, price, order, image) => [
-    title, slug, subtitle, desc, full, JSON.stringify(features), category, price, '4.8/5', 'Stores using plugin', image, '#', order,
+    title, slug, subtitle, desc, full, JSON.stringify(features), category, price, '', 'WooCommerce extension', image, '#', order,
   ];
 
   await connection.query(`INSERT INTO products (title, slug, subtitle, description, full_content, features, category, price, rating, rating_count, image_url, buy_url, sort_order) VALUES ?`, [[
@@ -111,11 +111,11 @@ export async function seedExtended(connection) {
   ]]);
 
   await connection.query(`INSERT INTO awards (title, organization, year, badge_label, sort_order) VALUES ?`, [[
-    ['5-Star Client Feedback', 'Reviews from delivered WordPress projects', 'Ongoing', '5★', 1],
-    ['WordPress Specialists', 'Themes, plugins & WooCommerce focus', 'Daily', 'WP', 2],
-    ['Performance-First Builds', 'Core Web Vitals checks before launch', 'Every launch', 'CWV', 3],
-    ['Trusted Delivery Partner', 'Retainers, staging QA & clear handoffs', 'Long-term', 'Care', 4],
-    ['Secure Launch Standard', 'Hardening, backups & update discipline', 'Standard', 'Secure', 5],
+    ['Written scopes before build', 'Clear inclusions, exclusions, and success criteria for WordPress work', 'Every project', 'Scope', 1],
+    ['WordPress specialists', 'Themes, plugins, WooCommerce, and LearnDash — not generic web packages', 'Daily focus', 'WP', 2],
+    ['Performance-minded launches', 'Core Web Vitals reviewed on real templates before go-live', 'Pre-launch', 'CWV', 3],
+    ['Staging-first changes', 'Meaningful updates reviewed on staging when hosting allows', 'Standard', 'QA', 4],
+    ['Secure launch habits', 'Hardening, backups, and update discipline as part of delivery', 'Standard', 'Secure', 5],
   ]]);
 
   await connection.query(`INSERT INTO site_stats (stat_key, stat_value, stat_label, sort_order) VALUES ?`, [[

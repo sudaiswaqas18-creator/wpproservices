@@ -6,15 +6,15 @@ import ContactLink from './ContactLink';
 const HeroShowcase = lazy(() => import('./HeroShowcase'));
 
 const trustPoints = [
-  'Custom WordPress themes & WooCommerce stores',
-  'Core Web Vitals checks before every launch',
-  'Staging QA, migrations & clear handoff docs',
+  'Custom themes, WooCommerce stores & plugins',
+  'Staging QA before every meaningful launch',
+  'Migrations with redirect maps & handoff docs',
 ];
 
 const highlights = [
-  'WordPress & WooCommerce builds from scratch',
-  'Core Web Vitals–minded performance work',
-  'Safe migrations with redirects and QA',
+  'Themes editors can update without breaking layouts',
+  'WooCommerce checkout, catalog & inventory logic',
+  'Care retainers for updates, backups and small fixes',
 ];
 export default function Hero() {
   const [showShowcase, setShowShowcase] = useState(false);
@@ -50,20 +50,20 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <Sparkles size={14} className="text-accent" aria-hidden="true" />
-              WordPress Development, Done Properly
+              WordPress studio for stores, LMS & care
             </div>
 
             <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
-              WordPress Sites Built{' '}
+              WordPress Work That{' '}
               <span className="relative inline-block">
-                <span className="text-accent">to Perform</span>
+                <span className="text-accent">Stays Maintainable</span>
                 <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-secondary" />
               </span>
             </h1>
 
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-              Custom themes, WooCommerce stores, and plugin work engineered for speed, clarity,
-              and long-term maintainability — so your site stays reliable as you grow.
+              WPServices builds custom themes, WooCommerce stores, LearnDash flows, and plugins with
+              staging QA, Core Web Vitals checks, and docs your editors can actually use.
             </p>
 
             <ul className="mt-6 space-y-2.5">

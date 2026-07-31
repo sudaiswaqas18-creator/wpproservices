@@ -24,10 +24,10 @@ export default function Services() {
   return (
     <section id="services" className="py-20">
       <div className="section-container">
-        <h2 className="section-title">Comprehensive WordPress Development Services</h2>
+        <h2 className="section-title">WordPress Services Built Around Real Delivery Work</h2>
         <p className="section-subtitle">
-          End-to-end WordPress design and development — scalable infrastructure, optimized
-          performance, and advanced workflows tailored to your business ecosystem.
+          Custom themes, WooCommerce stores, LearnDash, plugins, migrations, and care — scoped clearly
+          and handed off with docs your editors can use.
         </p>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-5">

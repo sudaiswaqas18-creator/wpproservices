@@ -19,11 +19,10 @@ const values = [
 ];
 
 const milestones = [
-  { v: 'Edit me', l: 'Years focused on WordPress' },
-  { v: 'Edit me', l: 'Active client retainers' },
-  { v: '5-star', l: 'Typical client feedback' },
+  { v: 'Themes', l: 'Custom WordPress builds editors can maintain' },
+  { v: 'Stores', l: 'WooCommerce catalogs, checkout & inventory logic' },
+  { v: 'Care', l: 'Updates, backups, staging checks & retainers' },
 ];
-
 export default function AboutPage() {
   return (
     <>
@@ -97,7 +96,7 @@ export default function AboutPage() {
           ))}
         </div>
         <p className="section-container mt-6 max-w-2xl text-center text-sm text-gray-500">
-          Milestone numbers above are placeholders you can replace with verified figures whenever you are ready.
+          Focus areas for WPServices — verified client counts and ratings are published only when we can back them with real references.
         </p>
       </section>
 

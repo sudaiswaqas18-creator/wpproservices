@@ -101,10 +101,10 @@ export const fallbackData = {
       id: 1,
       name: 'Build & Launch',
       tagline: 'A solid WordPress foundation for marketing sites that need to ship cleanly.',
-      price: '$4,200',
-      original_price: '$6,800',
-      discount_label: '38% Off',
-      is_best_seller: true,
+      price: 'From $4,200',
+      original_price: '',
+      discount_label: '',
+      is_best_seller: false,
       features: [
         'Launch-ready SEO structure',
         'Core keyword mapping',
@@ -119,8 +119,8 @@ export const fallbackData = {
       name: 'Re-Design & Convert',
       tagline: 'For WordPress sites that look dated or leak conversions.',
       price: 'Custom Quote',
-      original_price: '$5,200',
-      discount_label: '45% Off',
+      original_price: '',
+      discount_label: '',
       is_best_seller: false,
       features: [
         'Brand-aligned redesign',
@@ -231,26 +231,26 @@ export const fallbackData = {
   ] as Industry[],
 
   portfolio: [
-    { id: 1, title: 'E-commerce Client — Specialty Coffee', category: 'WooCommerce Store', image_url: '/section-images/portfolio-coffee.jpg' },
-    { id: 2, title: 'Services Client — Corporate Site', category: 'Corporate Website', image_url: '/section-images/portfolio-corporate.jpg' },
-    { id: 3, title: 'Education Client — LMS Dashboard', category: 'LMS Dashboard', image_url: '/section-images/portfolio-lms.jpg' },
-    { id: 4, title: 'B2B Client — Member Portal', category: 'B2B Portal', image_url: '/section-images/portfolio-b2b.jpg' },
+    { id: 1, title: 'Specialty retail WooCommerce storefront', category: 'WooCommerce Store', image_url: '/section-images/portfolio-coffee.jpg' },
+    { id: 2, title: 'Services company WordPress marketing site', category: 'Corporate Website', image_url: '/section-images/portfolio-corporate.jpg' },
+    { id: 3, title: 'Course team LearnDash dashboard', category: 'LMS Dashboard', image_url: '/section-images/portfolio-lms.jpg' },
+    { id: 4, title: 'B2B member catalog portal', category: 'B2B Portal', image_url: '/section-images/portfolio-b2b.jpg' },
   ] as PortfolioItem[],
 
   awards: [
-    { id: 1, title: '5-Star Client Feedback', organization: 'Reviews from delivered WordPress projects', year: 'Ongoing', badge_label: '5★' },
-    { id: 2, title: 'WordPress Specialists', organization: 'Themes, plugins & WooCommerce focus', year: 'Daily', badge_label: 'WP' },
-    { id: 3, title: 'Performance-First Builds', organization: 'Core Web Vitals checks before launch', year: 'Every launch', badge_label: 'CWV' },
-    { id: 4, title: 'Trusted Delivery Partner', organization: 'Retainers, staging QA & clear handoffs', year: 'Long-term', badge_label: 'Care' },
-    { id: 5, title: 'Secure Launch Standard', organization: 'Hardening, backups & update discipline', year: 'Standard', badge_label: 'Secure' },
+    { id: 1, title: 'Written scopes before build', organization: 'Clear inclusions, exclusions, and success criteria for WordPress work', year: 'Every project', badge_label: 'Scope' },
+    { id: 2, title: 'WordPress specialists', organization: 'Themes, plugins, WooCommerce, and LearnDash — not generic web packages', year: 'Daily focus', badge_label: 'WP' },
+    { id: 3, title: 'Performance-minded launches', organization: 'Core Web Vitals reviewed on real templates before go-live', year: 'Pre-launch', badge_label: 'CWV' },
+    { id: 4, title: 'Staging-first changes', organization: 'Meaningful updates reviewed on staging when hosting allows', year: 'Standard', badge_label: 'QA' },
+    { id: 5, title: 'Secure launch habits', organization: 'Hardening, backups, and update discipline as part of delivery', year: 'Standard', badge_label: 'Secure' },
   ],
 
   tools: [
     {
       id: 1,
-      title: 'Core Web Vitals Scorecard',
+      title: 'Core Web Vitals Review Notes',
       slug: 'speed-estimator',
-      description: 'Estimate where your WordPress or WooCommerce pages lose time — LCP, CLS, and server response.',
+      description: 'A practical checklist for spotting LCP, CLS, and TTFB issues on WordPress and WooCommerce templates.',
       icon: 'zap',
       is_new: true,
     },

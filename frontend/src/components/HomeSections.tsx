@@ -52,9 +52,9 @@ function AwardsSection() {
   return (
     <section className="border-y border-border bg-gradient-to-b from-background to-surface py-16">
       <div className="section-container text-center">
-        <h2 className="text-2xl font-bold text-ink">Trust Signals We Stand Behind</h2>
+        <h2 className="text-2xl font-bold text-ink">How We Deliver WordPress Work</h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-ink-light">
-          Honest delivery standards for WordPress work — not invented award badges or third-party logos we do not own.
+          Delivery habits we follow on themes, stores, and plugins — not third-party award badges or invented ratings.
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {awards.map((a) => (
@@ -82,9 +82,9 @@ interface CaseStudy {
 }
 
 const FALLBACK_FEATURED_CASES: CaseStudy[] = [
-  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'E-commerce Client — Grocery', slug: 'freshharvest-shipping' },
-  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Education Client — Private Cohort', slug: 'eduvault-lms' },
-  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'E-commerce Client — Apparel', slug: 'stylebox-cart-recovery' },
+  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'Anonymized grocery WooCommerce store', slug: 'freshharvest-shipping' },
+  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Anonymized private cohort LMS', slug: 'eduvault-lms' },
+  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'Anonymized apparel WooCommerce store', slug: 'stylebox-cart-recovery' },
 ];
 
 function FeaturedCases() {
@@ -103,7 +103,7 @@ function FeaturedCases() {
     <section className="bg-surface-elevated py-20">
       <div className="section-container">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Selected Work</p>
-        <h2 className="section-title mt-2">WordPress Projects With Measurable Outcomes</h2>
+        <h2 className="section-title mt-2">WordPress Project Stories Worth Studying</h2>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {cases.map((cs) => {
             const media = getCaseStudyMedia(cs.slug);
@@ -186,11 +186,11 @@ function PhilosophySection() {
     <section className="bg-surface py-16">
       <div className="section-container max-w-4xl text-center">
         <h2 className="text-2xl font-bold text-ink sm:text-3xl">
-          Our Standard Is Clear: WordPress Should Feel Fast for Visitors and Steady for Your Team.
+          WordPress Should Feel Fast for Visitors and Steady for Your Editors
         </h2>
         <p className="mt-4 text-lg text-gray-600">
-          We ship themes, stores, and plugins that hold up under real traffic — with clean code, staging QA,
-          and handoff docs your editors can actually use.
+          We ship themes, WooCommerce stores, and plugins with staging QA, Core Web Vitals checks,
+          and handoff docs — so launches stick and day-two edits stay calm.
         </p>
       </div>
     </section>

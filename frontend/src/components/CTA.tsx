@@ -15,7 +15,7 @@ export default function CTA() {
             </p>
             <ul className="mt-8 space-y-3 text-secondary">
               <li className="flex items-center gap-2">✓ Complimentary discovery call</li>
-              <li className="flex items-center gap-2">✓ Written proposal within two business days</li>
+              <li className="flex items-center gap-2">✓ Written scope outline after we understand the brief</li>
               <li className="flex items-center gap-2">✓ No retainer required to talk through options</li>
             </ul>
           </div>

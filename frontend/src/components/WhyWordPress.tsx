@@ -2,10 +2,26 @@ import { Layers, TrendingUp, Search, Wallet } from 'lucide-react';
 import ContactLink from './ContactLink';
 
 const benefits = [
-  { icon: Layers, title: 'Easy Customization', desc: 'Thousands of themes and plugins adapt seamlessly to any business need.' },
-  { icon: TrendingUp, title: 'Scalability', desc: 'From small blogs to enterprise websites, WordPress grows with your business.' },
-  { icon: Search, title: 'SEO-Friendly', desc: 'Built-in SEO features and integrations help your site rank higher organically.' },
-  { icon: Wallet, title: 'Cost-Effective', desc: 'Affordable setup and maintenance make it a smart investment for all sizes.' },
+  {
+    icon: Layers,
+    title: 'Editor-friendly builds',
+    desc: 'Block patterns and clean admin UX so your team can publish without breaking the layout.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Room to grow',
+    desc: 'Themes and plugins structured so catalogs, courses, and content models can expand later.',
+  },
+  {
+    icon: Search,
+    title: 'SEO-ready structure',
+    desc: 'Sensible URLs, headings, schema hooks, and Core Web Vitals habits before launch — not bolt-on fluff.',
+  },
+  {
+    icon: Wallet,
+    title: 'Owned, not rented',
+    desc: 'You keep the WordPress site, hosting choice, and code path — with docs that make handoff real.',
+  },
 ];
 
 export default function WhyWordPress() {
@@ -14,14 +30,14 @@ export default function WhyWordPress() {
       <div className="section-container">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="section-title">Why Choose WordPress?</h2>
+            <h2 className="section-title">Why We Build on WordPress</h2>
             <p className="section-subtitle">
-              WordPress powers more than 40% of websites worldwide. It offers unmatched flexibility,
-              scalability, and cost-efficiency — the go-to platform for startups, growing businesses,
-              and enterprises alike.
+              WordPress remains a strong fit for marketing sites, WooCommerce stores, and LMS products when
+              the theme and plugin stack is deliberate. We choose it when editors need control, catalogs need
+              flexibility, and you want a codebase your team can keep.
             </p>
             <ContactLink className="btn-primary mt-8 inline-flex">
-              Build My WordPress Website
+              Talk Through a WordPress Build
             </ContactLink>
           </div>
 

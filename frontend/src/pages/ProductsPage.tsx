@@ -148,8 +148,14 @@ export default function ProductsPage() {
                         <div className="mt-4 flex items-center justify-between border-t border-gray-50 pt-3">
                           <div>
                             <span className="text-lg font-bold text-gray-900">{p.price}</span>
-                            <p className="mt-0.5 flex items-center gap-1 text-xs text-yellow-600">
-                              <Star size={11} className="fill-yellow-400 text-yellow-400" /> {p.rating}
+                            <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-500">
+                              {p.rating && /\d/.test(p.rating) ? (
+                                <>
+                                  <Star size={11} className="fill-yellow-400 text-yellow-400" /> {p.rating}
+                                </>
+                              ) : (
+                                <>{p.rating_count || 'WooCommerce extension'}</>
+                              )}
                             </p>
                           </div>
                           <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition group-hover:gap-2">

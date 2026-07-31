@@ -144,9 +144,15 @@ export default function ProductsSection() {
                         ))}
                       </ul>
 
-                      <p className="mt-2 text-[10px] text-yellow-600">
-                        <Star size={10} className="mr-0.5 inline fill-yellow-400 text-yellow-400" />
-                        {p.rating} · {p.rating_count}
+                      <p className="mt-2 text-[10px] text-gray-500">
+                        {p.rating && /\d/.test(p.rating) ? (
+                          <>
+                            <Star size={10} className="mr-0.5 inline fill-yellow-400 text-yellow-400" />
+                            {p.rating} · {p.rating_count}
+                          </>
+                        ) : (
+                          <>{p.rating_count || 'WooCommerce extension'}</>
+                        )}
                       </p>
                       <div className="mt-3 flex items-center justify-between border-t border-gray-50 pt-3">
                         <span className="text-base font-bold text-gray-900">{p.price}</span>

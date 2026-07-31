@@ -27,7 +27,7 @@ export default function Pricing() {
             >
               {plan.is_best_seller && (
                 <span className="absolute -top-3.5 left-6 inline-flex items-center gap-1 rounded-full bg-brand-500 px-4 py-1 text-xs font-bold text-white">
-                  <Sparkles size={12} /> Best Seller
+                  <Sparkles size={12} /> Popular starting point
                 </span>
               )}
 
@@ -36,10 +36,9 @@ export default function Pricing() {
 
               <div className="mt-6 flex items-end gap-3">
                 <span className="text-4xl font-extrabold text-gray-900">{plan.price}</span>
-                {plan.original_price && (
+                {plan.original_price && plan.original_price.trim() && (
                   <span className="mb-1 text-lg text-gray-400 line-through">{plan.original_price}</span>
-                )}
-                {plan.discount_label && (
+                )}                {plan.discount_label && (
                   <span className="mb-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700">
                     {plan.discount_label}
                   </span>

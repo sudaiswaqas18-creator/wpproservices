@@ -1,17 +1,25 @@
 const technologies = [
-  'Elementor', 'Astra', 'Divi', 'Avada', 'Flatsome', 'WP Bakery',
-  'WP Rocket', 'WooCommerce', 'LearnDash', 'Yoast', 'Rank Math',
-  'WPML', 'Gutenberg', 'REST API', 'React', 'PHP 8+', 'MySQL', 'Docker',
+  'Gutenberg',
+  'WooCommerce',
+  'LearnDash',
+  'Custom plugins',
+  'REST API',
+  'PHP 8+',
+  'MySQL',
+  'WP-CLI',
+  'Staging workflows',
+  'Core Web Vitals',
+  'WPML',
+  'Elementor (when needed)',
 ];
 
 export default function TechStack() {
   return (
     <section className="py-20">
       <div className="section-container text-center">
-        <h2 className="section-title">Trusted Expertise Across the Ecosystem</h2>
+        <h2 className="section-title">Tools We Actually Ship With</h2>
         <p className="section-subtitle mx-auto">
-          We work with the most popular themes, plugins, and frameworks trusted by millions
-          of businesses worldwide.
+          WordPress-native stack choices we use on client work — not a partnership claim or logo wall.
         </p>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3">
