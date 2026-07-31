@@ -3,12 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { Download } from 'lucide-react';
 import CTA from '../components/CTA';
 import { apiUrl } from '../config/api';
+import { getGuidebookImage } from '../data/siteContent';
 
 interface Guidebook { id: number; title: string; slug: string; description: string; content: string; image_url: string; }
 
 const FALLBACK_GUIDEBOOKS: Guidebook[] = [
-  { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800' },
-  { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for maximum conversion.', content: 'Proven techniques for sub-2-second WooCommerce page loads.', image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800' },
+  { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: '/section-images/guidebook-pre-launch-checklist.jpg' },
+  { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for maximum conversion.', content: 'Proven techniques for sub-2-second WooCommerce page loads.', image_url: '/section-images/guidebook-woocommerce-speed-playbook.jpg' },
 ];
 
 export function GuidebooksListPage() {
@@ -26,7 +27,7 @@ export function GuidebooksListPage() {
       <section className="pb-20"><div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((g) => (
           <Link key={g.id} to={`/resources/guidebooks/${g.slug}`} className="card group overflow-hidden p-0">
-            {g.image_url && <img src={g.image_url} alt={g.title} className="h-40 w-full object-cover" />}
+            {g.image_url && <img src={getGuidebookImage(g.slug, g.image_url)} alt={g.title} className="h-40 w-full object-cover" />}
             <div className="p-5"><h2 className="font-bold group-hover:text-brand-600">{g.title}</h2><p className="mt-2 text-sm text-gray-600 line-clamp-2">{g.description}</p></div>
           </Link>
         ))}

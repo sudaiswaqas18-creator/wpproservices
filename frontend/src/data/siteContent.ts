@@ -290,6 +290,41 @@ export function getServiceImage(slug: string) {
   };
 }
 
+/** Blog card images — local files preferred over remote API URLs */
+export const BLOG_IMAGES: Record<string, string> = {
+  'migrate-wordpress-seo': '/section-images/blog-migrate-wordpress-seo.jpg',
+  'website-redesign-checklist': '/section-images/blog-website-redesign-checklist.jpg',
+  'woocommerce-customization-scale': '/section-images/blog-woocommerce-customization-scale.jpg',
+  'core-web-vitals-wordpress': '/section-images/blog-core-web-vitals-wordpress.jpg',
+  'hire-wordpress-agency': '/section-images/blog-hire-wordpress-agency.jpg',
+};
+
+export function getBlogImage(slug: string, apiUrl?: string | null) {
+  return BLOG_IMAGES[slug] || apiUrl || '/section-images/blog-migrate-wordpress-seo.jpg';
+}
+
+/** Portfolio showcase images */
+export const PORTFOLIO_IMAGES: Record<string, string> = {
+  'E-commerce Client — Specialty Coffee': '/section-images/portfolio-coffee.jpg',
+  'Services Client — Corporate Site': '/section-images/portfolio-corporate.jpg',
+  'Education Client — LMS Dashboard': '/section-images/portfolio-lms.jpg',
+  'B2B Client — Member Portal': '/section-images/portfolio-b2b.jpg',
+};
+
+export function getPortfolioImage(title: string, apiUrl?: string | null) {
+  return PORTFOLIO_IMAGES[title] || apiUrl || '/section-images/portfolio-corporate.jpg';
+}
+
+/** Guidebook card images */
+export const GUIDEBOOK_IMAGES: Record<string, string> = {
+  'pre-launch-checklist': '/section-images/guidebook-pre-launch-checklist.jpg',
+  'woocommerce-speed-playbook': '/section-images/guidebook-woocommerce-speed-playbook.jpg',
+};
+
+export function getGuidebookImage(slug: string, apiUrl?: string | null) {
+  return GUIDEBOOK_IMAGES[slug] || apiUrl || '/section-images/guidebook-pre-launch-checklist.jpg';
+}
+
 const FAKE_AWARD_MARKERS = [
   'css design awards',
   'clutch',

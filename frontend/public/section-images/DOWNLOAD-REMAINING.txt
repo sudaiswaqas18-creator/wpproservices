@@ -1,0 +1,94 @@
+# REMAINING CARD IMAGES — download & paste with EXACT filenames
+# Folder: frontend/public/section-images/
+# Services (25) already done in /services/ — skip those.
+# Tip: landscape JPG ~1200x700, no other agency logos.
+
+════════════════════════════════════════
+A) CASE STUDIES (homepage + /case-studies) — 5 files
+   Replace existing files with same names:
+════════════════════════════════════════
+case-grocery.jpg     | Grocery / produce supermarket shelves
+                     | Card: Loyalty shipping / WooCommerce grocery
+case-lms.jpg         | Students collaborating / classroom learning
+                     | Card: Gated LearnDash LMS
+case-apparel.jpg     | Clothing store / fashion retail interior
+                     | Card: Abandoned cart recovery apparel
+case-optics.jpg      | Eyewear / glasses shop display
+                     | Card: Subscription pricing specialty retail
+case-courses.jpg     | Person studying with laptop / online course
+                     | Card: Wallet-based course access
+
+════════════════════════════════════════
+B) PLUGINS / PRODUCTS (homepage + /products) — 8 files
+   Replace existing files with same names:
+════════════════════════════════════════
+plugin-quotes.jpg         | Shop counter / B2B product enquiry talk
+plugin-pricing.jpg        | Pricing charts / analytics dashboard
+plugin-bundles.jpg        | Gift boxes / shopping bags / product kits
+plugin-urgency.jpg        | Flash sale / campaign marketing desk
+plugin-stock.jpg          | Warehouse racks / inventory shelves
+plugin-reviews.jpg        | Customer reviews / star rating feedback
+plugin-subscriptions.jpg  | Invoices / recurring billing paperwork
+plugin-checkout.jpg       | Mobile pay / card checkout on phone
+
+════════════════════════════════════════
+C) BLOG CARDS (/blog + homepage blog) — 5 files
+   NEW — paste these exact names:
+════════════════════════════════════════
+blog-migrate-wordpress-seo.jpg
+  | Website migration / cloud move / SEO redirects concept
+  | Post: Safer WordPress Migration Checklist for SEO
+
+blog-website-redesign-checklist.jpg
+  | Website redesign wireframes / UI mockups on desk
+  | Post: When a WordPress Redesign Is Worth the Investment
+
+blog-woocommerce-customization-scale.jpg
+  | Busy online store / shopping cart growth
+  | Post: Where Stock WooCommerce Starts to Strain
+
+blog-core-web-vitals-wordpress.jpg
+  | Website speed / performance analytics / stopwatch
+  | Post: Core Web Vitals Fixes That Matter on WordPress
+
+blog-hire-wordpress-agency.jpg
+  | Agency team meeting / developers collaborating
+  | Post: Agency vs In-House WordPress Capacity
+
+════════════════════════════════════════
+D) PORTFOLIO SHOWCASE (homepage portfolio) — 4 files
+   NEW — paste these exact names:
+════════════════════════════════════════
+portfolio-coffee.jpg
+  | Specialty coffee / cafe products / coffee ecommerce
+  | Card: E-commerce Client — Specialty Coffee
+
+portfolio-corporate.jpg
+  | Modern corporate office / professional business website vibe
+  | Card: Services Client — Corporate Site
+
+portfolio-lms.jpg
+  | Online learning dashboard / student with courses on screen
+  | Card: Education Client — LMS Dashboard
+
+portfolio-b2b.jpg
+  | B2B meeting / member portal / business handshake desk
+  | Card: B2B Client — Member Portal
+
+════════════════════════════════════════
+E) GUIDEBOOKS (/resources/guidebooks) — 2 files
+   NEW — paste these exact names:
+════════════════════════════════════════
+guidebook-pre-launch-checklist.jpg
+  | Launch checklist clipboard / website go-live desk
+  | Guide: WordPress Pre-Launch Checklist
+
+guidebook-woocommerce-speed-playbook.jpg
+  | WooCommerce speed / checkout performance analytics
+  | Guide: WooCommerce Core Web Vitals Playbook
+
+════════════════════════════════════════
+TOTAL TO DOWNLOAD NOW: 5 case + 8 plugin + 5 blog + 4 portfolio + 2 guidebook = 24
+(If case/plugin look good already, you can skip A+B and only do C+D+E = 11 new files)
+
+After paste, tell me — I will rename if needed, wire them, and delete any useless leftover images.

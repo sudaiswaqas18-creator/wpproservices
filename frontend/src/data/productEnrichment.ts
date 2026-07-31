@@ -201,7 +201,7 @@ export const supplementalProducts = [
     price: '$59',
     rating: '4.8/5',
     rating_count: '1,200+ stores',
-    image_url: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800',
+    image_url: '/section-images/plugin-stock.jpg',
   },
   {
     id: 9002,
@@ -213,7 +213,7 @@ export const supplementalProducts = [
     price: '$49',
     rating: '4.9/5',
     rating_count: '2,500+ stores',
-    image_url: 'https://images.unsplash.com/photo-1556745757-8d76bdb6834a?w=800',
+    image_url: '/section-images/plugin-reviews.jpg',
   },
   {
     id: 9003,
@@ -225,7 +225,7 @@ export const supplementalProducts = [
     price: '$129',
     rating: '4.9/5',
     rating_count: '800+ stores',
-    image_url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
+    image_url: '/section-images/plugin-subscriptions.jpg',
   },
   {
     id: 9004,
@@ -237,7 +237,7 @@ export const supplementalProducts = [
     price: '$89',
     rating: '5.0/5',
     rating_count: '1,800+ stores',
-    image_url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800',
+    image_url: '/section-images/plugin-checkout.jpg',
   },
 ] as const;
 

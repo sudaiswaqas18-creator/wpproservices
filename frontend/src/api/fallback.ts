@@ -194,7 +194,7 @@ export const fallbackData = {
       title: 'A Safer WordPress Migration Checklist for SEO',
       slug: 'migrate-wordpress-seo',
       excerpt: 'Redirect maps, staging checks, and post-cutover Search Console habits that prevent ranking surprises.',
-      image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600',
+      image_url: '/section-images/blog-migrate-wordpress-seo.jpg',
       published_at: '2025-06-12',
     },
     {
@@ -202,7 +202,7 @@ export const fallbackData = {
       title: 'When a WordPress Redesign Is Worth the Investment',
       slug: 'website-redesign-checklist',
       excerpt: 'Signals that your theme, UX, or conversion paths are costing more than a structured rebuild.',
-      image_url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600',
+      image_url: '/section-images/blog-website-redesign-checklist.jpg',
       published_at: '2025-05-15',
     },
     {
@@ -210,7 +210,7 @@ export const fallbackData = {
       title: 'Where Stock WooCommerce Starts to Strain',
       slug: 'woocommerce-customization-scale',
       excerpt: 'Checkout friction, shipping rules, and plugin conflicts that show up as catalogs and traffic grow.',
-      image_url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600',
+      image_url: '/section-images/blog-woocommerce-customization-scale.jpg',
       published_at: '2025-04-08',
     },
     {
@@ -218,7 +218,7 @@ export const fallbackData = {
       title: 'Core Web Vitals Fixes That Matter on WordPress',
       slug: 'core-web-vitals-wordpress',
       excerpt: 'Practical LCP, CLS, and INP improvements for theme and WooCommerce pages — not lab-only tips.',
-      image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600',
+      image_url: '/section-images/blog-core-web-vitals-wordpress.jpg',
       published_at: '2025-03-20',
     },
     {
@@ -226,7 +226,7 @@ export const fallbackData = {
       title: 'Agency vs In-House WordPress Capacity',
       slug: 'hire-wordpress-agency',
       excerpt: 'How to decide between a retainer team and hiring when you need themes, plugins, and care coverage.',
-      image_url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600',
+      image_url: '/section-images/blog-hire-wordpress-agency.jpg',
       published_at: '2025-02-10',
     },
   ] as BlogPost[],
@@ -259,10 +259,10 @@ export const fallbackData = {
   ] as Industry[],
 
   portfolio: [
-    { id: 1, title: 'E-commerce Client — Specialty Coffee', category: 'WooCommerce Store', image_url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800' },
-    { id: 2, title: 'Services Client — Corporate Site', category: 'Corporate Website', image_url: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800' },
-    { id: 3, title: 'Education Client — LMS Dashboard', category: 'LMS Dashboard', image_url: 'https://images.unsplash.com/photo-1501504905252-473a47ee5617?w=800' },
-    { id: 4, title: 'B2B Client — Member Portal', category: 'B2B Portal', image_url: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800' },
+    { id: 1, title: 'E-commerce Client — Specialty Coffee', category: 'WooCommerce Store', image_url: '/section-images/portfolio-coffee.jpg' },
+    { id: 2, title: 'Services Client — Corporate Site', category: 'Corporate Website', image_url: '/section-images/portfolio-corporate.jpg' },
+    { id: 3, title: 'Education Client — LMS Dashboard', category: 'LMS Dashboard', image_url: '/section-images/portfolio-lms.jpg' },
+    { id: 4, title: 'B2B Client — Member Portal', category: 'B2B Portal', image_url: '/section-images/portfolio-b2b.jpg' },
   ] as PortfolioItem[],
 
   awards: [
@@ -307,7 +307,7 @@ export const fallbackData = {
       slug: 'pre-launch-checklist',
       description: 'Performance, SEO, security, and analytics checks to run before DNS cutover.',
       content: 'A practical launch checklist for WordPress site owners and agencies.',
-      image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+      image_url: '/section-images/guidebook-pre-launch-checklist.jpg',
     },
     {
       id: 2,
@@ -315,7 +315,7 @@ export const fallbackData = {
       slug: 'woocommerce-speed-playbook',
       description: 'Checkout, images, and query patterns that keep storefront pages responsive under load.',
       content: 'Field-tested notes for improving WooCommerce page experience.',
-      image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
+      image_url: '/section-images/guidebook-woocommerce-speed-playbook.jpg',
     },
   ],
 

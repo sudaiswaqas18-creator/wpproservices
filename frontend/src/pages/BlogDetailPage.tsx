@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar, Clock, User, CheckCircle2, ArrowRight, BookOpen } 
 import { api, BlogPostDetail, BlogPost } from '../api/client';
 import { fallbackData, fetchWithFallback } from '../api/fallback';
 import { getBlogEnrichment } from '../data/blogEnrichment';
+import { getBlogImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 
@@ -111,11 +112,11 @@ export default function BlogDetailPage() {
         </div>
       </section>
 
-      {post.image_url && (
+      {(getBlogImage(post.slug, post.image_url)) && (
         <div className="section-container -mt-6 max-w-5xl">
           <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-xl shadow-brand-500/10">
             <img
-              src={optimizeImageUrl(post.image_url, 1200)}
+              src={optimizeImageUrl(getBlogImage(post.slug, post.image_url), 1200)}
               alt={post.title}
               width={1200}
               height={514}
@@ -210,7 +211,7 @@ export default function BlogDetailPage() {
                 >
                   <div className="aspect-video overflow-hidden">
                     <img
-                      src={optimizeImageUrl(item.image_url, 600)}
+                      src={optimizeImageUrl(getBlogImage(item.slug, item.image_url), 600)}
                       alt={item.title}
                       width={600}
                       height={338}

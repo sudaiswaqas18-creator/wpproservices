@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
 import { optimizeImageUrl } from '../utils/imageUrl';
+import { getPortfolioImage } from '../data/siteContent';
 import ContactLink from './ContactLink';
 
 export default function Portfolio() {
@@ -30,7 +31,7 @@ export default function Portfolio() {
           >
             <div className="relative aspect-video overflow-hidden bg-gray-100">
               <img
-                src={optimizeImageUrl(items[active].image_url, 800)}
+                src={optimizeImageUrl(getPortfolioImage(items[active].title, items[active].image_url), 800)}
                 alt={items[active].title}
                 width={800}
                 height={450}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import type { BlogPostCard } from './BlogCard';
+import { getBlogImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface BlogExpandCardProps {
@@ -13,6 +14,7 @@ export default function BlogExpandCard({ post }: BlogExpandCardProps) {
     month: 'short',
     day: 'numeric',
   });
+  const imageSrc = getBlogImage(post.slug, post.image_url);
 
   return (
     <Link
@@ -21,7 +23,7 @@ export default function BlogExpandCard({ post }: BlogExpandCardProps) {
       aria-label={`Read article: ${post.title}`}
     >
       <img
-        src={optimizeImageUrl(post.image_url, 800)}
+        src={optimizeImageUrl(imageSrc, 800)}
         alt={post.title}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
         loading="lazy"

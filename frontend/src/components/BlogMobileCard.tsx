@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight } from 'lucide-react';
 import type { BlogPostCard } from './BlogCard';
+import { getBlogImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface BlogMobileCardProps {
@@ -13,6 +14,7 @@ export default function BlogMobileCard({ post }: BlogMobileCardProps) {
     month: 'long',
     day: 'numeric',
   });
+  const imageSrc = getBlogImage(post.slug, post.image_url);
 
   return (
     <Link
@@ -21,7 +23,7 @@ export default function BlogMobileCard({ post }: BlogMobileCardProps) {
     >
       <div className="aspect-video overflow-hidden">
         <img
-          src={optimizeImageUrl(post.image_url, 720)}
+          src={optimizeImageUrl(imageSrc, 720)}
           alt={post.title}
           className="h-full w-full object-cover"
           loading="lazy"
