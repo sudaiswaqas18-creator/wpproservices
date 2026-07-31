@@ -129,7 +129,7 @@ export const adminApi = {
   createProduct: (data: ProductForm) => adminFetch('/products', { method: 'POST', body: JSON.stringify(data) }),
   updateProduct: (id: number, data: ProductForm) => adminFetch(`/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteProduct: (id: number) => adminFetch(`/products/${id}`, { method: 'DELETE' }),
-  syncPluginCatalog: () => adminFetch<{ message: string; products: number; testimonials: number }>('/products/sync-catalog', { method: 'POST' }),
+  syncPluginCatalog: () => adminFetch<{ message: string; products: number; testimonials: number }>('/sync-plugin-catalog', { method: 'POST' }),
 
   // Tools
   getTools: async () => asArray<ToolRow>(await adminFetch('/tools')),

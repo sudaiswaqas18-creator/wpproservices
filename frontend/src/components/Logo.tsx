@@ -37,7 +37,7 @@ export default function Logo({
         width={isDark ? 220 : 220}
         height={isDark ? 44 : 56}
         loading="eager"
-        fetchPriority="high"
+        {...{ fetchpriority: 'high' as const }}
         decoding="async"
         draggable={false}
       />

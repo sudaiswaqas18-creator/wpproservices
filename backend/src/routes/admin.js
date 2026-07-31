@@ -42,6 +42,14 @@ router.get('/stats', authMiddleware, async (_req, res) => {
   res.json(stats);
 });
 
+// Sync WooCommerce plugins + clear placeholder testimonials (Railway + local)
+router.post('/sync-plugin-catalog', authMiddleware, async (_req, res) => {
+  await syncSiteContent();
+  const [[{ count }]] = await pool.query('SELECT COUNT(*) as count FROM products');
+  const [[{ testimonials }]] = await pool.query('SELECT COUNT(*) as testimonials FROM testimonials');
+  res.json({ message: 'Plugin catalog synced', products: count, testimonials });
+});
+
 // ─── Blog CRUD ──────────────────────────────────────
 router.get('/blogs', authMiddleware, async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY sort_order, published_at DESC');
@@ -258,13 +266,6 @@ router.put('/products/:id', authMiddleware, async (req, res) => {
 router.delete('/products/:id', authMiddleware, async (req, res) => {
   await pool.query('DELETE FROM products WHERE id = ?', [req.params.id]);
   res.json({ message: 'Deleted' });
-});
-
-router.post('/products/sync-catalog', authMiddleware, async (_req, res) => {
-  await syncSiteContent();
-  const [[{ count }]] = await pool.query('SELECT COUNT(*) as count FROM products');
-  const [[{ testimonials }]] = await pool.query('SELECT COUNT(*) as testimonials FROM testimonials');
-  res.json({ message: 'Plugin catalog synced', products: count, testimonials });
 });
 
 // ─── Tools CRUD ───────────────────────────────────────
