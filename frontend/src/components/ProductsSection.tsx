@@ -36,7 +36,7 @@ export default function ProductsSection() {
       <div className="section-container">
         <h2 className="section-title text-center">WooCommerce Plugins Built for Real Stores</h2>
         <p className="section-subtitle mx-auto text-center">
-          Six categories for B2B pricing, catalogs, campaigns, inventory, checkout trust, and subscriptions.
+          WooCommerce-only extensions across six store jobs: B2B pricing, catalogs, campaigns, inventory, checkout trust, and subscriptions.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           {[

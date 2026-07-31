@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { apiUrl } from '../config/api';
+import { PLUGIN_CATEGORIES, PLUGIN_TITLES } from '../data/productCategories';
 
 const GROUP_LABELS: Record<string, string> = {
   build: 'BUILD — Creation & Foundation',
@@ -246,7 +247,7 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Products — original design */}
+          {/* Plugins — category mega menu (mirrors Services) */}
           <div
             className="relative"
             onMouseEnter={() => { cancelClose(); openOnly('products'); }}
@@ -274,21 +275,50 @@ export default function Header() {
                   key="products-menu"
                   id="dropdown-products"
                   role="menu"
-                  aria-label="Plugins menu"
+                  aria-label="WooCommerce Plugins menu"
                   {...dropdownMotion}
-                  className="absolute left-0 top-full z-50 pt-2"
+                  className="absolute top-full z-50 pt-2"
+                  style={{ left: 'calc(50% - 360px)' }}
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-64 rounded-xl border border-gray-100 bg-white py-3 shadow-card">
-                    <p className="px-4 pb-2 text-[10px] font-bold uppercase text-gray-400">WooCommerce Plugins</p>
-                    <Link to="/products/quote-flow-pro" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>QuoteFlow Pro</Link>
-                    <Link to="/products/smart-pricing" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>SmartPricing</Link>
-                    <Link to="/products/bundlecraft" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>BundleCraft</Link>
-                    <Link to="/products/sales-boost-pack" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>SalesBoost Pack</Link>
-                    <Link to="/products/stock-alert-pro" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>StockAlert Pro</Link>
-                    <Link to="/products/review-boost" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>ReviewBoost</Link>
-                    <Link to="/products" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>View All Plugins →</Link>
+                  <div className="w-[720px] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
+                    <p className="mb-4 text-[10px] font-bold uppercase tracking-wider text-accent">
+                      WooCommerce Plugins by Category
+                    </p>
+                    <div className="grid grid-cols-3 gap-6">
+                      {PLUGIN_CATEGORIES.map((cat) => (
+                        <div key={cat.id}>
+                          <Link
+                            to={`/products?category=${cat.id}`}
+                            role="menuitem"
+                            className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-accent hover:underline"
+                            onClick={closeAll}
+                          >
+                            {cat.title}
+                          </Link>
+                          {cat.slugs.map((slug) => (
+                            <Link
+                              key={slug}
+                              to={`/products/${slug}`}
+                              role="menuitem"
+                              className="block py-1 text-sm text-ink hover:text-accent"
+                              onClick={closeAll}
+                            >
+                              {PLUGIN_TITLES[slug] || slug}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    <Link
+                      to="/products"
+                      role="menuitem"
+                      className="mt-4 block text-center text-sm font-semibold text-accent hover:underline"
+                      onClick={closeAll}
+                    >
+                      View all WooCommerce Plugins →
+                    </Link>
                   </div>
                 </motion.div>
               )}
@@ -364,8 +394,19 @@ export default function Header() {
         <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 lg:hidden">
           <Link to="/about" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>About Us</Link>
           <Link to="/services" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Services</Link>
-          <Link to="/products" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Plugins</Link>
-          <Link to="/resources" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
+          <p className="mt-3 text-[10px] font-bold uppercase tracking-wider text-gray-400">WooCommerce Plugins</p>
+          {PLUGIN_CATEGORIES.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/products?category=${cat.id}`}
+              className="block min-h-[44px] py-2 pl-2 text-sm text-ink hover:text-accent"
+              onClick={() => setMobileOpen(false)}
+            >
+              {cat.title}
+            </Link>
+          ))}
+          <Link to="/products" className="block min-h-[44px] py-2 text-sm font-semibold text-accent" onClick={() => setMobileOpen(false)}>All Plugins →</Link>
+          <Link to="/resources" className="mt-2 block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
           <Link to="/blog" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Blog</Link>
           <Link to="/case-studies" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Case Studies</Link>
           <Link to="/contact" className="btn-primary mt-3 block min-h-[44px] text-center" onClick={() => setMobileOpen(false)}>Contact Us</Link>

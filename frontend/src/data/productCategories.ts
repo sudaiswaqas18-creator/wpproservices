@@ -93,3 +93,25 @@ export function filterPluginsByCategory<T extends { slug: string; category?: str
 export const PLUGIN_CATEGORY_LABELS: Record<string, string> = Object.fromEntries(
   PLUGIN_CATEGORIES.map((c) => [c.id, c.title]),
 );
+
+/** Display titles for nav mega menu — WooCommerce plugins only */
+export const PLUGIN_TITLES: Record<string, string> = {
+  'quote-flow-pro': 'QuoteLane Pro',
+  'smart-pricing': 'TierPrice Matrix',
+  'catalog-cloak': 'CatalogCloak',
+  bundlecraft: 'BundleForge',
+  'relate-lane': 'RelateLane',
+  'kit-lane': 'KitLane',
+  'sales-boost-pack': 'UrgencyKit Pack',
+  'sticky-lane': 'StickyLane ATC',
+  'banner-forge': 'BannerForge',
+  'stock-alert-pro': 'StockdenPro',
+  'stock-map': 'StockMap',
+  'restock-pulse': 'RestockPulse',
+  'review-boost': 'Prooflane Reviews',
+  'checkout-flow': 'LaneCheckout',
+  'seal-strip': 'SealStrip',
+  subscripto: 'Subscrivo',
+  'cycle-flex': 'CycleFlex',
+  'tier-access': 'TierAccess',
+};

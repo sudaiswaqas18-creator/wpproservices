@@ -47,15 +47,15 @@ export default function ProductsPage() {
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-100/40 blur-3xl" />
         <div className="section-container relative text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-600">
-            <Package size={12} /> WooCommerce Plugins
+            <Package size={12} /> WooCommerce Store Plugins
           </span>
           <h1 className="mt-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
-            {activeCategory ? activeCategory.title : 'WooCommerce Plugins for Real Stores'}
+            {activeCategory ? `WooCommerce ${activeCategory.title}` : 'WooCommerce Plugins for Real Stores'}
           </h1>
           <p className="section-subtitle mx-auto mt-4">
             {activeCategory
               ? activeCategory.desc
-              : 'Six plugin categories for B2B pricing, catalogs, campaigns, inventory ops, checkout trust, and subscriptions — each with original product copy and a Get Plugin enquiry flow.'}
+              : 'Purpose-built WooCommerce extensions only — B2B pricing, catalogs, campaigns, inventory ops, checkout trust, and subscriptions. Not generic WordPress plugins: every item is built for store operators.'}
           </p>
           {activeCategory && (
             <Link

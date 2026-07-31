@@ -36,8 +36,8 @@ export const STATIC_SEO: Record<string, PageSEO> = {
   '/products': {
     title: 'WooCommerce Plugins by Category | WPServices',
     description:
-      'Browse WooCommerce plugins by category: B2B pricing, catalogs, campaigns, inventory ops, checkout trust, and subscriptions — original product copy for real stores.',
-    keywords: 'WooCommerce plugins, WordPress plugins, B2B pricing plugins, subscription plugins',
+      'WooCommerce-only plugins for B2B pricing, catalogs, campaigns, inventory, checkout trust, and subscriptions — built for real online stores.',
+    keywords: 'WooCommerce plugins, WooCommerce B2B pricing, WooCommerce inventory plugins, WooCommerce checkout',
     path: '/products',
   },
   '/industries': {
