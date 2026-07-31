@@ -21,7 +21,11 @@ const scenes = [
     scoreLabel: 'PageSpeed',
     delta: '+3.2x',
     deltaLabel: 'Faster load',
-    accent: 'from-brand-500 to-brand-400',
+    accent: 'from-sky-600 to-slate-800',
+    ringFrom: '#0EA5E9',
+    ringTo: '#1A1A1A',
+    barClass: 'from-sky-500 to-slate-700',
+    chip: 'bg-sky-50 text-sky-700 ring-sky-100',
     nav: ['Home', 'Work', 'Pricing'],
     features: ['Custom theme', 'SEO ready', 'A11y'],
     vitals: [
@@ -40,7 +44,11 @@ const scenes = [
     scoreLabel: 'Conv. lift %',
     delta: '1.2s',
     deltaLabel: 'TTI',
-    accent: 'from-ink to-ink',
+    accent: 'from-amber-600 to-stone-800',
+    ringFrom: '#D97706',
+    ringTo: '#1A1A1A',
+    barClass: 'from-amber-500 to-stone-700',
+    chip: 'bg-amber-50 text-amber-800 ring-amber-100',
     nav: ['Shop', 'Cart', 'Account'],
     features: ['Smart cart', 'Payments', 'Upsells'],
     vitals: [
@@ -59,7 +67,11 @@ const scenes = [
     scoreLabel: 'CWV Score',
     delta: '99.9%',
     deltaLabel: 'Uptime',
-    accent: 'from-brand-600 to-brand-600',
+    accent: 'from-teal-600 to-slate-800',
+    ringFrom: '#0D9488',
+    ringTo: '#1A1A1A',
+    barClass: 'from-teal-500 to-slate-700',
+    chip: 'bg-teal-50 text-teal-800 ring-teal-100',
     nav: ['Platform', 'Security', 'Support'],
     features: ['CDN', 'WAF', 'Backups'],
     vitals: [
@@ -75,13 +87,24 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 const SCENE_MS = 9000;
 const cursorEase = [0.33, 1, 0.68, 1] as const;
 
-function ScoreRing({ value, label }: { value: number; label: string }) {
+function ScoreRing({
+  value,
+  label,
+  ringFrom,
+  ringTo,
+}: {
+  value: number;
+  label: string;
+  ringFrom: string;
+  ringTo: string;
+}) {
   const r = 38;
   const c = 2 * Math.PI * r;
   const pct = Math.min(100, Math.max(0, value > 100 ? 100 : value)) / 100;
   const fill = value > 100 ? 1 : value / (value <= 50 && label.includes('%') ? 50 : 100);
   const ringPct = Math.min(1, fill);
   const offset = c * (1 - (value <= 50 && label.includes('lift') ? value / 50 : pct || ringPct));
+  const gradId = `heroScoreGrad-${label.replace(/\s/g, '')}`;
 
   return (
     <div className="relative flex h-[100px] w-[100px] items-center justify-center">
@@ -93,7 +116,7 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
           cy="50"
           r={r}
           fill="none"
-          stroke="url(#heroScoreGrad)"
+          stroke={`url(#${gradId})`}
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={c}
@@ -102,9 +125,9 @@ function ScoreRing({ value, label }: { value: number; label: string }) {
           transition={{ duration: 1.15, ease }}
         />
         <defs>
-          <linearGradient id="heroScoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1A1A1A" />
-            <stop offset="100%" stopColor="#525252" />
+          <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={ringFrom} />
+            <stop offset="100%" stopColor={ringTo} />
           </linearGradient>
         </defs>
       </svg>
@@ -233,7 +256,7 @@ export default function HeroShowcase() {
       transition={{ duration: 0.7, delay: 0.12, ease }}
       className="relative mx-auto w-full max-w-lg lg:max-w-none"
     >
-      <div className="pointer-events-none absolute -inset-10 rounded-[42%] bg-gradient-to-br from-brand-100/40 via-transparent to-brand-50/30 blur-3xl" />
+      <div className="pointer-events-none absolute -inset-10 rounded-[42%] bg-gradient-to-br from-sky-100/50 via-amber-50/30 to-teal-100/40 blur-3xl" />
 
       <div className="relative">
         {/* Floating chips — subtle drift only */}
@@ -248,17 +271,17 @@ export default function HeroShowcase() {
         >
           <div className="flex items-center gap-2.5 px-3.5 py-2.5">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inset-0 animate-ping rounded-full bg-gray-400 opacity-40" />
-              <span className="relative h-2.5 w-2.5 rounded-full bg-brand-500 ring-2 ring-brand-100" />
+              <span className="absolute inset-0 animate-ping rounded-full bg-teal-400 opacity-40" />
+              <span className="relative h-2.5 w-2.5 rounded-full bg-teal-500 ring-2 ring-teal-100" />
             </span>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-brand-600">Deployed</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-teal-700">Deployed</p>
               <p className="text-[11px] font-semibold text-gray-700">Launch-ready build</p>
             </div>
           </div>
           <div className="h-0.5 bg-gray-100">
             <motion.div
-              className="h-full bg-brand-500"
+              className="h-full bg-gradient-to-r from-teal-500 to-sky-500"
               animate={{ width: `${sceneProgress}%` }}
               transition={{ duration: 0.15, ease: 'linear' }}
             />
@@ -275,7 +298,7 @@ export default function HeroShowcase() {
           className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md sm:flex"
         >
           <div className="flex -space-x-1.5">
-            {['#1A1A1A', '#737373', '#D4D4D4'].map((c) => (
+            {['#0EA5E9', '#D97706', '#0D9488'].map((c) => (
               <span key={c} className="h-5 w-5 rounded-full border-2 border-white" style={{ background: c }} />
             ))}
           </div>
@@ -294,7 +317,7 @@ export default function HeroShowcase() {
           }}
           className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md sm:flex"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500 text-white shadow-md">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-slate-800 text-white shadow-md">
             <ShieldCheck size={16} strokeWidth={2.5} />
           </div>
           <div>
@@ -312,7 +335,7 @@ export default function HeroShowcase() {
           }}
           className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.2)] backdrop-blur-md sm:flex"
         >
-          <Globe2 size={14} className="text-brand-500" />
+          <Globe2 size={14} className="text-sky-600" />
           <span className="text-[10px] font-semibold text-gray-700">27+ countries</span>
         </motion.div>
 
@@ -361,13 +384,13 @@ export default function HeroShowcase() {
               className="pointer-events-none absolute inset-0 opacity-60"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 12% 18%, rgba(26,26,26,0.08), transparent 42%), radial-gradient(circle at 88% 78%, rgba(26,26,26,0.04), transparent 36%)',
+                  'radial-gradient(circle at 12% 18%, rgba(14,165,233,0.10), transparent 42%), radial-gradient(circle at 88% 78%, rgba(13,148,136,0.08), transparent 36%)',
               }}
             />
             <div
-              className="pointer-events-none absolute inset-0 opacity-[0.3]"
+              className="pointer-events-none absolute inset-0 opacity-[0.25]"
               style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(26,26,26,0.06) 1px, transparent 0)',
+                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(100,116,139,0.08) 1px, transparent 0)',
                 backgroundSize: '22px 22px',
               }}
             />
@@ -401,7 +424,7 @@ export default function HeroShowcase() {
                       </span>
                     ))}
                   </div>
-                  <div className="flex h-7 items-center gap-1 rounded-lg bg-brand-500 px-2.5 text-[9px] font-bold text-white shadow-md">
+                  <div className={`flex h-7 items-center gap-1 rounded-lg bg-gradient-to-r ${scene.accent} px-2.5 text-[9px] font-bold text-white shadow-md`}>
                     Get Started
                     <ArrowUpRight size={11} />
                   </div>
@@ -410,10 +433,10 @@ export default function HeroShowcase() {
                 <div className="grid min-h-0 flex-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
                   <div className="relative flex min-h-0 flex-col overflow-hidden rounded-xl bg-white/92 p-3.5 shadow-sm ring-1 ring-gray-100/90">
                     <div className="mb-2 flex items-center gap-1.5">
-                      <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-brand-600 ring-1 ring-brand-100">
+                      <span className={`rounded-full px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] ring-1 ${scene.chip}`}>
                         {scene.eyebrow}
                       </span>
-                      <CheckCircle2 size={12} className="text-brand-500" />
+                      <CheckCircle2 size={12} className="text-teal-600" />
                     </div>
                     <p className="text-[13px] font-extrabold tracking-tight text-gray-900 sm:text-[15px]">{scene.title}</p>
                     <p className="mt-1 text-[11px] leading-snug text-gray-500">{scene.subtitle}</p>
@@ -442,15 +465,15 @@ export default function HeroShowcase() {
                       })}
                     </div>
 
-                    <div className="mt-3 flex min-h-[44px] flex-1 items-end gap-1 rounded-lg bg-gradient-to-b from-brand-50/40 to-white p-2 ring-1 ring-brand-100/40">
+                    <div className="mt-3 flex min-h-[44px] flex-1 items-end gap-1 rounded-lg bg-gradient-to-b from-slate-50 to-white p-2 ring-1 ring-slate-100/80">
                       {scene.bars.map((h, i) => (
                         <motion.div
                           key={`${scene.id}-bar-${i}`}
-                          className={`flex-1 rounded-t-sm bg-gradient-to-t ${scene.accent}`}
+                          className={`flex-1 rounded-t-sm bg-gradient-to-t ${scene.barClass}`}
                           initial={{ height: 0 }}
                           animate={{ height: `${h}%` }}
                           transition={{ delay: 0.15 + i * 0.04, duration: 0.55, ease }}
-                          style={{ opacity: 0.55 + (i % 3) * 0.15 }}
+                          style={{ opacity: 0.65 + (i % 3) * 0.12 }}
                         />
                       ))}
                     </div>
@@ -464,7 +487,7 @@ export default function HeroShowcase() {
                         Start project
                         <ArrowUpRight size={11} />
                       </motion.div>
-                      <div className="flex items-center gap-1 text-[9px] font-semibold text-brand-600">
+                      <div className="flex items-center gap-1 text-[9px] font-semibold text-amber-700">
                         <TrendingUp size={11} />
                         +24% growth
                       </div>
@@ -496,7 +519,7 @@ export default function HeroShowcase() {
                         {clickFlash > 0 && (
                           <motion.span
                             key={`ripple-${clickFlash}`}
-                            className="absolute left-[3px] top-[3px] h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand-500/70"
+                            className="absolute left-[3px] top-[3px] h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-500/60"
                             initial={{ scale: 0.4, opacity: 0.7 }}
                             animate={{ scale: 1.5, opacity: 0 }}
                             exit={{ opacity: 0 }}
@@ -509,12 +532,17 @@ export default function HeroShowcase() {
 
                   <div className="flex min-h-0 flex-col gap-2.5">
                     <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-white/92 p-2.5 shadow-sm ring-1 ring-gray-100/90">
-                      <ScoreRing value={scene.score} label={scene.scoreLabel} />
+                      <ScoreRing
+                        value={scene.score}
+                        label={scene.scoreLabel}
+                        ringFrom={scene.ringFrom}
+                        ringTo={scene.ringTo}
+                      />
                       <div className="mt-1 grid w-full grid-cols-3 gap-1">
                         {scene.vitals.map((v) => (
                           <div key={v.label} className="rounded-md bg-slate-50 px-1 py-1 text-center ring-1 ring-gray-100">
                             <p className="text-[8px] font-bold text-gray-400">{v.label}</p>
-                            <p className={`text-[10px] font-extrabold ${v.good ? 'text-brand-600' : 'text-gray-700'}`}>
+                            <p className={`text-[10px] font-extrabold ${v.good ? 'text-teal-700' : 'text-gray-700'}`}>
                               {v.value}
                             </p>
                           </div>
@@ -557,7 +585,7 @@ export default function HeroShowcase() {
           </div>
         </motion.div>
 
-        <div className="mx-8 mt-1.5 h-6 rounded-b-3xl bg-gradient-to-b from-brand-500/15 to-transparent blur-[2px]" />
+        <div className="mx-8 mt-1.5 h-6 rounded-b-3xl bg-gradient-to-b from-sky-500/15 via-teal-500/10 to-transparent blur-[2px]" />
       </div>
 
       <div className="mt-7 flex items-center justify-center gap-1">
@@ -578,7 +606,7 @@ export default function HeroShowcase() {
               {i === active && (
                 <motion.span
                   layoutId="hero-scene-pill"
-                  className="absolute inset-0 rounded-full bg-brand-500"
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-sky-500 via-teal-500 to-amber-500"
                   transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}
