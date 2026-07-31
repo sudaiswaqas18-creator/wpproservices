@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Palette, Code, Shield, CreditCard, Zap, Puzzle, Check } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
 import { getServiceEnrichment } from '../data/serviceEnrichment';
+import { getServiceImage } from '../data/siteContent';
 import { filterServicesByCategory, getCategoryById, SERVICE_CATEGORIES } from '../data/serviceCategories';
+import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 
 const iconMap: Record<string, typeof Code> = {
@@ -91,6 +93,7 @@ export default function ServicesPage() {
                 const Icon = iconMap[s.icon] || Code;
                 const enriched = getServiceEnrichment(s.slug, s.features);
                 const previewFeatures = enriched.features.slice(0, 3);
+                const media = getServiceImage(s.slug);
 
                 return (
                   <motion.div key={s.id} {...fadeUp} transition={{ duration: 0.4, delay: (i % 6) * 0.06 }}>
@@ -98,14 +101,29 @@ export default function ServicesPage() {
                       to={`/services/${s.slug}`}
                       className="service-card-fill group flex h-full"
                     >
-                      <div className="service-card-fill__inner flex h-full flex-col p-6">
+                      <div className="service-card-fill__inner flex h-full flex-col overflow-hidden">
+                        <div className="relative h-40 overflow-hidden bg-surface-100">
+                          <img
+                            src={optimizeImageUrl(media.image_url, 640)}
+                            alt={media.image_alt}
+                            width={640}
+                            height={160}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                            onError={(e) => {
+                              e.currentTarget.style.opacity = '0';
+                            }}
+                          />
+                          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-600 backdrop-blur-sm">
+                            {enriched.categoryLabel}
+                          </span>
+                        </div>
+                        <div className="flex flex-1 flex-col p-6">
                         <div className="flex items-start justify-between">
                           <motion.div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 transition-colors duration-500 group-hover:bg-white/20">
                             <Icon size={22} className="text-brand-600 transition-colors duration-500 group-hover:text-white" />
                           </motion.div>
-                          <span className="rounded-full bg-surface-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-gray-500 transition-colors duration-500 group-hover:bg-white/15 group-hover:text-white/90">
-                            {enriched.categoryLabel}
-                          </span>
                         </div>
 
                         <h2 className="mt-4 text-lg font-bold text-gray-900 transition-colors duration-500 group-hover:text-white">
@@ -136,6 +154,7 @@ export default function ServicesPage() {
                           <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-all duration-500 group-hover:gap-2 group-hover:text-white">
                             Learn more <ArrowRight size={14} />
                           </span>
+                        </div>
                         </div>
                       </div>
                     </Link>

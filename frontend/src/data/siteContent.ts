@@ -142,6 +142,154 @@ export function getProductImage(slug: string, fallbackUrl?: string) {
   };
 }
 
+/**
+ * Service card / detail images — put files in `public/section-images/services/`
+ * with the exact filename listed below (JPG or WebP ok if you keep the name).
+ */
+export const SERVICE_IMAGES: Record<string, { file: string; image_alt: string; downloadHint: string }> = {
+  'wordpress-website-development': {
+    file: 'service-wordpress-website-development.jpg',
+    image_alt: 'Custom WordPress website design on a laptop screen',
+    downloadHint: 'Laptop showing modern website mockup / web design workspace',
+  },
+  'wordpress-setup': {
+    file: 'service-wordpress-setup.jpg',
+    image_alt: 'Clean WordPress installation and setup on a computer',
+    downloadHint: 'WordPress dashboard on monitor OR fresh website launch checklist on desk',
+  },
+  'woocommerce-setup': {
+    file: 'service-woocommerce-setup.jpg',
+    image_alt: 'Online store product grid ready for WooCommerce setup',
+    downloadHint: 'E-commerce product listing / online shop on laptop',
+  },
+  'learndash-setup': {
+    file: 'service-learndash-setup.jpg',
+    image_alt: 'Online course platform setup for LearnDash LMS',
+    downloadHint: 'Online course / e-learning platform on tablet or laptop',
+  },
+  'wordpress-customization': {
+    file: 'service-wordpress-customization.jpg',
+    image_alt: 'Developer customizing a WordPress theme layout',
+    downloadHint: 'Web designer editing website layout / Figma to browser',
+  },
+  'woocommerce-customization': {
+    file: 'service-woocommerce-customization.jpg',
+    image_alt: 'Custom WooCommerce checkout and cart experience',
+    downloadHint: 'Shopping cart / checkout page on laptop or phone',
+  },
+  'learndash-customization': {
+    file: 'service-learndash-customization.jpg',
+    image_alt: 'Customized online learning dashboard for students',
+    downloadHint: 'Student dashboard / progress tracking on screen',
+  },
+  'wordpress-migration': {
+    file: 'service-wordpress-migration.jpg',
+    image_alt: 'Website migration and data transfer concept',
+    downloadHint: 'Cloud transfer / moving files / server migration visual',
+  },
+  'migrate-woocommerce': {
+    file: 'service-migrate-woocommerce.jpg',
+    image_alt: 'Moving an online store catalog to WooCommerce',
+    downloadHint: 'Online shopping bags with laptop / store migration',
+  },
+  'migrate-learndash': {
+    file: 'service-migrate-learndash.jpg',
+    image_alt: 'Migrating courses and learners into LearnDash',
+    downloadHint: 'Students with laptops / transferring education content',
+  },
+  'wordpress-maintenance': {
+    file: 'service-wordpress-maintenance.jpg',
+    image_alt: 'WordPress site maintenance and updates',
+    downloadHint: 'IT support / software updates / wrench with laptop',
+  },
+  'website-management': {
+    file: 'service-website-management.jpg',
+    image_alt: 'Ongoing website management for a business site',
+    downloadHint: 'Team managing website content / content calendar desk',
+  },
+  'hire-wordpress-developers': {
+    file: 'service-hire-wordpress-developers.jpg',
+    image_alt: 'WordPress developers collaborating on code',
+    downloadHint: 'Developers pair programming / coding team at desks',
+  },
+  'hire-woocommerce-developers': {
+    file: 'service-hire-woocommerce-developers.jpg',
+    image_alt: 'E-commerce developers working on a WooCommerce store',
+    downloadHint: 'Developers with shopping / e-commerce analytics screens',
+  },
+  'hire-learndash-developers': {
+    file: 'service-hire-learndash-developers.jpg',
+    image_alt: 'LMS developers building education features',
+    downloadHint: 'Education tech team / developers with classroom screen',
+  },
+  'wordpress-redesign': {
+    file: 'service-wordpress-redesign.jpg',
+    image_alt: 'Website redesign wireframes and new WordPress UI',
+    downloadHint: 'Before-after website redesign / wireframes on desk',
+  },
+  'landing-page-redesign': {
+    file: 'service-landing-page-redesign.jpg',
+    image_alt: 'High-converting landing page design on screen',
+    downloadHint: 'Marketing landing page mockup / conversion page design',
+  },
+  'wordpress-speed-optimization': {
+    file: 'service-wordpress-speed-optimization.jpg',
+    image_alt: 'Website speed and Core Web Vitals performance work',
+    downloadHint: 'Fast loading / speedometer / performance analytics chart',
+  },
+  'woocommerce-speed-optimization': {
+    file: 'service-woocommerce-speed-optimization.jpg',
+    image_alt: 'Fast WooCommerce product and checkout pages',
+    downloadHint: 'Mobile shopping with speed / stopwatch e-commerce',
+  },
+  'api-integrations': {
+    file: 'service-api-integrations.jpg',
+    image_alt: 'API and system integrations connected to WordPress',
+    downloadHint: 'Connected apps / API network / integration nodes',
+  },
+  'wordpress-ai-automation': {
+    file: 'service-wordpress-ai-automation.jpg',
+    image_alt: 'Workflow automation for WordPress operations',
+    downloadHint: 'Automation workflow / AI assistant with laptop (no brand logos)',
+  },
+  'wordpress-seo-services': {
+    file: 'service-wordpress-seo-services.jpg',
+    image_alt: 'WordPress SEO and search ranking work',
+    downloadHint: 'SEO analytics / search ranking graph / keyword research desk',
+  },
+  'plugin-development': {
+    file: 'service-plugin-development.jpg',
+    image_alt: 'Custom WordPress plugin development on a code editor',
+    downloadHint: 'PHP code editor / developer writing plugin code',
+  },
+  'woocommerce-development': {
+    file: 'service-woocommerce-development.jpg',
+    image_alt: 'Full WooCommerce store development workspace',
+    downloadHint: 'Building online store / e-commerce website on dual monitors',
+  },
+  'learndash-development': {
+    file: 'service-learndash-development.jpg',
+    image_alt: 'Full LearnDash LMS platform development',
+    downloadHint: 'Building online academy / course platform UI on screen',
+  },
+};
+
+export function getServiceImage(slug: string) {
+  const entry = SERVICE_IMAGES[slug];
+  if (!entry) {
+    return {
+      image_url: '/section-images/services/service-wordpress-website-development.jpg',
+      image_alt: 'WordPress service delivery',
+      downloadHint: 'WordPress website on laptop',
+    };
+  }
+  return {
+    image_url: `/section-images/services/${entry.file}`,
+    image_alt: entry.image_alt,
+    downloadHint: entry.downloadHint,
+  };
+}
+
 const FAKE_AWARD_MARKERS = [
   'css design awards',
   'clutch',

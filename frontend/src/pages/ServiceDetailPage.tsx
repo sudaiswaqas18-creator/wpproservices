@@ -12,6 +12,8 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { buildTitle } from '../config/seo';
 import { getServiceEnrichment, getServiceSeoDescription } from '../data/serviceEnrichment';
+import { getServiceImage } from '../data/siteContent';
+import { optimizeImageUrl } from '../utils/imageUrl';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -41,6 +43,7 @@ export default function ServiceDetailPage() {
   }
 
   const enriched = getServiceEnrichment(service.slug, service.features);
+  const media = getServiceImage(service.slug);
 
   return (
     <>
@@ -72,15 +75,20 @@ export default function ServiceDetailPage() {
               <Link to="/case-studies" className="btn-outline">View Case Studies</Link>
             </div>
           </motion.div>
-          {service.image_url && (
-            <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>
-              <img
-                src={service.image_url}
-                alt={service.title}
-                className="rounded-2xl shadow-card ring-1 ring-gray-100"
-              />
-            </motion.div>
-          )}
+          <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>
+            <img
+              src={optimizeImageUrl(media.image_url, 800)}
+              alt={media.image_alt}
+              width={800}
+              height={520}
+              loading="eager"
+              decoding="async"
+              className="w-full rounded-2xl shadow-card ring-1 ring-gray-100 object-cover max-h-[420px]"
+              onError={(e) => {
+                e.currentTarget.classList.add('hidden');
+              }}
+            />
+          </motion.div>
         </div>
       </section>
 
