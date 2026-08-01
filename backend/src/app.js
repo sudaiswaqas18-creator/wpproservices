@@ -156,7 +156,7 @@ app.get('/api/blog/:slug', asyncHandler(async (req, res) => {
 
 app.get('/api/industries', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM industries ORDER BY sort_order');
-  res.json(rows);
+  res.json(rows.map((row) => ({ ...row, has_case_study: Boolean(row.has_case_study) })));
 }));
 
 app.get('/api/products', asyncHandler(async (_req, res) => {

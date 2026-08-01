@@ -84,9 +84,9 @@ async function runSeed(options = {}) {
 
   await connection.query(`INSERT INTO industries (title, description, has_case_study, sort_order) VALUES ?`, [[
     ['E-Commerce & Retail', 'WooCommerce catalogs, shipping rules, and checkout paths for retailers that sell online and in-store — with inventory-aware templates.', 1, 1],
-    ['Education & E-Learning', 'LearnDash courses, drip schedules, and learner dashboards built for cohorts and self-paced programs without access chaos.', 0, 2],
+    ['Education & E-Learning', 'LearnDash courses, drip schedules, and learner dashboards built for cohorts and self-paced programs without access chaos.', 1, 2],
     ['Healthcare & Wellness', 'WordPress booking flows, accessible layouts, and form handling for clinics and wellness brands that need calm admin UX.', 0, 3],
-    ['Corporate & B2B', 'Service sites, lead capture, and member-style portals for teams that sell expertise — with clear scopes and handoffs.', 0, 4],
+    ['Corporate & B2B', 'Service sites, lead capture, and member-style portals for teams that sell expertise — with clear scopes and handoffs.', 1, 4],
     ['Hospitality & Travel', 'Booking-friendly WordPress pages and destination storytelling without bloated page-builder stacks.', 0, 5],
     ['Non-Profit & NGO', 'Donation-ready layouts, campaign pages, and editor-friendly storytelling templates staff can update after launch.', 0, 6],
     ['Real Estate', 'Listing-friendly structures, inquiry forms, and gallery-heavy property pages that stay maintainable for agents.', 0, 7],
