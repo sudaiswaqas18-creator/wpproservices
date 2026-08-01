@@ -375,10 +375,15 @@ export function getPortfolioImage(title: string, apiUrl?: string | null) {
   return PORTFOLIO_IMAGES[title] || apiUrl || '/section-images/portfolio-corporate.jpg';
 }
 
-/** Guidebook card images */
+/** Guidebook card images — one unique asset per slug */
 export const GUIDEBOOK_IMAGES: Record<string, string> = {
   'pre-launch-checklist': '/section-images/guidebook-pre-launch-checklist.jpg',
   'woocommerce-speed-playbook': '/section-images/guidebook-woocommerce-speed-playbook.jpg',
+  'woocommerce-migration-checklist': '/section-images/guidebook-woocommerce-migration.jpg',
+  'learndash-diy-setup': '/section-images/guidebook-learndash-setup.jpg',
+  'learndash-tips-tricks': '/section-images/guidebook-learndash-tips.jpg',
+  'woocommerce-plugin-guide': '/section-images/guidebook-woocommerce-plugins.jpg',
+  'plugin-developer-guide': '/section-images/guidebook-plugin-developer.jpg',
 };
 
 export function getGuidebookImage(slug: string, apiUrl?: string | null) {

@@ -109,6 +109,20 @@ export async function syncSiteContent() {
   await pool.query(
     `UPDATE case_studies SET is_featured=1 WHERE slug IN ('grocery-loyalty-shipping','cohort-lms-access','apparel-cart-recovery')`,
   );
+
+  // Keep guidebook card images unique per topic (API may still have reused paths)
+  const GUIDEBOOK_IMAGE_UPDATES = [
+    ['woocommerce-migration-checklist', '/section-images/guidebook-woocommerce-migration.jpg'],
+    ['learndash-diy-setup', '/section-images/guidebook-learndash-setup.jpg'],
+    ['learndash-tips-tricks', '/section-images/guidebook-learndash-tips.jpg'],
+    ['woocommerce-plugin-guide', '/section-images/guidebook-woocommerce-plugins.jpg'],
+    ['plugin-developer-guide', '/section-images/guidebook-plugin-developer.jpg'],
+    ['pre-launch-checklist', '/section-images/guidebook-pre-launch-checklist.jpg'],
+    ['woocommerce-speed-playbook', '/section-images/guidebook-woocommerce-speed-playbook.jpg'],
+  ];
+  for (const [slug, image] of GUIDEBOOK_IMAGE_UPDATES) {
+    await pool.query(`UPDATE guidebooks SET image_url=? WHERE slug=?`, [image, slug]);
+  }
 }
 
 export async function ensureDatabase() {

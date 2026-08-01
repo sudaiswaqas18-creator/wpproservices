@@ -8,8 +8,11 @@ import { getGuidebookImage } from '../data/siteContent';
 interface Guidebook { id: number; title: string; slug: string; description: string; content: string; image_url: string; }
 
 const FALLBACK_GUIDEBOOKS: Guidebook[] = [
-  { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: '/section-images/guidebook-pre-launch-checklist.jpg' },
-  { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for storefront templates.', content: 'Field-data habits for LCP, CLS, and query weight on product, cart, and checkout templates — not lab-only screenshots.', image_url: '/section-images/guidebook-woocommerce-speed-playbook.jpg' },
+  { id: 1, title: 'WooCommerce Migration Checklist', slug: 'woocommerce-migration-checklist', description: 'Move products, customers, and orders to WooCommerce without losing URLs or checkout confidence.', content: 'Catalog mapping, gateway tests, redirects, and staging QA for store moves.', image_url: '/section-images/guidebook-woocommerce-migration.jpg' },
+  { id: 2, title: 'LearnDash LMS DIY Setup', slug: 'learndash-diy-setup', description: 'Stand up LearnDash courses, drip rules, and learner access with a launch-ready checklist.', content: 'Course structure, payments, certificates, and instructor roles.', image_url: '/section-images/guidebook-learndash-setup.jpg' },
+  { id: 3, title: '44 LearnDash Tips & Tricks', slug: 'learndash-tips-tricks', description: 'Operator-level LearnDash habits for drip content, progress clarity, and fewer support tickets.', content: 'Practical tips from LMS delivery work.', image_url: '/section-images/guidebook-learndash-tips.jpg' },
+  { id: 4, title: 'Top WooCommerce Plugin Guide', slug: 'woocommerce-plugin-guide', description: 'Choose WooCommerce plugins by job-to-be-done — pricing, inventory, checkout, and care.', content: 'When custom work beats another plugin.', image_url: '/section-images/guidebook-woocommerce-plugins.jpg' },
+  { id: 5, title: 'WordPress Plugin Developer Guide', slug: 'plugin-developer-guide', description: 'Build maintainable WordPress plugins with hooks, capability checks, and a clear release workflow.', content: 'Security basics and deployment steps for agency plugin work.', image_url: '/section-images/guidebook-plugin-developer.jpg' },
 ];
 
 export function GuidebooksListPage() {
@@ -27,7 +30,7 @@ export function GuidebooksListPage() {
       <section className="pb-20"><div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((g) => (
           <Link key={g.id} to={`/resources/guidebooks/${g.slug}`} className="card group overflow-hidden p-0">
-            {g.image_url && <img src={getGuidebookImage(g.slug, g.image_url)} alt={g.title} className="h-40 w-full object-cover" />}
+            <img src={getGuidebookImage(g.slug, g.image_url)} alt={g.title} className="h-40 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
             <div className="p-5"><h2 className="font-bold group-hover:text-brand-600">{g.title}</h2><p className="mt-2 text-sm text-gray-600 line-clamp-2">{g.description}</p></div>
           </Link>
         ))}
