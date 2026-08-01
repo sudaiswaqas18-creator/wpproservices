@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FileText, BookOpen, Wrench, Briefcase, Building2, HelpCircle, Image, Route } from 'lucide-react';
 import CTA from '../components/CTA';
+import { NAV_RESOURCE_LINKS } from '../data/navData';
 
 export default function ResourcesPage() {
   return (
@@ -15,17 +15,8 @@ export default function ResourcesPage() {
       </section>
       <section className="pb-20">
         <div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {[
-            { to: '/blog', icon: FileText, title: 'Blog', desc: 'Migrations, Core Web Vitals, WooCommerce limits, and retainers' },
-            { to: '/case-studies', icon: Briefcase, title: 'Case Studies', desc: 'Project stories with honest outcome notes' },
-            { to: '/portfolio', icon: Image, title: 'Portfolio', desc: 'Visual WordPress and WooCommerce samples' },
-            { to: '/industries', icon: Building2, title: 'Industries', desc: 'How we apply WordPress by sector' },
-            { to: '/process', icon: Route, title: 'Our Process', desc: 'Scope, staging, launch, and handoff' },
-            { to: '/faq', icon: HelpCircle, title: 'FAQs', desc: 'Timelines, migrations, and care-plan questions' },
-            { to: '/resources/guidebooks', icon: BookOpen, title: 'Guidebooks', desc: 'Checklists for launch, LMS, and store moves' },
-            { to: '/resources/tools', icon: Wrench, title: 'Tools', desc: 'Speed, security, and conflict helpers' },
-          ].map(({ to, icon: Icon, title, desc }) => (
-            <Link key={to} to={to} className="card group text-center">
+          {NAV_RESOURCE_LINKS.map(({ href, icon: Icon, title, desc }) => (
+            <Link key={href} to={href} className="card group text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 group-hover:bg-brand-500">
                 <Icon size={26} className="text-brand-600 group-hover:text-white" />
               </div>
