@@ -5,6 +5,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { apiUrl } from '../config/api';
 import { PLUGIN_CATEGORIES, PLUGIN_TITLES } from '../data/productCategories';
+import { NAV_RESOURCE_LINKS } from '../data/navData';
 
 const GROUP_LABELS: Record<string, string> = {
   build: 'BUILD — Creation & Foundation',
@@ -358,15 +359,44 @@ export default function Header() {
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-72 rounded-xl border border-gray-100 bg-white py-3 shadow-card">
-                    <p className="px-4 pb-1 text-[10px] font-bold uppercase text-gray-400">Insights</p>
-                    <Link to="/blog" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>Blogs</Link>
-                    <Link to="/case-studies" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>Case Studies</Link>
-                    <p className="mt-2 px-4 pb-1 text-[10px] font-bold uppercase text-gray-400">Guidebooks</p>
-                    <Link to="/resources/guidebooks" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>All Guidebooks</Link>
-                    <p className="mt-2 px-4 pb-1 text-[10px] font-bold uppercase text-gray-400">Tools</p>
-                    <Link to="/resources/tools" role="menuitem" className="block px-4 py-2 text-sm hover:bg-gray-50" onClick={closeAll}>All Tools</Link>
-                    <Link to="/resources" role="menuitem" className="block px-4 py-2 text-sm font-semibold text-accent" onClick={closeAll}>Resources Hub →</Link>
+                  <div className="w-[22rem] rounded-xl border border-gray-100 bg-white py-3 shadow-card sm:w-[28rem]">
+                    <p className="px-4 pb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                      Explore
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2">
+                      {NAV_RESOURCE_LINKS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.href}
+                            to={item.href}
+                            role="menuitem"
+                            className="flex items-start gap-2.5 px-4 py-2.5 text-sm hover:bg-gray-50"
+                            onClick={closeAll}
+                          >
+                            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+                              <Icon size={14} />
+                            </span>
+                            <span className="min-w-0">
+                              <span className="block font-medium text-ink">{item.title}</span>
+                              {item.desc && (
+                                <span className="mt-0.5 block text-[11px] leading-snug text-ink-light">
+                                  {item.desc}
+                                </span>
+                              )}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <Link
+                      to="/resources"
+                      role="menuitem"
+                      className="mt-1 block border-t border-gray-100 px-4 pt-3 text-sm font-semibold text-accent"
+                      onClick={closeAll}
+                    >
+                      Resources Hub →
+                    </Link>
                   </div>
                 </motion.div>
               )}
@@ -405,9 +435,17 @@ export default function Header() {
             </Link>
           ))}
           <Link to="/products" className="block min-h-[44px] py-2 text-sm font-semibold text-accent" onClick={() => setMobileOpen(false)}>All Plugins →</Link>
-          <Link to="/resources" className="mt-2 block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
-          <Link to="/blog" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Blog</Link>
-          <Link to="/case-studies" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Case Studies</Link>
+          <Link to="/resources" className="mt-2 block min-h-[44px] py-2 text-sm font-semibold text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
+          {NAV_RESOURCE_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className="block min-h-[44px] py-2 pl-2 text-sm text-ink hover:text-accent"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.title}
+            </Link>
+          ))}
           <Link to="/contact" className="btn-primary mt-3 block min-h-[44px] text-center" onClick={() => setMobileOpen(false)}>Contact Us</Link>
         </div>
       )}
