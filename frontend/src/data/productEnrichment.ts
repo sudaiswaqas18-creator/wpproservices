@@ -48,7 +48,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     categoryLabel: 'B2B Pricing',
     tagline: 'Show the right price to the right customer',
     highlights: [
-      { label: 'Rules', value: 'Unlimited' },
+      { label: 'Rules', value: 'Role & tier' },
       { label: 'Roles', value: 'User & role based' },
       { label: 'Discounts', value: 'Tiered & bulk' },
     ],
@@ -84,9 +84,9 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
     categoryLabel: 'Conversion Tools',
     tagline: 'Create urgency for campaign windows',
     highlights: [
-      { label: 'Tools', value: '5-in-1 pack' },
+      { label: 'Tools', value: 'Campaign pack' },
       { label: 'Campaigns', value: 'Flash & seasonal' },
-      { label: 'Setup', value: 'Plug & play' },
+      { label: 'Setup', value: 'Editor-ready' },
     ],
     features: [
       'Countdown timers on products & cart',
@@ -96,7 +96,7 @@ const enrichments: Record<string, Partial<ProductEnrichment>> = {
       'Exit-intent offer triggers',
     ],
     useCases: ['Flash sales', 'Seasonal campaigns', 'Cart recovery'],
-    compatibility: 'WooCommerce 8+ · All major themes',
+    compatibility: 'WooCommerce 8+ · Theme CSS overrides may be needed',
   },
   'stock-alert-pro': {
     categoryLabel: 'Inventory',

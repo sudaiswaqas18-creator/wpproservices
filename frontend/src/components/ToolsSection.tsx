@@ -8,9 +8,9 @@ const iconMap: Record<string, typeof Bug> = { bug: Bug, palette: Palette, 'messa
 interface Tool { id: number; title: string; slug: string; description: string; icon: string; is_new: boolean; }
 
 const FALLBACK_TOOLS: Tool[] = [
-  { id: 1, title: 'Core Web Vitals Scorecard', slug: 'speed-estimator', description: 'Estimate where your WordPress or WooCommerce pages lose time — LCP, CLS, and server response.', icon: 'zap', is_new: true },
+  { id: 1, title: 'Core Web Vitals Review Notes', slug: 'speed-estimator', description: 'Spot where WordPress or WooCommerce templates lose time — LCP, CLS, and heavy queries.', icon: 'zap', is_new: true },
   { id: 2, title: 'WordPress Hardening Checklist', slug: 'security-checklist', description: 'Walk through login protection, file permissions, backups, and common misconfigurations before launch.', icon: 'shield', is_new: false },
-  { id: 3, title: 'Plugin Conflict Diagnostic', slug: 'plugin-troubleshooter', description: 'A structured isolation path to find which plugin or theme update broke your checkout or admin screens.', icon: 'bug', is_new: false },
+  { id: 3, title: 'Plugin Conflict Checklist', slug: 'plugin-troubleshooter', description: 'A structured isolation path to find which plugin or theme update broke checkout or admin screens.', icon: 'bug', is_new: false },
 ];
 
 export default function ToolsSection() {
@@ -27,9 +27,9 @@ export default function ToolsSection() {
   return (
     <section className="bg-background py-20">
       <div className="section-container">
-        <h2 className="section-title text-center">Practical WordPress Tools</h2>
+        <h2 className="section-title text-center">WordPress Checklists & Review Notes</h2>
         <p className="section-subtitle mx-auto text-center">
-          Quick checks for performance, security, and plugin conflicts — useful before you book a full engagement.
+          Practical first-pass guides for performance, hardening, and plugin conflicts — not live SaaS scanners.
         </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((t) => {

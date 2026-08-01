@@ -23,7 +23,7 @@ export default function Footer() {
               <li><Link to="/services/wordpress-website-development" className="text-sm text-gray-400 transition hover:text-secondary">Website Development</Link></li>
               <li><Link to="/services/wordpress-redesign" className="text-sm text-gray-400 transition hover:text-secondary">Website Revamp</Link></li>
               <li><Link to="/services/wordpress-speed-optimization" className="text-sm text-gray-400 transition hover:text-secondary">Performance Optimization</Link></li>
-              <li><Link to="/services/wordpress-maintenance" className="text-sm text-gray-400 transition hover:text-secondary">Technology Partnership</Link></li>
+              <li><Link to="/services/wordpress-maintenance" className="text-sm text-gray-400 transition hover:text-secondary">Maintenance & care</Link></li>
               <li><Link to="/services/wordpress-ai-automation" className="text-sm text-gray-400 transition hover:text-secondary">AI Automations</Link></li>
             </ul>
           </div>

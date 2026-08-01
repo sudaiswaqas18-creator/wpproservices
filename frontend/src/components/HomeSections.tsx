@@ -82,9 +82,9 @@ interface CaseStudy {
 }
 
 const FALLBACK_FEATURED_CASES: CaseStudy[] = [
-  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'Anonymized grocery WooCommerce store', slug: 'freshharvest-shipping' },
-  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Anonymized private cohort LMS', slug: 'eduvault-lms' },
-  { id: 3, title: 'Abandoned Cart Flows That Recover Revenue', client: 'Anonymized apparel WooCommerce store', slug: 'stylebox-cart-recovery' },
+  { id: 1, title: 'Loyalty Shipping Rules That Cut Cart Friction', client: 'Anonymized grocery WooCommerce store', slug: 'grocery-loyalty-shipping' },
+  { id: 2, title: 'Member-Only LMS With Controlled Access', client: 'Anonymized private cohort LMS', slug: 'cohort-lms-access' },
+  { id: 3, title: 'Event-Tied Cart Recovery for Apparel WooCommerce', client: 'Anonymized apparel WooCommerce store', slug: 'apparel-cart-recovery' },
 ];
 
 function FeaturedCases() {
@@ -103,7 +103,7 @@ function FeaturedCases() {
     <section className="bg-surface-elevated py-20">
       <div className="section-container">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">Selected Work</p>
-        <h2 className="section-title mt-2">WordPress Project Stories Worth Studying</h2>
+        <h2 className="section-title mt-2">Anonymized WordPress Delivery Stories</h2>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {cases.map((cs) => {
             const media = getCaseStudyMedia(cs.slug);

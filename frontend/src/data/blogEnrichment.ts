@@ -106,7 +106,7 @@ const enrichments: Record<string, BlogEnrichment> = {
   'woocommerce-customization-scale': {
     category: 'WooCommerce',
     readTime: '9 min read',
-    intro: 'Stock WooCommerce works until it does not — usually around $1M ARR when shipping rules, subscriptions, and checkout logic outgrow plugin stacks.',
+    intro: 'Stock WooCommerce works until shipping rules, subscriptions, and checkout logic outgrow a pile of overlapping plugins — usually when catalogs and custom pricing get serious.',
     sections: [
       {
         heading: 'Where off-the-shelf breaks',
@@ -181,7 +181,7 @@ const enrichments: Record<string, BlogEnrichment> = {
       {
         heading: 'When to hire an agency',
         paragraphs: [
-          'Launches, redesigns, migrations, and specialized builds (WooCommerce, LearnDash, custom plugins) benefit from a team that has done it dozens of times.',
+          'Launches, redesigns, migrations, and specialized builds (WooCommerce, LearnDash, custom plugins) benefit from a team that already ships those patterns repeatedly.',
         ],
         bullets: [
           'Fixed-scope launch with a hard deadline',

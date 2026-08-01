@@ -35,7 +35,7 @@ export default function Industries() {
         </div>
 
         <p className="mt-10 text-center text-gray-600">
-          No matter your industry, we craft WordPress websites that deliver results.
+          Same staging and handoff habits — scoped to your catalog, course model, or service funnel.
         </p>
         <div className="mt-6 text-center">
           <ContactLink className="btn-primary">Let&apos;s Build Your Website</ContactLink>

@@ -40,10 +40,10 @@ export default function WhyChooseUs() {
   return (
     <section className="py-20">
       <div className="section-container">
-        <h2 className="section-title">Why Teams Choose This WordPress Studio</h2>
+        <h2 className="section-title">What You Get Before We Write a Line of PHP</h2>
         <p className="section-subtitle">
-          Focused WordPress and WooCommerce delivery — maintainable themes, careful migrations, and
-          specialists who work in wp-admin every day.
+          Written scopes, staging QA, editor-friendly templates, and care after launch — the habits that
+          keep WordPress and WooCommerce projects calm after go-live.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

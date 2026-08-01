@@ -63,7 +63,7 @@ router.post('/blogs', authMiddleware, async (req, res) => {
   const [result] = await pool.query(
     `INSERT INTO blog_posts (title, slug, excerpt, content, author, image_url, published_at, sort_order)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [title.trim(), finalSlug, excerpt || '', content || '', author || 'WPProServices Team', image_url || '', published_at || new Date().toISOString().slice(0, 10), sort_order || 0]
+    [title.trim(), finalSlug, excerpt || '', content || '', author || 'WPServices Team', image_url || '', published_at || new Date().toISOString().slice(0, 10), sort_order || 0]
   );
   res.status(201).json({ id: result.insertId, message: 'Blog post created' });
 });

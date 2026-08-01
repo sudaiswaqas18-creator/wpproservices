@@ -38,8 +38,8 @@ const scenes = [
   {
     id: 'commerce',
     eyebrow: 'WooCommerce',
-    title: 'High-converting store',
-    subtitle: 'Checkout flows that drive revenue',
+    title: 'Checkout-focused storefront',
+    subtitle: 'Cart and payment flows scoped for operators',
     score: 88,
     scoreLabel: 'Checkout UX',
     delta: 'Scoped',
@@ -60,9 +60,9 @@ const scenes = [
   },
   {
     id: 'scale',
-    eyebrow: 'Enterprise',
-    title: 'Always-on performance',
-    subtitle: 'Core Web Vitals locked in and stable',
+    eyebrow: 'Care & scale',
+    title: 'Steady performance habits',
+    subtitle: 'Core Web Vitals checked on real templates',
     score: 96,
     scoreLabel: 'Launch ready',
     delta: 'Care',
@@ -369,7 +369,7 @@ export default function HeroShowcase() {
                   transition={{ duration: 0.25 }}
                   className="truncate font-medium text-gray-500"
                 >
-                  https://wpservices.com/{scene.id}
+                  https://example.com/{scene.id}
                 </motion.span>
               </AnimatePresence>
             </div>

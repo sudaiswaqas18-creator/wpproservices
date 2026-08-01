@@ -18,7 +18,7 @@ export default function Portfolio() {
         <div className="text-center">
           <h2 className="section-title">WordPress Work Showcase</h2>
           <p className="section-subtitle mx-auto">
-            Sample WordPress, WooCommerce, and LearnDash builds — images match each project type for a clear visual story.
+            Representative WordPress, WooCommerce, and LearnDash project types — each tile matches a delivery pattern we scope often.
           </p>
         </div>
 

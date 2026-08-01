@@ -5,7 +5,7 @@ import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditB
 import { validateBlogForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: BlogForm = {
-  title: '', slug: '', excerpt: '', content: '', author: 'WPProServices Team',
+  title: '', slug: '', excerpt: '', content: '', author: 'WPServices Team',
   image_url: '', published_at: new Date().toISOString().slice(0, 10), sort_order: 0,
 };
 

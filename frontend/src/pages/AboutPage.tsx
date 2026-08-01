@@ -28,7 +28,7 @@ export default function AboutPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container max-w-3xl text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">About Our WordPress Agency</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900">About WPServices</h1>
           <p className="mt-6 text-lg leading-relaxed text-gray-600">
             WPServices is a WordPress development studio built for teams that need dependable themes,
             plugins, WooCommerce stores, and long-term care — not generic “website packages.” We work

@@ -14,7 +14,7 @@ export default function PortfolioPage() {
         <div className="section-container max-w-3xl text-center">
           <h1 className="text-4xl font-extrabold text-gray-900">WordPress Work Showcase</h1>
           <p className="section-subtitle mx-auto mt-4">
-            Visual samples of WordPress delivery — WooCommerce storefronts, corporate sites, LearnDash dashboards, and member portals. For deeper outcomes, see case studies.
+            Representative WordPress project types — WooCommerce storefronts, marketing sites, LearnDash dashboards, and member portals. Deeper write-ups live in case studies.
           </p>
         </div>
       </section>

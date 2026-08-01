@@ -50,35 +50,35 @@ export interface CaseStudyMedia {
  * Replace any file with the same filename — no code change needed.
  */
 export const CASE_STUDY_MEDIA: Record<string, CaseStudyMedia> = {
-  'freshharvest-shipping': {
+  'grocery-loyalty-shipping': {
     image_url: '/section-images/case-grocery.jpg',
     image_alt: 'Grocery shelves for a WooCommerce loyalty shipping case study',
     client_label: 'Anonymized grocery WooCommerce store',
     result_summary: 'Loyalty shipping rules clarified without manual coupons',
     tech_stack: 'WooCommerce + Custom PHP',
   },
-  'eduvault-lms': {
+  'cohort-lms-access': {
     image_url: '/section-images/case-lms.jpg',
     image_alt: 'Learners collaborating for a gated LearnDash LMS case study',
     client_label: 'Anonymized private cohort LMS',
     result_summary: 'Member access rules and progress views clarified',
     tech_stack: 'LearnDash + Custom Theme',
   },
-  'stylebox-cart-recovery': {
+  'apparel-cart-recovery': {
     image_url: '/section-images/case-apparel.jpg',
     image_alt: 'Apparel retail floor for a WooCommerce cart recovery case study',
     client_label: 'Anonymized apparel WooCommerce store',
     result_summary: 'Cart recovery tied to real WooCommerce order events',
     tech_stack: 'Custom Plugin + Email API',
   },
-  'clearview-subscriptions': {
+  'attribute-subscription-pricing': {
     image_url: '/section-images/case-optics.jpg',
     image_alt: 'Eyewear display for attribute-driven WooCommerce subscriptions',
     client_label: 'Anonymized specialty retail store',
     result_summary: 'Subscription pricing driven by selected attributes',
     tech_stack: 'WooCommerce Subscriptions + Custom Logic',
   },
-  'learnpoint-wallet': {
+  'course-wallet-checkout': {
     image_url: '/section-images/case-courses.jpg',
     image_alt: 'Student studying online for wallet-based course checkout',
     client_label: 'Anonymized online course team',

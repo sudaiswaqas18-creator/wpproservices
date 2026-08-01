@@ -7,7 +7,7 @@ import { apiUrl } from '../config/api';
 interface Tool { title: string; slug: string; description: string; full_content: string; is_new: boolean; }
 
 export function ToolsListPage() {
-  return (<><section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">Website Tools</h1></div></section><ToolsSection /><CTA /></>);
+  return (<><section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">WordPress Checklists</h1><p className="mt-4 text-gray-600">Review notes for Core Web Vitals, hardening, and plugin conflicts before a full engagement.</p></div></section><ToolsSection /><CTA /></>);
 }
 
 export default function ToolDetailPage() {

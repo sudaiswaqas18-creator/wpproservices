@@ -101,7 +101,7 @@ export default function Testimonials() {
       <div className="section-container">
         <h2 className="section-title text-center">WordPress Client Feedback</h2>
         <p className="section-subtitle mx-auto mt-4 max-w-2xl text-center">
-          Original notes from illustrative WordPress, WooCommerce, and LearnDash engagements — focused on delivery quality, not invented brand claims.
+          Notes from anonymized WordPress, WooCommerce, and LearnDash engagements — focused on delivery quality, not invented brand claims.
         </p>
 
         <div className="testimonial-stage relative mx-auto mt-12 max-w-4xl">

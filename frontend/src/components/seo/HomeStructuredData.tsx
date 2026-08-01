@@ -30,7 +30,7 @@ const localBusiness = {
     addressCountry: 'US',
   },
   telephone: SITE.phone,
-  areaServed: 'Worldwide',
+  areaServed: ['United States', 'United Arab Emirates', 'Pakistan'],
   priceRange: '$$',
 };
 

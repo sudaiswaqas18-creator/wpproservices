@@ -20,7 +20,7 @@ export default function CaseStudiesPage() {
         <div className="section-container text-center">
           <h1 className="text-4xl font-extrabold text-gray-900">WordPress Case Studies</h1>
           <p className="section-subtitle mx-auto mt-4">
-            Selected WordPress and WooCommerce engagements with honest outcome notes. Client labels are illustrative placeholders you can replace with approved references.
+            Selected anonymized WordPress and WooCommerce delivery patterns — problem, approach, and handoff — until approved client references are published.
           </p>
         </div>
       </section>

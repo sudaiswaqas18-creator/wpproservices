@@ -24,8 +24,8 @@ export async function seedExtended(connection) {
 
   const mkService = (title, slug, subtitle, desc, group, section, isNew = 0, order = 0) => [
     title, slug, subtitle, desc, title, subtitle, desc,
-    JSON.stringify(['Expert delivery', 'Dedicated team', 'Post-launch support']),
-    'code', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200',
+    JSON.stringify(['Written scope before build', 'Staging QA when hosting allows', 'Editor handoff docs']),
+    'code', '/section-images/blog-hire-wordpress-agency.jpg',
     group, section, isNew, order,
   ];
 
@@ -63,13 +63,13 @@ export async function seedExtended(connection) {
     [allServices]
   );
 
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, LearnDash', result_summary='Lesson loads: Faster | Logged-in lag: Removed' WHERE slug='eduvault-lms'`);
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Admin edits: Unlocked | Publishing: Faster' WHERE slug='freshharvest-shipping'`);
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, SEO', result_summary='4x User Engagement | +65% Visibility' WHERE slug='learnpoint-wallet'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, LearnDash', result_summary='Role-gated access | Clearer progress views' WHERE slug='cohort-lms-access'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Loyalty shipping rules | Staging-first cutover' WHERE slug='grocery-loyalty-shipping'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Wallet checkout | Self-serve seat assignment' WHERE slug='course-wallet-checkout'`);
 
   const img = (name) => `/section-images/${name}`;
   const mkPlugin = (title, slug, subtitle, desc, full, features, category, price, order, image) => [
-    title, slug, subtitle, desc, full, JSON.stringify(features), category, price, '', 'WooCommerce extension', image, '#', order,
+    title, slug, subtitle, desc, full, JSON.stringify(features), category, price, '', 'WooCommerce extension', image, '/contact', order,
   ];
 
   await connection.query(`INSERT INTO products (title, slug, subtitle, description, full_content, features, category, price, rating, rating_count, image_url, buy_url, sort_order) VALUES ?`, [[
@@ -94,20 +94,20 @@ export async function seedExtended(connection) {
   ]]);
 
   await connection.query(`INSERT INTO tools (title, slug, description, full_content, icon, is_new, sort_order) VALUES ?`, [[
-    ['Bug Fixing Bot', 'bug-fixing-bot', 'Isolate common WordPress breakage — white screens, plugin clashes, and checkout errors — with a clear first-pass checklist.', 'Use this guided path before you open a ticket. It walks through plugin isolation, theme switch tests, and error-log clues so you know what broke and what to hand an engineer.', 'bug', 1, 1],
-    ['Design Bot', 'design-bot', 'Explore WordPress page layouts and section ideas before theme build so stakeholders align on structure early.', 'Sketch homepage and landing patterns for WordPress marketing sites — hero, proof, services, and CTA — without committing to a full redesign yet.', 'palette', 0, 2],
-    ['WordPress Consultation Bot', 'consultation-bot', 'Get a second opinion on theme debt, WooCommerce limits, and retainer vs project trade-offs.', 'Ask practical WordPress delivery questions: migration risk, plugin stacks, staging needs, and when a custom plugin beats another SaaS add-on.', 'message-circle', 0, 3],
-    ['Website Speed Analyzer', 'speed-analyzer', 'Spot WordPress and WooCommerce bottlenecks across LCP, CLS, and heavy templates without guessing.', 'Review hero media, fonts, third-party scripts, and product query weight. Pair findings with field data, not only a single Lighthouse screenshot.', 'zap', 0, 4],
-    ['Conversion Rate Audit Tool', 'conversion-audit', 'Find friction on WordPress landing pages and WooCommerce checkout paths that quietly kill enquiries and orders.', 'Check form length, mobile CTA placement, shipping surprises, and trust cues near buy buttons — then prioritize fixes that match your traffic.', 'trending-up', 0, 5],
-    ['Security Vulnerability Scanner', 'security-scanner', 'Surface common WordPress hardening gaps before they become downtime or malware cleanup work.', 'Walk login protection, update hygiene, file permissions, backups, and obvious misconfigurations that agencies fix before launch.', 'shield', 0, 6],
+    ['Plugin Conflict Checklist', 'bug-fixing-bot', 'Isolate common WordPress breakage — white screens, plugin clashes, and checkout errors — with a clear first-pass checklist.', 'Use this guided path before you open a ticket. It walks through plugin isolation, theme switch tests, and error-log clues so you know what broke and what to hand an engineer.', 'bug', 1, 1],
+    ['WordPress Layout Notes', 'design-bot', 'Explore WordPress page layouts and section ideas before theme build so stakeholders align on structure early.', 'Sketch homepage and landing patterns for WordPress marketing sites — hero, proof, services, and CTA — without committing to a full redesign yet.', 'palette', 0, 2],
+    ['WordPress Scope Questions', 'consultation-bot', 'Get a second opinion on theme debt, WooCommerce limits, and retainer vs project trade-offs.', 'Ask practical WordPress delivery questions: migration risk, plugin stacks, staging needs, and when a custom plugin beats another SaaS add-on.', 'message-circle', 0, 3],
+    ['Core Web Vitals Review Notes', 'speed-analyzer', 'Spot WordPress and WooCommerce bottlenecks across LCP, CLS, and heavy templates without guessing.', 'Review hero media, fonts, third-party scripts, and product query weight. Pair findings with field data, not only a single Lighthouse screenshot.', 'zap', 0, 4],
+    ['Conversion Friction Checklist', 'conversion-audit', 'Find friction on WordPress landing pages and WooCommerce checkout paths that quietly kill enquiries and orders.', 'Check form length, mobile CTA placement, shipping surprises, and trust cues near buy buttons — then prioritize fixes that match your traffic.', 'trending-up', 0, 5],
+    ['WordPress Hardening Checklist', 'security-scanner', 'Surface common WordPress hardening gaps before they become downtime or malware cleanup work.', 'Walk login protection, update hygiene, file permissions, backups, and obvious misconfigurations that agencies fix before launch.', 'shield', 0, 6],
   ]]);
 
   await connection.query(`INSERT INTO guidebooks (title, slug, description, content, download_url, image_url, sort_order) VALUES ?`, [[
-    ['WooCommerce Migration Checklist', 'woocommerce-migration-checklist', 'Move products, customers, and orders to WooCommerce without losing URLs or checkout confidence.', 'Covers catalog mapping, gateway tests, redirect plans, staging QA, and post-cutover Search Console checks for store moves.', '#', '/section-images/guidebook-woocommerce-speed-playbook.jpg', 1],
-    ['LearnDash LMS DIY Setup', 'learndash-diy-setup', 'Stand up LearnDash courses, drip rules, and learner access with a launch-ready checklist.', 'Course structure, payments, certificates, instructor roles, and mobile lesson checks before you invite the first cohort.', '#', '/section-images/guidebook-pre-launch-checklist.jpg', 2],
-    ['44 LearnDash Tips & Tricks', 'learndash-tips-tricks', 'Operator-level LearnDash habits for drip content, progress clarity, and fewer support tickets.', 'From lesson templates to completion rules — practical tips collected from LMS delivery work, not generic LMS marketing copy.', '#', '/section-images/guidebook-pre-launch-checklist.jpg', 3],
-    ['Top WooCommerce Plugin Guide', 'woocommerce-plugin-guide', 'Choose WooCommerce plugins by job-to-be-done — pricing, inventory, checkout, and care — not by popularity lists.', 'A curated shortlist for performance, SEO hygiene, security, and conversion — with notes on when custom work beats another plugin.', '#', '/section-images/guidebook-woocommerce-speed-playbook.jpg', 4],
-    ['WordPress Plugin Developer Guide', 'plugin-developer-guide', 'Build maintainable WordPress plugins with hooks, capability checks, and a release workflow editors can trust.', 'Coding standards, security basics, HPOS-aware WooCommerce notes, and deployment steps for agency plugin work.', '#', '/section-images/guidebook-pre-launch-checklist.jpg', 5],
+    ['WooCommerce Migration Checklist', 'woocommerce-migration-checklist', 'Move products, customers, and orders to WooCommerce without losing URLs or checkout confidence.', 'Covers catalog mapping, gateway tests, redirect plans, staging QA, and post-cutover Search Console checks for store moves.', '/contact', '/section-images/guidebook-woocommerce-speed-playbook.jpg', 1],
+    ['LearnDash LMS DIY Setup', 'learndash-diy-setup', 'Stand up LearnDash courses, drip rules, and learner access with a launch-ready checklist.', 'Course structure, payments, certificates, instructor roles, and mobile lesson checks before you invite the first cohort.', '/contact', '/section-images/guidebook-pre-launch-checklist.jpg', 2],
+    ['44 LearnDash Tips & Tricks', 'learndash-tips-tricks', 'Operator-level LearnDash habits for drip content, progress clarity, and fewer support tickets.', 'From lesson templates to completion rules — practical tips collected from LMS delivery work, not generic LMS marketing copy.', '/contact', '/section-images/guidebook-pre-launch-checklist.jpg', 3],
+    ['Top WooCommerce Plugin Guide', 'woocommerce-plugin-guide', 'Choose WooCommerce plugins by job-to-be-done — pricing, inventory, checkout, and care — not by popularity lists.', 'A curated shortlist for performance, SEO hygiene, security, and conversion — with notes on when custom work beats another plugin.', '/contact', '/section-images/guidebook-woocommerce-speed-playbook.jpg', 4],
+    ['WordPress Plugin Developer Guide', 'plugin-developer-guide', 'Build maintainable WordPress plugins with hooks, capability checks, and a release workflow editors can trust.', 'Coding standards, security basics, HPOS-aware WooCommerce notes, and deployment steps for agency plugin work.', '/contact', '/section-images/guidebook-pre-launch-checklist.jpg', 5],
   ]]);
 
   await connection.query(`INSERT INTO awards (title, organization, year, badge_label, sort_order) VALUES ?`, [[

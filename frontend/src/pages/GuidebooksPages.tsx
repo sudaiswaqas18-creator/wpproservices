@@ -9,7 +9,7 @@ interface Guidebook { id: number; title: string; slug: string; description: stri
 
 const FALLBACK_GUIDEBOOKS: Guidebook[] = [
   { id: 1, title: 'WordPress Pre-Launch Checklist (2026)', slug: 'pre-launch-checklist', description: 'Complete 30-point checklist covering performance, SEO, security, and analytics before going live.', content: 'A complete pre-launch roadmap for agencies and site owners.', image_url: '/section-images/guidebook-pre-launch-checklist.jpg' },
-  { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for maximum conversion.', content: 'Proven techniques for sub-2-second WooCommerce page loads.', image_url: '/section-images/guidebook-woocommerce-speed-playbook.jpg' },
+  { id: 2, title: 'WooCommerce Core Web Vitals Playbook', slug: 'woocommerce-speed-playbook', description: 'Practical guide to optimizing checkout flow, image assets, and database queries for storefront templates.', content: 'Field-data habits for LCP, CLS, and query weight on product, cart, and checkout templates — not lab-only screenshots.', image_url: '/section-images/guidebook-woocommerce-speed-playbook.jpg' },
 ];
 
 export function GuidebooksListPage() {
@@ -23,7 +23,7 @@ export function GuidebooksListPage() {
 
   return (
     <>
-      <section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">Guidebooks</h1><p className="mt-4 text-gray-600">Free guides and checklists for WordPress professionals.</p></div></section>
+      <section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">WordPress Guidebooks</h1><p className="mt-4 text-gray-600">Practical checklists for migrations, LMS setup, WooCommerce plugins, and launch hygiene.</p></div></section>
       <section className="pb-20"><div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((g) => (
           <Link key={g.id} to={`/resources/guidebooks/${g.slug}`} className="card group overflow-hidden p-0">
