@@ -85,7 +85,7 @@ export default function ProductDetailPage() {
             <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-brand-600">
               {enriched.categoryLabel}
             </span>
-            <h1 className="mt-4 text-4xl font-extrabold text-gray-900">{product.title}</h1>
+            <h1 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">{product.title}</h1>
             <p className="mt-2 text-lg text-brand-600">{product.subtitle}</p>
             <p className="mt-3 text-gray-600">{enriched.tagline}</p>
             {product.rating && /\d/.test(product.rating) ? (

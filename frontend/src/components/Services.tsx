@@ -39,14 +39,14 @@ export default function Services() {
                   key={s.id}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`flex items-center gap-3 rounded-xl px-4 py-3.5 text-left transition ${
+                  className={`flex min-w-0 items-center gap-3 rounded-xl px-4 py-3.5 text-left transition ${
                     active === i
                       ? 'bg-brand-500 text-white shadow-md'
                       : 'bg-surface-50 text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  <SIcon size={20} />
-                  <span className="text-sm font-semibold">{s.title}</span>
+                  <SIcon size={20} className="shrink-0" />
+                  <span className="min-w-0 truncate text-sm font-semibold">{s.title}</span>
                 </button>
               );
             })}

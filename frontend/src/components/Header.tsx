@@ -157,10 +157,11 @@ export default function Header() {
       ref={headerRef}
       className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md"
     >
-      <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
+      <div className="section-container flex h-16 min-w-0 items-center justify-between gap-3 lg:h-[72px]">
         <Logo
           to="/"
           variant="light"
+          className="min-w-0"
           onClick={() => { setMobileOpen(false); closeAll(); }}
         />
 
@@ -197,16 +198,15 @@ export default function Header() {
                   role="menu"
                   aria-label="Services menu"
                   {...dropdownMotion}
-                  className="absolute top-full z-50 pt-2"
-                  style={{ left: 'calc(50% - 360px)' }}
+                  className="absolute left-1/2 top-full z-50 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 pt-2"
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-[720px] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
-                    <div className="grid grid-cols-3 gap-6">
+                  <div className="w-full rounded-2xl border border-gray-100 bg-white p-4 shadow-card sm:p-6">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                       {Object.entries(grouped).map(([group, sections]) => (
-                        <div key={group}>
-                          <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-accent">
+                        <div key={group} className="min-w-0">
+                          <p className="mb-3 text-[10px] font-bold uppercase leading-snug tracking-wider text-accent break-words">
                             {GROUP_LABELS[group]}
                           </p>
                           {Object.entries(sections).map(([sec, items]) => (
@@ -275,22 +275,21 @@ export default function Header() {
                   role="menu"
                   aria-label="WooCommerce Plugins menu"
                   {...dropdownMotion}
-                  className="absolute top-full z-50 pt-2"
-                  style={{ left: 'calc(50% - 360px)' }}
+                  className="absolute left-1/2 top-full z-50 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 pt-2"
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-[720px] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
+                  <div className="w-full rounded-2xl border border-gray-100 bg-white p-4 shadow-card sm:p-6">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-wider text-accent">
                       WooCommerce Plugins by Category
                     </p>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                       {PLUGIN_CATEGORIES.map((cat) => (
-                        <div key={cat.id}>
+                        <div key={cat.id} className="min-w-0">
                           <Link
                             to={`/products?category=${cat.id}`}
                             role="menuitem"
-                            className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-accent hover:underline"
+                            className="mb-2 block text-[10px] font-bold uppercase leading-snug tracking-wider text-accent hover:underline break-words"
                             onClick={closeAll}
                           >
                             {cat.title}

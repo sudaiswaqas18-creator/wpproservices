@@ -142,7 +142,7 @@ export default function LegalPageLayout({
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-24 right-6 z-40 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-lg print:hidden lg:bottom-8"
+          className="fixed bottom-24 left-4 z-40 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-lg print:hidden sm:left-6 lg:bottom-8"
           aria-label="Back to top of page"
         >
           Back to top

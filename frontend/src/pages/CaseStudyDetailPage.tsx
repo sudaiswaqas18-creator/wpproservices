@@ -32,7 +32,7 @@ export default function CaseStudyDetailPage() {
     <>
       <section className="bg-surface-50 py-12">
         <div className="section-container">
-          <h1 className="text-4xl font-extrabold text-gray-900">{study.title}</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">{study.title}</h1>
           <p className="mt-2 text-brand-600 font-medium">Client: {media.client_label}</p>
         </div>
       </section>

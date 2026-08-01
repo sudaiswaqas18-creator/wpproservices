@@ -34,10 +34,10 @@ export default function Pricing() {
               <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
               <p className="mt-2 text-sm text-gray-600">{plan.tagline}</p>
 
-              <div className="mt-6 flex items-end gap-3">
-                <span className="text-4xl font-extrabold text-gray-900">{plan.price}</span>
+              <div className="mt-6 flex min-w-0 flex-wrap items-end gap-x-3 gap-y-1">
+                <span className="min-w-0 break-words text-3xl font-extrabold text-gray-900 sm:text-4xl">{plan.price}</span>
                 {plan.original_price && plan.original_price.trim() && (
-                  <span className="mb-1 text-lg text-gray-400 line-through">{plan.original_price}</span>
+                  <span className="mb-1 text-base text-gray-400 line-through sm:text-lg">{plan.original_price}</span>
                 )}                {plan.discount_label && (
                   <span className="mb-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700">
                     {plan.discount_label}

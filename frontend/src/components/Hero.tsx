@@ -44,16 +44,16 @@ export default function Hero() {
       <div className="section-container relative">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-semibold text-accent shadow-sm">
-              <span className="relative flex h-2 w-2">
+            <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1.5 text-[11px] font-semibold text-accent shadow-sm sm:px-4 sm:text-xs">
+              <span className="relative flex h-2 w-2 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
-              <Sparkles size={14} className="text-accent" aria-hidden="true" />
-              WordPress studio for stores, LMS & care
+              <Sparkles size={14} className="shrink-0 text-accent" aria-hidden="true" />
+              <span className="min-w-0">WordPress studio for stores, LMS &amp; care</span>
             </div>
 
-            <h1 className="mt-6 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
+            <h1 className="mt-6 text-[2rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
               WordPress Work That{' '}
               <span className="relative inline-block">
                 <span className="text-accent">Stays Maintainable</span>

@@ -6,7 +6,7 @@ export default function ContactPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">Contact Our WordPress Team</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Contact Our WordPress Team</h1>
           <p className="section-subtitle mx-auto mt-4">
             Tell us about your theme, WooCommerce store, migration, or retainer needs. We typically reply within 1–2 business days.
           </p>

@@ -28,7 +28,7 @@ export default function AboutPage() {
     <>
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container max-w-3xl text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">About WPServices</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">About WPServices</h1>
           <p className="mt-6 text-lg leading-relaxed text-gray-600">
             WPServices is a WordPress development studio built for teams that need dependable themes,
             plugins, WooCommerce stores, and long-term care — not generic “website packages.” We work
@@ -87,7 +87,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16">
-        <div className="section-container grid gap-8 sm:grid-cols-3 text-center">
+        <div className="section-container grid grid-cols-1 gap-8 text-center md:grid-cols-3">
           {milestones.map((s) => (
             <div key={s.l} className="card">
               <div className="text-4xl font-extrabold text-brand-600">{s.v}</div>

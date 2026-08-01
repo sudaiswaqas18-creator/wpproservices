@@ -140,18 +140,18 @@ export default function Testimonials() {
             </motion.article>
           </AnimatePresence>
 
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-8 flex min-w-0 items-center justify-center gap-2 sm:gap-4">
             <button
               type="button"
               onClick={prev}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-gray-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-gray-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={20} />
             </button>
 
             <div
-              className="relative flex items-center"
+              className="relative flex max-w-[min(100%,14rem)] items-center overflow-x-auto sm:max-w-[min(100%,18rem)]"
               style={{ height: DOT_HIT }}
             >
               {items.map((item, i) => (
@@ -192,7 +192,7 @@ export default function Testimonials() {
             <button
               type="button"
               onClick={nextSlide}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-gray-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-gray-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-600"
               aria-label="Next testimonial"
             >
               <ChevronRight size={20} />

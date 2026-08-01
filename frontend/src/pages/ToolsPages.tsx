@@ -8,7 +8,7 @@ import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 interface Tool { title: string; slug: string; description: string; full_content: string; is_new: boolean; }
 
 export function ToolsListPage() {
-  return (<><section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">WordPress Checklists</h1><p className="mt-4 text-gray-600">Review notes for Core Web Vitals, hardening, and plugin conflicts before a full engagement.</p></div></section><ToolsSection /><CTA /></>);
+  return (<><section className="py-16 text-center"><div className="section-container"><h1 className="text-3xl font-extrabold sm:text-4xl">WordPress Checklists</h1><p className="mt-4 text-gray-600">Review notes for Core Web Vitals, hardening, and plugin conflicts before a full engagement.</p></div></section><ToolsSection /><CTA /></>);
 }
 
 export default function ToolDetailPage() {
@@ -20,7 +20,7 @@ export default function ToolDetailPage() {
   return (
     <section className="py-16">
       <div className="section-container max-w-3xl">
-        <h1 className="text-4xl font-extrabold">{tool.title}{tool.is_new && <span className="ml-2 rounded bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700">NEW</span>}</h1>
+        <h1 className="text-3xl font-extrabold sm:text-4xl">{tool.title}{tool.is_new && <span className="ml-2 rounded bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700">NEW</span>}</h1>
         <p className="mt-4 text-lg text-gray-600">{tool.description}</p>
         <p className="mt-6 leading-relaxed text-gray-700">{tool.full_content}</p>
         <Link to="/contact" className="btn-primary mt-8 inline-flex">Get Started</Link>

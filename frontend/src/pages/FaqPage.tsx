@@ -12,7 +12,7 @@ export default function FaqPage() {
       />
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container max-w-3xl text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">WordPress Agency FAQs</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">WordPress Agency FAQs</h1>
           <p className="section-subtitle mx-auto mt-4">
             Straight answers on scope, staging, migrations, WooCommerce work, and care plans — the questions operators ask before hiring a WordPress team.
           </p>

@@ -23,6 +23,7 @@ export default function CookieConsent() {
       className="fixed inset-x-0 bottom-0 z-50 border-t border-brand-100 bg-white/95 p-4 shadow-[0_-8px_30px_rgba(26,26,26,0.12)] backdrop-blur-md sm:p-5"
       role="dialog"
       aria-label="Cookie consent"
+      data-cookie-banner="true"
     >
       <div className="section-container flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">

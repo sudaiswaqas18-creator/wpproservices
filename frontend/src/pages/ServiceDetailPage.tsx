@@ -61,7 +61,7 @@ export default function ServiceDetailPage() {
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-600">
               <Sparkles size={12} /> {enriched.categoryLabel}
             </span>
-            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 lg:text-5xl">
+            <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
               {service.hero_title || service.title}
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">

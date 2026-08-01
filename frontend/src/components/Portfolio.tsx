@@ -72,11 +72,11 @@ export default function Portfolio() {
                   className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <span className="rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold">
+                <div className="absolute bottom-0 left-0 max-w-full p-4 text-white sm:p-6">
+                  <span className="inline-block max-w-full truncate rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold">
                     {current.category}
                   </span>
-                  <h3 className="mt-2 text-2xl font-bold">{current.title}</h3>
+                  <h3 className="mt-2 line-clamp-2 text-xl font-bold sm:text-2xl">{current.title}</h3>
                   <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-white/90">
                     Open related work <ExternalLink size={14} />
                   </span>

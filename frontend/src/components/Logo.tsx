@@ -39,14 +39,14 @@ export default function Logo({
   const heightClass = isIcon
     ? 'h-9'
     : isDark
-      ? 'h-[40px] sm:h-[44px]'
-      : 'h-[48px] sm:h-[56px]';
+      ? 'h-9 sm:h-[40px] md:h-[44px]'
+      : 'h-10 sm:h-[48px] md:h-[56px]';
 
   const image = (
     <img
       src={src}
       alt="WPServices — WordPress Development Agency"
-      className={`block w-auto max-w-none object-contain object-left ${heightClass}`}
+      className={`block h-auto w-auto max-w-[min(170px,48vw)] object-contain object-left sm:max-w-[200px] md:max-w-[220px] ${heightClass}`}
       width={isIcon ? 36 : 220}
       height={isIcon ? 36 : isDark ? 44 : 56}
       loading="eager"
@@ -56,7 +56,7 @@ export default function Logo({
     />
   );
 
-  const wrapperClass = `inline-flex shrink-0 items-center leading-none ${className}`;
+  const wrapperClass = `inline-flex min-w-0 max-w-full shrink items-center leading-none ${className}`;
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>) => {
     onClick?.();

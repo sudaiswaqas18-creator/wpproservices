@@ -27,7 +27,7 @@ export function GuidebooksListPage() {
 
   return (
     <>
-      <section className="py-16 text-center"><div className="section-container"><h1 className="text-4xl font-extrabold">WordPress Guidebooks</h1><p className="mt-4 text-gray-600">Practical checklists for migrations, LMS setup, WooCommerce plugins, and launch hygiene.</p></div></section>
+      <section className="py-16 text-center"><div className="section-container"><h1 className="text-3xl font-extrabold sm:text-4xl">WordPress Guidebooks</h1><p className="mt-4 text-gray-600">Practical checklists for migrations, LMS setup, WooCommerce plugins, and launch hygiene.</p></div></section>
       <section className="pb-20"><div className="section-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((g) => (
           <Link key={g.id} to={`/resources/guidebooks/${g.slug}`} className="card group overflow-hidden p-0">
@@ -49,7 +49,7 @@ export default function GuidebookDetailPage() {
   if (!book) return <div className="section-container py-32 text-center">Loading...</div>;
   return (
     <section className="py-16"><div className="section-container max-w-3xl">
-      <h1 className="text-4xl font-extrabold">{book.title}</h1>
+      <h1 className="text-3xl font-extrabold sm:text-4xl">{book.title}</h1>
       <p className="mt-4 text-lg text-gray-600">{book.description}</p>
       {book.content && <p className="mt-6 leading-relaxed text-gray-700">{book.content}</p>}
       <Link
