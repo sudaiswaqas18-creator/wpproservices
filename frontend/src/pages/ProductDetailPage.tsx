@@ -82,8 +82,7 @@ export default function ProductDetailPage() {
             />
           </motion.div>
           <motion.div {...fadeUp} transition={{ duration: 0.45, delay: 0.1 }}>
-            <Link to="/products" className="text-sm font-medium text-brand-600 hover:underline">← All Plugins</Link>
-            <span className="ml-3 rounded-full bg-brand-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-brand-600">
+            <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-brand-600">
               {enriched.categoryLabel}
             </span>
             <h1 className="mt-4 text-4xl font-extrabold text-gray-900">{product.title}</h1>

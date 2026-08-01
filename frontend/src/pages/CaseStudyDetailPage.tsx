@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { TrendingUp, ArrowLeft } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 import { api, CaseStudyDetail } from '../api/client';
 import { getCaseStudyMedia } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
@@ -32,8 +32,7 @@ export default function CaseStudyDetailPage() {
     <>
       <section className="bg-surface-50 py-12">
         <div className="section-container">
-          <Link to="/case-studies" className="inline-flex items-center gap-1 text-sm text-brand-600 hover:underline"><ArrowLeft size={14} /> All Case Studies</Link>
-          <h1 className="mt-4 text-4xl font-extrabold text-gray-900">{study.title}</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900">{study.title}</h1>
           <p className="mt-2 text-brand-600 font-medium">Client: {media.client_label}</p>
         </div>
       </section>

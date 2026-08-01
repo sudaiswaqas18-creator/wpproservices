@@ -49,8 +49,7 @@ export default function GuidebookDetailPage() {
   if (!book) return <div className="section-container py-32 text-center">Loading...</div>;
   return (
     <section className="py-16"><div className="section-container max-w-3xl">
-      <Link to="/resources/guidebooks" className="text-sm text-brand-600 hover:underline">← All Guidebooks</Link>
-      <h1 className="mt-4 text-4xl font-extrabold">{book.title}</h1>
+      <h1 className="text-4xl font-extrabold">{book.title}</h1>
       <p className="mt-4 text-lg text-gray-600">{book.description}</p>
       {book.content && <p className="mt-6 leading-relaxed text-gray-700">{book.content}</p>}
       <Link

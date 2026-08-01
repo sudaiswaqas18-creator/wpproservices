@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, CheckCircle2, ArrowRight, BookOpen } from 'lucide-react';
+import { Calendar, Clock, User, CheckCircle2, ArrowRight, BookOpen } from 'lucide-react';
 import { api, BlogPostDetail, BlogPost } from '../api/client';
 import { fallbackData, fetchWithFallback } from '../api/fallback';
 import { getBlogEnrichment } from '../data/blogEnrichment';
@@ -77,14 +77,7 @@ export default function BlogDetailPage() {
     <>
       <section className="border-b border-slate-200/80 bg-gradient-to-b from-brand-50/60 via-white to-white pb-10 pt-8 lg:pb-14 lg:pt-12">
         <div className="section-container max-w-5xl">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-brand-600 shadow-sm transition hover:border-brand-200 hover:bg-brand-50"
-          >
-            <ArrowLeft size={14} /> Back to Blog
-          </Link>
-
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-700">
               {enrichment.category}
             </span>

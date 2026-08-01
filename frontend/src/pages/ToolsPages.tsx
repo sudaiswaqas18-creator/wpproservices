@@ -20,8 +20,7 @@ export default function ToolDetailPage() {
   return (
     <section className="py-16">
       <div className="section-container max-w-3xl">
-        <Link to="/resources/tools" className="text-sm text-brand-600 hover:underline">← All Tools</Link>
-        <h1 className="mt-4 text-4xl font-extrabold">{tool.title}{tool.is_new && <span className="ml-2 rounded bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700">NEW</span>}</h1>
+        <h1 className="text-4xl font-extrabold">{tool.title}{tool.is_new && <span className="ml-2 rounded bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700">NEW</span>}</h1>
         <p className="mt-4 text-lg text-gray-600">{tool.description}</p>
         <p className="mt-6 leading-relaxed text-gray-700">{tool.full_content}</p>
         <Link to="/contact" className="btn-primary mt-8 inline-flex">Get Started</Link>
