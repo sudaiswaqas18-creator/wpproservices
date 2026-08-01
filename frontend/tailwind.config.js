@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        nav: '980px',
+      },
       colors: {
         /* Black / white brand — cream backgrounds stay warm */
         brand: {

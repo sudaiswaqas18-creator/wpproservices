@@ -57,7 +57,7 @@ export default function HeroMobileVisual() {
           <Globe2 size={14} className="shrink-0 text-ink-muted" />
         </div>
 
-        <div className="relative min-h-[280px] p-5 sm:min-h-[300px] sm:p-6">
+        <div className="relative min-h-[240px] p-4 sm:min-h-[260px] sm:p-5">
           <AnimatePresence mode="wait">
             <motion.div
               key={slide.id}
