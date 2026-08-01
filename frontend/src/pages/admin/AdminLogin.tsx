@@ -43,7 +43,7 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-surface-dark p-4">
       <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-8 shadow-2xl">
         <div className="mb-8 text-center">
-          <Logo variant="light" className="justify-center" />
+          <Logo variant="light" to="/" className="justify-center" />
           <h1 className="mt-4 text-2xl font-bold text-ink">Admin Login</h1>
           <p className="mt-1 text-sm text-ink-light">Manage your website content</p>
         </div>

@@ -33,7 +33,7 @@ export default function AdminSidebar() {
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col overflow-hidden bg-surface-dark text-gray-300">
       <div className="shrink-0 border-b border-white/10 px-4 py-5">
-        <Logo variant="dark" />
+        <Logo variant="dark" to="/admin" />
         <p className="mt-2 text-xs text-gray-500">Admin Panel</p>
       </div>
 

@@ -8,7 +8,7 @@ const organization = {
   '@type': 'Organization',
   name: SITE.name,
   url: SITE.url,
-  logo: `${SITE.url}/logo-light.png`,
+  logo: `${SITE.url}/logo/wp-services-black.png`,
   email: SITE.email,
   description:
     'WordPress development studio for custom themes, WooCommerce stores, LearnDash LMS, plugins, migrations, and care retainers.',
@@ -18,7 +18,7 @@ const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: SITE.name,
-  image: `${SITE.url}/logo-light.png`,
+  image: `${SITE.url}/logo/wp-services-black.png`,
   url: SITE.url,
   email: SITE.email,
   address: {

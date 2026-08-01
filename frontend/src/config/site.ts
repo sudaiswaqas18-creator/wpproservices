@@ -6,7 +6,7 @@ export const SITE = {
   phone: '+1 (904) 243-5044',
   whatsapp: '19042435044',
   themeColor: '#1A1A1A',
-  ogImage: '/logo-light.png',
+  ogImage: '/logo/wp-services-black.png',
   lastUpdated: {
     privacy: 'July 21, 2026',
     terms: 'July 22, 2026',

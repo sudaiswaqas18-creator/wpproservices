@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="section-container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Logo variant="dark" />
+            <Logo variant="dark" to="/" />
             <p className="mt-4 text-sm leading-relaxed text-gray-400">
               WPServices is a WordPress development studio focused on custom themes, WooCommerce,
               plugins, migrations, and ongoing care for teams that need reliable delivery.

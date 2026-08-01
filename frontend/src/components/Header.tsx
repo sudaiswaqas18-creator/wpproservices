@@ -158,13 +158,12 @@ export default function Header() {
       className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md"
     >
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
-        <Link
-          to="/"
-          className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+        <span
+          className="flex items-center"
           onClick={() => { setMobileOpen(false); closeAll(); }}
         >
-          <Logo />
-        </Link>
+          <Logo to="/" variant="light" />
+        </span>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Main navigation">
           <Link to="/about" className="text-sm font-medium text-ink hover:text-accent">About Us</Link>
