@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
 
-  const [rows] = await pool.query('SELECT * FROM admins WHERE email = ?', [email.trim()]);
+  const [rows] = await pool.query('SELECT * FROM admins WHERE LOWER(email) = ?', [email.trim().toLowerCase()]);
   if (!rows.length) return res.status(401).json({ error: 'Invalid credentials' });
 
   const admin = rows[0];

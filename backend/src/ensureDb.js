@@ -74,11 +74,11 @@ export async function syncSiteContent() {
   );
 
   const AWARD_ROWS = [
-    ['Written scopes before build', 'Clear inclusions, exclusions, and success criteria for WordPress work', 'Every project', 'Scope', 1],
-    ['WordPress specialists', 'Themes, plugins, WooCommerce, and LearnDash — not generic web packages', 'Daily focus', 'WP', 2],
-    ['Performance-minded launches', 'Core Web Vitals reviewed on real templates before go-live', 'Pre-launch', 'CWV', 3],
-    ['Staging-first changes', 'Meaningful updates reviewed on staging when hosting allows', 'Standard', 'QA', 4],
-    ['Secure launch habits', 'Hardening, backups, and update discipline as part of delivery', 'Standard', 'Secure', 5],
+    ['Written scopes before build', 'Clear inclusions and success criteria', 'Every project', 'Scope', 1],
+    ['WordPress specialists', 'Themes, plugins, WooCommerce, LearnDash', 'Daily focus', 'WP', 2],
+    ['Performance-minded launches', 'Core Web Vitals on real templates', 'Pre-launch', 'CWV', 3],
+    ['Staging-first changes', 'Updates reviewed on staging when possible', 'Standard', 'QA', 4],
+    ['Secure launch habits', 'Hardening, backups, and update discipline', 'Standard', 'Secure', 5],
   ];
   await pool.query('DELETE FROM awards');
   await pool.query(
@@ -155,8 +155,16 @@ export async function ensureDatabase() {
   try {
     const [rows] = await pool.query('SELECT COUNT(*) AS count FROM products');
     if (Number(rows[0]?.count) > 0) {
-      await syncSiteContent();
-      await syncAdminCredentials();
+      try {
+        await syncSiteContent();
+      } catch (err) {
+        console.error('syncSiteContent failed:', err.code || err.message);
+      }
+      try {
+        await syncAdminCredentials();
+      } catch (err) {
+        console.error('syncAdminCredentials failed:', err.code || err.message);
+      }
       return;
     }
   } catch (err) {
