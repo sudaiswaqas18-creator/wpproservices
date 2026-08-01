@@ -5,15 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Soft overlay scrollbars — no beige track / solid black thumb */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
   }
 
-  html:hover,
-  html:focus-within,
+  /* Black thumb only while actively scrolling (AnimatedScrollbar toggles .is-scrolling) */
   html.is-scrolling {
-    scrollbar-color: rgba(26, 26, 26, 0.28) transparent;
+    scrollbar-color: #1A1A1A transparent;
   }
 
   body {
@@ -26,20 +24,9 @@
     color: #F5F1EA;
   }
 
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-  }
-
-  *:hover,
-  *:focus-within,
-  *.is-scrolling {
-    scrollbar-color: rgba(26, 26, 26, 0.25) transparent;
-  }
-
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
@@ -48,38 +35,41 @@
 
   ::-webkit-scrollbar-thumb {
     background-color: transparent;
-    border-radius: 999px;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.35s ease;
   }
 
-  *:hover::-webkit-scrollbar-thumb,
-  *:focus-within::-webkit-scrollbar-thumb,
-  *.is-scrolling::-webkit-scrollbar-thumb,
   html.is-scrolling ::-webkit-scrollbar-thumb {
-    background-color: rgba(26, 26, 26, 0.22);
+    background-color: #1A1A1A;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(26, 26, 26, 0.38);
+    background-color: #111111;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: #1A1A1A;
   }
 
   ::-webkit-scrollbar-corner {
     background: transparent;
   }
 
+  /* Nested scroll panes (admin tables, sidebar, modals) */
   .scroll-area {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
   }
 
-  .scroll-area:hover,
-  .scroll-area:focus-within,
   .scroll-area.is-scrolling {
-    scrollbar-color: rgba(26, 26, 26, 0.25) transparent;
+    scrollbar-color: #1A1A1A transparent;
   }
 
   .scroll-area::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   .scroll-area::-webkit-scrollbar-track {
@@ -88,17 +78,18 @@
 
   .scroll-area::-webkit-scrollbar-thumb {
     background-color: transparent;
-    border-radius: 999px;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.35s ease;
   }
 
-  .scroll-area:hover::-webkit-scrollbar-thumb,
-  .scroll-area:focus-within::-webkit-scrollbar-thumb,
   .scroll-area.is-scrolling::-webkit-scrollbar-thumb {
-    background-color: rgba(26, 26, 26, 0.22);
+    background-color: #1A1A1A;
   }
 
   .scroll-area::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(26, 26, 26, 0.38);
+    background-color: #111111;
   }
 }
 
