@@ -251,15 +251,15 @@ export default function HeroShowcase() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.12, ease }}
-      className="relative mx-auto w-full max-w-lg lg:max-w-none"
+      transition={{ duration: 0.55, delay: 0.08, ease }}
+      className="relative mx-auto w-full max-w-md sm:max-w-lg xl:max-w-none"
     >
-      <div className="pointer-events-none absolute -inset-10 rounded-[42%] bg-gradient-to-br from-sky-100/50 via-amber-50/30 to-teal-100/40 blur-3xl" />
+      <div className="pointer-events-none absolute -inset-6 rounded-[42%] bg-gradient-to-br from-sky-100/50 via-amber-50/30 to-teal-100/40 blur-2xl sm:-inset-10 sm:blur-3xl" />
 
       <div className="relative">
-        {/* Floating chips — subtle drift only */}
+        {/* Floating chips — only when there is room (wide desktop), so mid/mobile stay clean */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: [0, -4, 0] }}
@@ -267,7 +267,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.35, duration: 0.45 },
             y: { delay: 1, duration: 6, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(26,26,26,0.28)] backdrop-blur-md sm:block"
+          className="absolute -right-1 top-5 z-30 hidden overflow-hidden rounded-2xl border border-white/90 bg-white/95 shadow-[0_18px_44px_-14px_rgba(26,26,26,0.28)] backdrop-blur-md xl:block"
         >
           <div className="flex items-center gap-2.5 px-3.5 py-2.5">
             <span className="relative flex h-2.5 w-2.5">
@@ -295,7 +295,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.5, duration: 0.45 },
             y: { delay: 1.2, duration: 7, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md sm:flex"
+          className="absolute -right-2 top-[42%] z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md xl:flex"
         >
           <div className="flex -space-x-1.5">
             {['#0EA5E9', '#D97706', '#0D9488'].map((c) => (
@@ -315,7 +315,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.55, duration: 0.45 },
             y: { delay: 1.4, duration: 6.5, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md sm:flex"
+          className="absolute -left-3 bottom-14 z-30 hidden items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 shadow-[0_16px_40px_-12px_rgba(26,26,26,0.22)] backdrop-blur-md xl:flex"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-slate-800 text-white shadow-md">
             <ShieldCheck size={16} strokeWidth={2.5} />
@@ -333,7 +333,7 @@ export default function HeroShowcase() {
             opacity: { delay: 0.65, duration: 0.45 },
             y: { delay: 1.6, duration: 6.8, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.2)] backdrop-blur-md sm:flex"
+          className="absolute -left-1 top-10 z-30 hidden items-center gap-2 rounded-2xl border border-white/90 bg-white/95 px-3 py-2 shadow-[0_14px_36px_-12px_rgba(26,26,26,0.2)] backdrop-blur-md xl:flex"
         >
           <Globe2 size={14} className="text-sky-600" />
           <span className="text-[10px] font-semibold text-gray-700">WooCommerce · LearnDash</span>

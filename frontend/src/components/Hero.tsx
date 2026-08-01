@@ -1,8 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import ContactLink from './ContactLink';
-import HeroMobileVisual from './HeroMobileVisual';
 
 const HeroShowcase = lazy(() => import('./HeroShowcase'));
 
@@ -19,30 +18,18 @@ const highlights = [
 ];
 
 export default function Hero() {
-  /** Full animated showcase only when there is real desktop width */
-  const [showFullShowcase, setShowFullShowcase] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1280px)');
-    const update = () => setShowFullShowcase(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
-  const visual = showFullShowcase ? (
+  /** Same polished showcase on every width — compact mode handles mid/mobile */
+  const visual = (
     <Suspense
       fallback={
         <div
-          className="min-h-[360px] rounded-3xl bg-gradient-to-br from-brand-50 to-white xl:min-h-[420px]"
+          className="min-h-[280px] rounded-3xl bg-gradient-to-br from-brand-50 to-white sm:min-h-[320px] xl:min-h-[420px]"
           aria-hidden="true"
         />
       }
     >
       <HeroShowcase />
     </Suspense>
-  ) : (
-    <HeroMobileVisual />
   );
 
   return (
@@ -61,7 +48,7 @@ export default function Hero() {
 
       <div className="section-container relative">
         {/* md+: text + visual side-by-side so ~1000px does not feel empty / scroll-heavy */}
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-8 lg:gap-12 xl:gap-14">
           <div className="min-w-0">
             <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1.5 text-[11px] font-semibold text-accent shadow-sm sm:px-4 sm:text-xs">
               <span className="relative flex h-2 w-2 shrink-0">
@@ -120,7 +107,7 @@ export default function Hero() {
           </div>
 
           {/* Tablet/desktop: visual beside copy */}
-          <div className="hidden min-w-0 md:block">{visual}</div>
+          <div className="hidden min-w-0 md:block md:pl-1 lg:pl-2">{visual}</div>
         </div>
       </div>
     </section>

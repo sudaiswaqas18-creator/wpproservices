@@ -165,7 +165,7 @@ export default function Header() {
           onClick={() => { setMobileOpen(false); closeAll(); }}
         />
 
-        <nav className="hidden items-center gap-3 nav:flex xl:gap-5" aria-label="Main navigation">
+        <nav className="hidden items-center gap-3 min-[980px]:flex xl:gap-5" aria-label="Main navigation">
           <Link to="/about" className="text-sm font-medium text-ink hover:text-accent">About Us</Link>
 
           {/* Services — original mega menu design */}
@@ -374,13 +374,13 @@ export default function Header() {
           </div>
         </nav>
 
-        <div className="hidden items-center gap-3 nav:flex">
+        <div className="hidden items-center gap-3 min-[980px]:flex">
           <Link to="/contact" className="btn-primary text-sm">Contact Us</Link>
         </div>
 
         <button
           type="button"
-          className="nav:hidden"
+          className="min-[980px]:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
@@ -390,7 +390,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 nav:hidden">
+        <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 min-[980px]:hidden">
           <Link to="/about" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>About Us</Link>
           <Link to="/services" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Services</Link>
           <p className="mt-3 text-[10px] font-bold uppercase tracking-wider text-gray-400">WooCommerce Plugins</p>
