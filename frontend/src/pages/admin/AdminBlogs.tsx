@@ -53,18 +53,18 @@ export default function AdminBlogs() {
   const set = (k: keyof BlogForm, v: string | number) => setForm((f) => ({ ...f, [k]: v }));
 
   return (
-    <div>
-      <div className="flex items-center justify-between">
+    <div className="flex min-h-0 flex-1 flex-col gap-4">
+      <div className="flex shrink-0 items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Blog Posts</h1>
-          <p className="text-sm text-gray-500">Add, edit, and delete blog articles</p>
+          <p className="text-sm text-gray-500">Add, edit, and delete blog articles — same posts as the public blog</p>
         </div>
         <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Post</button>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+      <div className="scroll-area min-h-0 flex-1 overflow-auto rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+          <thead className="sticky top-0 z-10 bg-gray-50 text-left text-xs uppercase text-gray-500">
             <tr><th className="px-4 py-3">Title</th><th className="px-4 py-3">Author</th><th className="px-4 py-3">Date</th><th className="px-4 py-3">Actions</th></tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -73,9 +73,11 @@ export default function AdminBlogs() {
                 <td className="px-4 py-3 font-medium text-gray-900">{row.title}</td>
                 <td className="px-4 py-3 text-gray-600">{row.author}</td>
                 <td className="px-4 py-3 text-gray-500">{row.published_at?.slice(0, 10)}</td>
-                <td className="px-4 py-3 flex gap-1">
-                  <EditBtn onClick={() => openEdit(row)} />
-                  <DeleteBtn onClick={() => handleDelete(row.id)} />
+                <td className="px-4 py-3">
+                  <div className="flex gap-1">
+                    <EditBtn onClick={() => openEdit(row)} />
+                    <DeleteBtn onClick={() => handleDelete(row.id)} />
+                  </div>
                 </td>
               </tr>
             ))}
@@ -84,7 +86,7 @@ export default function AdminBlogs() {
       </div>
 
       <AdminModal title={editId ? 'Edit Blog Post' : 'Add Blog Post'} open={modal} onClose={() => setModal(false)} wide>
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit} noValidate className="scroll-area max-h-[70vh] overflow-y-auto pr-1">
           <FormField label="Title *" error={fieldErrors.title}><input className={fieldInputClass(!!fieldErrors.title)} value={form.title} onChange={(e) => set('title', e.target.value)} /></FormField>
           <FormField label="Slug" error={fieldErrors.slug}><input className={fieldInputClass(!!fieldErrors.slug)} value={form.slug} onChange={(e) => set('slug', e.target.value)} placeholder="auto-generated if empty" /></FormField>
           <FormField label="Author"><input className={fieldInputClass()} value={form.author} onChange={(e) => set('author', e.target.value)} /></FormField>

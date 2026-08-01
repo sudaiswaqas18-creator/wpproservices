@@ -121,8 +121,8 @@ router.get('/services', authMiddleware, async (_req, res) => {
 router.post('/services', authMiddleware, async (req, res) => {
   const b = req.body;
   const [result] = await pool.query(
-    `INSERT INTO services (title, slug, subtitle, description, hero_title, hero_description, full_content, features, icon, image_url, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
-    [b.title, b.slug || slugify(b.title), b.subtitle, b.description, b.hero_title, b.hero_description, b.full_content, JSON.stringify(b.features || []), b.icon || 'code', b.image_url, b.sort_order || 0]
+    `INSERT INTO services (title, slug, subtitle, description, hero_title, hero_description, full_content, features, icon, image_url, category_group, category_section, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [b.title, b.slug || slugify(b.title), b.subtitle, b.description, b.hero_title, b.hero_description, b.full_content, JSON.stringify(b.features || []), b.icon || 'code', b.image_url, b.category_group || 'build', b.category_section || 'setup', b.sort_order || 0]
   );
   res.status(201).json({ id: result.insertId });
 });
@@ -130,8 +130,8 @@ router.post('/services', authMiddleware, async (req, res) => {
 router.put('/services/:id', authMiddleware, async (req, res) => {
   const b = req.body;
   await pool.query(
-    `UPDATE services SET title=?, slug=?, subtitle=?, description=?, hero_title=?, hero_description=?, full_content=?, features=?, icon=?, image_url=?, sort_order=? WHERE id=?`,
-    [b.title, b.slug, b.subtitle, b.description, b.hero_title, b.hero_description, b.full_content, JSON.stringify(b.features || []), b.icon, b.image_url, b.sort_order || 0, req.params.id]
+    `UPDATE services SET title=?, slug=?, subtitle=?, description=?, hero_title=?, hero_description=?, full_content=?, features=?, icon=?, image_url=?, category_group=?, category_section=?, sort_order=? WHERE id=?`,
+    [b.title, b.slug, b.subtitle, b.description, b.hero_title, b.hero_description, b.full_content, JSON.stringify(b.features || []), b.icon, b.image_url, b.category_group || 'build', b.category_section || 'setup', b.sort_order || 0, req.params.id]
   );
   res.json({ message: 'Updated' });
 });

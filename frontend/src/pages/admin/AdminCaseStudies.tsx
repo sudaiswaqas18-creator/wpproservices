@@ -40,14 +40,14 @@ export default function AdminCaseStudies() {
   const set = (k: keyof CaseStudyForm, v: string | number) => setForm((f) => ({ ...f, [k]: v }));
 
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Case Studies</h1><p className="text-sm text-gray-500">Manage project case studies</p></div>
+    <div className="flex min-h-0 flex-1 flex-col gap-4">
+      <div className="flex shrink-0 items-center justify-between">
+        <div><h1 className="text-2xl font-bold text-gray-900">Case Studies</h1><p className="text-sm text-gray-500">Manage project case studies — same records as the public case studies page</p></div>
         <button type="button" onClick={openCreate} className="btn-primary gap-2 text-sm"><Plus size={16} /> Add Case Study</button>
       </div>
-      <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+      <div className="scroll-area min-h-0 flex-1 overflow-auto rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+          <thead className="sticky top-0 z-10 bg-gray-50 text-left text-xs uppercase text-gray-500">
             <tr><th className="px-4 py-3">Title</th><th className="px-4 py-3">Client</th><th className="px-4 py-3">Actions</th></tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -55,9 +55,11 @@ export default function AdminCaseStudies() {
               <tr key={row.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium">{row.title}</td>
                 <td className="px-4 py-3 text-gray-600">{row.client}</td>
-                <td className="px-4 py-3 flex gap-1">
-                  <EditBtn onClick={() => openEdit(row)} />
-                  <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteCaseStudy(row.id); load(); } }} />
+                <td className="px-4 py-3">
+                  <div className="flex gap-1">
+                    <EditBtn onClick={() => openEdit(row)} />
+                    <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteCaseStudy(row.id); load(); } }} />
+                  </div>
                 </td>
               </tr>
             ))}
@@ -65,7 +67,7 @@ export default function AdminCaseStudies() {
         </table>
       </div>
       <AdminModal title={editId ? 'Edit Case Study' : 'Add Case Study'} open={modal} onClose={() => setModal(false)} wide>
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit} noValidate className="scroll-area max-h-[70vh] overflow-y-auto pr-1">
           <div className="grid gap-4 sm:grid-cols-2">
             <FormField label="Title *" error={fieldErrors.title}><input className={fieldInputClass(!!fieldErrors.title)} value={form.title} onChange={(e) => set('title', e.target.value)} /></FormField>
             <FormField label="Client *" error={fieldErrors.client}><input className={fieldInputClass(!!fieldErrors.client)} value={form.client} onChange={(e) => set('client', e.target.value)} /></FormField>
@@ -83,7 +85,7 @@ export default function AdminCaseStudies() {
               </div>
             ))}
           </div>
-          <div className="flex justify-end gap-3 mt-4">
+          <div className="mt-4 flex justify-end gap-3">
             <button type="button" onClick={() => setModal(false)} className="btn-outline text-sm">Cancel</button>
             <button type="submit" disabled={saving} className="btn-primary text-sm">{saving ? 'Saving...' : 'Save'}</button>
           </div>

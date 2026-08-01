@@ -31,13 +31,13 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="flex w-64 flex-col bg-surface-dark text-gray-300">
-      <div className="border-b border-white/10 px-4 py-5">
+    <aside className="flex h-screen w-64 shrink-0 flex-col overflow-hidden bg-surface-dark text-gray-300">
+      <div className="shrink-0 border-b border-white/10 px-4 py-5">
         <Logo variant="dark" />
         <p className="mt-2 text-xs text-gray-500">Admin Panel</p>
       </div>
 
-      <nav className="flex-1 space-y-1 p-4">
+      <nav className="scroll-area min-h-0 flex-1 space-y-1 overflow-y-auto p-4">
         {links.map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
@@ -55,7 +55,7 @@ export default function AdminSidebar() {
         ))}
       </nav>
 
-      <div className="border-t border-white/10 p-4">
+      <div className="shrink-0 border-t border-white/10 p-4">
         <p className="truncate text-sm font-medium text-white">{admin?.name}</p>
         <p className="truncate text-xs text-gray-500">{admin?.email}</p>
         <div className="mt-3 flex gap-2">

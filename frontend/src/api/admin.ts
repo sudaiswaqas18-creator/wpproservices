@@ -162,6 +162,8 @@ export interface ServiceRow {
   id: number; title: string; slug: string; subtitle: string; description: string;
   hero_title: string; hero_description: string; full_content: string;
   features: string[]; icon: string; image_url: string; sort_order: number;
+  category_group?: string | null;
+  category_section?: string | null;
 }
 export type ServiceForm = Omit<ServiceRow, 'id'>;
 
