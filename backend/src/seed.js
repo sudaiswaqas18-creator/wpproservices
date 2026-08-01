@@ -94,10 +94,10 @@ async function runSeed(options = {}) {
   ]]);
 
   await connection.query(`INSERT INTO portfolio_items (title, category, image_url, sort_order) VALUES ?`, [[
-    ['Specialty retail WooCommerce storefront', 'WooCommerce Store', '/section-images/portfolio-coffee.jpg', 1],
-    ['Services company WordPress marketing site', 'Corporate Website', '/section-images/portfolio-corporate.jpg', 2],
-    ['Course team LearnDash dashboard', 'LMS Dashboard', '/section-images/portfolio-lms.jpg', 3],
-    ['B2B member catalog portal', 'B2B Portal', '/section-images/portfolio-b2b.jpg', 4],
+    ['Urban Brew Coffee', 'WooCommerce Store', '/section-images/portfolio-coffee.jpg', 1],
+    ['AccessAbility UK', 'Corporate Website', '/section-images/portfolio-corporate.jpg', 2],
+    ['LearnSphere Academy', 'LMS Dashboard', '/section-images/portfolio-lms.jpg', 3],
+    ['NovaTech Solutions', 'B2B Portal', '/section-images/portfolio-b2b.jpg', 4],
   ]]);
 
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@wpproservices.com';

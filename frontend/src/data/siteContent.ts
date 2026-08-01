@@ -358,21 +358,38 @@ export function getBlogImage(slug: string, apiUrl?: string | null) {
   return BLOG_IMAGES[slug] || apiUrl || '/section-images/blog-migrate-wordpress-seo.jpg';
 }
 
-/** Portfolio showcase images */
+/** Portfolio showcase images — keyed by live titles, legacy titles, and category */
 export const PORTFOLIO_IMAGES: Record<string, string> = {
+  // Current API titles
+  'Urban Brew Coffee': '/section-images/portfolio-coffee.jpg',
+  'AccessAbility UK': '/section-images/portfolio-corporate.jpg',
+  'LearnSphere Academy': '/section-images/portfolio-lms.jpg',
+  'NovaTech Solutions': '/section-images/portfolio-b2b.jpg',
+  // Descriptive titles
   'Specialty retail WooCommerce storefront': '/section-images/portfolio-coffee.jpg',
   'Services company WordPress marketing site': '/section-images/portfolio-corporate.jpg',
   'Course team LearnDash dashboard': '/section-images/portfolio-lms.jpg',
   'B2B member catalog portal': '/section-images/portfolio-b2b.jpg',
-  // legacy titles (older DB rows)
+  // Legacy titles (older DB rows)
   'E-commerce Client — Specialty Coffee': '/section-images/portfolio-coffee.jpg',
   'Services Client — Corporate Site': '/section-images/portfolio-corporate.jpg',
   'Education Client — LMS Dashboard': '/section-images/portfolio-lms.jpg',
   'B2B Client — Member Portal': '/section-images/portfolio-b2b.jpg',
 };
 
-export function getPortfolioImage(title: string, apiUrl?: string | null) {
-  return PORTFOLIO_IMAGES[title] || apiUrl || '/section-images/portfolio-corporate.jpg';
+const PORTFOLIO_BY_CATEGORY: Record<string, string> = {
+  'WooCommerce Store': '/section-images/portfolio-coffee.jpg',
+  'Corporate Website': '/section-images/portfolio-corporate.jpg',
+  'LMS Dashboard': '/section-images/portfolio-lms.jpg',
+  'B2B Portal': '/section-images/portfolio-b2b.jpg',
+};
+
+export function getPortfolioImage(title: string, apiUrl?: string | null, category?: string | null) {
+  if (PORTFOLIO_IMAGES[title]) return PORTFOLIO_IMAGES[title];
+  if (category && PORTFOLIO_BY_CATEGORY[category]) return PORTFOLIO_BY_CATEGORY[category];
+  // Prefer local assets over broken/expired remote URLs
+  if (apiUrl && apiUrl.startsWith('/')) return apiUrl;
+  return '/section-images/portfolio-corporate.jpg';
 }
 
 /** Guidebook card images — one unique asset per slug */

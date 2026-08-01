@@ -31,7 +31,7 @@ export default function Portfolio() {
           >
             <div className="relative aspect-video overflow-hidden bg-gray-100">
               <img
-                src={optimizeImageUrl(getPortfolioImage(items[active].title, items[active].image_url), 800)}
+                src={optimizeImageUrl(getPortfolioImage(items[active].title, items[active].image_url, items[active].category), 800)}
                 alt={items[active].title}
                 width={800}
                 height={450}
