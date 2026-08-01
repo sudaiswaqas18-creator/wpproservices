@@ -125,11 +125,38 @@ export async function syncSiteContent() {
   }
 }
 
+/** Keep admin login in sync with ADMIN_EMAIL / ADMIN_PASSWORD env (Railway). */
+export async function syncAdminCredentials() {
+  const email = (process.env.ADMIN_EMAIL || 'admin@wpproservices.com').trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || 'ChangeMe!2026';
+  if (!email || !password) return;
+
+  const bcrypt = (await import('bcryptjs')).default;
+  const hash = await bcrypt.hash(password, 10);
+  const [rows] = await pool.query('SELECT id, email FROM admins ORDER BY id ASC LIMIT 1');
+
+  if (rows.length) {
+    await pool.query('UPDATE admins SET email = ?, password_hash = ? WHERE id = ?', [
+      email,
+      hash,
+      rows[0].id,
+    ]);
+    console.log(`Admin credentials synced: ${email}`);
+  } else {
+    await pool.query(
+      `INSERT INTO admins (name, email, password_hash, role) VALUES (?, ?, ?, ?)`,
+      ['Super Admin', email, hash, 'admin'],
+    );
+    console.log(`Admin created: ${email}`);
+  }
+}
+
 export async function ensureDatabase() {
   try {
     const [rows] = await pool.query('SELECT COUNT(*) AS count FROM products');
     if (Number(rows[0]?.count) > 0) {
       await syncSiteContent();
+      await syncAdminCredentials();
       return;
     }
   } catch (err) {
