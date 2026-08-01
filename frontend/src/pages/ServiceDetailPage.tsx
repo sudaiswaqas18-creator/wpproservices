@@ -8,8 +8,8 @@ import { api, ServiceDetail } from '../api/client';
 import ContactForm from '../components/ContactForm';
 import CTA from '../components/CTA';
 import SEO from '../components/seo/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 import { buildTitle } from '../config/seo';
 import { getServiceEnrichment, getServiceSeoDescription } from '../data/serviceEnrichment';
 import { getServiceImage } from '../data/siteContent';
@@ -32,6 +32,8 @@ export default function ServiceDetailPage() {
     api.getService(slug).then(setService).catch(() => setService(null)).finally(() => setLoading(false));
   }, [slug]);
 
+  useBreadcrumbLabel(service?.title);
+
   if (loading) return <LoadingSpinner className="min-h-[50vh]" label="Loading service..." />;
   if (!service) {
     return (
@@ -51,10 +53,7 @@ export default function ServiceDetailPage() {
         title={buildTitle(service.title)}
         description={(service.description || getServiceSeoDescription(service.slug)).slice(0, 160)}
         path={`/services/${service.slug}`}
-      />      <Breadcrumbs items={[
-        { label: 'Services', href: '/services' },
-        { label: service.title },
-      ]} />
+      />
       <section className="relative overflow-hidden bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-100/40 blur-3xl" />
         <div className="section-container relative grid items-center gap-12 lg:grid-cols-2">

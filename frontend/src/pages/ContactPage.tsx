@@ -1,11 +1,9 @@
 import ContactForm from '../components/ContactForm';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { SITE, OFFICES } from '../config/site';
 
 export default function ContactPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Contact Us' }]} />
       <section className="bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="section-container text-center">
           <h1 className="text-4xl font-extrabold text-gray-900">Contact Our WordPress Team</h1>

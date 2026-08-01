@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import ToolsSection from '../components/ToolsSection';
 import CTA from '../components/CTA';
 import { apiUrl } from '../config/api';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 
 interface Tool { title: string; slug: string; description: string; full_content: string; is_new: boolean; }
 
@@ -14,6 +15,7 @@ export default function ToolDetailPage() {
   const { slug } = useParams();
   const [tool, setTool] = useState<Tool | null>(null);
   useEffect(() => { if (slug) fetch(apiUrl(`tools/${slug}`)).then((r) => r.json()).then(setTool).catch(() => {}); }, [slug]);
+  useBreadcrumbLabel(tool?.title);
   if (!tool) return <div className="section-container py-32 text-center">Loading...</div>;
   return (
     <section className="py-16">

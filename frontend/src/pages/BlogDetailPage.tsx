@@ -7,6 +7,7 @@ import { getBlogEnrichment } from '../data/blogEnrichment';
 import { getBlogImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 
 function getInitials(name: string) {
   return name
@@ -45,6 +46,8 @@ export default function BlogDetailPage() {
       .catch(() => setPost(null))
       .finally(() => setLoading(false));
   }, [slug]);
+
+  useBreadcrumbLabel(post?.title);
 
   if (loading) {
     return (

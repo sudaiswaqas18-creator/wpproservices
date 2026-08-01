@@ -5,6 +5,7 @@ import { api, CaseStudyDetail } from '../api/client';
 import { getCaseStudyMedia } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 
 function softMetric(value?: string) {
   if (!value) return 'Documented';
@@ -19,6 +20,8 @@ export default function CaseStudyDetailPage() {
   useEffect(() => {
     if (slug) api.getCaseStudy(slug).then(setStudy).catch(() => setStudy(null));
   }, [slug]);
+
+  useBreadcrumbLabel(study?.title);
 
   if (!study) return <div className="section-container py-32 text-center text-gray-500">Loading...</div>;
 

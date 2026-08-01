@@ -8,6 +8,7 @@ import { apiUrl } from '../config/api';
 import { getProductEnrichment, getSupplementalProduct } from '../data/productEnrichment';
 import { getProductImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 
 interface Product {
   title: string; slug: string; subtitle: string; description: string; full_content: string;
@@ -48,6 +49,8 @@ export default function ProductDetailPage() {
       })
       .finally(() => setLoading(false));
   }, [slug]);
+
+  useBreadcrumbLabel(product?.title);
 
   if (loading) return <div className="section-container py-32 text-center text-gray-500">Loading...</div>;
   if (!product) {

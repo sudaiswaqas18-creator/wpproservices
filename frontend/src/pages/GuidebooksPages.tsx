@@ -4,6 +4,7 @@ import { Download } from 'lucide-react';
 import CTA from '../components/CTA';
 import { apiUrl } from '../config/api';
 import { getGuidebookImage } from '../data/siteContent';
+import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 
 interface Guidebook { id: number; title: string; slug: string; description: string; content: string; image_url: string; }
 
@@ -44,6 +45,7 @@ export default function GuidebookDetailPage() {
   const { slug } = useParams();
   const [book, setBook] = useState<Guidebook | null>(null);
   useEffect(() => { if (slug) fetch(apiUrl(`guidebooks/${slug}`)).then((r) => r.json()).then(setBook).catch(() => {}); }, [slug]);
+  useBreadcrumbLabel(book?.title);
   if (!book) return <div className="section-container py-32 text-center">Loading...</div>;
   return (
     <section className="py-16"><div className="section-container max-w-3xl">

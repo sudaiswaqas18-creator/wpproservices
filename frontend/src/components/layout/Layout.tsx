@@ -7,6 +7,7 @@ import PageProgressBar from '../PageProgressBar';
 import CookieConsent from '../CookieConsent';
 import BackToTop from '../BackToTop';
 import NewsletterSignup from '../NewsletterSignup';
+import { BreadcrumbProvider } from '../SiteBreadcrumbs';
 
 export default function Layout() {
   return (
@@ -15,9 +16,11 @@ export default function Layout() {
       <PageProgressBar />
       <RouteSEO />
       <Header />
-      <main id="main-content" className="flex-1" tabIndex={-1}>
-        <Outlet />
-      </main>
+      <BreadcrumbProvider>
+        <main id="main-content" className="flex-1" tabIndex={-1}>
+          <Outlet />
+        </main>
+      </BreadcrumbProvider>
       <NewsletterSignup />
       <Footer />
       <CookieConsent />

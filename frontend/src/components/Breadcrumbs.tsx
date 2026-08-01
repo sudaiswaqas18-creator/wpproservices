@@ -13,6 +13,8 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+  if (!items.length) return null;
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -28,31 +30,38 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="border-b border-gray-100 bg-white/80 py-3">
+    <nav aria-label="Breadcrumb" className="border-y border-border/70 bg-background/90 py-3">
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
-      <ol className="section-container flex flex-wrap items-center gap-1.5 text-sm text-gray-500">
+      <ol className="section-container flex flex-wrap items-center gap-1.5 text-sm text-ink-muted">
         <li>
-          <Link to="/" className="inline-flex items-center gap-1 transition hover:text-brand-600" aria-label="Home">
-            <Home size={14} />
-            <span className="sr-only sm:not-sr-only">Home</span>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 transition hover:text-accent"
+            aria-label="Home"
+          >
+            <Home size={14} aria-hidden />
+            <span>Home</span>
           </Link>
         </li>
-        {items.map((item, i) => (
-          <li key={`${item.label}-${i}`} className="flex items-center gap-1.5">
-            <ChevronRight size={14} className="text-gray-300" aria-hidden />
-            {item.href && i < items.length - 1 ? (
-              <Link to={item.href} className="transition hover:text-brand-600">
-                {item.label}
-              </Link>
-            ) : (
-              <span className="font-medium text-gray-700" aria-current="page">
-                {item.label}
-              </span>
-            )}
-          </li>
-        ))}
+        {items.map((item, i) => {
+          const isLast = i === items.length - 1;
+          return (
+            <li key={`${item.href ?? item.label}-${i}`} className="flex items-center gap-1.5">
+              <ChevronRight size={14} className="shrink-0 text-gray-300" aria-hidden />
+              {!isLast && item.href ? (
+                <Link to={item.href} className="transition hover:text-accent">
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="font-medium text-ink" aria-current="page">
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );
