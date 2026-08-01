@@ -63,9 +63,10 @@ export async function seedExtended(connection) {
     [allServices]
   );
 
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, LearnDash', result_summary='Role-gated access | Clearer progress views' WHERE slug='cohort-lms-access'`);
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Loyalty shipping rules | Staging-first cutover' WHERE slug='grocery-loyalty-shipping'`);
-  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Wallet checkout | Self-serve seat assignment' WHERE slug='course-wallet-checkout'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, LearnDash', result_summary='Role-gated access | Clearer progress views', image_url='/section-images/case-lms.jpg' WHERE slug='cohort-lms-access'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Loyalty shipping rules | Staging-first cutover', image_url='/section-images/case-grocery.jpg' WHERE slug='grocery-loyalty-shipping'`);
+  await connection.query(`UPDATE case_studies SET is_featured=1, tech_stack='WordPress, WooCommerce', result_summary='Event-tied cart recovery | Checkout clarity', image_url='/section-images/case-apparel.jpg' WHERE slug='apparel-cart-recovery'`);
+  await connection.query(`UPDATE case_studies SET is_featured=0 WHERE slug='course-wallet-checkout'`);
 
   const img = (name) => `/section-images/${name}`;
   const mkPlugin = (title, slug, subtitle, desc, full, features, category, price, order, image) => [

@@ -85,6 +85,30 @@ export async function syncSiteContent() {
     `INSERT INTO awards (title, organization, year, badge_label, sort_order) VALUES ?`,
     [AWARD_ROWS],
   );
+
+  // Migrate legacy invented-brand case study slugs + local content images
+  const CASE_SLUG_MIGRATIONS = [
+    ['freshharvest-shipping', 'grocery-loyalty-shipping', '/section-images/case-grocery.jpg', 'WordPress, WooCommerce', 'Loyalty shipping rules | Staging-first cutover'],
+    ['eduvault-lms', 'cohort-lms-access', '/section-images/case-lms.jpg', 'WordPress, LearnDash', 'Role-gated access | Clearer progress views'],
+    ['stylebox-cart-recovery', 'apparel-cart-recovery', '/section-images/case-apparel.jpg', 'WordPress, WooCommerce', 'Event-tied cart recovery | Checkout clarity'],
+    ['clearview-subscriptions', 'attribute-subscription-pricing', '/section-images/case-optics.jpg', 'WordPress, WooCommerce', 'Attribute-aware renewals | Fewer pricing exceptions'],
+    ['learnpoint-wallet', 'course-wallet-checkout', '/section-images/case-courses.jpg', 'WordPress, LearnDash', 'Wallet checkout | Self-serve seat assignment'],
+  ];
+  for (const [from, to, image, stack, summary] of CASE_SLUG_MIGRATIONS) {
+    await pool.query(
+      `UPDATE case_studies SET slug=?, image_url=?, tech_stack=?, result_summary=? WHERE slug=?`,
+      [to, image, stack, summary, from],
+    );
+    await pool.query(
+      `UPDATE case_studies SET image_url=?, tech_stack=COALESCE(NULLIF(tech_stack,''), ?), result_summary=COALESCE(NULLIF(result_summary,''), ?) WHERE slug=?`,
+      [image, stack, summary, to],
+    );
+  }
+  // Homepage featured trio: grocery + LMS + apparel (distinct images)
+  await pool.query(`UPDATE case_studies SET is_featured=0`);
+  await pool.query(
+    `UPDATE case_studies SET is_featured=1 WHERE slug IN ('grocery-loyalty-shipping','cohort-lms-access','apparel-cart-recovery')`,
+  );
 }
 
 export async function ensureDatabase() {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { apiUrl } from '../config/api';
 import ServicesScrollSection from './ServicesScrollSection';
-import { getCaseStudyMedia, isFakeAwardContent, TRUST_AWARDS } from '../data/siteContent';
+import { getCaseStudyMedia, isFakeAwardContent, TRUST_AWARDS, normalizeCaseStudySlug } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
 interface SiteStat {
@@ -107,6 +107,7 @@ function FeaturedCases() {
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {cases.map((cs) => {
             const media = getCaseStudyMedia(cs.slug);
+            const storySlug = normalizeCaseStudySlug(cs.slug) || cs.slug;
             return (
               <article key={cs.id} className="card overflow-hidden p-0">
                 <div className="relative h-44 overflow-hidden bg-gray-100">
@@ -131,7 +132,7 @@ function FeaturedCases() {
                       ? cs.result_summary
                       : media.result_summary}
                   </p>
-                  <Link to={`/case-studies/${cs.slug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                  <Link to={`/case-studies/${storySlug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
                     Read the Story <ArrowRight size={14} />
                   </Link>
                 </div>

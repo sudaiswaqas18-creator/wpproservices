@@ -87,12 +87,27 @@ export const CASE_STUDY_MEDIA: Record<string, CaseStudyMedia> = {
   },
 };
 
+/** Old invented-brand slugs → current SEO-safe slugs (live DB may still have legacy rows) */
+const CASE_STUDY_SLUG_ALIASES: Record<string, string> = {
+  'freshharvest-shipping': 'grocery-loyalty-shipping',
+  'eduvault-lms': 'cohort-lms-access',
+  'stylebox-cart-recovery': 'apparel-cart-recovery',
+  'clearview-subscriptions': 'attribute-subscription-pricing',
+  'learnpoint-wallet': 'course-wallet-checkout',
+};
+
+export function normalizeCaseStudySlug(slug: string | null | undefined): string {
+  if (!slug) return '';
+  return CASE_STUDY_SLUG_ALIASES[slug] || slug;
+}
+
 export function getCaseStudyMedia(slug: string): CaseStudyMedia {
+  const key = normalizeCaseStudySlug(slug);
   return (
-    CASE_STUDY_MEDIA[slug] ?? {
+    CASE_STUDY_MEDIA[key] ?? {
       image_url: '/section-images/case-courses.jpg',
       image_alt: 'WordPress project workspace for an agency case study',
-      client_label: 'WordPress Client — Confidential',
+      client_label: 'Anonymized WordPress engagement',
       result_summary: 'Outcomes documented after staging QA and launch',
       tech_stack: 'WordPress',
     }
