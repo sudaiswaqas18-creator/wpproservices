@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import ContactLink from './ContactLink';
+import HeroMobileVisual from './HeroMobileVisual';
 
 const HeroShowcase = lazy(() => import('./HeroShowcase'));
 
@@ -16,12 +17,13 @@ const highlights = [
   'WooCommerce checkout, catalog & inventory logic',
   'Care retainers for updates, backups and small fixes',
 ];
+
 export default function Hero() {
-  const [showShowcase, setShowShowcase] = useState(false);
+  const [showDesktopShowcase, setShowDesktopShowcase] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
-    const update = () => setShowShowcase(mq.matches);
+    const update = () => setShowDesktopShowcase(mq.matches);
     update();
     mq.addEventListener('change', update);
     return () => mq.removeEventListener('change', update);
@@ -42,7 +44,7 @@ export default function Hero() {
       </div>
 
       <div className="section-container relative">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1.5 text-[11px] font-semibold text-accent shadow-sm sm:px-4 sm:text-xs">
               <span className="relative flex h-2 w-2 shrink-0">
@@ -77,13 +79,13 @@ export default function Hero() {
               ))}
             </ul>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <ContactLink className="btn-primary group inline-flex items-center gap-2 px-7 py-3.5 text-base shadow-lg shadow-accent/25">
-                Book a Discovery Call
+                Start a Project
                 <ArrowRight size={18} className="transition group-hover:translate-x-0.5" aria-hidden="true" />
               </ContactLink>
               <Link to="/services" className="btn-outline inline-flex items-center gap-2 px-7 py-3.5 text-base">
-                Browse WordPress Services
+                View Services
               </Link>
             </div>
 
@@ -96,7 +98,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {showShowcase && (
+          {/* Desktop: full HeroShowcase animation. Mobile/tablet: compact substitute. */}
+          {showDesktopShowcase ? (
             <Suspense
               fallback={
                 <div
@@ -107,6 +110,8 @@ export default function Hero() {
             >
               <HeroShowcase />
             </Suspense>
+          ) : (
+            <HeroMobileVisual />
           )}
         </div>
       </div>

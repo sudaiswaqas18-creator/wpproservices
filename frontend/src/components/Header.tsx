@@ -155,7 +155,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md"
+      className="sticky top-0 z-50 overflow-visible border-b border-border bg-background/95 backdrop-blur-md"
     >
       <div className="section-container flex h-16 min-w-0 items-center justify-between gap-3 lg:h-[72px]">
         <Logo
@@ -198,15 +198,16 @@ export default function Header() {
                   role="menu"
                   aria-label="Services menu"
                   {...dropdownMotion}
-                  className="absolute left-1/2 top-full z-50 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 pt-2"
+                  className="absolute top-full z-50 pt-2"
+                  style={{ left: 'calc(50% - 360px)' }}
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-full rounded-2xl border border-gray-100 bg-white p-4 shadow-card sm:p-6">
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                  <div className="w-[720px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
+                    <div className="grid grid-cols-3 gap-6">
                       {Object.entries(grouped).map(([group, sections]) => (
-                        <div key={group} className="min-w-0">
-                          <p className="mb-3 text-[10px] font-bold uppercase leading-snug tracking-wider text-accent break-words">
+                        <div key={group}>
+                          <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-accent">
                             {GROUP_LABELS[group]}
                           </p>
                           {Object.entries(sections).map(([sec, items]) => (
@@ -275,21 +276,22 @@ export default function Header() {
                   role="menu"
                   aria-label="WooCommerce Plugins menu"
                   {...dropdownMotion}
-                  className="absolute left-1/2 top-full z-50 w-[min(720px,calc(100vw-2rem))] -translate-x-1/2 pt-2"
+                  className="absolute top-full z-50 pt-2"
+                  style={{ left: 'calc(50% - 360px)' }}
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-full rounded-2xl border border-gray-100 bg-white p-4 shadow-card sm:p-6">
+                  <div className="w-[720px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-wider text-accent">
                       WooCommerce Plugins by Category
                     </p>
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid grid-cols-3 gap-6">
                       {PLUGIN_CATEGORIES.map((cat) => (
-                        <div key={cat.id} className="min-w-0">
+                        <div key={cat.id}>
                           <Link
                             to={`/products?category=${cat.id}`}
                             role="menuitem"
-                            className="mb-2 block text-[10px] font-bold uppercase leading-snug tracking-wider text-accent hover:underline break-words"
+                            className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-accent hover:underline"
                             onClick={closeAll}
                           >
                             {cat.title}

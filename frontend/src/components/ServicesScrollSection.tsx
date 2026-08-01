@@ -60,6 +60,15 @@ export default function ServicesScrollSection() {
     };
   }, [isDesktop, updateFromScroll]);
 
+  // Below lg: scroll-linked animation pauses — keep presence with a gentle autoplay cycle
+  useEffect(() => {
+    if (isDesktop) return;
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % COUNT);
+    }, 3800);
+    return () => window.clearInterval(id);
+  }, [isDesktop]);
+
   const handleDotClick = (index: number) => {
     setActive(index);
     const el = sectionRef.current;
