@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 /** light = black logo on white/light bg; dark = white logo on black/dark bg */
 type LogoVariant = 'light' | 'dark' | 'icon';
@@ -8,6 +9,7 @@ interface LogoProps {
   variant?: LogoVariant;
   /** Where the logo navigates. Public site: "/". Admin: "/admin". */
   to?: string;
+  onClick?: () => void;
   showTagline?: boolean;
 }
 
@@ -19,11 +21,17 @@ const LOGO = {
   icon: '/logo/favicon.png?v=14',
 } as const;
 
+function scrollWindowToTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+}
+
 export default function Logo({
   className = '',
   variant = 'light',
   to,
+  onClick,
 }: LogoProps) {
+  const location = useLocation();
   const isDark = variant === 'dark';
   const isIcon = variant === 'icon';
   const src = isIcon ? LOGO.icon : isDark ? LOGO.dark : LOGO.light;
@@ -50,12 +58,27 @@ export default function Logo({
 
   const wrapperClass = `inline-flex shrink-0 items-center leading-none ${className}`;
 
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.();
+    if (!to) return;
+
+    const onSamePage =
+      location.pathname === to ||
+      (to === '/' && (location.pathname === '/' || location.pathname === ''));
+
+    if (onSamePage) {
+      e.preventDefault();
+      scrollWindowToTop();
+    }
+  };
+
   if (to) {
     return (
       <Link
         to={to}
+        onClick={handleNavClick}
         className={`${wrapperClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2`}
-        aria-label="WPServices Home"
+        aria-label={to === '/admin' ? 'Admin Dashboard' : 'WPServices Home'}
       >
         {image}
       </Link>
