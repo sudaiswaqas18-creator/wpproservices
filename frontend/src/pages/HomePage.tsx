@@ -11,7 +11,6 @@ import {
 import HomeStructuredData from '../components/seo/HomeStructuredData';
 
 const WPEstimatorSection = lazy(() => import('../components/WPEstimatorSection'));
-const DeliverySystemsSection = lazy(() => import('../components/DeliverySystemsSection'));
 const WordPressFitSection = lazy(() => import('../components/WordPressFitSection'));
 const ToolsSection = lazy(() => import('../components/ToolsSection'));
 const Blog = lazy(() => import('../components/Blog'));
@@ -33,7 +32,6 @@ export default function HomePage() {
       <FeaturedCases />
       <Suspense fallback={<BelowFoldFallback />}>
         <WPEstimatorSection />
-        <DeliverySystemsSection />
         <WordPressFitSection />
         <StatsBar />
         <ToolsSection />

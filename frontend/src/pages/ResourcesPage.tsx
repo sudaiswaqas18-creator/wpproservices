@@ -9,7 +9,8 @@ export default function ResourcesPage() {
         <div className="section-container text-center">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">WordPress Resources</h1>
           <p className="section-subtitle mx-auto mt-4">
-            Guides, tools, proof pages, and operator notes for teams running WordPress, WooCommerce, and LearnDash.
+            Original WPServices guides, tools, proof pages, and operator notes for teams running WordPress,
+            WooCommerce, and LearnDash — written from delivery work, not scraped directories or stock agency filler.
           </p>
         </div>
       </section>

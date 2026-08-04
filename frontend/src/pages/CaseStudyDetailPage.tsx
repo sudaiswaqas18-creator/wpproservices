@@ -4,6 +4,7 @@ import { TrendingUp } from 'lucide-react';
 import { api, CaseStudyDetail } from '../api/client';
 import { fallbackData } from '../api/fallback';
 import { getCaseStudyMedia, normalizeCaseStudySlug } from '../data/siteContent';
+import { getCaseStudyEnrichment } from '../data/caseStudyEnrichment';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
@@ -76,13 +77,14 @@ export default function CaseStudyDetailPage() {
   }
 
   const media = getCaseStudyMedia(study.slug || slug);
+  const enrich = getCaseStudyEnrichment(study.slug || slug);
   const heroImage = study.image_url?.startsWith('/') ? study.image_url : media.image_url;
 
   return (
     <>
       <SEO
         title={buildTitle(study.title)}
-        description={(study.challenge || study.solution || study.title).slice(0, 160)}
+        description={(enrich?.seoBlurb || study.challenge || study.solution || study.title).slice(0, 160)}
         path={`/case-studies/${study.slug || slug}`}
       />
       <section className="bg-surface-50 py-12">
@@ -121,6 +123,17 @@ export default function CaseStudyDetailPage() {
               <div>
                 <h2 className="text-sm font-bold uppercase tracking-wide text-gray-400">Delivery notes</h2>
                 <p className="mt-3 leading-relaxed text-gray-700">{study.full_content}</p>
+              </div>
+            )}
+            {enrich && (
+              <div>
+                <h2 className="text-sm font-bold uppercase tracking-wide text-gray-400">Engagement context</h2>
+                <p className="mt-3 leading-relaxed text-gray-700">{enrich.context}</p>
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-700">
+                  {enrich.lessons.map((lesson) => (
+                    <li key={lesson}>{lesson}</li>
+                  ))}
+                </ul>
               </div>
             )}
             <div>

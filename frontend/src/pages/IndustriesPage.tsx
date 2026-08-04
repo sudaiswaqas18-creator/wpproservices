@@ -14,9 +14,9 @@ export default function IndustriesPage() {
         <div className="section-container max-w-3xl text-center">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Industries We Serve with WordPress</h1>
           <p className="section-subtitle mx-auto mt-4">
-            WPServices helps retailers, course teams, clinics, B2B operators, and nonprofits with
-            WordPress themes, WooCommerce, LearnDash, and care plans shaped to how each industry
-            actually publishes and sells.
+            WPServices helps retailers, course teams, clinics, B2B operators, and nonprofits with WordPress themes,
+            WooCommerce, LearnDash, and care plans shaped to how each industry publishes and sells — original sector
+            notes from our delivery work, not generic industry filler copied from directories.
           </p>
         </div>
       </section>
