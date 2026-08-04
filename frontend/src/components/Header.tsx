@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { apiUrl } from '../config/api';
-import { PLUGIN_CATEGORIES, PLUGIN_TITLES } from '../data/productCategories';
 import { NAV_RESOURCE_LINKS } from '../data/navData';
 
 const GROUP_LABELS: Record<string, string> = {
@@ -74,7 +73,7 @@ const FALLBACK_GROUPED: GroupedServices = {
   },
 };
 
-type DropdownId = 'services' | 'products' | 'resources';
+type DropdownId = 'services' | 'resources';
 
 function hasGroupedData(data: GroupedServices) {
   return Object.keys(data).length > 0;
@@ -247,84 +246,6 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Plugins — category mega menu (mirrors Services) */}
-          <div
-            className="relative"
-            onMouseEnter={() => { cancelClose(); openOnly('products'); }}
-            onMouseLeave={scheduleClose}
-          >
-            <button
-              type="button"
-              id="products-menu-button"
-              aria-haspopup="menu"
-              aria-expanded={openDropdown === 'products'}
-              aria-controls="dropdown-products"
-              onClick={() => toggleDropdown('products')}
-              onKeyDown={(e) => handleMenuKeyDown(e, 'products')}
-              className={navBtnClass(openDropdown === 'products')}
-            >
-              Plugins
-              <ChevronDown
-                size={14}
-                className={`transition-transform duration-200 ${openDropdown === 'products' ? 'rotate-180' : ''}`}
-              />
-            </button>
-            <AnimatePresence>
-              {openDropdown === 'products' && (
-                <motion.div
-                  key="products-menu"
-                  id="dropdown-products"
-                  role="menu"
-                  aria-label="WooCommerce Plugins menu"
-                  {...dropdownMotion}
-                  className="absolute top-full z-50 pt-2"
-                  style={{ left: 'calc(50% - 360px)' }}
-                  onMouseEnter={cancelClose}
-                  onMouseLeave={scheduleClose}
-                >
-                  <div className="w-[720px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white p-6 shadow-card">
-                    <p className="mb-4 text-[10px] font-bold uppercase tracking-wider text-accent">
-                      WooCommerce Plugins by Category
-                    </p>
-                    <div className="grid grid-cols-3 gap-6">
-                      {PLUGIN_CATEGORIES.map((cat) => (
-                        <div key={cat.id}>
-                          <Link
-                            to={`/products?category=${cat.id}`}
-                            role="menuitem"
-                            className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-accent hover:underline"
-                            onClick={closeAll}
-                          >
-                            {cat.title}
-                          </Link>
-                          {cat.slugs.map((slug) => (
-                            <Link
-                              key={slug}
-                              to={`/products/${slug}`}
-                              role="menuitem"
-                              className="block py-1 text-sm text-ink hover:text-accent"
-                              onClick={closeAll}
-                            >
-                              {PLUGIN_TITLES[slug] || slug}
-                            </Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                    <Link
-                      to="/products"
-                      role="menuitem"
-                      className="mt-4 block text-center text-sm font-semibold text-accent hover:underline"
-                      onClick={closeAll}
-                    >
-                      View all WooCommerce Plugins →
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
           {/* Resources — original design */}
           <div
             className="relative"
@@ -423,18 +344,6 @@ export default function Header() {
         <div className="scroll-area max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-surface-200 bg-white px-4 py-4 min-[980px]:hidden">
           <Link to="/about" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>About Us</Link>
           <Link to="/services" className="block min-h-[44px] py-2 text-sm text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Services</Link>
-          <p className="mt-3 text-[10px] font-bold uppercase tracking-wider text-gray-400">WooCommerce Plugins</p>
-          {PLUGIN_CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              to={`/products?category=${cat.id}`}
-              className="block min-h-[44px] py-2 pl-2 text-sm text-ink hover:text-accent"
-              onClick={() => setMobileOpen(false)}
-            >
-              {cat.title}
-            </Link>
-          ))}
-          <Link to="/products" className="block min-h-[44px] py-2 text-sm font-semibold text-accent" onClick={() => setMobileOpen(false)}>All Plugins →</Link>
           <Link to="/resources" className="mt-2 block min-h-[44px] py-2 text-sm font-semibold text-ink hover:text-accent" onClick={() => setMobileOpen(false)}>Resources</Link>
           {NAV_RESOURCE_LINKS.map((item) => (
             <Link

@@ -33,21 +33,13 @@ router.get('/me', authMiddleware, async (req, res) => {
 
 // ─── Dashboard Stats ────────────────────────────────
 router.get('/stats', authMiddleware, async (_req, res) => {
-  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'products', 'tools', 'guidebooks'];
+  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'tools', 'guidebooks'];
   const stats = {};
   for (const t of tables) {
     const [[{ count }]] = await pool.query(`SELECT COUNT(*) as count FROM ${t}`);
     stats[t] = count;
   }
   res.json(stats);
-});
-
-// Sync WooCommerce plugins + clear placeholder testimonials (Railway + local)
-router.post('/sync-plugin-catalog', authMiddleware, async (_req, res) => {
-  await syncSiteContent();
-  const [[{ count }]] = await pool.query('SELECT COUNT(*) as count FROM products');
-  const [[{ testimonials }]] = await pool.query('SELECT COUNT(*) as testimonials FROM testimonials');
-  res.json({ message: 'Plugin catalog synced', products: count, testimonials });
 });
 
 // ─── Blog CRUD ──────────────────────────────────────
@@ -236,35 +228,6 @@ router.get('/leads', authMiddleware, async (_req, res) => {
 
 router.delete('/leads/:id', authMiddleware, async (req, res) => {
   await pool.query('DELETE FROM contact_leads WHERE id = ?', [req.params.id]);
-  res.json({ message: 'Deleted' });
-});
-
-// ─── Products CRUD ────────────────────────────────────
-router.get('/products', authMiddleware, async (_req, res) => {
-  const [rows] = await pool.query('SELECT * FROM products ORDER BY sort_order');
-  res.json(rows.map((p) => ({ ...p, features: parseJsonField(p.features) })));
-});
-
-router.post('/products', authMiddleware, async (req, res) => {
-  const b = req.body;
-  const [result] = await pool.query(
-    `INSERT INTO products (title, slug, subtitle, description, full_content, features, category, price, rating, rating_count, image_url, buy_url, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    [b.title, b.slug || slugify(b.title), b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.category || 'conversion', b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0]
-  );
-  res.status(201).json({ id: result.insertId });
-});
-
-router.put('/products/:id', authMiddleware, async (req, res) => {
-  const b = req.body;
-  await pool.query(
-    `UPDATE products SET title=?, slug=?, subtitle=?, description=?, full_content=?, features=?, category=?, price=?, rating=?, rating_count=?, image_url=?, buy_url=?, sort_order=? WHERE id=?`,
-    [b.title, b.slug, b.subtitle, b.description, b.full_content, JSON.stringify(b.features || []), b.category || 'conversion', b.price, b.rating, b.rating_count, b.image_url, b.buy_url, b.sort_order || 0, req.params.id]
-  );
-  res.json({ message: 'Updated' });
-});
-
-router.delete('/products/:id', authMiddleware, async (req, res) => {
-  await pool.query('DELETE FROM products WHERE id = ?', [req.params.id]);
   res.json({ message: 'Deleted' });
 });
 

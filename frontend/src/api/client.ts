@@ -121,7 +121,6 @@ export const api = {
   getTools: () => fetchApi<unknown[]>('/tools'),
   getGuidebooks: () => fetchApi<unknown[]>('/guidebooks'),
   getSiteStats: () => fetchApi<unknown[]>('/site-stats'),
-  getProducts: () => fetchApi<unknown[]>('/products'),
   submitContact: async (data: ContactPayload) => {
     const res = await fetch(`${API_BASE}/contact`, {
       method: 'POST',

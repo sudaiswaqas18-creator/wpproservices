@@ -2,6 +2,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, BlogRow, BlogForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validateBlogForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: BlogForm = {
@@ -16,6 +17,9 @@ export default function AdminBlogs() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getBlogs().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -44,10 +48,18 @@ export default function AdminBlogs() {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Delete this blog post?')) return;
-    await adminApi.deleteBlog(id);
-    load();
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteBlog(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
+    }
   };
 
   const set = (k: keyof BlogForm, v: string | number) => setForm((f) => ({ ...f, [k]: v }));
@@ -76,7 +88,7 @@ export default function AdminBlogs() {
                 <td className="px-4 py-3">
                   <div className="flex gap-1">
                     <EditBtn onClick={() => openEdit(row)} />
-                    <DeleteBtn onClick={() => handleDelete(row.id)} />
+                    <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.title })} />
                   </div>
                 </td>
               </tr>
@@ -100,6 +112,14 @@ export default function AdminBlogs() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

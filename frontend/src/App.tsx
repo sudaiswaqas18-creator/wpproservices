@@ -15,8 +15,6 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
 const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
-const ProductsPage = lazy(() => import('./pages/ProductsPage'));
-const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const IndustriesPage = lazy(() => import('./pages/IndustriesPage'));
 const FaqPage = lazy(() => import('./pages/FaqPage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
@@ -37,7 +35,6 @@ const AdminTestimonials = lazy(() => import('./pages/admin/AdminTestimonials'));
 const AdminPortfolio = lazy(() => import('./pages/admin/AdminPortfolio'));
 const AdminFaqs = lazy(() => import('./pages/admin/AdminFaqs'));
 const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
-const AdminProducts = lazy(() => import('./pages/admin/AdminProducts'));
 const AdminTools = lazy(() => import('./pages/admin/AdminTools'));
 const AdminGuidebooks = lazy(() => import('./pages/admin/AdminGuidebooks'));
 
@@ -49,8 +46,6 @@ export default function App() {
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="services/:slug" element={<ServiceDetailPage />} />
-        <Route path="products" element={<ProductsPage />} />
-        <Route path="products/:slug" element={<ProductDetailPage />} />
         <Route path="industries" element={<IndustriesPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="portfolio" element={<PortfolioPage />} />
@@ -78,7 +73,6 @@ export default function App() {
         <Route path="blogs" element={<AdminBlogs />} />
         <Route path="case-studies" element={<AdminCaseStudies />} />
         <Route path="services" element={<AdminServices />} />
-        <Route path="products" element={<AdminProducts />} />
         <Route path="tools" element={<AdminTools />} />
         <Route path="guidebooks" element={<AdminGuidebooks />} />
         <Route path="testimonials" element={<AdminTestimonials />} />

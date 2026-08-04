@@ -1,37 +1,29 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FileText, Briefcase, Mail, Wrench, Image, HelpCircle, Package, Bot, BookOpen, ArrowUpRight,
+  FileText, Briefcase, Mail, Wrench, Image, HelpCircle, Bot, BookOpen, ArrowUpRight, Star,
 } from 'lucide-react';
 import {
   adminApi,
   BlogForm,
   CaseStudyForm,
-  ProductForm,
   ServiceForm,
 } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass } from '../../components/admin/AdminModal';
-import { PLUGIN_CATEGORIES } from '../../data/productCategories';
 
 const statConfig = [
   { key: 'blog_posts', label: 'Blog Posts', icon: FileText, color: 'bg-brand-500', link: '/admin/blogs' },
   { key: 'case_studies', label: 'Case Studies', icon: Briefcase, color: 'bg-surface-dark', link: '/admin/case-studies' },
   { key: 'services', label: 'Services', icon: Wrench, color: 'bg-surface-dark', link: '/admin/services' },
-  { key: 'products', label: 'Plugins', icon: Package, color: 'bg-brand-600', link: '/admin/products' },
   { key: 'tools', label: 'Tools', icon: Bot, color: 'bg-green-500', link: '/admin/tools' },
   { key: 'guidebooks', label: 'Guidebooks', icon: BookOpen, color: 'bg-surface-dark', link: '/admin/guidebooks' },
   { key: 'portfolio_items', label: 'Portfolio', icon: Image, color: 'bg-green-500', link: '/admin/portfolio' },
   { key: 'faqs', label: 'FAQs', icon: HelpCircle, color: 'bg-surface-dark', link: '/admin/faqs' },
+  { key: 'testimonials', label: 'Testimonials', icon: Star, color: 'bg-amber-500', link: '/admin/testimonials' },
   { key: 'contact_leads', label: 'New Leads', icon: Mail, color: 'bg-red-500', link: '/admin/leads' },
 ];
 
-type QuickForm = 'plugin' | 'blog' | 'case' | 'service' | null;
-
-const emptyPlugin: ProductForm = {
-  title: '', slug: '', subtitle: '', description: '', full_content: '', features: [],
-  category: 'conversion', price: '', rating: '', rating_count: 'WooCommerce extension',
-  image_url: '', buy_url: '/contact', sort_order: 0,
-};
+type QuickForm = 'blog' | 'case' | 'service' | null;
 
 const emptyBlog: BlogForm = {
   title: '', slug: '', excerpt: '', content: '', author: 'WPServices Team',
@@ -56,13 +48,6 @@ const SERVICE_GROUPS = [
 ];
 
 const quickActions = [
-  {
-    id: 'plugin' as const,
-    title: 'Add Plugin',
-    desc: 'New WooCommerce extension for the public plugins catalog',
-    icon: Package,
-    tone: 'bg-brand-50 text-brand-700 ring-brand-100',
-  },
   {
     id: 'blog' as const,
     title: 'Add Blog Post',
@@ -92,7 +77,6 @@ export default function AdminDashboard() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
 
-  const [plugin, setPlugin] = useState<ProductForm>(emptyPlugin);
   const [blog, setBlog] = useState<BlogForm>(emptyBlog);
   const [caseStudy, setCaseStudy] = useState<CaseStudyForm>(emptyCase);
   const [service, setService] = useState<ServiceForm>(emptyService);
@@ -103,7 +87,6 @@ export default function AdminDashboard() {
 
   const openQuick = (type: Exclude<QuickForm, null>) => {
     setMessage('');
-    setPlugin(emptyPlugin);
     setBlog({ ...emptyBlog, published_at: new Date().toISOString().slice(0, 10) });
     setCaseStudy(emptyCase);
     setService(emptyService);
@@ -117,24 +100,6 @@ export default function AdminDashboard() {
     setMessage(`${label} saved — it will show on the public site after refresh.`);
     closeQuick();
     await refreshStats();
-  };
-
-  const savePlugin = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!plugin.title.trim()) return alert('Plugin title is required');
-    setSaving(true);
-    try {
-      await adminApi.createProduct({
-        ...plugin,
-        features: featuresText.split('\n').filter(Boolean),
-        description: plugin.description || plugin.subtitle || plugin.title,
-      });
-      await afterSave('Plugin');
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to save plugin');
-    } finally {
-      setSaving(false);
-    }
   };
 
   const saveBlog = async (e: FormEvent) => {
@@ -190,11 +155,10 @@ export default function AdminDashboard() {
   };
 
   const modalTitle =
-    quick === 'plugin' ? 'Add Plugin'
-      : quick === 'blog' ? 'Add Blog Post'
-        : quick === 'case' ? 'Add Case Study'
-          : quick === 'service' ? 'Add Service'
-            : '';
+    quick === 'blog' ? 'Add Blog Post'
+      : quick === 'case' ? 'Add Case Study'
+        : quick === 'service' ? 'Add Service'
+          : '';
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-6">
@@ -236,7 +200,7 @@ export default function AdminDashboard() {
           <p className="mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800 ring-1 ring-emerald-100">{message}</p>
         )}
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {quickActions.map(({ id, title, desc, icon: Icon, tone }) => (
             <button
               key={id}
@@ -258,27 +222,6 @@ export default function AdminDashboard() {
       </section>
 
       <AdminModal title={modalTitle} open={!!quick} onClose={closeQuick} wide>
-        {quick === 'plugin' && (
-          <form onSubmit={savePlugin}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <FormField label="Title *"><input className={fieldInputClass()} value={plugin.title} onChange={(e) => setPlugin({ ...plugin, title: e.target.value })} autoFocus /></FormField>
-              <FormField label="Price"><input className={fieldInputClass()} value={plugin.price} onChange={(e) => setPlugin({ ...plugin, price: e.target.value })} placeholder="$79" /></FormField>
-            </div>
-            <FormField label="Subtitle"><input className={fieldInputClass()} value={plugin.subtitle} onChange={(e) => setPlugin({ ...plugin, subtitle: e.target.value })} /></FormField>
-            <FormField label="Category">
-              <select className={fieldInputClass()} value={plugin.category} onChange={(e) => setPlugin({ ...plugin, category: e.target.value })}>
-                {PLUGIN_CATEGORIES.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
-              </select>
-            </FormField>
-            <FormField label="Description"><textarea rows={3} className={textareaClass} value={plugin.description} onChange={(e) => setPlugin({ ...plugin, description: e.target.value })} /></FormField>
-            <FormField label="Features (one per line)"><textarea rows={4} className={textareaClass} value={featuresText} onChange={(e) => setFeaturesText(e.target.value)} /></FormField>
-            <FormField label="Image URL"><input className={fieldInputClass()} value={plugin.image_url} onChange={(e) => setPlugin({ ...plugin, image_url: e.target.value })} placeholder="/section-images/plugin-….jpg" /></FormField>
-            <div className="flex justify-end gap-2 border-t border-gray-100 pt-4">
-              <button type="button" onClick={closeQuick} className="btn-outline text-sm">Cancel</button>
-              <button type="submit" disabled={saving} className="btn-primary text-sm">{saving ? 'Saving…' : 'Save Plugin'}</button>
-            </div>
-          </form>
-        )}
 
         {quick === 'blog' && (
           <form onSubmit={saveBlog}>

@@ -1,17 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Mail, Phone, Trash2 } from 'lucide-react';
 import { adminApi, LeadRow } from '../../api/admin';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 
 export default function AdminLeads() {
   const [items, setItems] = useState<LeadRow[]>([]);
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getLeads().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('Delete this lead?')) return;
-    await adminApi.deleteLead(id);
-    load();
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteLead(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete lead');
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -34,13 +45,22 @@ export default function AdminLeads() {
                 <p className="mt-3 text-sm text-gray-700">{lead.project_details}</p>
                 <p className="mt-2 text-xs text-gray-400">{new Date(lead.created_at).toLocaleString()}</p>
               </div>
-              <button type="button" onClick={() => handleDelete(lead.id)} className="rounded-lg p-2 text-red-500 hover:bg-red-50">
+              <button type="button" onClick={() => setDeleteTarget({ id: lead.id, name: lead.name })} className="rounded-lg p-2 text-red-500 hover:bg-red-50">
                 <Trash2 size={16} />
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        title="Delete Lead Submission"
+        itemName={deleteTarget?.name}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

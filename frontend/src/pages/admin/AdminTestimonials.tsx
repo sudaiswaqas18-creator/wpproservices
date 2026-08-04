@@ -2,6 +2,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, TestimonialRow, TestimonialForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validateTestimonialForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: TestimonialForm = { name: '', company: '', country: '', quote: '', metric_label: '', sort_order: 0 };
@@ -13,6 +14,9 @@ export default function AdminTestimonials() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getTestimonials().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -31,6 +35,20 @@ export default function AdminTestimonials() {
       setModal(false); load();
     } catch (err) { alert(err instanceof Error ? err.message : 'Failed'); }
     finally { setSaving(false); }
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteTestimonial(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -61,7 +79,7 @@ export default function AdminTestimonials() {
                 <td className="px-4 py-3 text-gray-600">{row.company}</td>
                 <td className="px-4 py-3 flex gap-1">
                   <EditBtn onClick={() => { const { id, ...rest } = row; setForm(rest); setEditId(id); setModal(true); }} />
-                  <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteTestimonial(row.id); load(); } }} />
+                  <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.name })} />
                 </td>
               </tr>
             ))}
@@ -83,6 +101,14 @@ export default function AdminTestimonials() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

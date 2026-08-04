@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, FileText, Briefcase, Image,
   HelpCircle, Mail, Wrench, LogOut, ExternalLink, Star,
-  Package, Bot, BookOpen,
+  Bot, BookOpen,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Logo from '../Logo';
@@ -12,7 +12,6 @@ const links = [
   { to: '/admin/blogs', label: 'Blog Posts', icon: FileText },
   { to: '/admin/case-studies', label: 'Case Studies', icon: Briefcase },
   { to: '/admin/services', label: 'Services', icon: Wrench },
-  { to: '/admin/products', label: 'Plugins', icon: Package },
   { to: '/admin/tools', label: 'Tools', icon: Bot },
   { to: '/admin/guidebooks', label: 'Guidebooks', icon: BookOpen },
   { to: '/admin/portfolio', label: 'Portfolio', icon: Image },

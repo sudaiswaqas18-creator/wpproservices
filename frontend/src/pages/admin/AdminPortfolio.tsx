@@ -2,6 +2,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, PortfolioRow, PortfolioForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validatePortfolioForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: PortfolioForm = { title: '', category: '', image_url: '', sort_order: 0 };
@@ -13,6 +14,9 @@ export default function AdminPortfolio() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getPortfolio().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -33,6 +37,20 @@ export default function AdminPortfolio() {
     finally { setSaving(false); }
   };
 
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deletePortfolio(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -48,7 +66,7 @@ export default function AdminPortfolio() {
               <p className="text-sm text-gray-500">{row.category}</p>
               <div className="mt-3 flex gap-1">
                 <EditBtn onClick={() => { const { id, ...rest } = row; setForm(rest); setEditId(id); setModal(true); }} />
-                <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deletePortfolio(row.id); load(); } }} />
+                <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.title })} />
               </div>
             </div>
           </div>
@@ -65,6 +83,14 @@ export default function AdminPortfolio() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

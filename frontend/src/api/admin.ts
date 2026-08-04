@@ -124,13 +124,6 @@ export const adminApi = {
   getLeads: async () => asArray<LeadRow>(await adminFetch('/leads')),
   deleteLead: (id: number) => adminFetch(`/leads/${id}`, { method: 'DELETE' }),
 
-  // Products
-  getProducts: async () => asArray<ProductRow>(await adminFetch('/products')),
-  createProduct: (data: ProductForm) => adminFetch('/products', { method: 'POST', body: JSON.stringify(data) }),
-  updateProduct: (id: number, data: ProductForm) => adminFetch(`/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-  deleteProduct: (id: number) => adminFetch(`/products/${id}`, { method: 'DELETE' }),
-  syncPluginCatalog: () => adminFetch<{ message: string; products: number; testimonials: number }>('/sync-plugin-catalog', { method: 'POST' }),
-
   // Tools
   getTools: async () => asArray<ToolRow>(await adminFetch('/tools')),
   createTool: (data: ToolForm) => adminFetch('/tools', { method: 'POST', body: JSON.stringify(data) }),

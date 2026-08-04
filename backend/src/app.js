@@ -159,17 +159,6 @@ app.get('/api/industries', asyncHandler(async (_req, res) => {
   res.json(rows.map((row) => ({ ...row, has_case_study: Boolean(row.has_case_study) })));
 }));
 
-app.get('/api/products', asyncHandler(async (_req, res) => {
-  const [rows] = await pool.query('SELECT * FROM products ORDER BY sort_order');
-  res.json(rows.map((p) => ({ ...p, features: parseJsonField(p.features) })));
-}));
-
-app.get('/api/products/:slug', asyncHandler(async (req, res) => {
-  const [rows] = await pool.query('SELECT * FROM products WHERE slug = ?', [req.params.slug]);
-  if (!rows.length) return res.status(404).json({ error: 'Product not found' });
-  res.json({ ...rows[0], features: parseJsonField(rows[0].features) });
-}));
-
 app.get('/api/tools', asyncHandler(async (_req, res) => {
   const [rows] = await pool.query('SELECT * FROM tools ORDER BY sort_order');
   res.json(rows.map((t) => ({ ...t, is_new: Boolean(t.is_new) })));

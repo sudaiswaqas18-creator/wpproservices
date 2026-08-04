@@ -2,6 +2,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, ToolRow, ToolForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validateToolForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: ToolForm = {
@@ -15,6 +16,9 @@ export default function AdminTools() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getTools().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -39,6 +43,20 @@ export default function AdminTools() {
     finally { setSaving(false); }
   };
 
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteTool(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const set = (k: keyof ToolForm, v: string | number | boolean) => setForm((f) => ({ ...f, [k]: v }));
 
   return (
@@ -59,7 +77,7 @@ export default function AdminTools() {
                 <td className="px-4 py-3">{row.is_new ? 'Yes' : 'No'}</td>
                 <td className="px-4 py-3 flex gap-1">
                   <EditBtn onClick={() => openEdit(row)} />
-                  <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteTool(row.id); load(); } }} />
+                  <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.title })} />
                 </td>
               </tr>
             ))}
@@ -81,6 +99,14 @@ export default function AdminTools() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const OFFICES = [
   {
     city: 'Pakistan',
     address: 'Gujranwala, Punjab',
-    phone: '03042336926',
+    phone: '03149496789',
   },
   {
     city: 'USA',

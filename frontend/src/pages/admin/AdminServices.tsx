@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, ServiceRow, ServiceForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validateServiceForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const SERVICE_GROUPS = [
@@ -26,6 +27,9 @@ export default function AdminServices() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getServices().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -73,6 +77,20 @@ export default function AdminServices() {
       alert(err instanceof Error ? err.message : 'Failed');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteService(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -128,7 +146,7 @@ export default function AdminServices() {
                 <td className="px-4 py-3">
                   <div className="flex gap-1">
                     <EditBtn onClick={() => openEdit(row)} />
-                    <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteService(row.id); load(); } }} />
+                    <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.title })} />
                   </div>
                 </td>
               </tr>
@@ -169,6 +187,14 @@ export default function AdminServices() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

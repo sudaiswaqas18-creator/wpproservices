@@ -2,6 +2,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { adminApi, FaqRow, FaqForm } from '../../api/admin';
 import AdminModal, { FormField, fieldInputClass, textareaClass, DeleteBtn, EditBtn } from '../../components/admin/AdminModal';
+import ConfirmModal from '../../components/admin/ConfirmModal';
 import { validateFaqForm, hasErrors, FieldErrors } from '../../utils/validation';
 
 const empty: FaqForm = { question: '', answer: '', page_slug: 'home', sort_order: 0 };
@@ -13,6 +14,9 @@ export default function AdminFaqs() {
   const [editId, setEditId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = () => adminApi.getFaqs().then(setItems).catch(console.error);
   useEffect(() => { load(); }, []);
@@ -33,6 +37,20 @@ export default function AdminFaqs() {
     finally { setSaving(false); }
   };
 
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await adminApi.deleteFaq(deleteTarget.id);
+      setDeleteTarget(null);
+      load();
+    } catch (err) {
+      alert('Failed to delete item');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -49,7 +67,7 @@ export default function AdminFaqs() {
               </div>
               <div className="flex gap-1 shrink-0 ml-4">
                 <EditBtn onClick={() => { const { id, ...rest } = row; setForm(rest); setEditId(id); setModal(true); }} />
-                <DeleteBtn onClick={async () => { if (confirm('Delete?')) { await adminApi.deleteFaq(row.id); load(); } }} />
+                <DeleteBtn onClick={() => setDeleteTarget({ id: row.id, title: row.question })} />
               </div>
             </div>
           </div>
@@ -65,6 +83,14 @@ export default function AdminFaqs() {
           </div>
         </form>
       </AdminModal>
+
+      <ConfirmModal
+        isOpen={!!deleteTarget}
+        itemName={deleteTarget?.title}
+        isDeleting={deleting}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }
