@@ -69,6 +69,10 @@ export default function ServiceDetailPage() {
             <p className="mt-4 text-lg leading-relaxed text-gray-600">
               {service.hero_description || service.description}
             </p>
+            <p className="mt-4 rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-3 text-sm leading-relaxed text-ink-muted">
+              <span className="font-semibold text-brand-700">On this engagement: </span>
+              {deep.outcomes.slice(0, 2).join(' · ')}
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
                 Get Free Consultation <ArrowRight size={16} />

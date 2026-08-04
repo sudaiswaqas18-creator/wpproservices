@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Palette, Code, Shield, CreditCard, Zap, Puzzle } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
 
+import { getServiceDeepContent } from '../data/serviceDeepContent';
+
 const iconMap: Record<string, typeof Code> = {
   palette: Palette,
   code: Code,
@@ -20,6 +22,7 @@ export default function Services() {
 
   const current = services[active];
   const Icon = iconMap[current.icon] || Code;
+  const deep = getServiceDeepContent(current.slug);
 
   return (
     <section id="services" className="py-20">
@@ -61,6 +64,9 @@ export default function Services() {
             </p>
             <h3 className="mt-2 text-2xl font-bold text-gray-900">{current.subtitle}</h3>
             <p className="mt-4 leading-relaxed text-gray-600">{current.description}</p>
+            <p className="mt-4 rounded-lg border border-brand-100 bg-brand-50/50 px-3 py-2.5 text-sm leading-snug text-brand-800">
+              {deep.outcomes[0]}
+            </p>
             <Link to={`/services/${current.slug}`} className="btn-primary mt-6 inline-flex">Get Started</Link>
           </div>
         </div>

@@ -16,6 +16,7 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
 const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 const IndustriesPage = lazy(() => import('./pages/IndustriesPage'));
+const IndustryDetailPage = lazy(() => import('./pages/IndustryDetailPage'));
 const FaqPage = lazy(() => import('./pages/FaqPage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const ProcessPage = lazy(() => import('./pages/ProcessPage'));
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="services" element={<ServicesPage />} />
         <Route path="services/:slug" element={<ServiceDetailPage />} />
         <Route path="industries" element={<IndustriesPage />} />
+        <Route path="industries/:slug" element={<IndustryDetailPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="portfolio" element={<PortfolioPage />} />
         <Route path="process" element={<ProcessPage />} />

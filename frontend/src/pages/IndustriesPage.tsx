@@ -20,7 +20,7 @@ export default function IndustriesPage() {
           </p>
         </div>
       </section>
-      <Industries />
+      <Industries showHeader={false} />
       <CTA />
     </>
   );

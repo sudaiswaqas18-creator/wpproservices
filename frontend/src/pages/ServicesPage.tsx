@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Palette, Code, Shield, CreditCard, Zap, Puzzle, Check } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
 import { getServiceEnrichment } from '../data/serviceEnrichment';
+import { getServiceDeepContent } from '../data/serviceDeepContent';
 import { getServiceImage } from '../data/siteContent';
 import { filterServicesByCategory, getCategoryById, SERVICE_CATEGORIES } from '../data/serviceCategories';
 import { optimizeImageUrl } from '../utils/imageUrl';
@@ -92,8 +93,10 @@ export default function ServicesPage() {
               {filteredServices.map((s, i) => {
                 const Icon = iconMap[s.icon] || Code;
                 const enriched = getServiceEnrichment(s.slug, s.features);
+                const deep = getServiceDeepContent(s.slug);
                 const previewFeatures = enriched.features.slice(0, 2);
                 const media = getServiceImage(s.slug);
+                const cardDetail = deep.outcomes[0] || deep.idealFor[0];
 
                 return (
                   <motion.div key={s.id} {...fadeUp} transition={{ duration: 0.4, delay: (i % 6) * 0.06 }}>
@@ -140,6 +143,10 @@ export default function ServicesPage() {
                               </li>
                             ))}
                           </ul>
+
+                          <p className="mt-3 line-clamp-2 text-[11px] font-medium leading-snug text-brand-700 transition-colors duration-500 group-hover:text-white/90">
+                            {cardDetail}
+                          </p>
 
                           <div className="mt-3 flex items-center justify-between border-t border-gray-50 pt-3 transition-colors duration-500 group-hover:border-white/20">
                             <span className="text-[10px] font-medium text-gray-500 transition-colors duration-500 group-hover:text-white/75">
