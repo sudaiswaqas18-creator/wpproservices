@@ -151,7 +151,28 @@ export async function syncAdminCredentials() {
   }
 }
 
+export async function ensureNewsletterTable() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      email VARCHAR(150) NOT NULL UNIQUE,
+      status ENUM('subscribed', 'unsubscribed') NOT NULL DEFAULT 'subscribed',
+      admin_disabled TINYINT(1) NOT NULL DEFAULT 0,
+      subscribed_at TIMESTAMP NULL,
+      unsubscribed_at TIMESTAMP NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )
+  `);
+}
+
 export async function ensureDatabase() {
+  try {
+    await ensureNewsletterTable();
+  } catch (err) {
+    console.error('ensureNewsletterTable failed:', err.code || err.message);
+  }
+
   try {
     const [rows] = await pool.query('SELECT COUNT(*) AS count FROM products');
     if (Number(rows[0]?.count) > 0) {

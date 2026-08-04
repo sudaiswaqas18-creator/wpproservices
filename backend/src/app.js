@@ -9,6 +9,15 @@ import { parseJsonField } from './utils.js';
 import { validateContactPayload, firstError } from './validation.js';
 import { ensureDatabase } from './ensureDb.js';
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function normalizeNewsletterEmail(raw) {
+  const email = String(raw || '').trim().toLowerCase();
+  if (!email) return { error: 'Email is required.' };
+  if (!EMAIL_RE.test(email) || email.length > 150) return { error: 'Please enter a valid email address.' };
+  return { email };
+}
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -221,6 +230,67 @@ app.post('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Failed to submit. Please try again.' });
   }
 });
+
+app.post('/api/newsletter/subscribe', asyncHandler(async (req, res) => {
+  const parsed = normalizeNewsletterEmail(req.body?.email);
+  if (parsed.error) return res.status(400).json({ error: parsed.error });
+  const { email } = parsed;
+
+  const [rows] = await pool.query('SELECT * FROM newsletter_subscribers WHERE email = ? LIMIT 1', [email]);
+  const existing = rows[0];
+
+  if (existing?.admin_disabled) {
+    return res.status(403).json({
+      error: 'This email cannot subscribe. Contact us if you believe this is a mistake.',
+      code: 'ADMIN_DISABLED',
+    });
+  }
+
+  if (existing?.status === 'subscribed') {
+    return res.status(409).json({
+      error: 'This email is already subscribed. You can unsubscribe below.',
+      code: 'ALREADY_SUBSCRIBED',
+      email,
+    });
+  }
+
+  if (existing) {
+    await pool.query(
+      `UPDATE newsletter_subscribers SET status='subscribed', subscribed_at=NOW(), unsubscribed_at=NULL WHERE id=?`,
+      [existing.id],
+    );
+    return res.json({ success: true, message: 'You are subscribed again.', email, status: 'subscribed' });
+  }
+
+  await pool.query(
+    `INSERT INTO newsletter_subscribers (email, status, admin_disabled, subscribed_at) VALUES (?, 'subscribed', 0, NOW())`,
+    [email],
+  );
+  res.status(201).json({ success: true, message: 'Thanks for subscribing!', email, status: 'subscribed' });
+}));
+
+app.post('/api/newsletter/unsubscribe', asyncHandler(async (req, res) => {
+  const parsed = normalizeNewsletterEmail(req.body?.email);
+  if (parsed.error) return res.status(400).json({ error: parsed.error });
+  const { email } = parsed;
+
+  const [rows] = await pool.query('SELECT * FROM newsletter_subscribers WHERE email = ? LIMIT 1', [email]);
+  const existing = rows[0];
+
+  if (!existing) {
+    return res.status(404).json({ error: 'This email is not on our list.', code: 'NOT_FOUND' });
+  }
+
+  if (existing.status === 'unsubscribed') {
+    return res.json({ success: true, message: 'You are already unsubscribed.', email, status: 'unsubscribed' });
+  }
+
+  await pool.query(
+    `UPDATE newsletter_subscribers SET status='unsubscribed', unsubscribed_at=NOW() WHERE id=?`,
+    [existing.id],
+  );
+  res.json({ success: true, message: 'You have been unsubscribed.', email, status: 'unsubscribed' });
+}));
 
 // Admin routes (protected)
 app.use('/api/admin', adminRoutes);

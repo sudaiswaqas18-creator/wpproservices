@@ -8,6 +8,9 @@ import {
   Gauge,
   ShieldCheck,
   Sparkles,
+  FileCheck2,
+  Timer,
+  Waypoints,
 } from 'lucide-react';
 import ContactLink from './ContactLink';
 
@@ -21,21 +24,33 @@ const SITE_TYPES = [
     id: 'marketing',
     label: 'Marketing / brochure site',
     focus: 'Editor-safe themes, forms, and SEO-ready structure',
+    deliveryNote:
+      'We treat brochure builds as editor systems — patterns, forms, and meta that marketing can change without a rebuild ticket every week.',
+    stagingFocus: 'Form endpoints, analytics tags, and key landing templates checked on staging before DNS cutover.',
   },
   {
     id: 'woo',
     label: 'WooCommerce store',
     focus: 'Catalog, checkout clarity, shipping rules, staging QA',
+    deliveryNote:
+      'Store scopes start from how you sell — catalog rules, shipping thresholds, and checkout honesty under real product data, not demo SKUs.',
+    stagingFocus: 'Cart, coupons, shipping, and payment sandbox paths rehearsed before campaign traffic.',
   },
   {
     id: 'lms',
     label: 'LearnDash / membership',
     focus: 'Access rules, cohort ops, seat or payment paths',
+    deliveryNote:
+      'LMS work is access math first — who gets which course, when drip fires, and how seats assign without support chaos.',
+    stagingFocus: 'Role gates, enrollment, and progress views verified with sample cohorts before launch.',
   },
   {
     id: 'migrate',
     label: 'Migration or redesign',
     focus: 'Redirect maps, content inventory, cutover checklist',
+    deliveryNote:
+      'Migrations succeed on inventory and redirects, not hope. We map URLs, plugins that stay, and a rollback path before go-live.',
+    stagingFocus: 'Redirect spot-checks, media paths, and editor login on the new stack before cutover day.',
   },
 ] as const;
 
@@ -46,6 +61,7 @@ const WORKSTREAMS = [
     desc: 'Inclusions, exclusions, and definition of done before build starts.',
     weeks: '3–5 days',
     weight: 18,
+    panelHint: 'Locks what “done” means so mid-build surprises stay out of the critical path.',
   },
   {
     id: 'theme',
@@ -53,6 +69,7 @@ const WORKSTREAMS = [
     desc: 'Layouts editors can update without breaking the design system.',
     weeks: '2–4 weeks',
     weight: 22,
+    panelHint: 'Patterns and spacing rules your editors reuse — not one-off page-builder free-for-alls.',
   },
   {
     id: 'commerce',
@@ -60,6 +77,7 @@ const WORKSTREAMS = [
     desc: 'Checkout, catalog, access, or membership logic matched to ops.',
     weeks: '2–5 weeks',
     weight: 24,
+    panelHint: 'Commerce or LMS depth scoped to real ops — shipping, seats, or access — not plugin pile-ons.',
   },
   {
     id: 'performance',
@@ -67,6 +85,7 @@ const WORKSTREAMS = [
     desc: 'Hero media, queries, and third-party scripts on real money pages.',
     weeks: '3–7 days',
     weight: 16,
+    panelHint: 'LCP and query weight reviewed on templates that earn money, not a blank homepage alone.',
   },
   {
     id: 'care',
@@ -74,6 +93,7 @@ const WORKSTREAMS = [
     desc: 'Staging cutover, docs, and update habits your team can keep.',
     weeks: 'Ongoing',
     weight: 14,
+    panelHint: 'Cutover checklist, update cadence, and who owns plugins after we leave the build floor.',
   },
 ] as const;
 
@@ -95,12 +115,21 @@ export default function WPEstimatorSection() {
   }, [selected]);
 
   const site = SITE_TYPES.find((s) => s.id === siteType) ?? SITE_TYPES[1];
+  const activeStreams = WORKSTREAMS.filter((w) => selected.includes(w.id));
   const weeksHint =
     selected.length === 0
       ? 'Add at least one workstream'
       : selected.includes('theme') || selected.includes('commerce')
         ? 'Typically 3–8 weeks after discovery'
         : 'Typically 1–3 weeks after discovery';
+
+  const gapNotes = useMemo(() => {
+    const missing = WORKSTREAMS.filter((w) => !selected.includes(w.id));
+    if (!missing.length) {
+      return 'Full workstream set selected — this is the profile we prefer before a fixed-price conversation.';
+    }
+    return `Still optional: ${missing.map((m) => m.label.split(' / ')[0]).join(' · ')}. Adding them raises readiness and reduces mid-project change orders.`;
+  }, [selected]);
 
   return (
     <section className="relative overflow-hidden bg-background py-20">
@@ -126,8 +155,8 @@ export default function WPEstimatorSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-start">
-          <div className="space-y-5 lg:col-span-7">
+        <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch">
+          <div className="flex flex-col space-y-5 lg:col-span-7">
             <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
               <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600">
                 <Layers size={14} /> Step 1 — Platform shape
@@ -154,7 +183,7 @@ export default function WPEstimatorSection() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+            <div className="flex-1 rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
               <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600">
                 <ClipboardList size={14} /> Step 2 — Workstreams to include
               </h3>
@@ -193,8 +222,8 @@ export default function WPEstimatorSection() {
             </div>
           </div>
 
-          <aside className="lg:col-span-5">
-            <div className="sticky top-28 rounded-2xl border border-border bg-white p-6 shadow-cardHover">
+          <aside className="flex lg:col-span-5">
+            <div className="flex w-full flex-col rounded-2xl border border-border bg-white p-6 shadow-cardHover">
               <div className="flex items-center justify-between border-b border-border pb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-ink-light">Scope readiness</span>
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-brand-700">
@@ -202,8 +231,8 @@ export default function WPEstimatorSection() {
                 </span>
               </div>
 
-              <div className="my-8 text-center">
-                <div className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full border-[6px] border-brand-100 bg-surface-50">
+              <div className="my-6 text-center">
+                <div className="relative mx-auto flex h-32 w-32 items-center justify-center rounded-full border-[6px] border-brand-100 bg-surface-50">
                   <div
                     className="absolute inset-0 rounded-full border-[6px] border-brand-600"
                     style={{
@@ -236,21 +265,66 @@ export default function WPEstimatorSection() {
                 </li>
                 <li className="flex justify-between gap-3 border-t border-border pt-3">
                   <span className="flex items-center gap-1.5">
-                    <ClipboardList size={14} className="text-brand-600" /> Timing hint
+                    <Timer size={14} className="text-brand-600" /> Timing hint
                   </span>
                   <span className="max-w-[55%] text-right font-semibold text-ink">{weeksHint}</span>
                 </li>
               </ul>
 
-              <ContactLink className="btn-primary mt-6 flex w-full items-center justify-center gap-2">
-                Request a custom scope <ArrowRight size={16} />
-              </ContactLink>
-              <p className="mt-3 text-center text-[11px] text-ink-light">
-                Free discovery call — we map hosting, theme debt, and success criteria before quoting.
-              </p>
-              <Link to="/quotes" className="mt-3 block text-center text-xs font-semibold text-brand-600 hover:underline">
-                Read our build-floor principles →
-              </Link>
+              <div className="mt-4 flex-1 space-y-4">
+                <div className="rounded-xl border border-brand-100 bg-brand-50/50 p-4">
+                  <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-700">
+                    <Waypoints size={12} /> How we deliver this platform
+                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-ink-muted">{site.deliveryNote}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-ink-muted">
+                    <span className="font-semibold text-ink">Staging focus: </span>
+                    {site.stagingFocus}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border bg-surface-50 p-4">
+                  <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-ink-light">
+                    <FileCheck2 size={12} /> In your draft scope
+                  </p>
+                  {activeStreams.length === 0 ? (
+                    <p className="mt-2 text-xs text-ink-muted">Select workstreams on the left to preview what lands in the written plan.</p>
+                  ) : (
+                    <ul className="mt-2 space-y-2.5">
+                      {activeStreams.map((w) => (
+                        <li key={w.id} className="flex gap-2 text-xs leading-snug text-ink-muted">
+                          <CheckCircle2 size={13} className="mt-0.5 shrink-0 text-brand-600" />
+                          <span>
+                            <span className="font-semibold text-ink">{w.label}</span>
+                            {' — '}
+                            {w.panelHint}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="mt-3 border-t border-border pt-3 text-[11px] leading-relaxed text-ink-light">
+                    {gapNotes}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-dashed border-border px-4 py-3 text-[11px] leading-relaxed text-ink-muted">
+                  WPServices quotes only after discovery maps hosting, theme debt, and success criteria — this panel is a
+                  planning signal, not a price guarantee or PageSpeed promise.
+                </div>
+              </div>
+
+              <div className="mt-5 border-t border-border pt-5">
+                <ContactLink className="btn-primary flex w-full items-center justify-center gap-2">
+                  Request a custom scope <ArrowRight size={16} />
+                </ContactLink>
+                <p className="mt-3 text-center text-[11px] text-ink-light">
+                  Free discovery call — we map hosting, theme debt, and success criteria before quoting.
+                </p>
+                <Link to="/quotes" className="mt-3 block text-center text-xs font-semibold text-brand-600 hover:underline">
+                  Read our build-floor principles →
+                </Link>
+              </div>
             </div>
           </aside>
         </div>

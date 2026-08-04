@@ -131,4 +131,26 @@ export const api = {
     if (!res.ok) throw new Error(json.error || 'Submission failed');
     return json;
   },
+
+  subscribeNewsletter: async (email: string) => {
+    const res = await fetch(`${API_BASE}/newsletter/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Subscription failed');
+    return json as { success: boolean; message: string; email: string; status: string };
+  },
+
+  unsubscribeNewsletter: async (email: string) => {
+    const res = await fetch(`${API_BASE}/newsletter/unsubscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Unsubscribe failed');
+    return json as { success: boolean; message: string; email: string; status: string };
+  },
 };

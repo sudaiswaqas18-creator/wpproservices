@@ -41,6 +41,7 @@ const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
 const AdminTools = lazy(() => import('./pages/admin/AdminTools'));
 const AdminGuidebooks = lazy(() => import('./pages/admin/AdminGuidebooks'));
 const AdminIndustries = lazy(() => import('./pages/admin/AdminIndustries'));
+const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
 
 export default function App() {
   return (
@@ -83,6 +84,7 @@ export default function App() {
         <Route path="tools" element={<AdminTools />} />
         <Route path="guidebooks" element={<AdminGuidebooks />} />
         <Route path="industries" element={<AdminIndustries />} />
+        <Route path="subscribers" element={<AdminSubscribers />} />
         <Route path="testimonials" element={<AdminTestimonials />} />
         <Route path="portfolio" element={<AdminPortfolio />} />
         <Route path="faqs" element={<AdminFaqs />} />

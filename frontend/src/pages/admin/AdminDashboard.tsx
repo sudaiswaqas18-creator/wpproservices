@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FileText, Briefcase, Mail, Wrench, Image, HelpCircle, Bot, BookOpen, ArrowUpRight, Star, Building2,
+  FileText, Briefcase, Mail, Wrench, Image, HelpCircle, Bot, BookOpen, ArrowUpRight, Star, Building2, MailPlus,
 } from 'lucide-react';
 import {
   adminApi,
@@ -21,6 +21,7 @@ const statConfig = [
   { key: 'portfolio_items', label: 'Portfolio', icon: Image, color: 'bg-green-500', link: '/admin/portfolio' },
   { key: 'faqs', label: 'FAQs', icon: HelpCircle, color: 'bg-surface-dark', link: '/admin/faqs' },
   { key: 'testimonials', label: 'Testimonials', icon: Star, color: 'bg-amber-500', link: '/admin/testimonials' },
+  { key: 'newsletter_subscribers', label: 'Subscribers', icon: MailPlus, color: 'bg-sky-600', link: '/admin/subscribers' },
   { key: 'contact_leads', label: 'New Leads', icon: Mail, color: 'bg-red-500', link: '/admin/leads' },
 ];
 

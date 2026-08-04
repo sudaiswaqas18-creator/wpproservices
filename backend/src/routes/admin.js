@@ -33,7 +33,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 
 // ─── Dashboard Stats ────────────────────────────────
 router.get('/stats', authMiddleware, async (_req, res) => {
-  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'tools', 'guidebooks', 'industries'];
+  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'tools', 'guidebooks', 'industries', 'newsletter_subscribers'];
   const stats = {};
   for (const t of tables) {
     const [[{ count }]] = await pool.query(`SELECT COUNT(*) as count FROM ${t}`);
@@ -315,6 +315,45 @@ router.put('/industries/:id', authMiddleware, async (req, res) => {
 
 router.delete('/industries/:id', authMiddleware, async (req, res) => {
   await pool.query('DELETE FROM industries WHERE id = ?', [req.params.id]);
+  res.json({ message: 'Deleted' });
+});
+
+// ─── Newsletter subscribers ───────────────────────────
+router.get('/newsletter', authMiddleware, async (_req, res) => {
+  const [rows] = await pool.query(
+    'SELECT * FROM newsletter_subscribers ORDER BY created_at DESC, id DESC',
+  );
+  res.json(rows);
+});
+
+router.patch('/newsletter/:id', authMiddleware, async (req, res) => {
+  const id = req.params.id;
+  const { admin_disabled, status } = req.body ?? {};
+  const [rows] = await pool.query('SELECT * FROM newsletter_subscribers WHERE id = ? LIMIT 1', [id]);
+  if (!rows.length) return res.status(404).json({ error: 'Subscriber not found' });
+
+  let disabled = rows[0].admin_disabled;
+  let nextStatus = rows[0].status;
+
+  if (typeof admin_disabled === 'boolean' || admin_disabled === 0 || admin_disabled === 1) {
+    disabled = admin_disabled ? 1 : 0;
+  }
+  if (status === 'subscribed' || status === 'unsubscribed') {
+    nextStatus = status;
+  }
+
+  await pool.query(
+    `UPDATE newsletter_subscribers SET admin_disabled=?, status=?,
+      subscribed_at=CASE WHEN ?='subscribed' AND status!='subscribed' THEN NOW() ELSE subscribed_at END,
+      unsubscribed_at=CASE WHEN ?='unsubscribed' AND status!='unsubscribed' THEN NOW() ELSE unsubscribed_at END
+     WHERE id=?`,
+    [disabled, nextStatus, nextStatus, nextStatus, id],
+  );
+  res.json({ message: 'Updated' });
+});
+
+router.delete('/newsletter/:id', authMiddleware, async (req, res) => {
+  await pool.query('DELETE FROM newsletter_subscribers WHERE id = ?', [req.params.id]);
   res.json({ message: 'Deleted' });
 });
 

@@ -173,3 +173,14 @@ CREATE TABLE IF NOT EXISTS site_stats (
   stat_label VARCHAR(100) NOT NULL,
   sort_order INT DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  status ENUM('subscribed', 'unsubscribed') NOT NULL DEFAULT 'subscribed',
+  admin_disabled TINYINT(1) NOT NULL DEFAULT 0,
+  subscribed_at TIMESTAMP NULL,
+  unsubscribed_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

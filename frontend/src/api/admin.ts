@@ -141,6 +141,12 @@ export const adminApi = {
   createIndustry: (data: IndustryForm) => adminFetch('/industries', { method: 'POST', body: JSON.stringify(data) }),
   updateIndustry: (id: number, data: IndustryForm) => adminFetch(`/industries/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteIndustry: (id: number) => adminFetch(`/industries/${id}`, { method: 'DELETE' }),
+
+  // Newsletter
+  getNewsletter: async () => asArray<NewsletterRow>(await adminFetch('/newsletter')),
+  updateNewsletter: (id: number, data: { admin_disabled?: boolean; status?: 'subscribed' | 'unsubscribed' }) =>
+    adminFetch(`/newsletter/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  deleteNewsletter: (id: number) => adminFetch(`/newsletter/${id}`, { method: 'DELETE' }),
 };
 
 export interface BlogRow {
@@ -209,3 +215,14 @@ export interface IndustryRow {
   id: number; title: string; description: string; has_case_study: boolean | number; sort_order: number;
 }
 export type IndustryForm = Omit<IndustryRow, 'id'>;
+
+export interface NewsletterRow {
+  id: number;
+  email: string;
+  status: 'subscribed' | 'unsubscribed';
+  admin_disabled: boolean | number;
+  subscribed_at: string | null;
+  unsubscribed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
