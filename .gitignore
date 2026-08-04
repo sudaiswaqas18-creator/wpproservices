@@ -67,6 +67,7 @@ frontend/.vercel
 *.seed
 *.pid.lock
 
+# Local credential notes (never commit)
 passsword.txt
-*.txt
-!frontend/**/*.txt
+password*.txt
+*password*.txt
