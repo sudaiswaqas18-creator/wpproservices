@@ -15,6 +15,15 @@ await ensureDatabase().catch((err) => {
   console.error('API will start anyway; routes may return 500 until MySQL is configured.');
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`WPServices API running on port ${PORT}`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use. Stop the other process, then restart.`);
+    console.error(`Windows: netstat -ano | findstr :${PORT}  then  taskkill /PID <pid> /F`);
+    process.exit(1);
+  }
+  throw err;
 });
