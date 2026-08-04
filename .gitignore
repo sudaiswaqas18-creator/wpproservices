@@ -66,3 +66,7 @@ frontend/.vercel
 *.pid
 *.seed
 *.pid.lock
+
+passsword.txt
+*.txt
+!frontend/**/*.txt
