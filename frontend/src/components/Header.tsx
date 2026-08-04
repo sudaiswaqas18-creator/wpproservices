@@ -280,11 +280,11 @@ export default function Header() {
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="w-[22rem] rounded-xl border border-gray-100 bg-white py-3 shadow-card sm:w-[28rem]">
+                  <div className="w-[22rem] rounded-xl border border-gray-100 bg-white py-3 shadow-card sm:w-[32rem]">
                     <p className="px-4 pb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">
                       Explore
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2">
+                    <div className="grid max-h-[70vh] grid-cols-1 overflow-y-auto sm:grid-cols-2">
                       {NAV_RESOURCE_LINKS.map((item) => {
                         const Icon = item.icon;
                         return (

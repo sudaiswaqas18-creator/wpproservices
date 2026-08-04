@@ -1,7 +1,7 @@
 import {
   Code, ShoppingCart, Puzzle, Palette, Shield, Search, Zap,
   ArrowRightLeft, MessageCircle, BookOpen, Wrench, FileText, Briefcase,
-  Image, Building2, Route, HelpCircle,
+  Image, Building2, Route, HelpCircle, Users, Quote,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -32,6 +32,8 @@ export const NAV_RESOURCE_LINKS: NavItem[] = [
   { title: 'Case Studies', slug: 'case-studies', href: '/case-studies', icon: Briefcase, desc: 'Project stories with honest outcomes' },
   { title: 'Portfolio', slug: 'portfolio', href: '/portfolio', icon: Image, desc: 'WordPress & WooCommerce samples' },
   { title: 'Industries', slug: 'industries', href: '/industries', icon: Building2, desc: 'WordPress by sector' },
+  { title: 'Customers', slug: 'customers', href: '/customers', icon: Users, desc: 'Who we build WordPress for' },
+  { title: 'Quotes', slug: 'quotes', href: '/quotes', icon: Quote, desc: 'Build-floor principles' },
   { title: 'Our Process', slug: 'process', href: '/process', icon: Route, desc: 'Scope, staging, launch & handoff' },
   { title: 'FAQs', slug: 'faq', href: '/faq', icon: HelpCircle, desc: 'Timelines, migrations & care plans' },
   { title: 'Guidebooks', slug: 'guidebooks', href: '/resources/guidebooks', icon: BookOpen, desc: 'Launch, LMS & store checklists' },
@@ -41,10 +43,10 @@ export const NAV_RESOURCE_LINKS: NavItem[] = [
 export const NAV_RESOURCES: { label: string; items: NavItem[] }[] = [
   {
     label: 'Explore',
-    items: NAV_RESOURCE_LINKS.slice(0, 6),
+    items: NAV_RESOURCE_LINKS.slice(0, 8),
   },
   {
     label: 'Downloads',
-    items: NAV_RESOURCE_LINKS.slice(6),
+    items: NAV_RESOURCE_LINKS.slice(8),
   },
 ];

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
-import { getCaseStudyMedia } from '../data/siteContent';
+import { getCaseStudyMedia, normalizeCaseStudySlug } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 import CTA from '../components/CTA';
 
@@ -27,11 +27,12 @@ export default function CaseStudiesPage() {
       <section className="pb-20">
         <div className="section-container space-y-6">
           {studies.map((cs) => {
-            const media = getCaseStudyMedia(cs.slug);
+            const storySlug = normalizeCaseStudySlug(cs.slug) || cs.slug;
+            const media = getCaseStudyMedia(storySlug);
             return (
               <article key={cs.id} className="card overflow-hidden p-0">
                 <div className="grid lg:grid-cols-5">
-                  <div className="relative h-52 overflow-hidden bg-gray-100 lg:col-span-2 lg:h-auto min-h-[220px]">
+                  <div className="relative h-52 min-h-[220px] overflow-hidden bg-gray-100 lg:col-span-2 lg:h-auto">
                     <img
                       src={optimizeImageUrl(media.image_url, 800)}
                       alt={media.image_alt}
@@ -46,7 +47,7 @@ export default function CaseStudiesPage() {
                     <h2 className="text-xl font-bold text-gray-900">{cs.title}</h2>
                     <p className="mt-2 text-sm font-medium text-brand-600">Client: {media.client_label}</p>
                     <p className="mt-4 text-sm text-gray-600">{cs.challenge}</p>
-                    <Link to={`/case-studies/${cs.slug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                    <Link to={`/case-studies/${storySlug}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
                       View Full Case Study <ArrowRight size={14} />
                     </Link>
                   </div>

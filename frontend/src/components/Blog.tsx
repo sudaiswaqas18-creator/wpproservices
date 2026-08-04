@@ -3,12 +3,30 @@ import { useApiData } from '../hooks/useApiData';
 import BlogShowcaseStrip from './BlogShowcaseStrip';
 import BlogMobileCard from './BlogMobileCard';
 
-interface Props { limit?: number; showViewAll?: boolean }
+/** Seed / default articles only — admin test posts stay off the homepage */
+export const HOMEPAGE_BLOG_SLUGS = [
+  'migrate-wordpress-seo',
+  'website-redesign-checklist',
+  'woocommerce-customization-scale',
+  'core-web-vitals-wordpress',
+] as const;
 
-export default function Blog({ limit, showViewAll = true }: Props) {
+interface Props {
+  limit?: number;
+  showViewAll?: boolean;
+  /** When true (homepage), only curated default slugs are shown */
+  featuredOnly?: boolean;
+}
+
+export default function Blog({ limit, showViewAll = true, featuredOnly = false }: Props) {
   const { data: posts } = useApiData('blog');
   const list = Array.isArray(posts) ? posts : [];
-  const items = limit ? list.slice(0, limit) : list;
+  const curated = featuredOnly
+    ? HOMEPAGE_BLOG_SLUGS.map((slug) => list.find((p) => p.slug === slug)).filter(
+        (p): p is (typeof list)[number] => Boolean(p),
+      )
+    : list;
+  const items = limit ? curated.slice(0, limit) : curated;
   if (!items.length) return null;
 
   return (
@@ -16,7 +34,8 @@ export default function Blog({ limit, showViewAll = true }: Props) {
       <div className="section-container">
         <h2 className="section-title">WordPress Notes From the Build Floor</h2>
         <p className="section-subtitle">
-          Straight talk on migrations, Core Web Vitals, WooCommerce limits, and keeping sites maintainable after launch.
+          Straight talk on migrations, Core Web Vitals, WooCommerce limits, and keeping sites maintainable after
+          launch.
         </p>
 
         <BlogShowcaseStrip posts={items} />
@@ -29,7 +48,9 @@ export default function Blog({ limit, showViewAll = true }: Props) {
 
         {showViewAll && (
           <div className="mt-10 text-center">
-            <Link to="/blog" className="btn-outline">View All Articles</Link>
+            <Link to="/blog" className="btn-outline">
+              View All Articles
+            </Link>
           </div>
         )}
       </div>

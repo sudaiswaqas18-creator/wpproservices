@@ -27,6 +27,8 @@ export const fallbackData = {
       metric3_label: 'Ops Effort',
       metric3_value: 'Less manual work',
       slug: 'grocery-loyalty-shipping',
+      full_content:
+        'Staging QA covered cart, coupons, and address edge cases before cutover. Editors received a short rule sheet so marketing could adjust thresholds without developer tickets.',
     },
     {
       id: 2,
@@ -42,6 +44,59 @@ export const fallbackData = {
       metric3_label: 'Delivery',
       metric3_value: 'Staging-first',
       slug: 'cohort-lms-access',
+      full_content:
+        'Access rules were rehearsed with sample cohorts on staging. Staff handoff covered enrollment, drip schedules, and how to add a new cohort without breaking prior members.',
+    },
+    {
+      id: 3,
+      title: 'Event-Tied Cart Recovery for Apparel',
+      client: 'Anonymized apparel WooCommerce store',
+      challenge: 'Abandoned carts recovered poorly because reminders ignored real order and inventory events.',
+      solution:
+        'Wired recovery messaging to WooCommerce order lifecycle events so shoppers only saw offers that matched stock and checkout state.',
+      metric1_label: 'Recovery Clarity',
+      metric1_value: 'Event-tied',
+      metric2_label: 'Checkout Path',
+      metric2_value: 'Fewer dead ends',
+      metric3_label: 'Ops Trust',
+      metric3_value: 'Honest stock',
+      slug: 'apparel-cart-recovery',
+      full_content:
+        'Templates and triggers were documented so marketing could pause campaigns without breaking transactional email. Staging covered guest and logged-in carts.',
+    },
+    {
+      id: 4,
+      title: 'Attribute-Driven Subscription Pricing',
+      client: 'Anonymized specialty retail store',
+      challenge: 'Subscription renewals ignored product attributes, creating manual pricing exceptions.',
+      solution:
+        'Extended WooCommerce subscription logic so renewals respected selected attributes with clearer admin controls.',
+      metric1_label: 'Pricing Exceptions',
+      metric1_value: 'Reduced',
+      metric2_label: 'Renewals',
+      metric2_value: 'Attribute-aware',
+      metric3_label: 'Support Load',
+      metric3_value: 'Fewer tickets',
+      slug: 'attribute-subscription-pricing',
+      full_content:
+        'Admins received a short matrix of attribute → price behavior. Changes were staged against a sample subscription catalog before production.',
+    },
+    {
+      id: 5,
+      title: 'Wallet Checkout for Course Seats',
+      client: 'Anonymized online course team',
+      challenge: 'Team buyers struggled to assign seats after purchase without support intervention.',
+      solution:
+        'Built a wallet-style checkout and seat assignment flow so managers could allocate access after payment without custom tickets every time.',
+      metric1_label: 'Seat Assignment',
+      metric1_value: 'Self-serve',
+      metric2_label: 'Support',
+      metric2_value: 'Fewer handoffs',
+      metric3_label: 'Checkout',
+      metric3_value: 'Clearer path',
+      slug: 'course-wallet-checkout',
+      full_content:
+        'Handoff covered wallet top-ups, seat limits, and how to refund unused seats. Staging validated guest vs organization buyers.',
     },
   ] as CaseStudy[],
 

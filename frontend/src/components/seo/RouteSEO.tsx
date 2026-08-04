@@ -8,7 +8,6 @@ export default function RouteSEO() {
 
   if (pathname.startsWith('/admin')) return null;
   if (pathname.match(/^\/services\/[^/]+$/)) return null;
-  if (pathname.match(/^\/products\/[^/]+$/)) return null;
   if (pathname.match(/^\/blog\/[^/]+$/)) return null;
   if (pathname.match(/^\/case-studies\/[^/]+$/)) return null;
   if (pathname.match(/^\/resources\//)) return null;

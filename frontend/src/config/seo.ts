@@ -34,11 +34,25 @@ export const STATIC_SEO: Record<string, PageSEO> = {
     path: '/services',
   },
   '/products': {
-    title: 'WooCommerce Plugins by Category | WPServices',
+    title: 'WordPress Delivery Systems | WPServices',
     description:
-      'WooCommerce-only plugins for B2B pricing, catalogs, campaigns, inventory, checkout trust, and subscriptions — built for real online stores.',
-    keywords: 'WooCommerce plugins, WooCommerce B2B pricing, WooCommerce inventory plugins, WooCommerce checkout',
-    path: '/products',
+      'How WPServices scopes, stages, and hands off maintainable WordPress themes, WooCommerce stores, and LearnDash builds.',
+    keywords: 'WordPress agency process, maintainable WordPress, WooCommerce delivery',
+    path: '/process',
+  },
+  '/customers': {
+    title: 'Who We Build For | WPServices Customers',
+    description:
+      'Customer types WPServices serves: WooCommerce retail, LearnDash training, B2B sites, healthcare, hospitality, and non-profits.',
+    keywords: 'WordPress agency customers, WooCommerce for retailers, LearnDash agency',
+    path: '/customers',
+  },
+  '/quotes': {
+    title: 'WordPress Build-Floor Principles | WPServices',
+    description:
+      'Original WPServices principles on scope, staging, WooCommerce, LearnDash, Core Web Vitals, migrations, and care.',
+    keywords: 'WordPress agency principles, WooCommerce best practices, WordPress staging',
+    path: '/quotes',
   },
   '/industries': {
     title: 'Industries We Serve | WordPress Agency',

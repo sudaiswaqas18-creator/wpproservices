@@ -98,7 +98,15 @@ app.get('/api/case-studies/featured/list', asyncHandler(async (_req, res) => {
 }));
 
 app.get('/api/case-studies/:slug', asyncHandler(async (req, res) => {
-  const [rows] = await pool.query('SELECT * FROM case_studies WHERE slug = ?', [req.params.slug]);
+  const aliases = {
+    'freshharvest-shipping': 'grocery-loyalty-shipping',
+    'eduvault-lms': 'cohort-lms-access',
+    'stylebox-cart-recovery': 'apparel-cart-recovery',
+    'clearview-subscriptions': 'attribute-subscription-pricing',
+    'learnpoint-wallet': 'course-wallet-checkout',
+  };
+  const slug = aliases[req.params.slug] || req.params.slug;
+  const [rows] = await pool.query('SELECT * FROM case_studies WHERE slug = ?', [slug]);
   if (!rows.length) return res.status(404).json({ error: 'Case study not found' });
   res.json(rows[0]);
 }));

@@ -20,6 +20,8 @@ const FaqPage = lazy(() => import('./pages/FaqPage'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const ProcessPage = lazy(() => import('./pages/ProcessPage'));
 const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
+const CustomersPage = lazy(() => import('./pages/CustomersPage'));
+const QuotesPage = lazy(() => import('./pages/QuotesPage'));
 const ToolsListPage = lazy(() => import('./pages/ToolsPages').then((m) => ({ default: m.ToolsListPage })));
 const ToolDetailPage = lazy(() => import('./pages/ToolsPages'));
 const GuidebooksListPage = lazy(() => import('./pages/GuidebooksPages').then((m) => ({ default: m.GuidebooksListPage })));
@@ -51,6 +53,8 @@ export default function App() {
         <Route path="portfolio" element={<PortfolioPage />} />
         <Route path="process" element={<ProcessPage />} />
         <Route path="resources" element={<ResourcesPage />} />
+        <Route path="customers" element={<CustomersPage />} />
+        <Route path="quotes" element={<QuotesPage />} />
         <Route path="resources/tools" element={<ToolsListPage />} />
         <Route path="resources/tools/:slug" element={<ToolDetailPage />} />
         <Route path="resources/guidebooks" element={<GuidebooksListPage />} />

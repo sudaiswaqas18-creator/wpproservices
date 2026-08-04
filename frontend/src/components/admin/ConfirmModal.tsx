@@ -60,27 +60,27 @@ export default function ConfirmModal({
 
             {/* Content Body */}
             <div className="mt-5 text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-50 text-red-600">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-50 text-brand-700">
                 <AlertTriangle size={28} />
               </div>
-              <h3 className="mt-4 text-lg font-bold text-gray-900">{title}</h3>
+              <h3 className="mt-4 text-lg font-bold text-ink">{title}</h3>
               {itemName && (
-                <p className="mt-1 font-semibold text-sm text-red-600 line-clamp-1">
-                  "{itemName}"
+                <p className="mt-1 line-clamp-1 text-sm font-semibold text-ink">
+                  &ldquo;{itemName}&rdquo;
                 </p>
               )}
-              <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+              <p className="mt-2 text-xs leading-relaxed text-ink-muted">
                 {message}
               </p>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons — brand black / outline to match site */}
             <div className="mt-6 flex items-center gap-3">
               <button
                 type="button"
                 onClick={onCancel}
                 disabled={isDeleting}
-                className="flex-1 rounded-xl border border-gray-200 bg-white py-2.5 text-xs font-bold text-gray-700 hover:bg-gray-50 transition"
+                className="flex-1 rounded-xl border border-border bg-white py-2.5 text-xs font-bold text-ink-muted transition hover:bg-surface-50"
               >
                 {cancelText}
               </button>
@@ -88,7 +88,7 @@ export default function ConfirmModal({
                 type="button"
                 onClick={onConfirm}
                 disabled={isDeleting}
-                className="flex-1 rounded-xl bg-red-600 py-2.5 text-xs font-bold text-white shadow-md shadow-red-600/20 hover:bg-red-700 transition disabled:opacity-50"
+                className="flex-1 rounded-xl bg-brand-500 py-2.5 text-xs font-bold text-white shadow-md shadow-brand-500/20 transition hover:bg-brand-600 disabled:opacity-50"
               >
                 {isDeleting ? 'Deleting...' : confirmText}
               </button>

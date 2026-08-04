@@ -14,7 +14,8 @@ const BreadcrumbContext = createContext<BreadcrumbContextValue>({
 const SEGMENT_LABELS: Record<string, string> = {
   about: 'About Us',
   services: 'Services',
-  products: 'Plugins',
+  customers: 'Customers',
+  quotes: 'Quotes',
   industries: 'Industries',
   faq: 'FAQs',
   portfolio: 'Portfolio',

@@ -72,7 +72,7 @@ export const textareaClass = `${inputClass} resize-y`;
 
 export function DeleteBtn({ onClick }: { onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="rounded-lg px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50">
+    <button type="button" onClick={onClick} className="rounded-lg px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-50">
       Delete
     </button>
   );
