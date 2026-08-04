@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  Check, Clock, Shield, Users, ArrowRight, Package, Sparkles, Zap,
+  Check, Clock, Shield, Users, ArrowRight, Package, Sparkles, Zap, Target, ListChecks,
 } from 'lucide-react';
 import { api, ServiceDetail } from '../api/client';
 import ContactForm from '../components/ContactForm';
@@ -12,6 +12,7 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 import { buildTitle } from '../config/seo';
 import { getServiceEnrichment, getServiceSeoDescription } from '../data/serviceEnrichment';
+import { getServiceDeepContent } from '../data/serviceDeepContent';
 import { getServiceImage } from '../data/siteContent';
 import { optimizeImageUrl } from '../utils/imageUrl';
 
@@ -45,6 +46,7 @@ export default function ServiceDetailPage() {
   }
 
   const enriched = getServiceEnrichment(service.slug, service.features);
+  const deep = getServiceDeepContent(service.slug);
   const media = getServiceImage(service.slug);
 
   return (
@@ -124,6 +126,55 @@ export default function ServiceDetailPage() {
                   ? service.full_content
                   : enriched.intro}
               </p>
+            </motion.div>
+
+            <motion.div {...fadeUp} className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-surface-50 p-5">
+                <div className="flex items-center gap-2 text-sm font-bold text-ink">
+                  <Target size={16} className="text-brand-600" /> Ideal for
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {deep.idealFor.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                      <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-border bg-surface-50 p-5">
+                <div className="flex items-center gap-2 text-sm font-bold text-ink">
+                  <ListChecks size={16} className="text-brand-600" /> Outcomes we aim for
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {deep.outcomes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                      <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {deep.deepDive.map((section) => (
+              <motion.div key={section.heading} {...fadeUp}>
+                <h3 className="text-xl font-bold text-gray-900">{section.heading}</h3>
+                <p className="mt-3 text-base leading-relaxed text-gray-600">{section.body}</p>
+              </motion.div>
+            ))}
+
+            <motion.div {...fadeUp} className="rounded-2xl border border-dashed border-brand-200 bg-brand-50/40 p-5">
+              <h3 className="text-sm font-bold uppercase tracking-wide text-brand-700">
+                What we clarify before build
+              </h3>
+              <ul className="mt-3 grid gap-2 sm:grid-cols-3">
+                {deep.whatWeClarify.map((item) => (
+                  <li key={item} className="text-sm font-medium text-ink-muted">
+                    • {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
 
             {/* Benefits cards */}
