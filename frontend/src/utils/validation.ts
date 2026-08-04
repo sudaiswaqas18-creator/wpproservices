@@ -228,5 +228,14 @@ export function validateGuidebookForm(form: { title: string; description: string
   return errors;
 }
 
+export function validateIndustryForm(form: { title: string; description: string }): FieldErrors {
+  const errors: FieldErrors = {};
+  const titleErr = validateRequired(form.title, 'Title', 3, 120);
+  if (titleErr) errors.title = titleErr;
+  const descErr = validateRequired(form.description, 'Description', 10, 2000);
+  if (descErr) errors.description = descErr;
+  return errors;
+}
+
 export const fieldClass = (base: string, hasError: boolean) =>
   `${base} ${hasError ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20' : ''}`;

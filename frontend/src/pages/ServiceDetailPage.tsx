@@ -252,7 +252,7 @@ export default function ServiceDetailPage() {
                   </ul>
                 </div>
 
-                <Link to="/contact" className="btn-primary mt-6 w-full">
+                <Link to="/quotes" className="btn-primary mt-6 w-full">
                   Request a Quote
                 </Link>
                 <p className="mt-3 text-center text-xs text-gray-500">

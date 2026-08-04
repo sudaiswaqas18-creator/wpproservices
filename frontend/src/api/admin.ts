@@ -135,6 +135,12 @@ export const adminApi = {
   createGuidebook: (data: GuidebookForm) => adminFetch('/guidebooks', { method: 'POST', body: JSON.stringify(data) }),
   updateGuidebook: (id: number, data: GuidebookForm) => adminFetch(`/guidebooks/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteGuidebook: (id: number) => adminFetch(`/guidebooks/${id}`, { method: 'DELETE' }),
+
+  // Industries
+  getIndustries: async () => asArray<IndustryRow>(await adminFetch('/industries')),
+  createIndustry: (data: IndustryForm) => adminFetch('/industries', { method: 'POST', body: JSON.stringify(data) }),
+  updateIndustry: (id: number, data: IndustryForm) => adminFetch(`/industries/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteIndustry: (id: number) => adminFetch(`/industries/${id}`, { method: 'DELETE' }),
 };
 
 export interface BlogRow {
@@ -198,3 +204,8 @@ export interface GuidebookRow {
   download_url: string; image_url: string; sort_order: number;
 }
 export type GuidebookForm = Omit<GuidebookRow, 'id'>;
+
+export interface IndustryRow {
+  id: number; title: string; description: string; has_case_study: boolean | number; sort_order: number;
+}
+export type IndustryForm = Omit<IndustryRow, 'id'>;

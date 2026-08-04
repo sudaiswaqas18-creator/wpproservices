@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Check, Sparkles } from 'lucide-react';
 import { useApiData } from '../hooks/useApiData';
-import ContactLink from './ContactLink';
 
 export default function Pricing() {
   const { data: plans } = useApiData('pricing');
@@ -55,9 +55,9 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <ContactLink className="btn-primary mt-8 w-full block text-center">
+              <Link to="/quotes" className="btn-primary mt-8 block w-full text-center">
                 Get a Project Quote
-              </ContactLink>
+              </Link>
             </div>
           ))}
         </div>

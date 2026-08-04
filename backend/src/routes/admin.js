@@ -33,7 +33,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 
 // ─── Dashboard Stats ────────────────────────────────
 router.get('/stats', authMiddleware, async (_req, res) => {
-  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'tools', 'guidebooks'];
+  const tables = ['blog_posts', 'case_studies', 'services', 'testimonials', 'portfolio_items', 'faqs', 'contact_leads', 'tools', 'guidebooks', 'industries'];
   const stats = {};
   for (const t of tables) {
     const [[{ count }]] = await pool.query(`SELECT COUNT(*) as count FROM ${t}`);
@@ -286,6 +286,35 @@ router.put('/guidebooks/:id', authMiddleware, async (req, res) => {
 
 router.delete('/guidebooks/:id', authMiddleware, async (req, res) => {
   await pool.query('DELETE FROM guidebooks WHERE id = ?', [req.params.id]);
+  res.json({ message: 'Deleted' });
+});
+
+// ─── Industries CRUD ──────────────────────────────────
+router.get('/industries', authMiddleware, async (_req, res) => {
+  const [rows] = await pool.query('SELECT * FROM industries ORDER BY sort_order');
+  res.json(rows);
+});
+
+router.post('/industries', authMiddleware, async (req, res) => {
+  const b = req.body;
+  const [result] = await pool.query(
+    `INSERT INTO industries (title, description, has_case_study, sort_order) VALUES (?,?,?,?)`,
+    [b.title, b.description, b.has_case_study ? 1 : 0, b.sort_order || 0]
+  );
+  res.status(201).json({ id: result.insertId });
+});
+
+router.put('/industries/:id', authMiddleware, async (req, res) => {
+  const b = req.body;
+  await pool.query(
+    `UPDATE industries SET title=?, description=?, has_case_study=?, sort_order=? WHERE id=?`,
+    [b.title, b.description, b.has_case_study ? 1 : 0, b.sort_order || 0, req.params.id]
+  );
+  res.json({ message: 'Updated' });
+});
+
+router.delete('/industries/:id', authMiddleware, async (req, res) => {
+  await pool.query('DELETE FROM industries WHERE id = ?', [req.params.id]);
   res.json({ message: 'Deleted' });
 });
 
