@@ -18,34 +18,45 @@ import { markScopeBuilderIntent, SCOPE_BUILDER_STORAGE_KEY } from '../utils/scop
  * Scores are honest readiness signals, not guaranteed PageSpeed numbers.
  */
 
+type PlatformId = 'marketing' | 'woo' | 'lms' | 'migrate';
+
+type Workstream = {
+  id: string;
+  label: string;
+  desc: string;
+  weeks: string;
+  weight: number;
+};
+
 const SITE_TYPES = [
   {
-    id: 'marketing',
+    id: 'marketing' as const,
     label: 'Marketing / brochure site',
     focus: 'Editor-safe themes, forms, SEO structure',
     note: 'Editor patterns and forms your marketing team can update without weekly rebuild tickets.',
   },
   {
-    id: 'woo',
+    id: 'woo' as const,
     label: 'WooCommerce store',
     focus: 'Catalog, checkout, shipping, staging QA',
     note: 'Scoped around real catalog rules, shipping thresholds, and checkout honesty — not demo SKUs.',
   },
   {
-    id: 'lms',
+    id: 'lms' as const,
     label: 'LearnDash / membership',
     focus: 'Access rules, cohorts, seat paths',
     note: 'Access math first — who gets which course, when drip fires, and how seats assign cleanly.',
   },
   {
-    id: 'migrate',
+    id: 'migrate' as const,
     label: 'Migration or redesign',
     focus: 'Redirects, inventory, cutover checklist',
     note: 'URL maps, plugin keep-lists, and a rollback path before DNS cutover — not hope-based launches.',
   },
-] as const;
+];
 
-const WORKSTREAMS = [
+/** Always shown for every platform */
+const BASE_WORKSTREAMS: Workstream[] = [
   {
     id: 'scope',
     label: 'Written scope & success criteria',
@@ -54,38 +65,133 @@ const WORKSTREAMS = [
     weight: 18,
   },
   {
-    id: 'theme',
-    label: 'Custom theme / Gutenberg patterns',
-    desc: 'Layouts editors can update safely.',
-    weeks: '2–4 weeks',
-    weight: 22,
-  },
-  {
-    id: 'commerce',
-    label: 'WooCommerce or LearnDash depth',
-    desc: 'Checkout, catalog, or access logic.',
-    weeks: '2–5 weeks',
-    weight: 24,
-  },
-  {
-    id: 'performance',
-    label: 'Template performance review',
-    desc: 'Hero media, queries, third-party scripts.',
-    weeks: '3–7 days',
-    weight: 16,
-  },
-  {
     id: 'care',
     label: 'Launch + care handoff',
     desc: 'Cutover docs and update habits.',
     weeks: 'Ongoing',
     weight: 14,
   },
-] as const;
+];
+
+/** Extra workstreams that change with Step 1 */
+const PLATFORM_WORKSTREAMS: Record<PlatformId, Workstream[]> = {
+  marketing: [
+    {
+      id: 'theme',
+      label: 'Custom theme / Gutenberg patterns',
+      desc: 'Layouts editors can update safely without a rebuild ticket.',
+      weeks: '2–4 weeks',
+      weight: 22,
+    },
+    {
+      id: 'performance',
+      label: 'Template performance review',
+      desc: 'Hero media, queries, and third-party scripts on key pages.',
+      weeks: '3–7 days',
+      weight: 16,
+    },
+  ],
+  woo: [
+    {
+      id: 'theme',
+      label: 'Custom theme / Gutenberg patterns',
+      desc: 'Product and archive templates editors can maintain.',
+      weeks: '2–4 weeks',
+      weight: 20,
+    },
+    {
+      id: 'woo-depth',
+      label: 'WooCommerce depth',
+      desc: 'Catalog clarity, checkout honesty, and shipping rules under real SKUs.',
+      weeks: '2–5 weeks',
+      weight: 24,
+    },
+    {
+      id: 'performance',
+      label: 'Template performance review',
+      desc: 'LCP and query weight on cart, product, and checkout paths.',
+      weeks: '3–7 days',
+      weight: 16,
+    },
+  ],
+  lms: [
+    {
+      id: 'theme',
+      label: 'Custom theme / Gutenberg patterns',
+      desc: 'Course and dashboard layouts learners and admins can navigate.',
+      weeks: '2–4 weeks',
+      weight: 20,
+    },
+    {
+      id: 'lms-depth',
+      label: 'LearnDash depth',
+      desc: 'Access rules, cohort drip, and seat or payment paths that hold.',
+      weeks: '2–5 weeks',
+      weight: 24,
+    },
+    {
+      id: 'performance',
+      label: 'Template performance review',
+      desc: 'Heavy course templates and dashboards checked before launch.',
+      weeks: '3–7 days',
+      weight: 16,
+    },
+  ],
+  migrate: [
+    {
+      id: 'theme',
+      label: 'Custom theme / Gutenberg patterns',
+      desc: 'Rebuild or reshape templates on the destination stack.',
+      weeks: '2–4 weeks',
+      weight: 20,
+    },
+    {
+      id: 'cutover',
+      label: 'Redirects, inventory & cutover checklist',
+      desc: 'URL maps, content inventory, plugin keep-list, and rollback path.',
+      weeks: '1–3 weeks',
+      weight: 24,
+    },
+    {
+      id: 'performance',
+      label: 'Template performance review',
+      desc: 'Post-migration templates checked on real destination hosting.',
+      weeks: '3–7 days',
+      weight: 16,
+    },
+  ],
+};
+
+/** Default checked IDs when a platform is selected */
+const DEFAULT_SELECTED: Record<PlatformId, string[]> = {
+  marketing: ['scope', 'theme', 'performance'],
+  woo: ['scope', 'woo-depth', 'performance'],
+  lms: ['scope', 'lms-depth', 'performance'],
+  migrate: ['scope', 'cutover', 'performance'],
+};
+
+function workstreamsFor(platform: PlatformId): Workstream[] {
+  const extras = PLATFORM_WORKSTREAMS[platform] ?? [];
+  // Base first (scope), then platform-specific, then care last
+  const scope = BASE_WORKSTREAMS.find((w) => w.id === 'scope')!;
+  const care = BASE_WORKSTREAMS.find((w) => w.id === 'care')!;
+  return [scope, ...extras, care];
+}
+
+function isDepthId(id: string) {
+  return id === 'theme' || id === 'woo-depth' || id === 'lms-depth' || id === 'cutover';
+}
 
 export default function WPEstimatorSection() {
-  const [siteType, setSiteType] = useState<string>('woo');
-  const [selected, setSelected] = useState<string[]>(['scope', 'commerce', 'performance']);
+  const [siteType, setSiteType] = useState<PlatformId>('woo');
+  const [selected, setSelected] = useState<string[]>(() => [...DEFAULT_SELECTED.woo]);
+
+  const available = useMemo(() => workstreamsFor(siteType), [siteType]);
+
+  const selectPlatform = (id: PlatformId) => {
+    setSiteType(id);
+    setSelected([...DEFAULT_SELECTED[id]]);
+  };
 
   const toggle = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -94,18 +200,18 @@ export default function WPEstimatorSection() {
   const readiness = useMemo(() => {
     const base = 42;
     const bonus = selected.reduce((sum, id) => {
-      const row = WORKSTREAMS.find((w) => w.id === id);
+      const row = available.find((w) => w.id === id);
       return sum + (row?.weight ?? 0);
     }, 0);
     return Math.min(96, base + Math.round(bonus * 0.55));
-  }, [selected]);
+  }, [selected, available]);
 
   const site = SITE_TYPES.find((s) => s.id === siteType) ?? SITE_TYPES[1];
-  const activeLabels = WORKSTREAMS.filter((w) => selected.includes(w.id)).map((w) => w.label);
+  const activeLabels = available.filter((w) => selected.includes(w.id)).map((w) => w.label);
   const weeksHint =
     selected.length === 0
       ? 'Add a workstream'
-      : selected.includes('theme') || selected.includes('commerce')
+      : selected.some(isDepthId)
         ? 'Typically 3–8 weeks after discovery'
         : 'Typically 1–3 weeks after discovery';
 
@@ -133,9 +239,7 @@ export default function WPEstimatorSection() {
           </p>
         </div>
 
-        {/* Equal columns, equal visual weight */}
         <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-stretch">
-          {/* LEFT */}
           <div className="flex flex-col gap-5">
             <div className="rounded-2xl border border-border bg-white p-5 shadow-card">
               <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -148,7 +252,7 @@ export default function WPEstimatorSection() {
                     <button
                       key={type.id}
                       type="button"
-                      onClick={() => setSiteType(type.id)}
+                      onClick={() => selectPlatform(type.id)}
                       className={`rounded-xl border p-3 text-left transition ${
                         active
                           ? 'border-brand-500 bg-brand-50 shadow-sm'
@@ -167,8 +271,11 @@ export default function WPEstimatorSection() {
               <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600">
                 <ClipboardList size={14} /> Step 2 — Workstreams
               </h3>
+              <p className="mt-1 text-[11px] text-ink-muted">
+                Base items stay for every platform; extras update with your Step 1 choice.
+              </p>
               <div className="mt-3 flex flex-1 flex-col justify-between gap-2">
-                {WORKSTREAMS.map((item) => {
+                {available.map((item) => {
                   const on = selected.includes(item.id);
                   return (
                     <button
@@ -202,7 +309,6 @@ export default function WPEstimatorSection() {
             </div>
           </div>
 
-          {/* RIGHT — medium summary, mirrors left height */}
           <aside className="flex">
             <div className="flex w-full flex-col rounded-2xl border border-border bg-white p-5 shadow-cardHover sm:p-6">
               <div className="flex items-center justify-between border-b border-border pb-3">
@@ -225,7 +331,7 @@ export default function WPEstimatorSection() {
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-ink-muted">
-                  Score rises when scope, build depth, performance, and handoff are selected together — a planning
+                  Score rises when scope, platform depth, performance, and handoff are selected together — a planning
                   signal, not a price or PageSpeed guarantee.
                 </p>
               </div>
