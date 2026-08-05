@@ -88,6 +88,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
         heading: 'Staging discipline',
         body: 'Clone PHP version, object cache, and the same payment sandbox. Measure once, change one layer, measure again. Parallel changes hide which toggle actually helped.',
       },
+      {
+        heading: 'What “good enough” looks like',
+        body: 'Money pages feel responsive on a mid-range phone on real cellular data. Archives do not wait on related-product queries. Editors can publish without undoing your defer rules. Write that definition into the care log before the next campaign week.',
+      },
     ],
     checklist: [
       'Baseline mobile field metrics for money pages',
@@ -132,6 +136,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
       {
         heading: 'What hardening is not',
         body: 'A shield badge on the homepage does not equal a restore drill. Treat security as operations: who can deploy, who reviews plugins, and how fast you can roll back after a bad update.',
+      },
+      {
+        heading: 'After the checklist',
+        body: 'Schedule the first restore drill on a calendar, not a sticky note. Assign update owners. If staging is missing, fix hosting before the next major plugin release — WPServices can help scope that path without a vanity rebuild.',
       },
     ],
     checklist: [
@@ -179,6 +187,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
         heading: 'Theme template debt',
         body: 'Outdated WooCommerce template overrides in a child theme often break after WooCommerce releases. Diff template versions before blaming payment gateways.',
       },
+      {
+        heading: 'Handoff that prevents the next ticket',
+        body: 'Name the failing plugin or override, the update that triggered it, and the test path you re-ran as a guest. Paste that into the care log before you close the ticket — the next update window will thank you.',
+      },
     ],
     checklist: [
       'Reproduce on staging with the same PHP version',
@@ -190,6 +202,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
       {
         q: 'Should I debug on production?',
         a: 'Only if you have no staging and accept outage risk. Prefer a clone. If production is required, schedule a quiet window and a rollback plan.',
+      },
+      {
+        q: 'What if two plugins both seem guilty?',
+        a: 'Keep the smallest failing set enabled and document both. Often one is the trigger and the other amplifies it — WPServices can scope a proper coexistence fix when you cannot drop either.',
       },
     ],
     seoBlurb: 'Plugin conflict checklist for WordPress and WooCommerce breakages — staging-first isolation notes.',
@@ -270,6 +286,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
         heading: 'Handoff to build',
         body: 'When design exits, builders need spacing tokens, component states, and empty/error states for forms — not only desktop screenshots. That is how WPServices keeps redesigns maintainable after launch.',
       },
+      {
+        heading: 'Brand without theme debt',
+        body: 'Keep typography and color tokens in one place. Avoid one-off page-builder sections that nobody can update. Document which templates are “locked brand” vs weekly marketing freestyle so the next campaign does not fork the theme.',
+      },
     ],
     checklist: [
       'Conversion goals written before wireframes',
@@ -281,6 +301,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
       {
         q: 'Do you design in Figma?',
         a: 'We can work from approved designs or help shape structure first. Either way, WordPress constraints are flagged early.',
+      },
+      {
+        q: 'Can editors keep updating after launch?',
+        a: 'That is the point of marking editable regions early. If everything is locked in the theme, you will pay for every copy change — we flag that risk before build.',
       },
     ],
     seoBlurb: 'WordPress redesign planning notes for conversion-focused templates — WPServices structure-first guide.',
@@ -311,6 +335,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
         heading: 'Bring these artifacts',
         body: 'Hosting panel access or a staging URL, a list of must-keep plugins, analytics on money pages, and any failed update notes. Better inputs produce a sharper written scope.',
       },
+      {
+        heading: 'What a good written next step includes',
+        body: 'Named risks, two or three options with rough effort, and what you will own vs what WPServices owns. If the only output is “we should rebuild,” push for evidence — staging gaps, plugin debt, or conversion goals usually decide the path.',
+      },
     ],
     checklist: [
       'Hosting and PHP version noted',
@@ -322,6 +350,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
       {
         q: 'Is the consultation free?',
         a: 'Discovery calls are complementary for qualified projects. Complex audits may be scoped separately — we say so up front.',
+      },
+      {
+        q: 'Will you tell us to rebuild everything?',
+        a: 'Only when evidence says stabilize is more expensive than rebuild. Most engagements start with staging, plugin debt, and conversion goals — not a blank theme.',
       },
     ],
     seoBlurb:
@@ -353,6 +385,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
         heading: 'After the audit',
         body: 'Ship the highest-impact template changes on staging, measure one release at a time, and keep editors from undoing form labels. WPServices can implement the ranked list as a scoped sprint.',
       },
+      {
+        heading: 'Trust and proof near pay',
+        body: 'Shipping promises, return policy, and payment badges only help when they sit next to the action — not buried in the footer. On WordPress builders, those blocks often get deleted in the next “quick edit.” Pin them in a reusable pattern.',
+      },
     ],
     checklist: [
       'Mobile checkout completed end-to-end',
@@ -364,6 +400,10 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
       {
         q: 'Do you guarantee a conversion lift percentage?',
         a: 'No. We rank friction and ship maintainable fixes. Percent promises without your baseline are marketing fiction.',
+      },
+      {
+        q: 'Is this only for WooCommerce?',
+        a: 'No. Lead-gen forms, booking flows, and LMS enroll paths use the same friction map — WordPress template debt shows up the same way.',
       },
     ],
     seoBlurb:

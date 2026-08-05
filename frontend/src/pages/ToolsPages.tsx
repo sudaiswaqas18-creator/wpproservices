@@ -174,6 +174,18 @@ export default function ToolDetailPage() {
   const outcomes = enrich?.outcomes ?? [];
   const faqs = enrich?.faqs ?? [];
 
+  // Split long-form notes across both columns so heights stay even
+  const splitAt = Math.ceil(sections.length / 2) || 0;
+  const leftSections = sections.slice(0, splitAt);
+  const rightSections = sections.slice(splitAt);
+
+  const SectionCard = ({ heading, body }: { heading: string; body: string }) => (
+    <article className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+      <h2 className="text-lg font-bold text-ink sm:text-xl">{heading}</h2>
+      <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{body}</p>
+    </article>
+  );
+
   return (
     <>
       <SEO
@@ -182,7 +194,6 @@ export default function ToolDetailPage() {
         path={`/resources/tools/${tool.slug}`}
       />
 
-      {/* Service-style hero */}
       <section className="relative overflow-hidden bg-gradient-to-b from-surface-50 to-white py-16 lg:py-24">
         <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-brand-100/40 blur-3xl" />
         <div className="section-container relative grid items-center gap-12 lg:grid-cols-2">
@@ -234,52 +245,16 @@ export default function ToolDetailPage() {
         </div>
       </section>
 
-      <section className="py-14 lg:py-16">
-        <div className="section-container grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
-          {/* LEFT — long-form notes */}
+      <section className="border-t border-border bg-surface-50/40 py-14 lg:py-16">
+        <div className="section-container grid items-start gap-5 lg:grid-cols-2 lg:gap-6 lg:items-stretch">
+          {/* LEFT — notes + audience + outcomes + CTA (balances heavy checklist on right) */}
           <div className="flex flex-col gap-5">
-            {sections.map((s) => (
-              <article key={s.heading} className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
-                <h2 className="text-lg font-bold text-ink sm:text-xl">{s.heading}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{s.body}</p>
-              </article>
+            {leftSections.map((s) => (
+              <SectionCard key={s.heading} heading={s.heading} body={s.body} />
             ))}
             {!sections.length && (
-              <article className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
-                <h2 className="text-lg font-bold text-ink sm:text-xl">First-pass notes</h2>
-                <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{tool.full_content}</p>
-              </article>
+              <SectionCard heading="First-pass notes" body={tool.full_content} />
             )}
-          </div>
-
-          {/* RIGHT — checklist + trust blocks (matches left height) */}
-          <div className="flex flex-col gap-5">
-            <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
-              <div className="bg-brand-500 px-5 py-4">
-                <h2 className="flex items-center gap-2 text-lg font-bold text-white">
-                  <ClipboardList size={18} /> Operator checklist
-                </h2>
-              </div>
-              <ul className="space-y-3 p-5">
-                {(checklist.length
-                  ? checklist
-                  : ['Use staging before production', 'Document the root cause', 'Share notes with your team']
-                ).map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
-                    <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="border-t border-border p-5">
-                <Link to="/contact" className="btn-primary w-full">
-                  Request help applying this
-                </Link>
-                <p className="mt-3 text-center text-[11px] text-ink-light">
-                  Free discovery · Written next steps
-                </p>
-              </div>
-            </div>
 
             {whoFor.length > 0 && (
               <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
@@ -309,8 +284,56 @@ export default function ToolDetailPage() {
               </div>
             )}
 
+            <div className="mt-auto rounded-2xl border border-dashed border-brand-200 bg-brand-50/40 p-5 sm:p-6">
+              <h2 className="text-lg font-bold text-ink">Need this applied on your stack?</h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                Bring these notes to a discovery call — we map hosting, staging, and a written next step before any
+                production change. Same habits on every WPServices engagement.
+              </p>
+              <Link
+                to="/contact"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800"
+              >
+                Talk to WPServices <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* RIGHT — checklist + remaining notes + FAQs */}
+          <div className="flex flex-col gap-5">
+            <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
+              <div className="bg-brand-500 px-5 py-4">
+                <h2 className="flex items-center gap-2 text-lg font-bold text-white">
+                  <ClipboardList size={18} /> Operator checklist
+                </h2>
+              </div>
+              <ul className="space-y-3 p-5">
+                {(checklist.length
+                  ? checklist
+                  : ['Use staging before production', 'Document the root cause', 'Share notes with your team']
+                ).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                    <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="border-t border-border p-5">
+                <Link to="/contact" className="btn-primary w-full">
+                  Request help applying this
+                </Link>
+                <p className="mt-3 text-center text-[11px] text-ink-light">
+                  Free discovery · Written next steps
+                </p>
+              </div>
+            </div>
+
+            {rightSections.map((s) => (
+              <SectionCard key={s.heading} heading={s.heading} body={s.body} />
+            ))}
+
             {faqs.length > 0 && (
-              <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+              <div className="mt-auto rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
                 <h2 className="text-lg font-bold text-ink">Questions operators ask</h2>
                 <div className="mt-4 space-y-4">
                   {faqs.map((f) => (
@@ -322,17 +345,6 @@ export default function ToolDetailPage() {
                 </div>
               </div>
             )}
-
-            <div className="rounded-2xl border border-dashed border-border bg-surface-50 p-5 text-sm text-ink-muted">
-              <p className="font-semibold text-ink">Need this applied on your stack?</p>
-              <p className="mt-2 leading-relaxed">
-                Bring these notes to a discovery call — we map hosting, staging, and a written next step before any
-                production change.
-              </p>
-              <Link to="/contact" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
-                Talk to WPServices <ArrowRight size={14} />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
