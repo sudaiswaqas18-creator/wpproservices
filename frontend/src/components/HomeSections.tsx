@@ -92,8 +92,13 @@ function FeaturedCases() {
 
   useEffect(() => {
     fetch(apiUrl('case-studies/featured/list'))
-      .then((r) => r.json())
-      .then((d) => { if (Array.isArray(d) && d.length > 0) setCases(d); })
+      .then(async (r) => {
+        if (!r.ok) throw new Error('fail');
+        return r.json();
+      })
+      .then((d) => {
+        if (Array.isArray(d)) setCases(d.length > 0 ? d : FALLBACK_FEATURED_CASES);
+      })
       .catch(() => {});
   }, []);
 

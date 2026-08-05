@@ -344,7 +344,7 @@ export const fallbackData = {
     {
       id: 3,
       title: 'WordPress Consultation Bot',
-      slug: 'wordpress-consultation-bot',
+      slug: 'consultation-bot',
       description: 'Get a second opinion on theme debt, WooCommerce limits, and retainer vs project trade-offs.',
       icon: 'message-circle',
       is_new: false,
@@ -352,7 +352,7 @@ export const fallbackData = {
     {
       id: 4,
       title: 'Website Speed Analyzer',
-      slug: 'website-speed-analyzer',
+      slug: 'speed-analyzer',
       description: 'Spot WordPress and WooCommerce bottlenecks across LCP, CLS, and heavy templates without guessing.',
       icon: 'zap',
       is_new: false,
@@ -360,7 +360,7 @@ export const fallbackData = {
     {
       id: 5,
       title: 'Conversion Rate Audit Tool',
-      slug: 'conversion-rate-audit-tool',
+      slug: 'conversion-audit',
       description: 'Find friction on WordPress landing pages and WooCommerce checkout paths that quietly kill enquiries and orders.',
       icon: 'trending-up',
       is_new: false,
@@ -368,7 +368,7 @@ export const fallbackData = {
     {
       id: 6,
       title: 'Security Vulnerability Scanner',
-      slug: 'security-vulnerability-scanner',
+      slug: 'security-scanner',
       description: 'Surface common WordPress hardening gaps before they become downtime or malware cleanup work.',
       icon: 'shield',
       is_new: false,

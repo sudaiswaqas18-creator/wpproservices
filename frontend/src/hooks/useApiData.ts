@@ -5,7 +5,7 @@ import { fallbackData, fetchWithFallback } from '../api/fallback';
 type DataKey = keyof typeof fallbackData;
 
 function ensureArray<T>(value: unknown, fallback: T[]): T[] {
-  return Array.isArray(value) ? value : fallback;
+  return Array.isArray(value) ? (value as T[]) : fallback;
 }
 
 export function useApiData<K extends DataKey>(key: K) {
@@ -13,6 +13,7 @@ export function useApiData<K extends DataKey>(key: K) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     const fallback = fallbackData[key];
     const fetchers: Record<DataKey, () => Promise<unknown>> = {
       testimonials: api.getTestimonials,
@@ -29,10 +30,33 @@ export function useApiData<K extends DataKey>(key: K) {
       siteStats: api.getSiteStats,
     };
 
-    fetchWithFallback(fetchers[key], fallback)
-      .then((result) => setData(ensureArray(result, fallback as unknown[]) as (typeof fallbackData)[K]))
-      .catch(() => setData(fallback))
-      .finally(() => setLoading(false));
+    const load = () => {
+      fetchWithFallback(fetchers[key], fallback)
+        .then((result) => {
+          if (cancelled) return;
+          // Live API arrays win (including empty). Fallback only when fetch fails.
+          if (Array.isArray(result)) {
+            setData(result as (typeof fallbackData)[K]);
+          } else {
+            setData(ensureArray(result, fallback as unknown[]) as (typeof fallbackData)[K]);
+          }
+        })
+        .catch(() => {
+          if (!cancelled) setData(fallback);
+        })
+        .finally(() => {
+          if (!cancelled) setLoading(false);
+        });
+    };
+
+    setLoading(true);
+    load();
+    const onFocus = () => load();
+    window.addEventListener('focus', onFocus);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('focus', onFocus);
+    };
   }, [key]);
 
   return { data, loading };

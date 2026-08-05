@@ -412,17 +412,20 @@ const ENRICHMENT: Record<string, ToolEnrichment> = {
 };
 
 const ALIASES: Record<string, string> = {
-  'speed-estimator': 'speed-estimator',
+  'speed-estimator': 'speed-analyzer',
   'website-speed-analyzer': 'speed-analyzer',
   'speed-analyzer': 'speed-analyzer',
   'security-vulnerability-scanner': 'security-checklist',
+  'security-scanner': 'security-checklist',
   'security-checklist': 'security-checklist',
   'plugin-conflict-checklist': 'plugin-troubleshooter',
   'plugin-troubleshooter': 'plugin-troubleshooter',
   'bug-fixing-bot': 'bug-fixing-bot',
   'design-bot': 'design-bot',
   'wordpress-consultation-bot': 'wordpress-consultation-bot',
+  'consultation-bot': 'wordpress-consultation-bot',
   'conversion-rate-audit-tool': 'conversion-rate-audit-tool',
+  'conversion-audit': 'conversion-rate-audit-tool',
 };
 
 export function getToolEnrichment(slug: string | undefined | null): ToolEnrichment | null {

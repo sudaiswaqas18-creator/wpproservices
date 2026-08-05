@@ -10,6 +10,7 @@ import {
   Shield,
   Sparkles,
   TrendingUp,
+  Wrench,
   Zap,
 } from 'lucide-react';
 import ToolsSection from '../components/ToolsSection';
@@ -19,6 +20,7 @@ import { apiUrl } from '../config/api';
 import { buildTitle } from '../config/seo';
 import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
 import { getToolEnrichment } from '../data/toolEnrichment';
+import { fallbackData } from '../api/fallback';
 
 interface Tool {
   title: string;
@@ -29,57 +31,6 @@ interface Tool {
   icon?: string;
 }
 
-const LOCAL_TOOLS: Tool[] = [
-  {
-    title: 'Bug Fixing Bot',
-    slug: 'bug-fixing-bot',
-    description: 'Isolate common WordPress breakage — white screens, plugin clashes, and checkout errors.',
-    full_content: 'Reproduce on staging, isolate plugins, document the root cause.',
-    is_new: true,
-    icon: 'bug',
-  },
-  {
-    title: 'Design Bot',
-    slug: 'design-bot',
-    description: 'Explore WordPress page layouts and section ideas before theme build.',
-    full_content: 'Template inventory and conversion goals before decorative mockups.',
-    is_new: false,
-    icon: 'palette',
-  },
-  {
-    title: 'WordPress Consultation Bot',
-    slug: 'wordpress-consultation-bot',
-    description: 'Second opinion on theme debt, WooCommerce limits, and retainer vs project.',
-    full_content: 'Discovery checklist for hosting, staging, and written next steps.',
-    is_new: false,
-    icon: 'message-circle',
-  },
-  {
-    title: 'Website Speed Analyzer',
-    slug: 'website-speed-analyzer',
-    description: 'Spot WordPress and WooCommerce bottlenecks across LCP, CLS, and heavy templates.',
-    full_content: 'Separate hosting from theme debt before buying another speed plugin.',
-    is_new: false,
-    icon: 'zap',
-  },
-  {
-    title: 'Conversion Rate Audit Tool',
-    slug: 'conversion-rate-audit-tool',
-    description: 'Find friction on landing pages and WooCommerce checkout paths.',
-    full_content: 'Mobile form and checkout friction map ranked by revenue impact.',
-    is_new: false,
-    icon: 'trending-up',
-  },
-  {
-    title: 'Security Vulnerability Scanner',
-    slug: 'security-vulnerability-scanner',
-    description: 'Surface common WordPress hardening gaps before downtime or malware cleanup.',
-    full_content: 'Hardening habits: users, backups, staging, abandoned plugins.',
-    is_new: false,
-    icon: 'shield',
-  },
-];
-
 const iconMap: Record<string, typeof Bug> = {
   bug: Bug,
   palette: Palette,
@@ -87,6 +38,9 @@ const iconMap: Record<string, typeof Bug> = {
   zap: Zap,
   'trending-up': TrendingUp,
   shield: Shield,
+  wrench: Wrench,
+  clipboard: ClipboardList,
+  'clipboard-list': ClipboardList,
 };
 
 function toolIcon(slug: string, icon?: string) {
@@ -96,8 +50,75 @@ function toolIcon(slug: string, icon?: string) {
   if (slug.includes('design')) return Palette;
   if (slug.includes('consult')) return MessageCircle;
   if (slug.includes('conversion')) return TrendingUp;
-  return ClipboardList;
+  return Wrench;
 }
+
+/** Build balanced column content from admin `full_content` when no SEO enrichment exists */
+function synthesizeFromTool(tool: Tool) {
+  const raw = (tool.full_content || tool.description || '').trim();
+  const paras = raw
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  let chunks = paras;
+  if (chunks.length < 2 && raw.length > 180) {
+    const sentences = raw.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((s) => s.trim()).filter(Boolean) || [raw];
+    const mid = Math.ceil(sentences.length / 2) || 1;
+    chunks = [sentences.slice(0, mid).join(' '), sentences.slice(mid).join(' ')].filter(Boolean);
+  }
+  if (!chunks.length) chunks = [tool.description || 'Operator checklist from WPServices.'];
+
+  const sections = chunks.slice(0, 4).map((body, i) => ({
+    heading: i === 0 ? 'First-pass notes' : i === 1 ? 'How to apply this' : `Detail ${i + 1}`,
+    body,
+  }));
+
+  return {
+    intro: tool.description,
+    sections,
+    checklist: [
+      'Review these notes on a staging clone',
+      'Capture evidence before changing production',
+      'Document the outcome in your care log',
+      'Book a scoped review if you are stuck',
+    ],
+    whoFor: [
+      'Operators running this checklist on their stack',
+      'Teams preparing a WPServices discovery call',
+      'Agencies handing off a written first-pass brief',
+    ],
+    outcomes: [
+      'A written first-pass path for this tool',
+      'Clear next step before production changes',
+      'Notes you can share with stakeholders',
+    ],
+    faqs: [
+      {
+        q: 'Is this an automated bot?',
+        a: 'No. Admin-managed checklists are operator guides. You (or WPServices) still run the steps on your stack.',
+      },
+      {
+        q: 'Can WPServices apply this for us?',
+        a: 'Yes — bring these notes to a discovery call and we scope a staging-first engagement.',
+      },
+    ],
+  };
+}
+
+function fallbackTool(slug: string): Tool | null {
+  const row = fallbackData.tools.find((t) => t.slug === slug);
+  if (!row) return null;
+  return {
+    title: row.title,
+    slug: row.slug,
+    description: row.description,
+    full_content: row.description,
+    is_new: Boolean(row.is_new),
+    icon: row.icon,
+  };
+}
+
 
 export function ToolsListPage() {
   return (
@@ -143,7 +164,7 @@ export default function ToolDetailPage() {
         if (!cancelled) setTool(d);
       })
       .catch(() => {
-        if (!cancelled) setTool(LOCAL_TOOLS.find((t) => t.slug === slug) || null);
+        if (!cancelled) setTool(fallbackTool(slug));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -168,11 +189,13 @@ export default function ToolDetailPage() {
   }
 
   const Icon = toolIcon(tool.slug, tool.icon);
-  const checklist = enrich?.checklist ?? [];
-  const sections = enrich?.sections ?? [];
-  const whoFor = enrich?.whoFor ?? [];
-  const outcomes = enrich?.outcomes ?? [];
-  const faqs = enrich?.faqs ?? [];
+  const synth = enrich ? null : synthesizeFromTool(tool);
+  const checklist = enrich?.checklist ?? synth?.checklist ?? [];
+  const sections = enrich?.sections ?? synth?.sections ?? [];
+  const whoFor = enrich?.whoFor ?? synth?.whoFor ?? [];
+  const outcomes = enrich?.outcomes ?? synth?.outcomes ?? [];
+  const faqs = enrich?.faqs ?? synth?.faqs ?? [];
+  const intro = enrich?.intro || synth?.intro || tool.full_content;
 
   // Split long-form notes across both columns so heights stay even
   const splitAt = Math.ceil(sections.length / 2) || 0;
@@ -209,7 +232,7 @@ export default function ToolDetailPage() {
             </h1>
             <p className="mt-3 text-lg text-ink-muted">{tool.description}</p>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-              {enrich?.intro || tool.full_content}
+              {intro}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact" className="btn-primary inline-flex items-center gap-2">

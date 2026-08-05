@@ -8,6 +8,8 @@ import { buildTitle } from '../config/seo';
 import { getGuidebookImage } from '../data/siteContent';
 import { getGuidebookEnrichment } from '../data/guidebookEnrichment';
 import { useBreadcrumbLabel } from '../components/SiteBreadcrumbs';
+import { useApiData } from '../hooks/useApiData';
+import { fallbackData } from '../api/fallback';
 
 interface Guidebook {
   id: number;
@@ -62,15 +64,8 @@ const FALLBACK_GUIDEBOOKS: Guidebook[] = [
 ];
 
 export function GuidebooksListPage() {
-  const [items, setItems] = useState<Guidebook[]>(FALLBACK_GUIDEBOOKS);
-  useEffect(() => {
-    fetch(apiUrl('guidebooks'))
-      .then((r) => r.json())
-      .then((d) => {
-        if (Array.isArray(d) && d.length > 0) setItems(d);
-      })
-      .catch(() => {});
-  }, []);
+  const { data } = useApiData('guidebooks');
+  const items = data as Guidebook[];
 
   return (
     <>
@@ -133,7 +128,13 @@ export default function GuidebookDetailPage() {
         if (!cancelled) setBook(d);
       })
       .catch(() => {
-        if (!cancelled) setBook(FALLBACK_GUIDEBOOKS.find((g) => g.slug === slug) || null);
+        if (!cancelled) {
+          const match =
+            FALLBACK_GUIDEBOOKS.find((g) => g.slug === slug) ||
+            (fallbackData.guidebooks as Guidebook[]).find((g) => g.slug === slug) ||
+            null;
+          setBook(match);
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false);

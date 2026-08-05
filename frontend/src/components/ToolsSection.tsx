@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Bug, Palette, MessageCircle, Zap, TrendingUp, Shield } from 'lucide-react';
-import { apiUrl } from '../config/api';
-import { fallbackData } from '../api/fallback';
+import {
+  Bug,
+  ClipboardList,
+  MessageCircle,
+  Palette,
+  Shield,
+  TrendingUp,
+  Wrench,
+  Zap,
+} from 'lucide-react';
+import { useApiData } from '../hooks/useApiData';
 
 const iconMap: Record<string, typeof Bug> = {
   bug: Bug,
@@ -11,6 +18,9 @@ const iconMap: Record<string, typeof Bug> = {
   zap: Zap,
   'trending-up': TrendingUp,
   shield: Shield,
+  wrench: Wrench,
+  clipboard: ClipboardList,
+  'clipboard-list': ClipboardList,
 };
 
 interface Tool {
@@ -23,15 +33,8 @@ interface Tool {
 }
 
 export default function ToolsSection() {
-  const [tools, setTools] = useState<Tool[]>(fallbackData.tools as Tool[]);
-  useEffect(() => {
-    fetch(apiUrl('tools'))
-      .then((r) => r.json())
-      .then((d) => {
-        if (Array.isArray(d) && d.length > 0) setTools(d);
-      })
-      .catch(() => {});
-  }, []);
+  const { data } = useApiData('tools');
+  const tools = data as Tool[];
 
   if (!tools.length) return null;
 
@@ -45,7 +48,7 @@ export default function ToolsSection() {
         </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((t) => {
-            const Icon = iconMap[t.icon] || Zap;
+            const Icon = iconMap[t.icon] || Wrench;
             return (
               <Link
                 key={t.id}
