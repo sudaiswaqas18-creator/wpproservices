@@ -234,11 +234,55 @@ export default function ToolDetailPage() {
         </div>
       </section>
 
-      {(whoFor.length > 0 || outcomes.length > 0) && (
-        <section className="border-y border-border bg-white py-12">
-          <div className="section-container grid gap-6 md:grid-cols-2">
+      <section className="py-14 lg:py-16">
+        <div className="section-container grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
+          {/* LEFT — long-form notes */}
+          <div className="flex flex-col gap-5">
+            {sections.map((s) => (
+              <article key={s.heading} className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+                <h2 className="text-lg font-bold text-ink sm:text-xl">{s.heading}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{s.body}</p>
+              </article>
+            ))}
+            {!sections.length && (
+              <article className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+                <h2 className="text-lg font-bold text-ink sm:text-xl">First-pass notes</h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{tool.full_content}</p>
+              </article>
+            )}
+          </div>
+
+          {/* RIGHT — checklist + trust blocks (matches left height) */}
+          <div className="flex flex-col gap-5">
+            <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
+              <div className="bg-brand-500 px-5 py-4">
+                <h2 className="flex items-center gap-2 text-lg font-bold text-white">
+                  <ClipboardList size={18} /> Operator checklist
+                </h2>
+              </div>
+              <ul className="space-y-3 p-5">
+                {(checklist.length
+                  ? checklist
+                  : ['Use staging before production', 'Document the root cause', 'Share notes with your team']
+                ).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                    <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="border-t border-border p-5">
+                <Link to="/contact" className="btn-primary w-full">
+                  Request help applying this
+                </Link>
+                <p className="mt-3 text-center text-[11px] text-ink-light">
+                  Free discovery · Written next steps
+                </p>
+              </div>
+            </div>
+
             {whoFor.length > 0 && (
-              <div className="rounded-2xl border border-border bg-surface-50 p-6">
+              <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
                 <h2 className="text-lg font-bold text-ink">Who this checklist is for</h2>
                 <ul className="mt-4 space-y-2.5">
                   {whoFor.map((item) => (
@@ -250,8 +294,9 @@ export default function ToolDetailPage() {
                 </ul>
               </div>
             )}
+
             {outcomes.length > 0 && (
-              <div className="rounded-2xl border border-border bg-surface-50 p-6">
+              <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
                 <h2 className="text-lg font-bold text-ink">What you walk away with</h2>
                 <ul className="mt-4 space-y-2.5">
                   {outcomes.map((item) => (
@@ -263,30 +308,11 @@ export default function ToolDetailPage() {
                 </ul>
               </div>
             )}
-          </div>
-        </section>
-      )}
-
-      <section className="py-16">
-        <div className="section-container grid gap-10 lg:grid-cols-3">
-          <div className="space-y-8 lg:col-span-2">
-            {sections.map((s) => (
-              <article key={s.heading} className="rounded-2xl border border-border bg-white p-6 shadow-card">
-                <h2 className="text-xl font-bold text-ink">{s.heading}</h2>
-                <p className="mt-3 leading-relaxed text-ink-muted">{s.body}</p>
-              </article>
-            ))}
-            {!sections.length && (
-              <article className="rounded-2xl border border-border bg-white p-6 shadow-card">
-                <h2 className="text-xl font-bold text-ink">First-pass notes</h2>
-                <p className="mt-3 leading-relaxed text-ink-muted">{tool.full_content}</p>
-              </article>
-            )}
 
             {faqs.length > 0 && (
-              <div className="rounded-2xl border border-border bg-white p-6 shadow-card">
-                <h2 className="text-xl font-bold text-ink">Questions operators ask</h2>
-                <div className="mt-5 space-y-4">
+              <div className="rounded-2xl border border-border bg-white p-5 shadow-card sm:p-6">
+                <h2 className="text-lg font-bold text-ink">Questions operators ask</h2>
+                <div className="mt-4 space-y-4">
                   {faqs.map((f) => (
                     <div key={f.q} className="border-t border-border pt-4 first:border-0 first:pt-0">
                       <h3 className="font-semibold text-ink">{f.q}</h3>
@@ -296,35 +322,18 @@ export default function ToolDetailPage() {
                 </div>
               </div>
             )}
-          </div>
 
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
-              <div className="bg-brand-500 px-5 py-4">
-                <h2 className="flex items-center gap-2 text-lg font-bold text-white">
-                  <ClipboardList size={18} /> Operator checklist
-                </h2>
-              </div>
-              <ul className="space-y-3 p-5">
-                {(checklist.length ? checklist : ['Use staging before production', 'Document the root cause', 'Share notes with your team']).map(
-                  (item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
-                      <Check size={14} className="mt-0.5 shrink-0 text-brand-600" />
-                      {item}
-                    </li>
-                  ),
-                )}
-              </ul>
-              <div className="border-t border-border p-5">
-                <Link to="/contact" className="btn-primary w-full">
-                  Request help applying this
-                </Link>
-                <p className="mt-3 text-center text-[11px] text-ink-light">
-                  Free discovery · Written next steps
-                </p>
-              </div>
+            <div className="rounded-2xl border border-dashed border-border bg-surface-50 p-5 text-sm text-ink-muted">
+              <p className="font-semibold text-ink">Need this applied on your stack?</p>
+              <p className="mt-2 leading-relaxed">
+                Bring these notes to a discovery call — we map hosting, staging, and a written next step before any
+                production change.
+              </p>
+              <Link to="/contact" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline">
+                Talk to WPServices <ArrowRight size={14} />
+              </Link>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
       <CTA />
