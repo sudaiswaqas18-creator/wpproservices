@@ -5,6 +5,7 @@ export type ScopeBuilderData = {
 };
 
 export const SCOPE_BUILDER_STORAGE_KEY = 'scopeBuilderData';
+export const SCOPE_BUILDER_INTENT_KEY = 'scopeBuilderIntent';
 
 export function readScopeBuilderData(): ScopeBuilderData | null {
   try {
@@ -24,12 +25,36 @@ export function readScopeBuilderData(): ScopeBuilderData | null {
   }
 }
 
-export function clearScopeBuilderData() {
+/** Only true after "Request a custom scope" in this browser session. */
+export function hasScopeBuilderIntent(): boolean {
   try {
-    localStorage.removeItem(SCOPE_BUILDER_STORAGE_KEY);
+    return sessionStorage.getItem(SCOPE_BUILDER_INTENT_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function markScopeBuilderIntent() {
+  try {
+    sessionStorage.setItem(SCOPE_BUILDER_INTENT_KEY, '1');
   } catch {
     /* ignore */
   }
+}
+
+export function clearScopeBuilderData() {
+  try {
+    localStorage.removeItem(SCOPE_BUILDER_STORAGE_KEY);
+    sessionStorage.removeItem(SCOPE_BUILDER_INTENT_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Active draft to show on Contact — requires CTA intent this session. */
+export function getActiveScopeBuilderData(): ScopeBuilderData | null {
+  if (!hasScopeBuilderIntent()) return null;
+  return readScopeBuilderData();
 }
 
 export function appendScopeToBrief(details: string, scope: ScopeBuilderData | null | undefined) {

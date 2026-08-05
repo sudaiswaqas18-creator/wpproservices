@@ -11,7 +11,7 @@ import {
   Timer,
 } from 'lucide-react';
 import ContactLink from './ContactLink';
-import { SCOPE_BUILDER_STORAGE_KEY } from '../utils/scopeBuilderStorage';
+import { markScopeBuilderIntent, SCOPE_BUILDER_STORAGE_KEY } from '../utils/scopeBuilderStorage';
 
 /**
  * Unique WPServices Scope Builder — cream/ink brand (not dark SaaS clone).
@@ -290,6 +290,7 @@ export default function WPEstimatorSection() {
                           readinessScore: readiness,
                         }),
                       );
+                      markScopeBuilderIntent();
                     } catch {
                       /* ignore quota / private mode */
                     }
