@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUpRight,
@@ -84,7 +84,8 @@ const scenes = [
 ];
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
-const SCENE_MS = 9000;
+/** Long enough for move → pause → click on 3 chips + CTA */
+const SCENE_MS = 12000;
 const cursorEase = [0.33, 1, 0.68, 1] as const;
 
 function ScoreRing({
@@ -147,22 +148,32 @@ function ScoreRing({
   );
 }
 
-/** Cursor path — paced to finish before scene change */
-const clickPath = [
-  { x: 24, y: 40, target: 'feature-0' as const },
-  { x: 44, y: 40, target: 'feature-1' as const },
-  { x: 64, y: 40, target: 'feature-2' as const },
-  { x: 30, y: 84, target: 'cta' as const },
-];
+type CursorTarget = { x: number; y: number; kind: 'feature' | 'cta'; featureIndex?: number };
 
 export default function HeroShowcase() {
   const [active, setActive] = useState(0);
-  const [cursor, setCursor] = useState({ x: 18, y: 28 });
+  const [cursor, setCursor] = useState({ x: 12, y: 18 });
   const [sceneProgress, setSceneProgress] = useState(0);
   const [isClicking, setIsClicking] = useState(false);
   const [clickFlash, setClickFlash] = useState(0);
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
   const [ctaPressed, setCtaPressed] = useState(false);
+
+  const stageRef = useRef<HTMLDivElement>(null);
+  const featureRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  const measureTarget = (el: HTMLElement | null): { x: number; y: number } | null => {
+    const stage = stageRef.current;
+    if (!stage || !el) return null;
+    const stageBox = stage.getBoundingClientRect();
+    const box = el.getBoundingClientRect();
+    if (stageBox.width < 8 || stageBox.height < 8) return null;
+    return {
+      x: ((box.left + box.width / 2 - stageBox.left) / stageBox.width) * 100,
+      y: ((box.top + box.height / 2 - stageBox.top) / stageBox.height) * 100,
+    };
+  };
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -180,7 +191,8 @@ export default function HeroShowcase() {
     return () => window.clearInterval(tick);
   }, [active]);
 
-  // Calm move → pause → click sequence
+  const scene = scenes[active];
+
   useEffect(() => {
     let cancelled = false;
     const timers: number[] = [];
@@ -194,49 +206,88 @@ export default function HeroShowcase() {
       setActiveFeature(null);
       setCtaPressed(false);
       setIsClicking(false);
-      setCursor({ x: 18, y: 26 });
+      setCursor({ x: 10, y: 14 });
+      featureRefs.current = [];
 
-      await wait(900);
+      await wait(750);
       if (cancelled) return;
 
-      for (let i = 0; i < clickPath.length; i++) {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
+      if (cancelled) return;
+
+      const buildPath = (): CursorTarget[] => {
+        const path: CursorTarget[] = [];
+        scenes[active].features.forEach((_, i) => {
+          const pos = measureTarget(featureRefs.current[i]);
+          if (pos) path.push({ ...pos, kind: 'feature', featureIndex: i });
+        });
+        const cta = measureTarget(ctaRef.current);
+        if (cta) path.push({ ...cta, kind: 'cta' });
+        return path;
+      };
+
+      let path = buildPath();
+      if (!path.length) {
+        path = [
+          { x: 22, y: 38, kind: 'feature', featureIndex: 0 },
+          { x: 38, y: 38, kind: 'feature', featureIndex: 1 },
+          { x: 54, y: 38, kind: 'feature', featureIndex: 2 },
+          { x: 24, y: 78, kind: 'cta' },
+        ];
+      }
+
+      for (const step of path) {
         if (cancelled) return;
-        const step = clickPath[i];
+
+        if (step.kind === 'feature' && step.featureIndex != null) {
+          const live = measureTarget(featureRefs.current[step.featureIndex]);
+          if (live) {
+            step.x = live.x;
+            step.y = live.y;
+          }
+        }
+        if (step.kind === 'cta') {
+          const live = measureTarget(ctaRef.current);
+          if (live) {
+            step.x = live.x;
+            step.y = live.y;
+          }
+        }
 
         setIsClicking(false);
         setCursor({ x: step.x, y: step.y });
-        await wait(1100);
+        await wait(950);
         if (cancelled) return;
 
-        await wait(280);
+        await wait(220);
         if (cancelled) return;
 
         setIsClicking(true);
-        await wait(120);
+        await wait(110);
         if (cancelled) return;
 
         setClickFlash((n) => n + 1);
-        if (step.target.startsWith('feature-')) {
-          setActiveFeature(Number(step.target.split('-')[1]));
+        if (step.kind === 'feature' && step.featureIndex != null) {
+          setActiveFeature(step.featureIndex);
           setCtaPressed(false);
         } else {
           setCtaPressed(true);
         }
 
-        await wait(160);
+        await wait(180);
         if (cancelled) return;
 
         setIsClicking(false);
-        await wait(480);
+        await wait(420);
         if (cancelled) return;
 
-        if (step.target === 'cta') {
-          setCtaPressed(false);
-        }
+        if (step.kind === 'cta') setCtaPressed(false);
       }
 
       setActiveFeature(null);
-      setCursor({ x: 22, y: 32 });
+      setCursor({ x: 14, y: 20 });
     };
 
     void run();
@@ -246,8 +297,6 @@ export default function HeroShowcase() {
       timers.forEach((id) => window.clearTimeout(id));
     };
   }, [active]);
-
-  const scene = scenes[active];
 
   return (
     <motion.div
@@ -259,7 +308,6 @@ export default function HeroShowcase() {
       <div className="pointer-events-none absolute -inset-6 rounded-[42%] bg-gradient-to-br from-sky-100/50 via-amber-50/30 to-teal-100/40 blur-2xl sm:-inset-10 sm:blur-3xl" />
 
       <div className="relative">
-        {/* Floating chips — only when there is room (wide desktop), so mid/mobile stay clean */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: [0, -4, 0] }}
@@ -339,13 +387,11 @@ export default function HeroShowcase() {
           <span className="text-[10px] font-semibold text-gray-700">WooCommerce · LearnDash</span>
         </motion.div>
 
-        {/* Main frame — gentle float, no spinning orbits / hard 3D tilt */}
         <motion.div
           className="relative z-10 overflow-hidden rounded-[1.4rem] border border-white/95 bg-white shadow-[0_36px_90px_-28px_rgba(26,26,26,0.38)]"
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         >
-          {/* Soft shimmer — rare pass */}
           <motion.div
             className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/4 bg-gradient-to-r from-transparent via-white/35 to-transparent"
             animate={{ x: ['-140%', '380%'] }}
@@ -369,7 +415,7 @@ export default function HeroShowcase() {
                   transition={{ duration: 0.25 }}
                   className="truncate font-medium text-gray-500"
                 >
-                  https://example.com/{scene.id}
+                  https://wpservices.studio/{scene.id}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -380,21 +426,6 @@ export default function HeroShowcase() {
           </div>
 
           <div className="relative aspect-[16/11.2] overflow-hidden bg-gradient-to-br from-background via-white to-brand-50/50">
-            <div
-              className="pointer-events-none absolute inset-0 opacity-60"
-              style={{
-                backgroundImage:
-                  'radial-gradient(circle at 12% 18%, rgba(14,165,233,0.10), transparent 42%), radial-gradient(circle at 88% 78%, rgba(13,148,136,0.08), transparent 36%)',
-              }}
-            />
-            <div
-              className="pointer-events-none absolute inset-0 opacity-[0.25]"
-              style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(100,116,139,0.08) 1px, transparent 0)',
-                backgroundSize: '22px 22px',
-              }}
-            />
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={scene.id}
@@ -431,7 +462,10 @@ export default function HeroShowcase() {
                 </div>
 
                 <div className="grid min-h-0 flex-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
-                  <div className="relative flex min-h-0 flex-col overflow-hidden rounded-xl bg-white/92 p-3.5 shadow-sm ring-1 ring-gray-100/90">
+                  <div
+                    ref={stageRef}
+                    className="relative flex min-h-0 flex-col overflow-hidden rounded-xl bg-white/92 p-3.5 shadow-sm ring-1 ring-gray-100/90"
+                  >
                     <div className="mb-2 flex items-center gap-1.5">
                       <span className={`rounded-full px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] ring-1 ${scene.chip}`}>
                         {scene.eyebrow}
@@ -447,15 +481,18 @@ export default function HeroShowcase() {
                         return (
                           <motion.span
                             key={f}
+                            ref={(el) => {
+                              featureRefs.current[i] = el;
+                            }}
                             layout
                             animate={{
-                              scale: selected ? 1.04 : 1,
-                              backgroundColor: selected ? '#F3F3F3' : '#F8FAFC',
+                              scale: selected ? 1.06 : 1,
+                              backgroundColor: selected ? '#EEF2FF' : '#F8FAFC',
                             }}
                             transition={{ duration: 0.25, ease }}
                             className={`rounded-md px-2 py-1 text-[9px] font-semibold ring-1 ${
                               selected
-                                ? 'text-brand-700 ring-brand-300 shadow-sm'
+                                ? 'text-brand-700 ring-brand-400 shadow-sm'
                                 : 'text-gray-600 ring-gray-100'
                             }`}
                           >
@@ -480,9 +517,15 @@ export default function HeroShowcase() {
 
                     <div className="mt-3 flex items-center gap-2">
                       <motion.div
+                        ref={ctaRef}
                         className={`flex h-8 items-center gap-1 rounded-lg bg-gradient-to-r ${scene.accent} px-3 text-[10px] font-bold text-white shadow-md`}
-                        animate={{ scale: ctaPressed ? 0.96 : 1 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                        animate={{
+                          scale: ctaPressed ? 0.94 : 1,
+                          boxShadow: ctaPressed
+                            ? '0 0 0 3px rgba(14,165,233,0.35)'
+                            : '0 4px 12px rgba(26,26,26,0.18)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       >
                         Start project
                         <ArrowUpRight size={11} />
@@ -498,14 +541,14 @@ export default function HeroShowcase() {
                       animate={{
                         left: `${cursor.x}%`,
                         top: `${cursor.y}%`,
-                        scale: isClicking ? 0.88 : 1,
+                        scale: isClicking ? 0.86 : 1,
                       }}
                       transition={{
-                        left: { duration: 1.05, ease: cursorEase },
-                        top: { duration: 1.05, ease: cursorEase },
-                        scale: { duration: 0.15 },
+                        left: { duration: 0.9, ease: cursorEase },
+                        top: { duration: 0.9, ease: cursorEase },
+                        scale: { duration: 0.14 },
                       }}
-                      style={{ translateX: '-18%', translateY: '-12%' }}
+                      style={{ translateX: '-12%', translateY: '-8%' }}
                     >
                       <svg width="20" height="24" viewBox="0 0 18 22" fill="none" className="relative drop-shadow-md">
                         <path
@@ -519,11 +562,11 @@ export default function HeroShowcase() {
                         {clickFlash > 0 && (
                           <motion.span
                             key={`ripple-${clickFlash}`}
-                            className="absolute left-[3px] top-[3px] h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-500/60"
-                            initial={{ scale: 0.4, opacity: 0.7 }}
-                            animate={{ scale: 1.5, opacity: 0 }}
+                            className="absolute left-[3px] top-[3px] h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-sky-500/70 bg-sky-400/20"
+                            initial={{ scale: 0.35, opacity: 0.75 }}
+                            animate={{ scale: 1.6, opacity: 0 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.45, ease }}
+                            transition={{ duration: 0.42, ease }}
                           />
                         )}
                       </AnimatePresence>

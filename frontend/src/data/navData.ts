@@ -21,7 +21,7 @@ export const NAV_SERVICES: NavItem[] = [
   { title: 'Website Maintenance', slug: 'wordpress-maintenance', href: '/services/wordpress-maintenance', icon: Shield },
   { title: 'SEO Optimization', slug: 'wordpress-seo-services', href: '/services/wordpress-seo-services', icon: Search },
   { title: 'Speed Optimization', slug: 'wordpress-speed-optimization', href: '/services/wordpress-speed-optimization', icon: Zap },
-  { title: 'Security Services', slug: 'wordpress-maintenance', href: '/services/wordpress-maintenance', icon: Shield },
+  { title: 'Security Services', slug: 'wordpress-security', href: '/services/wordpress-maintenance', icon: Shield },
   { title: 'Migration Services', slug: 'wordpress-migration', href: '/services/wordpress-migration', icon: ArrowRightLeft },
   { title: 'Consultation', slug: 'hire-wordpress-developers', href: '/services/hire-wordpress-developers', icon: MessageCircle },
 ];

@@ -31,36 +31,52 @@ interface Tool {
 
 const LOCAL_TOOLS: Tool[] = [
   {
-    title: 'Core Web Vitals Review Notes',
-    slug: 'speed-estimator',
-    description: 'Spot where WordPress or WooCommerce templates lose time — LCP, CLS, and heavy queries.',
-    full_content: 'Review hero media, product archive queries, and third-party scripts before buying another speed plugin.',
-    is_new: true,
-    icon: 'zap',
-  },
-  {
-    title: 'WordPress Hardening Checklist',
-    slug: 'security-checklist',
-    description: 'Login protection, permissions, backups, and misconfigurations to clear before launch.',
-    full_content: 'Treat hardening as an operating cadence — users, backups, staging, and abandoned plugins.',
-    is_new: false,
-    icon: 'shield',
-  },
-  {
-    title: 'Plugin Conflict Checklist',
-    slug: 'plugin-troubleshooter',
-    description: 'Isolate which plugin or theme update broke checkout or admin screens.',
-    full_content: 'Reproduce on staging, binary-search plugins, then document the root cause for your team.',
-    is_new: false,
-    icon: 'bug',
-  },
-  {
     title: 'Bug Fixing Bot',
     slug: 'bug-fixing-bot',
     description: 'Isolate common WordPress breakage — white screens, plugin clashes, and checkout errors.',
     full_content: 'Reproduce on staging, isolate plugins, document the root cause.',
     is_new: true,
     icon: 'bug',
+  },
+  {
+    title: 'Design Bot',
+    slug: 'design-bot',
+    description: 'Explore WordPress page layouts and section ideas before theme build.',
+    full_content: 'Template inventory and conversion goals before decorative mockups.',
+    is_new: false,
+    icon: 'palette',
+  },
+  {
+    title: 'WordPress Consultation Bot',
+    slug: 'wordpress-consultation-bot',
+    description: 'Second opinion on theme debt, WooCommerce limits, and retainer vs project.',
+    full_content: 'Discovery checklist for hosting, staging, and written next steps.',
+    is_new: false,
+    icon: 'message-circle',
+  },
+  {
+    title: 'Website Speed Analyzer',
+    slug: 'website-speed-analyzer',
+    description: 'Spot WordPress and WooCommerce bottlenecks across LCP, CLS, and heavy templates.',
+    full_content: 'Separate hosting from theme debt before buying another speed plugin.',
+    is_new: false,
+    icon: 'zap',
+  },
+  {
+    title: 'Conversion Rate Audit Tool',
+    slug: 'conversion-rate-audit-tool',
+    description: 'Find friction on landing pages and WooCommerce checkout paths.',
+    full_content: 'Mobile form and checkout friction map ranked by revenue impact.',
+    is_new: false,
+    icon: 'trending-up',
+  },
+  {
+    title: 'Security Vulnerability Scanner',
+    slug: 'security-vulnerability-scanner',
+    description: 'Surface common WordPress hardening gaps before downtime or malware cleanup.',
+    full_content: 'Hardening habits: users, backups, staging, abandoned plugins.',
+    is_new: false,
+    icon: 'shield',
   },
 ];
 
@@ -154,6 +170,9 @@ export default function ToolDetailPage() {
   const Icon = toolIcon(tool.slug, tool.icon);
   const checklist = enrich?.checklist ?? [];
   const sections = enrich?.sections ?? [];
+  const whoFor = enrich?.whoFor ?? [];
+  const outcomes = enrich?.outcomes ?? [];
+  const faqs = enrich?.faqs ?? [];
 
   return (
     <>
@@ -215,6 +234,39 @@ export default function ToolDetailPage() {
         </div>
       </section>
 
+      {(whoFor.length > 0 || outcomes.length > 0) && (
+        <section className="border-y border-border bg-white py-12">
+          <div className="section-container grid gap-6 md:grid-cols-2">
+            {whoFor.length > 0 && (
+              <div className="rounded-2xl border border-border bg-surface-50 p-6">
+                <h2 className="text-lg font-bold text-ink">Who this checklist is for</h2>
+                <ul className="mt-4 space-y-2.5">
+                  {whoFor.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                      <Check size={15} className="mt-0.5 shrink-0 text-brand-600" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {outcomes.length > 0 && (
+              <div className="rounded-2xl border border-border bg-surface-50 p-6">
+                <h2 className="text-lg font-bold text-ink">What you walk away with</h2>
+                <ul className="mt-4 space-y-2.5">
+                  {outcomes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                      <Check size={15} className="mt-0.5 shrink-0 text-brand-600" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       <section className="py-16">
         <div className="section-container grid gap-10 lg:grid-cols-3">
           <div className="space-y-8 lg:col-span-2">
@@ -229,6 +281,20 @@ export default function ToolDetailPage() {
                 <h2 className="text-xl font-bold text-ink">First-pass notes</h2>
                 <p className="mt-3 leading-relaxed text-ink-muted">{tool.full_content}</p>
               </article>
+            )}
+
+            {faqs.length > 0 && (
+              <div className="rounded-2xl border border-border bg-white p-6 shadow-card">
+                <h2 className="text-xl font-bold text-ink">Questions operators ask</h2>
+                <div className="mt-5 space-y-4">
+                  {faqs.map((f) => (
+                    <div key={f.q} className="border-t border-border pt-4 first:border-0 first:pt-0">
+                      <h3 className="font-semibold text-ink">{f.q}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{f.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
 
