@@ -6,22 +6,27 @@ interface ContactLinkProps {
   onClick?: () => void;
 }
 
+/**
+ * Always go to /contact unless already there (then scroll to the form).
+ * Do not scroll to other pages' #contact anchors (e.g. homepage CTA).
+ */
 export default function ContactLink({ children, className, onClick }: ContactLinkProps) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     onClick?.();
-    const target = document.getElementById('contact');
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
+    e.preventDefault();
+
+    if (pathname === '/contact') {
+      const target = document.getElementById('contact');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
     }
-    if (pathname !== '/contact') {
-      e.preventDefault();
-      navigate('/contact');
-    }
+
+    navigate('/contact');
   };
 
   return (
