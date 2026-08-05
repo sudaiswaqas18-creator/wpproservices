@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, ShoppingBag, Loader2 } from 'lucide-react';
 import { api } from '../api/client';
 import { validateContactForm, fieldClass, FieldErrors, hasErrors } from '../utils/validation';
+import {
+  appendScopeToBrief,
+  clearScopeBuilderData,
+  type ScopeBuilderData,
+} from '../utils/scopeBuilderStorage';
 
 const budgets = [
   'Select a budget range',
@@ -19,9 +24,15 @@ const inputBase =
 
 interface ContactFormProps {
   compact?: boolean;
+  scopeData?: ScopeBuilderData | null;
+  onScopeSubmitted?: () => void;
 }
 
-export default function ContactForm({ compact = false }: ContactFormProps) {
+export default function ContactForm({
+  compact = false,
+  scopeData = null,
+  onScopeSubmitted,
+}: ContactFormProps) {
   const [searchParams] = useSearchParams();
   const purchaseProduct = searchParams.get('product');
   const purchasePrice = searchParams.get('price');
@@ -76,12 +87,20 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
 
     setStatus('loading');
     try {
-      const res = await api.submitContact({ ...form, budget: form.budget });
+      const res = await api.submitContact({
+        ...form,
+        budget: form.budget,
+        project_details: appendScopeToBrief(form.project_details, scopeData),
+      });
       setStatus('success');
       setMessage(res.message);
       setForm({ name: '', phone: '', email: '', budget: '', project_details: '', privacy_accepted: false });
       setErrors({});
       setTouched({});
+      if (scopeData) {
+        clearScopeBuilderData();
+        onScopeSubmitted?.();
+      }
     } catch (err) {
       setStatus('error');
       setMessage(err instanceof Error ? err.message : 'Something went wrong.');
@@ -144,6 +163,14 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
           <ShoppingBag size={16} />
           Purchasing: {purchaseProduct}{purchasePrice ? ` — ${purchasePrice}` : ''}
         </div>
+      )}
+
+      {scopeData && (
+        <>
+          <input type="hidden" name="scope_platform" value={scopeData.platform} readOnly />
+          <input type="hidden" name="scope_workstreams" value={scopeData.workstreams.join('|')} readOnly />
+          <input type="hidden" name="scope_readiness" value={String(scopeData.readinessScore)} readOnly />
+        </>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2">

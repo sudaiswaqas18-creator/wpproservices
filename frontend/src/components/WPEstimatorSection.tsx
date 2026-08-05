@@ -11,6 +11,7 @@ import {
   Timer,
 } from 'lucide-react';
 import ContactLink from './ContactLink';
+import { SCOPE_BUILDER_STORAGE_KEY } from '../utils/scopeBuilderStorage';
 
 /**
  * Unique WPServices Scope Builder — cream/ink brand (not dark SaaS clone).
@@ -277,7 +278,23 @@ export default function WPEstimatorSection() {
               </div>
 
               <div className="mt-5 border-t border-border pt-4">
-                <ContactLink className="btn-primary flex w-full items-center justify-center gap-2">
+                <ContactLink
+                  className="btn-primary flex w-full items-center justify-center gap-2"
+                  onClick={() => {
+                    try {
+                      localStorage.setItem(
+                        SCOPE_BUILDER_STORAGE_KEY,
+                        JSON.stringify({
+                          platform: site.label,
+                          workstreams: activeLabels,
+                          readinessScore: readiness,
+                        }),
+                      );
+                    } catch {
+                      /* ignore quota / private mode */
+                    }
+                  }}
+                >
                   Request a custom scope <ArrowRight size={16} />
                 </ContactLink>
                 <p className="mt-2.5 text-center text-[11px] text-ink-light">
